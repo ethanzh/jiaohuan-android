@@ -10,7 +10,8 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               tools:context="com.jiaohuan.jiaohuan.LoginActivity"
               android:weightSum="1"
-              android:background="@drawable/Shanghai">
+              android:background="@drawable/shanghai">
+
 
     <!-- Login progress -->
     <ProgressBar
@@ -51,7 +52,8 @@
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:maxLines="1"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:background="#d2838383"/>
 
     <Space
         android:layout_width="match_parent"
@@ -66,7 +68,9 @@
         android:ems="10"
         android:hint="Password"
         android:id="@+id/password"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:background="#d2838383"
+        android:autoText="false"/>
 
     <Space
         android:layout_width="match_parent"
