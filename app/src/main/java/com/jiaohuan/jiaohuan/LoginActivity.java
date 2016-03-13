@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -33,6 +34,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private TextView mCreateAcccount;
+    private TextView mNeedHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +102,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        mCreateAcccount = (TextView) findViewById(R.id.create_account);
+        mNeedHelp = (TextView) findViewById(R.id.need_help);
+
+    }
+
+    public void createAccount(View v){
+        Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+        startActivity(intent);
     }
 
     private void populateAutoComplete() {
@@ -315,7 +329,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
+                Thread.sleep(4500);
             } catch (InterruptedException e) {
                 return false;
             }
