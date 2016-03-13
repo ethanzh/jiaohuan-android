@@ -112,7 +112,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public void createAccount(View v){
-        Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+        super.onPause();
+
+        Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 

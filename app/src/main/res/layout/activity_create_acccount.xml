@@ -91,5 +91,20 @@
         android:singleLine="true"
         android:background="#d2838383"/>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.35"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Back"
+        android:onClick="backFunction"
+        android:id="@+id/textView2"
+        android:textColor="#ffffff"/>
+
 
 </LinearLayout>
