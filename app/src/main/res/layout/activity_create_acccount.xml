@@ -20,82 +20,114 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.20"/>
+        android:layout_weight="0.08"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.04"/>
 
     <EditText
-        android:layout_width="225dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="Username"
         android:inputType="text"
         android:maxLines="1"
         android:singleLine="true"
-        android:background="#d2838383"/>
+        android:textColor="#FFFFFF"
+        android:background="@drawable/rounded_edittext"
+        android:layout_weight="0.07"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"/>
+        android:layout_weight="0.05"/>
 
     <EditText
-        android:layout_width="225dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="Email"
+        android:textColor="#FFFFFF"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:singleLine="true"
-        android:background="#d2838383"/>
+        android:background="@drawable/rounded_edittext"
+        android:layout_weight="0.07"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"/>
+        android:layout_weight="0.05"/>
 
     <EditText
-        android:layout_width="225dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:textColor="#FFFFFF"
         android:inputType="textPassword"
         android:maxLines="1"
         android:singleLine="true"
-        android:background="#d2838383"/>
+        android:background="@drawable/rounded_edittext"
+        android:layout_weight="0.07"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"/>
+        android:layout_weight="0.05"/>
 
     <EditText
-        android:layout_width="225dp"
+        android:textColor="#FFFFFF"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="Repeat Password"
         android:inputType="textPassword"
         android:maxLines="1"
         android:singleLine="true"
-        android:background="#d2838383"/>
+        android:background="@drawable/rounded_edittext"
+        android:layout_weight="0.07"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"/>
+        android:layout_weight="0.05"/>
 
     <EditText
-        android:layout_width="225dp"
+        android:textColor="#FFFFFF"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="Phone Number"
         android:inputType="phone"
         android:maxLines="1"
         android:singleLine="true"
-        android:background="#d2838383"/>
+        android:background="@drawable/rounded_edittext"
+        android:layout_weight="0.07"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.35"/>
+        android:layout_weight="0.15"/>
+
+    <Button
+        android:layout_width="290dp"
+        android:layout_height="38dp"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"/>
 
     <TextView
         android:layout_width="match_parent"
