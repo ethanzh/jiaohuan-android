@@ -50,13 +50,23 @@
 
     <AutoCompleteTextView
         android:id="@+id/email"
-        android:layout_width="225dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_email"
+        android:hint=" Email"
         android:inputType="textEmailAddress"
+        android:textColorHint="#FFFFFF"
+        android:gravity="center_vertical|left"
         android:maxLines="1"
+        android:typeface="sans"
         android:singleLine="true"
-        android:background="#d2838383"/>
+        android:textColor="#FFFFFF"
+        android:layout_weight="0.07"
+
+        android:background="@drawable/rounded_edittext"
+        />
+
+    <!--android:background="@drawable/rounded_edittext"-->
+
 
     <Space
         android:layout_width="match_parent"
@@ -65,16 +75,26 @@
         android:layout_weight="0.10"/>
 
     <EditText
-        android:layout_width="225dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:hint="Password"
+        android:textColorHint="#FFFFFF"
+        android:typeface="sans"
+        android:gravity="center_vertical|left"
+        android:hint=" Password"
         android:id="@+id/password"
         android:imeActionId="@+id/login"
         android:layout_gravity="center_horizontal"
-        android:background="#d2838383"
-        android:autoText="false"/>
+        android:textColor="#FFFFFF"
+        android:autoText="false"
+
+
+        android:background="@drawable/rounded_edittext"
+
+
+        android:layout_weight="0.07"/>
+        <!--android:background="@drawable/rounded_edittext"-->
 
     <Space
         android:layout_width="match_parent"
@@ -83,17 +103,20 @@
         android:layout_weight="0.10"/>
 
     <Button
-        android:layout_width="225dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:text="Get Started"
         android:id="@+id/login_button"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+
+
+        android:layout_weight="0.02"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.30"/>
+        android:layout_weight="0.16"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
