@@ -38,7 +38,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import static com.jiaohuan.jiaohuan.R.drawable.*;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
