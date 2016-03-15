@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.32"/>
+        android:layout_weight="0.29"/>
 
     <AutoCompleteTextView
         android:id="@+id/email"
@@ -61,6 +61,10 @@
         android:singleLine="true"
         android:textColor="#FFFFFF"
         android:layout_weight="0.07"
+
+        android:paddingLeft="50dp"
+
+        android:cursorVisible="false"
 
         android:background="@drawable/rounded_edittext"
         />
@@ -85,10 +89,15 @@
         android:hint=" Password"
         android:id="@+id/password"
         android:imeActionId="@+id/login"
+
+
+
         android:layout_gravity="center_horizontal"
         android:textColor="#FFFFFF"
         android:autoText="false"
 
+        android:cursorVisible="false"
+        android:paddingLeft="50dp"
 
         android:background="@drawable/rounded_edittext"
 
@@ -100,7 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"/>
+        android:layout_weight="0.16"/>
 
     <Button
         android:layout_width="290dp"
@@ -108,24 +117,29 @@
         android:text="Get Started"
         android:id="@+id/login_button"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/black_rounded_button"
 
+        android:layout_weight="0.02"
 
-        android:layout_weight="0.02"/>
+        android:textColor="@drawable/button_text_color"
+        />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.16"/>
+        android:layout_weight="0.20"/>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_weight="0.05">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Create Account"
             android:id="@+id/create_account"
@@ -134,19 +148,31 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="#ffffff"/>
+            android:padding="15dp"
+            android:textColor="#C8FFFFFF"
+            android:layout_gravity="bottom"
+            />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.24"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="109dp"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Need Help?"
             android:focusableInTouchMode="false"
             android:id="@+id/need_help"
+            android:padding="15dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textColor="#ffffff"/>
-    </RelativeLayout>
+            android:textColor="#C8FFFFFF"
+            android:layout_gravity="bottom"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

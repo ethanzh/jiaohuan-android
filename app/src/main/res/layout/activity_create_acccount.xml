@@ -35,9 +35,14 @@
         android:inputType="text"
         android:maxLines="1"
         android:singleLine="true"
+        android:textColorHint="#FFFFFF"
         android:textColor="#FFFFFF"
+        android:cursorVisible="false"
+        android:paddingLeft="50dp"
+
         android:background="@drawable/rounded_edittext"
-        android:layout_weight="0.07"/>
+        android:layout_weight="0.07"
+        />
 
     <Space
         android:layout_width="match_parent"
@@ -52,7 +57,11 @@
         android:textColor="#FFFFFF"
         android:inputType="textEmailAddress"
         android:maxLines="1"
+        android:textColorHint="#FFFFFF"
         android:singleLine="true"
+        android:cursorVisible="false"
+        android:paddingLeft="50dp"
+
         android:background="@drawable/rounded_edittext"
         android:layout_weight="0.07"/>
 
@@ -70,6 +79,10 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:singleLine="true"
+        android:cursorVisible="false"
+        android:textColorHint="#FFFFFF"
+        android:paddingLeft="50dp"
+
         android:background="@drawable/rounded_edittext"
         android:layout_weight="0.07"/>
 
@@ -86,8 +99,12 @@
         android:layout_height="wrap_content"
         android:hint="Repeat Password"
         android:inputType="textPassword"
+        android:textColorHint="#FFFFFF"
         android:maxLines="1"
         android:singleLine="true"
+        android:cursorVisible="false"
+        android:paddingLeft="50dp"
+
         android:background="@drawable/rounded_edittext"
         android:layout_weight="0.07"/>
 
@@ -104,7 +121,10 @@
         android:hint="Phone Number"
         android:inputType="phone"
         android:maxLines="1"
+        android:textColorHint="#FFFFFF"
         android:singleLine="true"
+        android:cursorVisible="false"
+        android:paddingLeft="50dp"
         android:background="@drawable/rounded_edittext"
         android:layout_weight="0.07"/>
 
