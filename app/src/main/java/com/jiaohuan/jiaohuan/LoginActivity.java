@@ -79,11 +79,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-        FontsOverride.setDefaultFont(this, "DEFAULT", "OpenSans-Regular.ttf");
-        FontsOverride.setDefaultFont(this, "MONOSPACE", "OpenSans-Regular.ttf");
-        FontsOverride.setDefaultFont(this, "SERIF", "OpenSans-Regular.ttf");
-        FontsOverride.setDefaultFont(this, "SANS_SERIF", "OpenSans-Regular.ttf");
+        //OpenSans-Regular.ttf
+        FontsOverride.setDefaultFont(this, "DEFAULT", "Roman.ttf");
+        FontsOverride.setDefaultFont(this, "MONOSPACE", "Roman.ttf");
+        FontsOverride.setDefaultFont(this, "SERIF", "Roman.ttf");
+        FontsOverride.setDefaultFont(this, "SANS_SERIF", "Roman.ttf");
 
 
 
