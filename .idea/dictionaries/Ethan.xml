@@ -2,6 +2,7 @@
   <dictionary name="Ethan">
     <words>
       <w>edittext</w>
+      <w>myfield</w>
     </words>
   </dictionary>
 </component>

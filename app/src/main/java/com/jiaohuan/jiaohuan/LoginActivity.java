@@ -3,12 +3,8 @@ package com.jiaohuan.jiaohuan;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,32 +20,31 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import static com.jiaohuan.jiaohuan.R.drawable.*;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
+
+
+
+
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
+
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -77,12 +72,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private TextView mNeedHelp;
     private Button mButton;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //mButton.getBackground().setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.MULTIPLY);
+
+        FontsOverride.setDefaultFont(this, "DEFAULT", "OpenSans-Regular.ttf");
+        FontsOverride.setDefaultFont(this, "MONOSPACE", "OpenSans-Regular.ttf");
+        FontsOverride.setDefaultFont(this, "SERIF", "OpenSans-Regular.ttf");
+        FontsOverride.setDefaultFont(this, "SANS_SERIF", "OpenSans-Regular.ttf");
+
+
+
+
+
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -111,8 +117,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        mCreateAcccount = (TextView) findViewById(R.id.create_account);
-        mNeedHelp = (TextView) findViewById(R.id.need_help);
+
 
     }
 
@@ -376,4 +381,5 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
 }
