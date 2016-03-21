@@ -1,5 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,10 @@ public class MainActivity extends FragmentActivity {
 
         mViewPager.setAdapter(new MyAdapter(fragmentManager));
         mViewPager.setCurrentItem(1);
+
+       
+
+
 
 
     }
