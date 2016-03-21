@@ -81,7 +81,7 @@
     <EditText
         android:layout_width="290dp"
         android:layout_height="25dp"
-        android:inputType="textPassword"
+        android:inputType="textPassword|textNoSuggestions"
         android:ems="10"
         android:textColorHint="#FFFFFF"
         android:typeface="sans"

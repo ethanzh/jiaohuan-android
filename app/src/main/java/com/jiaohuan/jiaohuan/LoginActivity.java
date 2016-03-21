@@ -3,6 +3,8 @@ package com.jiaohuan.jiaohuan;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -21,9 +23,12 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -67,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
+    private EditText mEmail;
     private View mLoginFormView;
     private TextView mCreateAcccount;
     private TextView mNeedHelp;
@@ -117,7 +123,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
+        mEmail = (EditText) findViewById(R.id.email);
 
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEmail.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
     }
 
@@ -128,7 +137,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
     public void createAccount(View v){
-        //super.onPause();
+        super.onPause();
 
         Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
