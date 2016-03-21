@@ -51,7 +51,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Swipe down to reveal QR"
         android:textSize="20dp"
-        android:id="@+id/textView9"
+        android:id="@+id/change_me"
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff"
         />

@@ -8,10 +8,17 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends FragmentActivity {
 
     ViewPager mViewPager = null;
+    Toolbar mToolbar;
+    TextView mChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +32,26 @@ public class MainActivity extends FragmentActivity {
         mViewPager.setAdapter(new MyAdapter(fragmentManager));
         mViewPager.setCurrentItem(1);
 
-       
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        mChange = (TextView) findViewById(R.id.change_me);
 
 
 
     }
+    public Fragment getVisibleFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if(fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment != null && fragment.isVisible())
+                    return fragment;
+            }
+        }
+        return null;
+    }
 }
+
 
 class MyAdapter extends FragmentStatePagerAdapter {
 

@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
     public void createAccount(View v){
-        super.onPause();
+        //super.onPause();
 
         Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
@@ -379,6 +379,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 //openMain();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
