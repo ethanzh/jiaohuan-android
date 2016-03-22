@@ -154,8 +154,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Back"
-        android:onClick="backFunction"
-        android:id="@+id/textView2"
+        android:id="@+id/create_back"
         android:textColor="#ffffff"
         android:layout_gravity="left"/>
 

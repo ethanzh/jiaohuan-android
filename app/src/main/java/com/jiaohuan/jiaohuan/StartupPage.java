@@ -28,18 +28,6 @@ public class StartupPage extends Activity {
                 startActivityForResult(intent, 1);
 
 
-                //startActivity(intent);
-
-
-                //overridePendingTransition(R.drawable.slide_in, R.drawable.slide_out);
-
-
-
-                //Intent intent2 = new Intent(getApplicationContext(), LoginActivity.class);
-                // ActivityOptions options = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.drawable.slide_in_up, 0);
-                //startActivity(intent2, options.toBundle());
-
-
             }
         });
 
@@ -49,8 +37,7 @@ public class StartupPage extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
                 startActivityForResult(intent, 2);
-                //startActivity(intent);
-                //overridePendingTransition(R.drawable.slide_in, R.drawable.slide_out);
+
             }
         });
 

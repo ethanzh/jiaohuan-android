@@ -35,6 +35,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
+    private TextView mBack;
     private EditText mEmail;
     private View mLoginFormView;
     private TextView mCreateAcccount;
@@ -128,6 +131,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mEmail.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
+        mBack = (TextView) findViewById(R.id.back);
+        mBack.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    public void back(){
+        finish();
     }
 
     public void openMain(View v){
