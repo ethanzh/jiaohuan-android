@@ -18,7 +18,7 @@ public class Splash extends Activity {
             Log.e("Splash", e.getMessage());
         }
 
-        Intent intent = new Intent(getApplicationContext(), StartPage.class);
+        Intent intent = new Intent(getApplicationContext(), StartupPage.class);
         startActivity(intent);
         finish();
     }
