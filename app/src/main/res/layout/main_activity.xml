@@ -83,10 +83,12 @@
             android:layout_height="wrap_content"
             android:text="Cards"
             android:id="@+id/my_cards"
+            android:onClick="jumpToCards"
             android:layout_alignTop="@+id/main_button"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:onClick="jumpToCards"/>
+            android:layout_toLeftOf="@+id/main_button"
+            android:layout_toStartOf="@+id/main_button"
+            android:layout_marginRight="34dp"
+            android:layout_marginEnd="34dp"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -94,10 +96,12 @@
             android:layout_height="wrap_content"
             android:text="Profile"
             android:id="@+id/my_profile"
+            android:onClick="jumpToProfile"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
             android:layout_alignTop="@+id/main_button"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="jumpToProfile"/>
+            android:layout_toRightOf="@+id/main_button"
+            android:layout_toEndOf="@+id/main_button"/>
 
     </RelativeLayout>
 
