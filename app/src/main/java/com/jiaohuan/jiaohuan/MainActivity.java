@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -19,6 +21,9 @@ public class MainActivity extends FragmentActivity {
     ViewPager mViewPager = null;
     Toolbar mToolbar;
     TextView mChange;
+    Button mMainButton;
+    Button mMyCards;
+    Button mMyProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class MainActivity extends FragmentActivity {
 
 
 
+
     }
     public Fragment getVisibleFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -49,6 +55,18 @@ public class MainActivity extends FragmentActivity {
             }
         }
         return null;
+    }
+
+    public void jumpToProfile(View view) {
+        mViewPager.setCurrentItem(2);
+    }
+
+    public void jumpToCards(View view) {
+        mViewPager.setCurrentItem(0);
+    }
+
+    public void jumpToMain(View view) {
+        mViewPager.setCurrentItem(1);
     }
 }
 

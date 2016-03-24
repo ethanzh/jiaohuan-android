@@ -2,6 +2,8 @@ package com.jiaohuan.jiaohuan;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ public class StartupPage extends Activity {
     private Button mSignup;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +27,10 @@ public class StartupPage extends Activity {
         mSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivityForResult(intent, 1);
-
+                //startActivity(intent);
 
             }
         });
@@ -35,8 +39,10 @@ public class StartupPage extends Activity {
         mSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
                 startActivityForResult(intent, 2);
+                //startActivity(intent);
 
             }
         });
@@ -44,4 +50,6 @@ public class StartupPage extends Activity {
 
 
     }
+
+
 }
