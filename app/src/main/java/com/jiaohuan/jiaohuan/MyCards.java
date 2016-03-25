@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -36,9 +37,11 @@ public class MyCards extends android.support.v4.app.Fragment{
         String[] emails = {"SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com","SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com"};
         String[] locations = {"Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China"};
 
+        int[] pictures = {R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th};
+
         mListView = (ListView) view.findViewById( R.id.list_view );
 
-        customAdapter adapter = new customAdapter(getContext(),names,company,phone_nums,emails,locations);
+        customAdapter adapter = new customAdapter(getContext(),names,company,phone_nums,emails,locations,pictures);
 
         mListView.setAdapter(adapter);
 
@@ -53,9 +56,10 @@ class customAdapter extends ArrayAdapter<String>{
     String[] mPhone;
     String[] mLocation;
     String[] mEmail;
+    int[] mPicture;
 
 
-    customAdapter(Context c, String[] names, String[] companies, String[] phonenums, String[] emails, String[] locations){
+    customAdapter(Context c, String[] names, String[] companies, String[] phonenums, String[] emails, String[] locations, int[] images){
         super(c, R.layout.single_row, R.id.name, names);
         this.mContext = c;
         this.mName = names;
@@ -63,6 +67,7 @@ class customAdapter extends ArrayAdapter<String>{
         this.mPhone = phonenums;
         this.mLocation = locations;
         this.mEmail = emails;
+        this.mPicture = images;
 
     }
 
@@ -78,12 +83,15 @@ class customAdapter extends ArrayAdapter<String>{
         TextView mPhoneText = (TextView) mRow.findViewById(R.id.phone);
         TextView mLocationText = (TextView) mRow.findViewById(R.id.location);
         TextView mEmailText = (TextView) mRow.findViewById(R.id.email);
+        ImageView mPictureView = (ImageView) mRow.findViewById(R.id.image_view);
 
         mNameText.setText(mName[position]);
         mCompanyText.setText(mCompany[position]);
         mPhoneText.setText(mPhone[position]);
         mLocationText.setText(mLocation[position]);
         mEmailText.setText(mEmail[position]);
+
+        mPictureView.setImageResource(mPicture[position]);
 
         int color = Color.argb(255,255,255,255);
         mRow.setBackgroundColor(color);

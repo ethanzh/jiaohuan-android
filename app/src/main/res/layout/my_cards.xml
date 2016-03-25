@@ -19,8 +19,8 @@
         android:overScrollMode="never"
         android:id="@+id/list_view"
         android:divider="#191919"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginLeft="23dp"
         android:dividerHeight="12dp"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>
