@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/image_view"
-        android:src="@drawable/th"
+        android:src="@drawable/tae"
         android:layout_above="@+id/location"
         android:layout_alignTop="@+id/company"
         android:layout_toStartOf="@+id/phone"

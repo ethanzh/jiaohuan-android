@@ -1,24 +1,16 @@
 package com.jiaohuan.jiaohuan;
 
-import android.app.Fragment;
-import android.app.ListActivity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class MyCards extends android.support.v4.app.Fragment{
 
@@ -37,7 +29,7 @@ public class MyCards extends android.support.v4.app.Fragment{
         String[] emails = {"SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com","SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com"};
         String[] locations = {"Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China"};
 
-        int[] pictures = {R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th,R.drawable.th};
+        int[] pictures = {R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae};
 
         mListView = (ListView) view.findViewById( R.id.list_view );
 
