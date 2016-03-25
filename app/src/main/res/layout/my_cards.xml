@@ -8,9 +8,19 @@
               android:weightSum="1">
 
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:layout_gravity="center_horizontal"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:overScrollMode="never"
         android:id="@+id/list_view"
+        android:divider="#191919"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:dividerHeight="12dp"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>

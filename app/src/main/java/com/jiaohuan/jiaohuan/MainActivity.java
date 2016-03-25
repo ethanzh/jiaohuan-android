@@ -13,7 +13,10 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -43,6 +46,13 @@ public class MainActivity extends FragmentActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mChange = (TextView) findViewById(R.id.change_me);
+
+
+
+        String[] array = {"One", "Two", "Three", "Four"};
+
+        ListAdapter mListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, array);
+
 
 
     }
