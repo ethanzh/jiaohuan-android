@@ -88,6 +88,8 @@ class customAdapter extends ArrayAdapter<String>{
         int color = Color.argb(255,255,255,255);
         mRow.setBackgroundColor(color);
 
+        mRow.setBackgroundResource(R.drawable.custom_listview_shape);
+
         return mRow;
     }
 }
