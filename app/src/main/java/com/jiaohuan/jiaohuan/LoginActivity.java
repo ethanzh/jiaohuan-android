@@ -404,6 +404,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Intent finish = new Intent("finish_activity");
                 sendBroadcast(finish);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             } else {

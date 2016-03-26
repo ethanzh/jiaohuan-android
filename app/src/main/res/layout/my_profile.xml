@@ -10,35 +10,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.24"/>
+        android:layout_weight="0.12"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="142dp"
         android:layout_gravity="center_horizontal"
-        android:weightSum="1">
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.28"/>
+        android:weightSum="1"
+        >
 
         <Button
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text=""
+            android:gravity="center_vertical"
             android:id="@+id/button2"
             android:background="@drawable/button_background"
-            />
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="63dp"
+
+            android:layout_marginStart="63dp"/>
+
+        <ImageView
+            android:layout_width="148dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView"
+            android:src="@drawable/tae"
+
+            android:layout_marginRight="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11"/>
+        android:layout_weight="0.17"/>
 
     <EditText
         android:layout_width="290dp"
@@ -60,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.03"/>
+        android:layout_weight="0.06"/>
 
     <EditText
         android:layout_width="290dp"
@@ -81,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.03"/>
+        android:layout_weight="0.06"/>
 
     <EditText
         android:layout_width="290dp"
@@ -103,7 +114,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.03"/>
+        android:layout_weight="0.06"/>
 
     <EditText
         android:layout_width="290dp"
@@ -125,7 +136,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.03"/>
+        android:layout_weight="0.06"/>
 
     <EditText
         android:layout_width="290dp"

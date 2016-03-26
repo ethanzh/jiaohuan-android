@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,36 +12,9 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:gravity="top">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="JH"
-                android:gravity="center"
-                android:id="@+id/toolbar_title"
-                android:textColor="#000000"
-                android:textSize="28dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="+"
-                android:textColor="#000000"
-                android:textSize="28dp"
-                android:id="@+id/textView10"
-                android:layout_gravity="right"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
+
+
+
 
     </android.support.v7.widget.Toolbar>
 
@@ -49,17 +22,19 @@
         android:layout_height="388dp"
         android:layout_width="match_parent"
         android:id="@+id/pager"
-        android:layout_weight="1"/>
+        android:layout_weight="5.59"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="75dp">
         <android.support.v7.widget.Toolbar
             android:id="@+id/bottombar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#191919"
-            android:gravity="bottom">
+            android:gravity="bottom"
+            android:layout_alignParentTop="true">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

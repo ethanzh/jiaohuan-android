@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.R.*;
 import android.widget.TextView;
 
 public class MyCards extends android.support.v4.app.Fragment{
@@ -19,22 +20,23 @@ public class MyCards extends android.support.v4.app.Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return inflater.inflate(R.layout.my_cards, container, false);
+
+        //Inflate the view
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
-
+        //Arrays for test information
         String[] names = {"Sangwook Park", "Kevin Wu", "Tian Ge Liu", "Teety So","Sangwook Park", "Kevin Wu", "Tian Ge Liu", "Teety So"};
         String[] company = {"Gate Education", "Unemployed", "CCP", "ISB","Gate Education", "Unemployed", "CCP", "ISB"};
         String[] phone_nums = {"15488965321","45789632594","15699447584","15811556497","15488965321","45789632594","15699447584","15811556497"};
         String[] emails = {"SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com","SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com"};
         String[] locations = {"Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China"};
-
         int[] pictures = {R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae};
 
+        //Get reference to the listview
         mListView = (ListView) view.findViewById( R.id.list_view );
 
+        //Initialize the adapter, and set it to the listview
         customAdapter adapter = new customAdapter(getContext(),names,company,phone_nums,emails,locations,pictures);
-
         mListView.setAdapter(adapter);
 
 
