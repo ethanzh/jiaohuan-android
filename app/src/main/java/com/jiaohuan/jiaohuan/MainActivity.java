@@ -81,7 +81,7 @@ class MyAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i){
         Fragment fragment = null;
         if(i == 0){
-            fragment = new MyCards();
+            fragment = new NewMyCards();
         }
         if(i == 1){
             fragment = new MainFragment();
