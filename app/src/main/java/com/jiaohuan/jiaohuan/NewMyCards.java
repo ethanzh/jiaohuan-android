@@ -1,13 +1,18 @@
 package com.jiaohuan.jiaohuan;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,6 +22,9 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
+    private PopupWindow mPopupWindow;
+    private LayoutInflater mLayoutInflater;
+    private LinearLayout mLinearLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,16 +40,25 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), R.dimen.padding_four));
 
+        mLinearLayout = (LinearLayout) view.findViewById(R.id.pop);
+
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.d("CLICK", "" + position);
-                //Log.d("CLICK", "" + getList(position));
+                //Log.d("CLICK", "" + RecycleAdapter.getList(position));
+
+                /*mLayoutInflater = (LayoutInflater) getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.popup, null);
+
+                mPopupWindow = new PopupWindow(mContainer, 400, 400, true);
+                mPopupWindow.showAtLocation(mLinearLayout, Gravity.NO_GRAVITY, 500, 500);  */
             }
         });
 
         return view;
     }
+
 
     public static List<OneRow> getData(){
         List<OneRow> data = new ArrayList<>();

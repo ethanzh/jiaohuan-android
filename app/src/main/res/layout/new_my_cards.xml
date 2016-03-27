@@ -10,8 +10,8 @@
         android:layout_height="match_parent"
         android:id="@+id/recycle"
         android:overScrollMode="never"
-        android:paddingRight="14dp"
-        android:paddingLeft="14dp"
+        android:paddingRight="6dp"
+        android:paddingLeft="6dp"
         >
 
 

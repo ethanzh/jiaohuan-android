@@ -19,8 +19,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     List<OneRow> data = Collections.emptyList();
 
 
-    public List<OneRow> getList(int position){
-        return data;
+    public OneRow getList(int position){
+        return data.get(position);
     }
 
     public RecycleAdapter(Context context, List<OneRow> data){
