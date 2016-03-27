@@ -10,13 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.R.*;
 import android.widget.TextView;
 
 public class MyCards extends android.support.v4.app.Fragment{
 
     private ListView mListView;
-    private Button mButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +37,6 @@ public class MyCards extends android.support.v4.app.Fragment{
         customAdapter adapter = new customAdapter(getContext(),names,company,phone_nums,emails,locations,pictures);
         mListView.setAdapter(adapter);
 
-
         return view;
     }
 }
@@ -52,7 +49,6 @@ class customAdapter extends ArrayAdapter<String>{
     String[] mEmail;
     int[] mPicture;
 
-
     customAdapter(Context c, String[] names, String[] companies, String[] phonenums, String[] emails, String[] locations, int[] images){
         super(c, R.layout.single_row, R.id.name, names);
         this.mContext = c;
@@ -62,7 +58,6 @@ class customAdapter extends ArrayAdapter<String>{
         this.mLocation = locations;
         this.mEmail = emails;
         this.mPicture = images;
-
     }
 
     @Override

@@ -1,14 +1,12 @@
 package com.jiaohuan.jiaohuan;
 
 import android.content.Context;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -18,15 +16,11 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
 
     List<OneRow> data = Collections.emptyList();
 
-
-    public OneRow getList(int position){
-        return data.get(position);
-    }
-
     public RecycleAdapter(Context context, List<OneRow> data){
         mLayoutInflater = LayoutInflater.from(context);
         this.data = data;
     }
+
     @Override
     public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -74,8 +68,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
             location = (TextView) itemView.findViewById(R.id.location);
 
             icon = (ImageView) itemView.findViewById(R.id.image_view);
-
-
         }
     }
 }

@@ -26,10 +26,6 @@ public class MainActivity extends FragmentActivity {
     ViewPager mViewPager = null;
     Toolbar mToolbar;
     TextView mChange;
-    Button mMainButton;
-    Button mMyCards;
-    Button mMyProfile;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +33,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.main_activity);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
-
         FragmentManager fragmentManager = getSupportFragmentManager();
-
         mViewPager.setAdapter(new MyAdapter(fragmentManager));
         mViewPager.setCurrentItem(1);
 
@@ -47,29 +41,22 @@ public class MainActivity extends FragmentActivity {
 
         mChange = (TextView) findViewById(R.id.change_me);
 
-
-
         String[] array = {"One", "Two", "Three", "Four"};
 
         ListAdapter mListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, array);
-
-
-
     }
 
     public void jumpToMain(View view) {
         mViewPager.setCurrentItem(1);
     }
-
     public void jumpToProfile(View view) {
         mViewPager.setCurrentItem(2);
     }
-
     public void jumpToCards(View view) {
         mViewPager.setCurrentItem(0);
     }
-}
 
+}
 
 class MyAdapter extends FragmentStatePagerAdapter {
 
@@ -96,5 +83,4 @@ class MyAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 3;
     }
-
 }

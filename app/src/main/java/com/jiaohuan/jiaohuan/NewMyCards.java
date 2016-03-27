@@ -2,6 +2,7 @@ package com.jiaohuan.jiaohuan;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -22,12 +24,10 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
-    private PopupWindow mPopupWindow;
-    private LayoutInflater mLayoutInflater;
-    private LinearLayout mLinearLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         //Inflate the view
         View view = inflater.inflate(R.layout.new_my_cards, container, false);
 
@@ -40,28 +40,23 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), R.dimen.padding_four));
 
-        mLinearLayout = (LinearLayout) view.findViewById(R.id.pop);
-
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.d("CLICK", "" + position);
-                //Log.d("CLICK", "" + RecycleAdapter.getList(position));
 
-                /*mLayoutInflater = (LayoutInflater) getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.popup, null);
-
-                mPopupWindow = new PopupWindow(mContainer, 400, 400, true);
-                mPopupWindow.showAtLocation(mLinearLayout, Gravity.NO_GRAVITY, 500, 500);  */
+                //Make popup here
+                Intent myIntent = new Intent(getActivity(), PopUp.class);
+                startActivity(myIntent);
             }
         });
 
         return view;
     }
 
-
     public static List<OneRow> getData(){
         List<OneRow> data = new ArrayList<>();
+
         String[] names = {"Sangwook Park", "Kevin Wu", "Tian Ge Liu", "Teety So","Sangwook Park", "Kevin Wu", "Tian Ge Liu", "Teety So"};
         String[] company = {"Gate Education", "Unemployed", "CCP", "ISB","Gate Education", "Unemployed", "CCP", "ISB"};
         String[] phone_nums = {"15488965321","45789632594","15699447584","15811556497","15488965321","45789632594","15699447584","15811556497"};

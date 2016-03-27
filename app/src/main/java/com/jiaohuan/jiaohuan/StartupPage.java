@@ -12,13 +12,10 @@ public class StartupPage extends Activity {
     private Button mSignin;
     private Button mSignup;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_page);
-
 
         mSignin = (Button) findViewById(R.id.signin);
         mSignin.setOnClickListener(new View.OnClickListener() {
@@ -27,8 +24,6 @@ public class StartupPage extends Activity {
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivityForResult(intent, 1);
-                //startActivity(intent);
-
             }
         });
 
@@ -39,14 +34,7 @@ public class StartupPage extends Activity {
 
                 Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
                 startActivityForResult(intent, 2);
-                //startActivity(intent);
-
             }
         });
-
-
-
     }
-
-
 }
