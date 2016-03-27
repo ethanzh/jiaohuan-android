@@ -1,6 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
 import android.content.Context;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     List<OneRow> data = Collections.emptyList();
 
 
+    public List<OneRow> getList(int position){
+        return data;
+    }
 
     public RecycleAdapter(Context context, List<OneRow> data){
         mLayoutInflater = LayoutInflater.from(context);

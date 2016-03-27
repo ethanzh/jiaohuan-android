@@ -36,6 +36,7 @@ public class NewMyCards extends android.support.v4.app.Fragment {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.d("CLICK", "" + position);
+                //Log.d("CLICK", "" + getList(position));
             }
         });
 
