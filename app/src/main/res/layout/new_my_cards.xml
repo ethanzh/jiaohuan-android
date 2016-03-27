@@ -8,7 +8,11 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycle">
+        android:id="@+id/recycle"
+        android:overScrollMode="never"
+        android:paddingRight="14dp"
+        android:paddingLeft="14dp"
+        >
 
 
     </android.support.v7.widget.RecyclerView>

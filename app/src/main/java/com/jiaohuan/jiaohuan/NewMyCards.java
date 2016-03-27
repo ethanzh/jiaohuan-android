@@ -28,6 +28,8 @@ public class NewMyCards extends android.support.v4.app.Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), R.dimen.padding_four));
+
         return view;
     }
 
