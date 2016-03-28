@@ -1,13 +1,20 @@
 package com.jiaohuan.jiaohuan;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +22,9 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
+    private PopupWindow mPopupWindow;
+    private LayoutInflater mLayoutInflater;
+    private LinearLayout mLinearLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,14 +41,29 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), R.dimen.padding_four));
 
+        mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
+
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.d("CLICK", "" + position);
 
                 //Make popup here
-                Intent myIntent = new Intent(getActivity(), PopUp.class);
-                startActivity(myIntent);
+                mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.popup, null);
+
+                mPopupWindow = new PopupWindow(mContainer,900, 1600, true);
+
+                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+                mContainer.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        mPopupWindow.dismiss();
+                        return true;
+                    }
+                });
+
             }
         });
 
