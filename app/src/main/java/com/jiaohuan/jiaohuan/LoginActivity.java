@@ -126,13 +126,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mEmail.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-        mBack = (TextView) findViewById(R.id.back);
-        mBack.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
 
     }
 
@@ -243,7 +237,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+            //showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }

@@ -55,11 +55,12 @@
         android:layout_height="25dp"
         android:hint=" Email"
         android:inputType="textEmailAddress"
-        android:textColorHint="#FFFFFF"
+
         android:gravity="center_vertical|left"
         android:maxLines="1"
         android:typeface="sans"
         android:singleLine="true"
+        android:textColorHint="#FFFFFF"
         android:textColor="#FFFFFF"
 
         android:paddingLeft="50dp"
