@@ -40,9 +40,10 @@
 
         <ImageView
             android:layout_width="80dp"
+            android:id="@+id/left"
             android:layout_height="80dp"
             android:onClick="jumpToCards"
-            android:src="@drawable/person"
+            android:src="@drawable/black_card"
             />
 
         <Space
@@ -53,8 +54,9 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:id="@+id/center"
             android:onClick="jumpToMain"
-            android:src="@drawable/person"
+            android:src="@drawable/white_arrow"
             />
 
         <Space
@@ -65,8 +67,9 @@
         <ImageView
             android:layout_width="80dp"
             android:onClick="jumpToProfile"
+            android:id="@+id/right"
             android:layout_height="80dp"
-            android:src="@drawable/person"
+            android:src="@drawable/black_profile"
             />
 
     </LinearLayout>
