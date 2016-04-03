@@ -29,119 +29,57 @@
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
-    <Space
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.17"/>
-
-    <EditText
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name"
         android:id="@+id/name"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_edittext"
-        android:layout_weight="0.05"
-        android:cursorVisible="false"
-        android:singleLine="true"
         android:textColor="#FFFFFF"
-        android:paddingLeft="50dp"
-        android:maxLines="1"
-        android:textColorHint="#FFFFFF"
-        android:text="Ethan Houston"
-        android:gravity="center_vertical|left"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.06"/>
-
-    <EditText
-        android:layout_width="290dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"/>
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Email"
         android:id="@+id/email"
-        android:text="ethan.houston@gmail.com"
-        android:singleLine="true"
-        android:maxLines="1"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_edittext"
-        android:layout_weight="0.05"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:textColor="#FFFFFF"
-        android:paddingLeft="50dp"
-        android:cursorVisible="false"
-        android:textColorHint="#FFFFFF"
-        android:gravity="center_vertical|left"/>
-    <Space
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.06"/>
-
-    <EditText
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/phone_num"
-        android:text="15811556736"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_edittext"
-        android:layout_weight="0.05"
-        android:singleLine="true"
-        android:maxLines="1"
-        android:cursorVisible="false"
-        android:inputType="phone"
-        android:paddingLeft="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Phone Number"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:id="@+id/phone"
         android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:gravity="center_vertical|left"/>
-    <Space
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.06"/>
-
-    <EditText
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_edittext"
-        android:layout_weight="0.05"
-        android:text="********"
-        android:singleLine="true"
-        android:paddingLeft="50dp"
-        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Password"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:inputType="textPassword"
-        android:cursorVisible="false"
+        android:id="@+id/password"
         android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:gravity="center_vertical|left"/>
-    <Space
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.06"/>
-
-    <EditText
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/nationality"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_edittext"
-        android:layout_weight="0.05"
-        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Location"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:id="@+id/location"
         android:textColor="#FFFFFF"
-        android:cursorVisible="false"
-        android:singleLine="true"
-        android:paddingLeft="50dp"
-        android:text="Norway"
-        android:textColorHint="#FFFFFF"
-        android:gravity="center_vertical|left"/>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.03"/>
+        android:layout_gravity="center_horizontal"/>
 
 
 </LinearLayout>

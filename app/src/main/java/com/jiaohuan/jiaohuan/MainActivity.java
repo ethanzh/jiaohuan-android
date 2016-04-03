@@ -1,5 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 
@@ -22,6 +24,7 @@ public class MainActivity extends FragmentActivity {
     ImageView mLeft;
     ImageView mCenter;
     ImageView mRight;
+    TextView mSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,9 @@ public class MainActivity extends FragmentActivity {
         mLeft = (ImageView) findViewById(R.id.left);
         mCenter = (ImageView) findViewById(R.id.center);
         mRight = (ImageView) findViewById(R.id.right);
+
+        mSettings = (TextView) findViewById(R.id.settings);
+        mSettings.setVisibility(View.INVISIBLE);
 
         //final Drawable mBlackCard = getResources().getDrawable(R.drawable.black_card);
         //final Drawable mBlackCard = null;
@@ -66,12 +72,15 @@ public class MainActivity extends FragmentActivity {
 
             public void onPageSelected(int position) {
                 if(position == 1){
+                    mSettings.setVisibility(View.INVISIBLE);
                     //changeToMain(mBlackCard, mWhiteArrow, mBlackProfile);
                 }
                 else if (position == 2){
+                    mSettings.setVisibility(View.VISIBLE);
                     //changeToProfile(mBlackCard, mBlackArrow, mWhiteProfile);
                 }
                 else if(position == 0){
+                    mSettings.setVisibility(View.INVISIBLE);
                     //changeToCards(mWhiteCard, mBlackArrow, mBlackProfile);
                 }
             }
@@ -110,18 +119,25 @@ public class MainActivity extends FragmentActivity {
 
 
     public void jumpToMain(View view) {
-
+        mSettings.setVisibility(View.INVISIBLE);
         mViewPager.setCurrentItem(1);
     }
     public void jumpToProfile(View view) {
-
+        mSettings.setVisibility(View.VISIBLE);
         mViewPager.setCurrentItem(2);
     }
     public void jumpToCards(View view) {
-
+        mSettings.setVisibility(View.INVISIBLE);
         mViewPager.setCurrentItem(0);
     }
 
+    public void inflateSettings(View view){
+        Toast.makeText(getApplicationContext(), "this is my Toast message!!! =)",
+                Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
 
 
 }
