@@ -1,5 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -31,6 +32,17 @@ public class MainActivity extends FragmentActivity {
         mCenter = (ImageView) findViewById(R.id.center);
         mRight = (ImageView) findViewById(R.id.right);
 
+        //final Drawable mBlackCard = getResources().getDrawable(R.drawable.black_card);
+        //final Drawable mBlackCard = null;
+        //final Drawable mWhiteCard = getResources().getDrawable(R.drawable.white_card);
+
+        //final Drawable mBlackArrow = getResources().getDrawable(R.drawable.black_arrow);
+        //final Drawable mBlackArrow = null;
+        //final Drawable mWhiteArrow = getResources().getDrawable(R.drawable.white_arrow);
+
+        //final Drawable mBlackProfile = getResources().getDrawable(R.drawable.black_profile);
+        //final Drawable mBlackProfile = null;
+        //final Drawable mWhiteProfile = getResources().getDrawable(R.drawable.white_profile);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -54,19 +66,47 @@ public class MainActivity extends FragmentActivity {
 
             public void onPageSelected(int position) {
                 if(position == 1){
-                    changeToMain();
+                    //changeToMain(mBlackCard, mWhiteArrow, mBlackProfile);
                 }
                 else if (position == 2){
-                    changeToProfile();
+                    //changeToProfile(mBlackCard, mBlackArrow, mWhiteProfile);
                 }
                 else if(position == 0){
-                    changeToCards();
+                    //changeToCards(mWhiteCard, mBlackArrow, mBlackProfile);
                 }
             }
         });
     }
 
+    public void changeToCards(Drawable whiteCard, Drawable blackArrow, Drawable blackProfile){
+       /* mLeft.setImageDrawable(whiteCard);
+        mCenter.setImageDrawable(blackArrow);
+        mRight.setImageDrawable(blackProfile);*/
 
+        mLeft.setImageDrawable(whiteCard);
+        mCenter.setImageDrawable(null);
+        mRight.setImageDrawable(null);
+    }
+
+    public void changeToMain (Drawable blackCard, Drawable whiteArrow, Drawable blackProfile){
+        //mLeft.setImageDrawable(blackCard);
+        //mCenter.setImageDrawable(whiteArrow);
+        //mRight.setImageDrawable(blackProfile);
+
+        mLeft.setImageDrawable(null);
+        mCenter.setImageDrawable(whiteArrow);
+        mRight.setImageDrawable(null);
+    }
+
+    public void changeToProfile (Drawable blackCard, Drawable blackArrow, Drawable whiteProfile){
+        //mLeft.setImageDrawable(blackCard);
+      //  mCenter.setImageDrawable(blackArrow);
+      //  mRight.setImageDrawable(whiteProfile);
+
+        mLeft.setImageDrawable(null);
+        mCenter.setImageDrawable(null);
+        mRight.setImageDrawable(whiteProfile);
+    }
 
 
     public void jumpToMain(View view) {
@@ -82,23 +122,7 @@ public class MainActivity extends FragmentActivity {
         mViewPager.setCurrentItem(0);
     }
 
-    public void changeToCards(){
-        mLeft.setImageResource(R.drawable.white_card);
-        mCenter.setImageResource(R.drawable.black_arrow);
-        mRight.setImageResource(R.drawable.black_profile);
-    }
 
-    public void changeToMain (){
-        mCenter.setImageResource(R.drawable.white_arrow);
-        mLeft.setImageResource(R.drawable.black_card);
-        mRight.setImageResource(R.drawable.black_profile);
-    }
-
-    public void changeToProfile (){
-        mRight.setImageResource(R.drawable.white_profile);
-        mLeft.setImageResource(R.drawable.black_card);
-        mCenter.setImageResource(R.drawable.black_arrow);
-    }
 
 }
 
