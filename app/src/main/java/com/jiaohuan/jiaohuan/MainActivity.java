@@ -1,5 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,10 +10,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +32,18 @@ public class MainActivity extends FragmentActivity {
     ImageView mCenter;
     ImageView mRight;
     TextView mSettings;
+    private ShakeDetector mShaker;
+    private LayoutInflater mLayoutInflater;
+    private PopupWindow mPopupWindow;
+    private LinearLayout mLinearLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        mLinearLayout = (LinearLayout) findViewById(R.id.main_activity_layout);
 
         mLeft = (ImageView) findViewById(R.id.left);
         mCenter = (ImageView) findViewById(R.id.center);
@@ -38,17 +52,30 @@ public class MainActivity extends FragmentActivity {
         mSettings = (TextView) findViewById(R.id.settings);
         mSettings.setVisibility(View.INVISIBLE);
 
-        //final Drawable mBlackCard = getResources().getDrawable(R.drawable.black_card);
-        //final Drawable mBlackCard = null;
-        //final Drawable mWhiteCard = getResources().getDrawable(R.drawable.white_card);
+        mShaker = new ShakeDetector(getApplicationContext());
+        mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+            public void onShake() {
+                //Make popup here
+                mLayoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
 
-        //final Drawable mBlackArrow = getResources().getDrawable(R.drawable.black_arrow);
-        //final Drawable mBlackArrow = null;
-        //final Drawable mWhiteArrow = getResources().getDrawable(R.drawable.white_arrow);
+                mPopupWindow = new PopupWindow(mContainer, 900, 1200, true);
 
-        //final Drawable mBlackProfile = getResources().getDrawable(R.drawable.black_profile);
-        //final Drawable mBlackProfile = null;
-        //final Drawable mWhiteProfile = getResources().getDrawable(R.drawable.white_profile);
+                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+                mContainer.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        mPopupWindow.dismiss();
+                        mShaker.resume();
+                        return true;
+                    }
+                });
+                mShaker.pause();
+            }
+        });
+
+
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -73,14 +100,17 @@ public class MainActivity extends FragmentActivity {
             public void onPageSelected(int position) {
                 if(position == 1){
                     mSettings.setVisibility(View.INVISIBLE);
+                    mShaker.resume();
                     //changeToMain(mBlackCard, mWhiteArrow, mBlackProfile);
                 }
                 else if (position == 2){
                     mSettings.setVisibility(View.VISIBLE);
+                    mShaker.pause();
                     //changeToProfile(mBlackCard, mBlackArrow, mWhiteProfile);
                 }
                 else if(position == 0){
                     mSettings.setVisibility(View.INVISIBLE);
+                    mShaker.pause();
                     //changeToCards(mWhiteCard, mBlackArrow, mBlackProfile);
                 }
             }
@@ -120,13 +150,16 @@ public class MainActivity extends FragmentActivity {
 
     public void jumpToMain(View view) {
         mSettings.setVisibility(View.INVISIBLE);
+        mShaker.resume();
         mViewPager.setCurrentItem(1);
     }
     public void jumpToProfile(View view) {
+        mShaker.pause();
         mSettings.setVisibility(View.VISIBLE);
         mViewPager.setCurrentItem(2);
     }
     public void jumpToCards(View view) {
+        mShaker.pause();
         mSettings.setVisibility(View.INVISIBLE);
         mViewPager.setCurrentItem(0);
     }

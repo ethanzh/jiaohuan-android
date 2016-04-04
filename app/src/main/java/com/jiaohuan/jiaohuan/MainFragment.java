@@ -43,7 +43,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         });*/
 
-        mShaker = new ShakeDetector(getContext());
+        /*mShaker = new ShakeDetector(getContext());
         mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener () {
             public void onShake()
             {
@@ -65,7 +65,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
                 });
                 mShaker.pause();
             }
-        });
+        });*/
 
         return view;
     }
