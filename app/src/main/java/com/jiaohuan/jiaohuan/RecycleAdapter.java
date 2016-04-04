@@ -40,12 +40,12 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
 
         OneRow current = data.get(position);
 
-        holder.name.setText(current.getNames());
-        holder.email.setText(current.emails);
-        holder.phone.setText(current.phone_nums);
-        holder.location.setText(current.locations);
-        holder.company.setText(current.company);
-        holder.icon.setImageResource(current.pictures);
+        holder.name.setText(current.getName());
+        holder.email.setText(current.getEmail());
+        holder.phone.setText(current.getPhoneNum());
+        holder.location.setText(current.getLocation());
+        holder.company.setText(current.getCompany());
+        holder.icon.setImageResource(current.getPic());
     }
 
     @Override

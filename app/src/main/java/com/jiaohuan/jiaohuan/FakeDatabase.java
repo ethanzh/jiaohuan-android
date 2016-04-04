@@ -15,10 +15,10 @@ public class FakeDatabase {
     private FakeDatabase() {
         data = new ArrayList<>();
 
-        OneRow row1 = new OneRow("Sangwook Park", "Gate Education", "15488965321", "SWP@hotmail.com", "Beijing, China", R.drawable.tae);
+        OneRow row1 = new OneRow("Sangwook Park", "Gate Education", "15488965321", "SWP@hotmail.com", "Beijing, China", R.drawable.tae, "WangJing", "Likes to party");
         data.add(row1);
 
-        OneRow row2 = new OneRow("Kevin Wu", "Unemployed", "45789632594", "kevinwu@gmail.com", "Beijing, China", R.drawable.tae);
+        OneRow row2 = new OneRow("Kevin Wu", "Unemployed", "45789632594", "kevinwu@gmail.com", "Beijing, China", R.drawable.tae, "Yosemite Apartment", "Likes to TH");
         data.add(row2);
 
         OneRow row3 = new OneRow("Tian Ge Liu");

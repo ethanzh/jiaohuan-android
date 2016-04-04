@@ -30,6 +30,9 @@ public class NewMyCards extends android.support.v4.app.Fragment {
     private TextView mPopName;
     private TextView mPopCompany;
     private TextView mPopEmail;
+    private TextView mPopPhone;
+    private TextView mPopAddress;
+    private TextView mPopInfo;
 
     public static String mTransfer;
 
@@ -63,10 +66,19 @@ public class NewMyCards extends android.support.v4.app.Fragment {
                 mPopName = (TextView) mContainer.findViewById(R.id.pop_name);
                 mPopCompany = (TextView) mContainer.findViewById(R.id.pop_company);
                 mPopEmail = (TextView) mContainer.findViewById(R.id.pop_email);
+                mPopPhone = (TextView) mContainer.findViewById(R.id.pop_phone);
+                mPopAddress = (TextView) mContainer.findViewById(R.id.pop_address);
+                mPopInfo = (TextView) mContainer.findViewById(R.id.pop_info);
 
-                mPopName.setText("" + position);
+
                 OneRow selectedRow = mAdapter.getRow(position);
-                mPopCompany.setText(selectedRow.company);
+
+                mPopName.setText(selectedRow.getName());
+                mPopCompany.setText(selectedRow.getCompany());
+                mPopEmail.setText(selectedRow.getEmail());
+                mPopPhone.setText(selectedRow.getPhoneNum());
+                mPopAddress.setText(selectedRow.getAddress());
+                mPopInfo.setText(selectedRow.getInfo());
 
                 mPopupWindow = new PopupWindow(mContainer,900, 1600, true);
 
