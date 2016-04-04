@@ -21,6 +21,10 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         this.data = data;
     }
 
+    public OneRow getRow(int position) {
+        return this.data.get(position);
+    }
+
     @Override
     public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -36,7 +40,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
 
         OneRow current = data.get(position);
 
-        holder.name.setText(current.names);
+        holder.name.setText(current.getNames());
         holder.email.setText(current.emails);
         holder.phone.setText(current.phone_nums);
         holder.location.setText(current.locations);

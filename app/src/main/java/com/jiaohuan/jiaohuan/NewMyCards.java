@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,11 @@ public class NewMyCards extends android.support.v4.app.Fragment {
     private PopupWindow mPopupWindow;
     private LayoutInflater mLayoutInflater;
     private LinearLayout mLinearLayout;
+    private TextView mPopName;
+    private TextView mPopCompany;
+    private TextView mPopEmail;
+
+    public static String mTransfer;
 
 
     @Override
@@ -36,7 +42,7 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
 
-        mAdapter = new RecycleAdapter(getActivity(), getData());
+        mAdapter = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getData());
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -54,6 +60,14 @@ public class NewMyCards extends android.support.v4.app.Fragment {
                 mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.popup, null);
 
+                mPopName = (TextView) mContainer.findViewById(R.id.pop_name);
+                mPopCompany = (TextView) mContainer.findViewById(R.id.pop_company);
+                mPopEmail = (TextView) mContainer.findViewById(R.id.pop_email);
+
+                mPopName.setText("" + position);
+                OneRow selectedRow = mAdapter.getRow(position);
+                mPopCompany.setText(selectedRow.company);
+
                 mPopupWindow = new PopupWindow(mContainer,900, 1600, true);
 
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -70,31 +84,6 @@ public class NewMyCards extends android.support.v4.app.Fragment {
         });
 
         return view;
-    }
-
-    public static List<OneRow> getData(){
-        List<OneRow> data = new ArrayList<>();
-
-        String[] names = {"Sangwook Park", "Kevin Wu", "Tian Ge Liu", "Teety So","Sangwook Park", "Kevin Wu", "Tian Ge Liu", "Teety So"};
-        String[] company = {"Gate Education", "Unemployed", "CCP", "ISB","Gate Education", "Unemployed", "CCP", "ISB"};
-        String[] phone_nums = {"15488965321","45789632594","15699447584","15811556497","15488965321","45789632594","15699447584","15811556497"};
-        String[] emails = {"SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com","SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com"};
-        String[] locations = {"Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China"};
-        int[] pictures = {R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae};
-
-        for(int i = 0; i < names.length && i<company.length && i<phone_nums.length && i<emails.length && i<locations.length && i < pictures.length; i++){
-            OneRow current = new OneRow();
-
-            current.names = names[i];
-            current.company = company[i];
-            current.phone_nums = phone_nums[i];
-            current.emails = emails[i];
-            current.locations = locations[i];
-            current.pictures = pictures[i];
-
-            data.add(current);
-        }
-        return data;
     }
 
 }
