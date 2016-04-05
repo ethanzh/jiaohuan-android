@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MyCards extends android.support.v4.app.Fragment{
+public class OldMyCards extends android.support.v4.app.Fragment{
 
     private ListView mListView;
 
@@ -28,7 +27,7 @@ public class MyCards extends android.support.v4.app.Fragment{
         String[] phone_nums = {"15488965321","45789632594","15699447584","15811556497","15488965321","45789632594","15699447584","15811556497"};
         String[] emails = {"SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com","SWP@hotmail.com","kevinwu@gmail.com","TGL@hotmail.com","Teety.so@gmail.com"};
         String[] locations = {"Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China","Beijing, China"};
-        int[] pictures = {R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae,R.drawable.tae};
+        int[] pictures = {R.drawable.xia,R.drawable.xia,R.drawable.xia,R.drawable.xia,R.drawable.xia,R.drawable.xia,R.drawable.xia,R.drawable.xia};
 
         //Get reference to the listview
         mListView = (ListView) view.findViewById( R.id.list_view );

@@ -61,6 +61,21 @@
             android:layout_below="@+id/textView16"
             android:layout_alignLeft="@+id/pop_name"
             android:layout_alignStart="@+id/pop_name"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/image"
+            android:src="@drawable/wook"
+
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/pop_company"
+            android:paddingRight="20dp"
+            android:layout_toRightOf="@+id/pop_company"
+            android:layout_marginLeft="74dp"
+            android:layout_marginStart="74dp"/>
     </RelativeLayout>
 
     <RelativeLayout

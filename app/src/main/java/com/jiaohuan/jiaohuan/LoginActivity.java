@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mLoginFormView;
     private TextView mCreateAcccount;
     private TextView mNeedHelp;
+    private TextView mNewLogin;
     private Button mButton;
 
 
@@ -110,18 +111,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.login_button);
+       /* Button mEmailSignInButton = (Button) findViewById(R.id.login_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
-        });
+        });*/
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
         mEmail = (EditText) findViewById(R.id.email);
+
+        mNewLogin = (TextView)findViewById(R.id.new_login);
+
+        mNewLogin.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptLogin();
+            }
+        });
 
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mEmail.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

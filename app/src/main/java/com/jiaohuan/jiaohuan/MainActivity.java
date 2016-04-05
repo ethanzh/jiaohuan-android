@@ -119,7 +119,7 @@ public class MainActivity extends FragmentActivity {
         mViewPager.setAdapter(new MyAdapter(fragmentManager));
         mViewPager.setCurrentItem(1);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mChange = (TextView) findViewById(R.id.change_me);
 

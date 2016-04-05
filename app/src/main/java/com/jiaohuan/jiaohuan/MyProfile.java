@@ -19,7 +19,6 @@ public class MyProfile extends android.support.v4.app.Fragment {
     private TextView mName;
     private TextView mEmail;
     private TextView mPhone;
-    private TextView mPassword;
     private TextView mLocation;
 
     @Override
@@ -31,14 +30,12 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mName = (TextView) view.findViewById(R.id.name);
         mEmail = (TextView) view.findViewById(R.id.email);
         mPhone = (TextView) view.findViewById(R.id.phone);
-        mPassword = (TextView) view.findViewById(R.id.password);
         mLocation = (TextView) view.findViewById(R.id.location);
 
-        mName.setText("Tae Hyung Kim");
-        mEmail.setText("TH@gmail.com");
-        mPhone.setText("15699345063");
-        mPassword.setText("TTTTHHHH");
-        mLocation.setText("顺义，北京");
+        mName.setText("Xia Nong");
+        mEmail.setText("xianong@gmail.com");
+        mPhone.setText("156 6511 1548");
+        mLocation.setText("Beijing, China");
 
 
         return view;

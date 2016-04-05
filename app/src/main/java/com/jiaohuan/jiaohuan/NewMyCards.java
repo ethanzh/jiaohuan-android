@@ -34,6 +34,8 @@ public class NewMyCards extends android.support.v4.app.Fragment {
     private TextView mPopAddress;
     private TextView mPopInfo;
 
+    private ImageView mImageView;
+
     public static String mTransfer;
 
 
@@ -69,6 +71,7 @@ public class NewMyCards extends android.support.v4.app.Fragment {
                 mPopPhone = (TextView) mContainer.findViewById(R.id.pop_phone);
                 mPopAddress = (TextView) mContainer.findViewById(R.id.pop_address);
                 mPopInfo = (TextView) mContainer.findViewById(R.id.pop_info);
+                mImageView = (ImageView) mContainer.findViewById(R.id.image);
 
 
                 OneRow selectedRow = mAdapter.getRow(position);
@@ -79,6 +82,8 @@ public class NewMyCards extends android.support.v4.app.Fragment {
                 mPopPhone.setText(selectedRow.getPhoneNum());
                 mPopAddress.setText(selectedRow.getAddress());
                 mPopInfo.setText(selectedRow.getInfo());
+
+                mImageView.setImageResource(selectedRow.getPic());
 
                 mPopupWindow = new PopupWindow(mContainer,900, 1600, true);
 
