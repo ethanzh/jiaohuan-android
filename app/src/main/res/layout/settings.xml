@@ -6,11 +6,26 @@
               android:id="@+id/settings_layout"
               android:weightSum="1">
 
-    <Space
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.09"/>
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Settings"
+            android:id="@+id/textView27"
+            android:onClick="deflateSettings"
+            android:paddingRight="10dp"
+            android:textColor="#0e0019"
+            android:textSize="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="10dp"/>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"

@@ -50,6 +50,8 @@ public class MainActivity extends FragmentActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +63,18 @@ public class MainActivity extends FragmentActivity {
         mCenter = (ImageView) findViewById(R.id.center);
         mRight = (ImageView) findViewById(R.id.right);
 
+        mCenter.setImageResource(R.drawable.white_arrow);
+        mLeft.setImageDrawable(null);
+        mRight.setImageDrawable(null);
+
         mSettings = (TextView) findViewById(R.id.settings);
         mSettings.setVisibility(View.INVISIBLE);
 
         mSeconds = (TextView) findViewById(R.id.seconds);
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+
 
 
         mShaker = new ShakeDetector(getApplicationContext());
@@ -141,48 +149,36 @@ public class MainActivity extends FragmentActivity {
                 if (position == 1) {
                     mSettings.setVisibility(View.INVISIBLE);
                     mShaker.resume();
-                    //changeToMain(mBlackCard, mWhiteArrow, mBlackProfile);
+                    changeToMain();
                 } else if (position == 2) {
                     mSettings.setVisibility(View.VISIBLE);
                     mShaker.pause();
-                    //changeToProfile(mBlackCard, mBlackArrow, mWhiteProfile);
+                    changeToProfile();
                 } else if (position == 0) {
                     mSettings.setVisibility(View.INVISIBLE);
                     mShaker.pause();
-                    //changeToCards(mWhiteCard, mBlackArrow, mBlackProfile);
+                    changeToCards();
                 }
             }
         });
     }
 
-    public void changeToCards(Drawable whiteCard, Drawable blackArrow, Drawable blackProfile){
-       /* mLeft.setImageDrawable(whiteCard);
-        mCenter.setImageDrawable(blackArrow);
-        mRight.setImageDrawable(blackProfile);*/
-
-        mLeft.setImageDrawable(whiteCard);
+    public void changeToCards(){
+        mLeft.setImageResource(R.drawable.white_card);
         mCenter.setImageDrawable(null);
         mRight.setImageDrawable(null);
     }
 
-    public void changeToMain (Drawable blackCard, Drawable whiteArrow, Drawable blackProfile){
-        //mLeft.setImageDrawable(blackCard);
-        //mCenter.setImageDrawable(whiteArrow);
-        //mRight.setImageDrawable(blackProfile);
-
+    public void changeToMain (){
         mLeft.setImageDrawable(null);
-        mCenter.setImageDrawable(whiteArrow);
+        mCenter.setImageResource(R.drawable.white_arrow);
         mRight.setImageDrawable(null);
     }
 
-    public void changeToProfile (Drawable blackCard, Drawable blackArrow, Drawable whiteProfile){
-        //mLeft.setImageDrawable(blackCard);
-      //  mCenter.setImageDrawable(blackArrow);
-      //  mRight.setImageDrawable(whiteProfile);
-
+    public void changeToProfile (){
         mLeft.setImageDrawable(null);
         mCenter.setImageDrawable(null);
-        mRight.setImageDrawable(whiteProfile);
+        mRight.setImageResource(R.drawable.white_profile);
     }
 
 
@@ -203,9 +199,6 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void inflateSettings(View view){
-        Toast.makeText(getApplicationContext(), "this is my Toast message!!! =)",
-                Toast.LENGTH_LONG).show();
-
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }
