@@ -94,7 +94,7 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
                 mImageView.setImageResource(selectedRow.getPic());
                 mCard.setImageResource(selectedRow.getBusiness_card());
-                mPopupWindow = new PopupWindow(mContainer,900, 1600, true);
+                mPopupWindow = new PopupWindow(mContainer,930, 1620, true);
 
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
