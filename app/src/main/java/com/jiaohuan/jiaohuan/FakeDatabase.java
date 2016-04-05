@@ -15,49 +15,49 @@ public class FakeDatabase {
     private FakeDatabase() {
         data = new ArrayList<>();
 
-        OneRow row1 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!");
+        OneRow row1 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!", R.drawable.nyu);
         data.add(row1);
 
-        OneRow row2 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!");
+        OneRow row2 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.nyu);
         data.add(row2);
 
-        OneRow row3 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector");
+        OneRow row3 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector", R.drawable.nyu);
         data.add(row3);
 
-        OneRow row4 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!");
+        OneRow row4 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!", R.drawable.nyu);
         data.add(row4);
 
-        OneRow row5 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!");
+        OneRow row5 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.nyu);
         data.add(row5);
 
-        OneRow row6 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector");
+        OneRow row6 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector", R.drawable.nyu);
         data.add(row6);
 
-        OneRow row7 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!");
+        OneRow row7 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!", R.drawable.nyu);
         data.add(row7);
 
-        OneRow row8 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!");
+        OneRow row8 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.nyu);
         data.add(row8);
 
-        OneRow row9 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector");
+        OneRow row9 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector", R.drawable.nyu);
         data.add(row9);
 
-        OneRow row10 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!");
+        OneRow row10 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!", R.drawable.nyu);
         data.add(row10);
 
-        OneRow row11 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!");
+        OneRow row11 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.nyu);
         data.add(row11);
 
-        OneRow row12 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector");
+        OneRow row12 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector", R.drawable.nyu);
         data.add(row12);
 
-        OneRow row13 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!");
+        OneRow row13 = new OneRow("Sangwook Park", "Gate Education", "148 1653 2157", "SWP@hotmail.com", "Beijing, China", R.drawable.wook, "北京望京", "Is a valuble member of STUCO!", R.drawable.nyu);
         data.add(row13);
 
-        OneRow row14 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!");
+        OneRow row14 = new OneRow("Ethan Houston", "Jiao Huan Inc.", "158 1456 8743", "e@gmail.com", "Beijing, China", R.drawable.ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.nyu);
         data.add(row14);
 
-        OneRow row15 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector");
+        OneRow row15 = new OneRow("Tian Ge Liu", "CCP", "158 3264 4562", "LTG@gmail.com", "Beijing, China", R.drawable.tg, "Capital Paradise", "Is a watch collector", R.drawable.nyu);
         data.add(row15);
 
 

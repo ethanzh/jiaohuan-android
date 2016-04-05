@@ -9,6 +9,7 @@ public class OneRow {
     String address;
     String additional_info;
     int pictures;
+    int business_card;
 
     public OneRow(String n) {
         names = n;
@@ -19,6 +20,18 @@ public class OneRow {
         pictures = 0;
         address = "Unknown";
         additional_info = "Unknown";
+    }
+
+    public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i, int card) {
+        names = n;
+        company = c;
+        phone_nums = p;
+        emails = e;
+        locations = l;
+        pictures = pics;
+        address = a;
+        additional_info = i;
+        business_card = card;
     }
 
     public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i) {
@@ -55,4 +68,7 @@ public class OneRow {
 
     public int getPic() {return pictures;}
     public void setPic(int pi) {pictures = pi;}
+
+    public int getBusiness_card() {return business_card;}
+    public void setBusiness_card(int pi) {pictures = business_card;}
 }

@@ -2,6 +2,8 @@ package com.jiaohuan.jiaohuan;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +36,10 @@ public class NewMyCards extends android.support.v4.app.Fragment {
     private TextView mPopAddress;
     private TextView mPopInfo;
 
+    private TextView mClose;
+
     private ImageView mImageView;
+    private ImageView mCard;
 
     public static String mTransfer;
 
@@ -72,6 +77,9 @@ public class NewMyCards extends android.support.v4.app.Fragment {
                 mPopAddress = (TextView) mContainer.findViewById(R.id.pop_address);
                 mPopInfo = (TextView) mContainer.findViewById(R.id.pop_info);
                 mImageView = (ImageView) mContainer.findViewById(R.id.image);
+                mCard = (ImageView) mContainer.findViewById(R.id.card_pic);
+                mClose = (TextView) mContainer.findViewById(R.id.close);
+
 
 
                 OneRow selectedRow = mAdapter.getRow(position);
@@ -83,19 +91,30 @@ public class NewMyCards extends android.support.v4.app.Fragment {
                 mPopAddress.setText(selectedRow.getAddress());
                 mPopInfo.setText(selectedRow.getInfo());
 
-                mImageView.setImageResource(selectedRow.getPic());
 
+                mImageView.setImageResource(selectedRow.getPic());
+                mCard.setImageResource(selectedRow.getBusiness_card());
                 mPopupWindow = new PopupWindow(mContainer,900, 1600, true);
 
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
-                mContainer.setOnTouchListener(new View.OnTouchListener() {
+                /* mContainer.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         mPopupWindow.dismiss();
                         return true;
                     }
+                }); */
+
+                mClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPopupWindow.dismiss();
+                    }
                 });
+
+                mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                mPopupWindow.setOutsideTouchable(true);
 
             }
         });

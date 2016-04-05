@@ -2,183 +2,267 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:background="#FFF000"
+              android:background="#000000"
               android:id="@+id/touch"
               android:layout_height="match_parent"
               android:weightSum="1">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.26"
+        android:layout_height="159dp"
         android:background="#2a1d76">
 
 
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Name"
-            android:id="@+id/pop_name"
-            android:layout_marginLeft="42dp"
-            android:layout_marginStart="42dp"
-            android:textColor="#ffffff"
-            android:layout_below="@+id/textView15"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Name"
+                android:id="@+id/textView15"
+                android:textColor="#ffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/pop_name"
+                android:layout_alignStart="@+id/pop_name"
+                android:paddingTop="20dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Name"
+                android:id="@+id/pop_name"
+                android:layout_marginLeft="42dp"
+                android:layout_marginStart="42dp"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/textView15"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Company"
+                android:id="@+id/textView16"
+                android:textColor="#FFFFFF"
+                android:layout_below="@+id/pop_name"
+                android:layout_alignLeft="@+id/pop_company"
+                android:layout_alignStart="@+id/pop_company"
+                android:paddingTop="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Company"
+                android:id="@+id/pop_company"
+                android:textColor="#FFFFFF"
+                android:layout_below="@+id/textView16"
+                android:layout_alignLeft="@+id/pop_name"
+                android:layout_alignStart="@+id/pop_name"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Name"
-            android:id="@+id/textView15"
-            android:textColor="#ffffff"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/pop_name"
-            android:layout_alignStart="@+id/pop_name"
-            android:paddingTop="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Company"
-            android:id="@+id/textView16"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/pop_name"
-            android:layout_alignLeft="@+id/pop_company"
-            android:layout_alignStart="@+id/pop_company"
-            android:paddingTop="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Company"
-            android:id="@+id/pop_company"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/textView16"
-            android:layout_alignLeft="@+id/pop_name"
-            android:layout_alignStart="@+id/pop_name"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/image"
-            android:src="@drawable/wook"
-
-            android:layout_centerVertical="true"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/pop_company"
-            android:paddingRight="20dp"
-            android:layout_toRightOf="@+id/pop_company"
-            android:layout_marginLeft="74dp"
-            android:layout_marginStart="74dp"/>
-    </RelativeLayout>
+            android:layout_alignParentEnd="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.83"
-        android:background="#ffffff">
+            <ImageView
+                android:layout_width="92dp"
+                android:layout_height="match_parent"
+                android:id="@+id/image"
+                android:src="@drawable/wook"
 
+                android:paddingRight="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/close"
+                android:layout_alignEnd="@+id/close"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Email"
-            android:id="@+id/pop_email"
-            android:textColor="#2a1d76"
-            android:layout_marginLeft="38dp"
-            android:layout_marginStart="38dp"
-            android:layout_below="@+id/textView17"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="CLOSE"
+                android:id="@+id/close"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="#FFFFFF"
+                android:onClick="close"
+                android:padding="10dp"
+                android:paddingRight="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Email"
-            android:id="@+id/textView17"
-            android:layout_marginTop="33dp"
-            android:textColor="#2a1d76"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/pop_email"
-            android:layout_alignStart="@+id/pop_email"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Phone Number"
-            android:id="@+id/textView18"
-            android:layout_below="@+id/pop_email"
-            android:layout_alignLeft="@+id/pop_email"
-            android:layout_alignStart="@+id/pop_email"
-            android:layout_marginTop="26dp"
-            android:textColor="#2a1d76"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Phone Number"
-            android:id="@+id/pop_phone"
-            android:layout_below="@+id/textView18"
-            android:layout_alignLeft="@+id/textView18"
-            android:layout_alignStart="@+id/textView18"
-            android:textColor="#2a1d76"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Address"
-            android:id="@+id/textView20"
-            android:layout_below="@+id/pop_phone"
-            android:layout_alignLeft="@+id/pop_phone"
-            android:layout_alignStart="@+id/pop_phone"
-            android:layout_marginTop="25dp"
-            android:textColor="#2a1d76"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Address"
-            android:id="@+id/pop_address"
-            android:layout_below="@+id/textView20"
-            android:layout_alignLeft="@+id/textView20"
-            android:layout_alignStart="@+id/textView20"
-            android:textColor="#2a1d76"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Additional Information"
-            android:id="@+id/textView22"
-            android:layout_marginTop="31dp"
-            android:layout_below="@+id/pop_address"
-            android:layout_alignLeft="@+id/pop_address"
-            android:layout_alignStart="@+id/pop_address"
-            android:textColor="#2a1d76"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Additional information"
-            android:id="@+id/pop_info"
-            android:layout_below="@+id/textView22"
-            android:layout_alignLeft="@+id/textView22"
-            android:layout_alignStart="@+id/textView22"
-            android:textColor="#2a1d76"/>
+        </RelativeLayout>
 
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        android:scrollbars = "vertical"
+        android:scrollbarStyle="insideInset"
+        android:layout_weight="0.93">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.14"
+            android:orientation="vertical"
+            android:background="#ffffff">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Business Card"
+                android:id="@+id/textView25"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="38dp"
+                android:layout_marginStart="38dp"
+                android:textColor="#2a1d76"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/textView17"
+                android:layout_alignStart="@+id/textView17"/>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:scaleType="fitXY"
+                android:id="@+id/card_pic"
+                android:src="@drawable/nyu"
+                android:layout_marginBottom="20dp"
+                android:maxHeight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Email"
+                android:id="@+id/textView17"
+                android:layout_marginLeft="38dp"
+                android:layout_marginStart="38dp"
+                android:textColor="#2a1d76"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/pop_email"
+                android:layout_alignStart="@+id/pop_email"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Email"
+                android:id="@+id/pop_email"
+                android:textColor="#2a1d76"
+                android:layout_marginLeft="38dp"
+                android:layout_marginStart="38dp"
+                android:layout_below="@+id/textView17"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Phone Number"
+                android:id="@+id/textView18"
+                android:layout_marginLeft="38dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="38dp"
+                android:layout_below="@+id/pop_email"
+                android:layout_alignLeft="@+id/pop_email"
+                android:layout_alignStart="@+id/pop_email"
+                android:textColor="#2a1d76"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Phone Number"
+                android:layout_marginLeft="38dp"
+                android:layout_marginStart="38dp"
+                android:id="@+id/pop_phone"
+                android:layout_below="@+id/textView18"
+                android:layout_alignLeft="@+id/textView18"
+                android:layout_alignStart="@+id/textView18"
+                android:textColor="#2a1d76"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Address"
+                android:id="@+id/textView20"
+                android:layout_below="@+id/pop_phone"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="38dp"
+                android:layout_marginStart="38dp"
+                android:layout_alignLeft="@+id/pop_phone"
+                android:layout_alignStart="@+id/pop_phone"
+                android:textColor="#2a1d76"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Address"
+                android:id="@+id/pop_address"
+                android:layout_marginLeft="38dp"
+                android:layout_marginStart="38dp"
+                android:layout_below="@+id/textView20"
+                android:layout_alignLeft="@+id/textView20"
+                android:layout_alignStart="@+id/textView20"
+                android:textColor="#2a1d76"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Additional Information"
+                android:id="@+id/textView22"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="38dp"
+                android:layout_marginStart="38dp"
+                android:layout_below="@+id/pop_address"
+                android:layout_alignLeft="@+id/pop_address"
+                android:layout_alignStart="@+id/pop_address"
+                android:textColor="#2a1d76"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Additional information"
+                android:id="@+id/pop_info"
+                android:layout_marginLeft="38dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="38dp"
+                android:layout_below="@+id/textView22"
+                android:layout_alignLeft="@+id/textView22"
+                android:layout_alignStart="@+id/textView22"
+                android:textColor="#2a1d76"/>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>
