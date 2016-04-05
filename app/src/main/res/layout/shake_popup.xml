@@ -23,4 +23,13 @@
         android:layout_gravity="center_horizontal"
         android:visibility="visible"
         android:paddingTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/seconds"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff"/>
 </LinearLayout>

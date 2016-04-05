@@ -35,37 +35,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.main_linear);
-        /*mLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), QRCode.class);
-                startActivity(myIntent);
-            }
-        });*/
 
-        /*mShaker = new ShakeDetector(getContext());
-        mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener () {
-            public void onShake()
-            {
-                //Make popup here
-                mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
 
-                mPopupWindow = new PopupWindow(mContainer,900, 1200, true);
-
-                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
-
-                mContainer.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        mPopupWindow.dismiss();
-                        mShaker.resume();
-                        return true;
-                    }
-                });
-                mShaker.pause();
-            }
-        });*/
 
         return view;
     }

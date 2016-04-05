@@ -1,15 +1,22 @@
 package com.jiaohuan.jiaohuan;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -36,6 +43,11 @@ public class MainActivity extends FragmentActivity {
     private LayoutInflater mLayoutInflater;
     private PopupWindow mPopupWindow;
     private LinearLayout mLinearLayout;
+    private TextView mSeconds;
+
+    private LocationManager mLocationManager;
+    private LocationListener mLocationListener;
+
 
 
     @Override
@@ -52,9 +64,34 @@ public class MainActivity extends FragmentActivity {
         mSettings = (TextView) findViewById(R.id.settings);
         mSettings.setVisibility(View.INVISIBLE);
 
+        mSeconds = (TextView) findViewById(R.id.seconds);
+
+        mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+
         mShaker = new ShakeDetector(getApplicationContext());
         mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             public void onShake() {
+
+                //GPS Stuff
+                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                LocationListener locationListener = new MyLocationListener();
+
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+
+
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+
                 //Make popup here
                 mLayoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
@@ -94,21 +131,22 @@ public class MainActivity extends FragmentActivity {
 
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {}
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            public void onPageScrollStateChanged(int state) {
+            }
+
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
             public void onPageSelected(int position) {
-                if(position == 1){
+                if (position == 1) {
                     mSettings.setVisibility(View.INVISIBLE);
                     mShaker.resume();
                     //changeToMain(mBlackCard, mWhiteArrow, mBlackProfile);
-                }
-                else if (position == 2){
+                } else if (position == 2) {
                     mSettings.setVisibility(View.VISIBLE);
                     mShaker.pause();
                     //changeToProfile(mBlackCard, mBlackArrow, mWhiteProfile);
-                }
-                else if(position == 0){
+                } else if (position == 0) {
                     mSettings.setVisibility(View.INVISIBLE);
                     mShaker.pause();
                     //changeToCards(mWhiteCard, mBlackArrow, mBlackProfile);
