@@ -1,7 +1,5 @@
 package com.jiaohuan.jiaohuan;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -10,13 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -36,8 +32,6 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
-
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -59,7 +53,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private TextView mBack;
     private EditText mEmail;
     private TextView mLogin;
 
@@ -68,18 +61,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //OpenSans-Regular.ttf
-        FontsOverride.setDefaultFont(this, "DEFAULT", "Roman.ttf");
-        FontsOverride.setDefaultFont(this, "MONOSPACE", "Roman.ttf");
-        FontsOverride.setDefaultFont(this, "SERIF", "Roman.ttf");
-        FontsOverride.setDefaultFont(this, "SANS_SERIF", "Roman.ttf");
-
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
         mPasswordView = (EditText) findViewById(R.id.password);
         mEmail = (EditText) findViewById(R.id.email);
-        mLogin = (TextView)findViewById(R.id.start);
+        mLogin = (TextView) findViewById(R.id.start);
 
         mLogin.setOnClickListener(new OnClickListener() {
             @Override
@@ -88,25 +75,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mEmail.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    }
-
-    public void back(){
-        finish();
-    }
-
-    public void openMain(View v){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
-        finish();
-
-    }
-    public void createAccount(View v){
-        super.onPause();
-
-        Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
     }
 
     private void populateAutoComplete() {
@@ -173,6 +143,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         boolean cancel = false;
         View focusView = null;
+
+        mAuthTask = new UserLoginTask(email, password);
+        mAuthTask.execute((Void) null);
 
     }
 
@@ -299,6 +272,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onCancelled() {
             mAuthTask = null;
+
         }
 
     }
