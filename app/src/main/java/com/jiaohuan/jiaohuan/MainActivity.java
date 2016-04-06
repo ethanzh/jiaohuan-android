@@ -62,7 +62,7 @@ public class MainActivity extends FragmentActivity {
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
 
                 // Set the location where the pop up occurs
-                mPopupWindow = new PopupWindow(mContainer, 900, 1200, true);
+                mPopupWindow = new PopupWindow(mContainer, 1000, 1300, true);
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
                 // When anywhere is tapped, the pop up dismisses, it also resumes the shaker

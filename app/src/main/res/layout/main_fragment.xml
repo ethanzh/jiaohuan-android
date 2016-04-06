@@ -19,15 +19,20 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Welcome to Jiao Huan."
         android:textSize="20dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/textView3"
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff"/>
 
-    <Space
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/exchange"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.52"/>
+        android:layout_weight="0.14"/>
 
     <TextView
         android:layout_width="wrap_content"
