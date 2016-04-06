@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:id="@+id/linlay"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#191919"
+              android:background="#0e0019">
 
-              android:id="@+id/card_layout"
-              android:weightSum="1">
-
-
-    <Space
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:layout_gravity="center_horizontal"/>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/recycle"
         android:overScrollMode="never"
-        android:id="@+id/list_view"
+        android:paddingRight="6dp"
+        android:paddingLeft="6dp"
+        >
 
-        android:divider="#191919"
-        android:layout_marginRight="23dp"
-        android:layout_marginLeft="23dp"
-        android:dividerHeight="12dp"
-        android:layout_gravity="center_horizontal"/>
+
+    </android.support.v7.widget.RecyclerView>
+
 </LinearLayout>

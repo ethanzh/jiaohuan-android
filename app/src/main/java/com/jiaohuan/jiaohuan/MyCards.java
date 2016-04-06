@@ -1,18 +1,12 @@
 package com.jiaohuan.jiaohuan;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.PhoneNumberUtils;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,10 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class NewMyCards extends android.support.v4.app.Fragment {
+public class MyCards extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
@@ -44,7 +35,7 @@ public class NewMyCards extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.new_my_cards, container, false);
+        View view = inflater.inflate(R.layout.my_cards, container, false);
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
@@ -61,9 +52,9 @@ public class NewMyCards extends android.support.v4.app.Fragment {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.d("CLICK", "" + position);
 
-                // Make popup here
+                // Make card_expand here
                 mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.popup, null);
+                ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_expand, null);
 
                 // Assign all of the pop up's TextViews
                 mPopName = (TextView) mContainer.findViewById(R.id.pop_name);

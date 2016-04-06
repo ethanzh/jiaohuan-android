@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="DONE"
-            android:id="@+id/new_login"
+            android:id="@+id/start"
             android:paddingRight="10dp"
             android:textSize="16dp"
             android:layout_centerVertical="true"

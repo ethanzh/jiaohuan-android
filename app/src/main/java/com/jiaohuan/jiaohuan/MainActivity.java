@@ -1,34 +1,22 @@
 package com.jiaohuan.jiaohuan;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 
@@ -69,7 +57,7 @@ public class MainActivity extends FragmentActivity {
         mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             public void onShake() {
 
-                //Make popup here
+                //Make card_expand here
                 mLayoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
 
@@ -178,7 +166,7 @@ class MyAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i){
         Fragment fragment = null;
         if(i == 0){
-            fragment = new NewMyCards();
+            fragment = new MyCards();
         }
         if(i == 1){
             fragment = new MainFragment();
