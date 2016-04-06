@@ -79,7 +79,7 @@
                     android:layout_width="92dp"
                     android:layout_height="match_parent"
                     android:id="@+id/image"
-                    android:src="@drawable/wook"
+                    android:src="@drawable/pp_wookie"
 
                     android:paddingRight="20dp"
                     android:layout_alignParentTop="true"
@@ -162,7 +162,7 @@
                 android:layout_height="180dp"
                 android:scaleType="fitXY"
                 android:id="@+id/card_pic"
-                android:src="@drawable/nyu"
+                android:src="@drawable/card_nyu"
                 android:layout_marginBottom="20dp"
                 android:maxHeight="10dp"
                 android:layout_marginTop="10dp"
