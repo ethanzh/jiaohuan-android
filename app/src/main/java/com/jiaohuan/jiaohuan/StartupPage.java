@@ -17,6 +17,7 @@ public class StartupPage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_page);
 
+        // Start sign in process
         mSignin = (Button) findViewById(R.id.signin);
         mSignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +28,7 @@ public class StartupPage extends Activity {
             }
         });
 
+        // Start sign up process
         mSignup = (Button) findViewById(R.id.signup);
         mSignup.setOnClickListener(new View.OnClickListener() {
             @Override

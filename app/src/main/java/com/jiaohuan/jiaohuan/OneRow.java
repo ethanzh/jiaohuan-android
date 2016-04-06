@@ -1,16 +1,20 @@
 package com.jiaohuan.jiaohuan;
 
 public class OneRow {
+
     private String names;
     private String company;
-    String phone_nums;
-    String emails;
-    String locations;
-    String address;
-    String additional_info;
-    int pictures;
-    int business_card;
+    private String phone_nums;
+    private String emails;
+    private String locations;
+    private String address;
+    private String additional_info;
+    private int pictures;
+    private int business_card;
+    private String title;
+    private String website;
 
+    // Dummy constructor, just in case there's only a name
     public OneRow(String n) {
         names = n;
         company = "Unemployed";
@@ -22,7 +26,8 @@ public class OneRow {
         additional_info = "Unknown";
     }
 
-    public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i, int card) {
+    // Main constructor
+    public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w) {
         names = n;
         company = c;
         phone_nums = p;
@@ -32,6 +37,8 @@ public class OneRow {
         address = a;
         additional_info = i;
         business_card = card;
+        title = ti;
+        website = w;
     }
 
     public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i) {
@@ -44,6 +51,8 @@ public class OneRow {
         address = a;
         additional_info = i;
     }
+
+    // Various methods for getting/setting the variables
 
     public String getName() {return names;}
     public void setName(String n) { names = n; }
@@ -70,5 +79,11 @@ public class OneRow {
     public void setPic(int pi) {pictures = pi;}
 
     public int getBusiness_card() {return business_card;}
-    public void setBusiness_card(int pi) {pictures = business_card;}
+    public void setBusiness_card(int pi) {business_card = pi;}
+
+    public String getTitle() {return title;}
+    public void setTitle(String ti){title = ti;}
+
+    public String getWebsite() {return website;}
+    public void setWebsite(String ti){website = ti;}
 }

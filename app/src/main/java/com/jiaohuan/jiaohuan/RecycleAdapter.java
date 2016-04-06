@@ -28,7 +28,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     @Override
     public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = mLayoutInflater.inflate(R.layout.single_row, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.new_single_row, parent, false);
 
         myViewHolder holder = new myViewHolder(view);
 
@@ -41,10 +41,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         OneRow current = data.get(position);
 
         holder.name.setText(current.getName());
-        holder.email.setText(current.getEmail());
-        holder.phone.setText(current.getPhoneNum());
-        holder.location.setText(current.getLocation());
         holder.company.setText(current.getCompany());
+
         holder.icon.setImageResource(current.getPic());
     }
 
@@ -57,9 +55,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
 
         TextView name;
         TextView company;
-        TextView email;
-        TextView phone;
-        TextView location;
         ImageView icon;
 
         public myViewHolder(View itemView) {
@@ -67,11 +62,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
 
             name = (TextView) itemView.findViewById(R.id.name);
             company = (TextView) itemView.findViewById(R.id.company);
-            email = (TextView) itemView.findViewById(R.id.email);
-            phone = (TextView) itemView.findViewById(R.id.phone);
-            location = (TextView) itemView.findViewById(R.id.location);
-
-            icon = (ImageView) itemView.findViewById(R.id.image_view);
+            icon = (ImageView) itemView.findViewById(R.id.profile_pic);
         }
     }
 }

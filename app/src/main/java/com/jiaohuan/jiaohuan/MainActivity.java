@@ -33,7 +33,6 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivity {
 
     ViewPager mViewPager = null;
-    Toolbar mToolbar;
     TextView mChange;
     ImageView mLeft;
     ImageView mCenter;
@@ -43,14 +42,6 @@ public class MainActivity extends FragmentActivity {
     private LayoutInflater mLayoutInflater;
     private PopupWindow mPopupWindow;
     private LinearLayout mLinearLayout;
-    private TextView mSeconds;
-
-    private LocationManager mLocationManager;
-    private LocationListener mLocationListener;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,55 +50,34 @@ public class MainActivity extends FragmentActivity {
 
         mLinearLayout = (LinearLayout) findViewById(R.id.main_activity_layout);
 
+        // These are the bottom buttons
         mLeft = (ImageView) findViewById(R.id.left);
         mCenter = (ImageView) findViewById(R.id.center);
         mRight = (ImageView) findViewById(R.id.right);
 
+        // App starts on the main page, so obviously the arrow will be the 'on' one
         mCenter.setImageResource(R.drawable.white_arrow);
         mLeft.setImageDrawable(null);
         mRight.setImageDrawable(null);
 
+        // Settings is off by default, because app starts on the 'main' screen
         mSettings = (TextView) findViewById(R.id.settings);
         mSettings.setVisibility(View.INVISIBLE);
 
-        mSeconds = (TextView) findViewById(R.id.seconds);
-
-        mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-
-
-
+        // Shake listener
         mShaker = new ShakeDetector(getApplicationContext());
         mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             public void onShake() {
-
-                //GPS Stuff
-                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                LocationListener locationListener = new MyLocationListener();
-
-
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-
-
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
 
                 //Make popup here
                 mLayoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
 
+                // Set the location where the pop up occurs
                 mPopupWindow = new PopupWindow(mContainer, 900, 1200, true);
-
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
+                // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
                 mContainer.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -116,27 +86,17 @@ public class MainActivity extends FragmentActivity {
                         return true;
                     }
                 });
+
+                // Shaker is paused when pop up is displayed
                 mShaker.pause();
             }
         });
 
-
-
+        // Code the start the view pager
         mViewPager = (ViewPager) findViewById(R.id.pager);
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new MyAdapter(fragmentManager));
         mViewPager.setCurrentItem(1);
-
-        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        mChange = (TextView) findViewById(R.id.change_me);
-
-
-
-        String[] array = {"One", "Two", "Three", "Four"};
-
-        ListAdapter mListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, array);
-
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageScrollStateChanged(int state) {
@@ -145,6 +105,7 @@ public class MainActivity extends FragmentActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
+            // Either pause or resume shaker, and assign appropriate bottom icon
             public void onPageSelected(int position) {
                 if (position == 1) {
                     mSettings.setVisibility(View.INVISIBLE);
@@ -163,6 +124,8 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
+    // Various methods to change the pictures
+
     public void changeToCards(){
         mLeft.setImageResource(R.drawable.white_card);
         mCenter.setImageDrawable(null);
@@ -180,7 +143,6 @@ public class MainActivity extends FragmentActivity {
         mCenter.setImageDrawable(null);
         mRight.setImageResource(R.drawable.white_profile);
     }
-
 
     public void jumpToMain(View view) {
         mSettings.setVisibility(View.INVISIBLE);

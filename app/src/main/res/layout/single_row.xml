@@ -25,8 +25,8 @@
         android:text="Company"
         android:id="@+id/company"
         android:textColor="#191919"
-        android:layout_marginLeft="52dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginLeft="111dp"
+        android:layout_marginStart="111dp"
         android:layout_marginTop="14dp"
         android:layout_below="@+id/name"
         android:layout_alignParentLeft="true"
@@ -73,10 +73,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/image_view"
         android:src="@drawable/xia"
-        android:layout_above="@+id/location"
-        android:layout_alignTop="@+id/company"
+        android:maxHeight="40dp"
+        android:maxWidth="40dp"
         android:layout_toStartOf="@+id/phone"
-        android:layout_toLeftOf="@+id/phone"/>
+        android:layout_toLeftOf="@+id/phone"
+        android:layout_below="@+id/name"
+        android:layout_alignBottom="@+id/phone"/>
 
 
 

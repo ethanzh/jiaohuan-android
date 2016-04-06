@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Settings"
+            android:text="Back"
             android:id="@+id/textView27"
             android:onClick="deflateSettings"
             android:paddingRight="10dp"

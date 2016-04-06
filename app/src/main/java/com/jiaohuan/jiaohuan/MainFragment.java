@@ -22,22 +22,10 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 public class MainFragment extends android.support.v4.app.Fragment {
-    @Nullable
-
-    private LinearLayout mLinearLayout;
-    private ShakeDetector mShaker;
-    private LayoutInflater mLayoutInflater;
-    private PopupWindow mPopupWindow;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
-
-        mLinearLayout = (LinearLayout) view.findViewById(R.id.main_linear);
-
-
-
         return view;
     }
 }

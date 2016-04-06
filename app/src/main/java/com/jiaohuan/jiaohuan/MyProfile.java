@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class MyProfile extends android.support.v4.app.Fragment {
     @Nullable
 
-    ImageView mImageView;
+    private ImageView mImageView;
     private TextView mName;
     private TextView mEmail;
     private TextView mPhone;
@@ -27,16 +27,17 @@ public class MyProfile extends android.support.v4.app.Fragment {
 
         mImageView = (ImageView) view.findViewById(R.id.picture);
 
+        // Connect the TextViews to their ids
         mName = (TextView) view.findViewById(R.id.name);
         mEmail = (TextView) view.findViewById(R.id.email);
         mPhone = (TextView) view.findViewById(R.id.phone);
         mLocation = (TextView) view.findViewById(R.id.location);
 
+        // Set dummy data, eventually to be replaced with data from server
         mName.setText("Xia Nong");
         mEmail.setText("xianong@gmail.com");
         mPhone.setText("156 6511 1548");
         mLocation.setText("Beijing, China");
-
 
         return view;
     }

@@ -398,10 +398,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                //SystemClock.sleep(7000);
-                //openMain();
-                Intent finish = new Intent("finish_activity");
-                sendBroadcast(finish);
+                // Start the new activity, with no animation
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

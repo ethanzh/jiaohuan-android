@@ -16,13 +16,5 @@ public class PopUp extends Activity{
 
         mLinearLayout = (LinearLayout) findViewById(R.id.touch);
 
-        mLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
-
-
 }
