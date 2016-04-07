@@ -10,10 +10,19 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Searching for Devices..."
-        android:id="@+id/textView13"
         android:layout_gravity="center_horizontal"
         android:paddingTop="180dp"
         android:textColor="#ffffff"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="GPS Locaton"
+        android:id="@+id/gps"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#FFFFFF"
+        android:paddingTop="40dp"/>
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
@@ -23,5 +32,12 @@
         android:layout_gravity="center_horizontal"
         android:visibility="visible"
         android:paddingTop="15dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press for location"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
