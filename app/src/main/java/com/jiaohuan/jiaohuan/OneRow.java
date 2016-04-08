@@ -1,5 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
+import android.text.Editable;
+
 public class OneRow {
 
     private String names;

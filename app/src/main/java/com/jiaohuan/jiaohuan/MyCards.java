@@ -103,6 +103,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                     mShowCompany.setTextColor(Color.BLACK);
                     mPopName.setTextColor(Color.BLACK);
                     mPopCompany.setTextColor(Color.BLACK);
+                    mClose.setTextColor(Color.BLACK);
                 }
 
                 // Gets text from the (fake) database and prints them to the activity

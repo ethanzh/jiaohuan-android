@@ -36,7 +36,6 @@
             android:text="Edit"
             android:id="@+id/edit"
             android:textColor="#FFFFFF"
-            android:onClick="jumpToEdit"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -100,7 +99,7 @@
     <ImageView
         android:layout_width="264dp"
 
-        android:id="@+id/imageView2"
+        android:id="@+id/pic"
         android:src="@drawable/card_nyu"
         android:layout_height="150dp"
         android:scaleType="fitXY"

@@ -11,9 +11,13 @@ public class FakeDatabase {
     }
 
     private List<OneRow> data;
+    private OneRow myData;
 
     // This is just fake data, it will eventually be replaced with calls to the server
     private FakeDatabase() {
+
+        // My own data
+        myData = new OneRow("Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China", R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.card_nyu, "CEO", "www.baidu.com", -12303292 , R.drawable.card_flip);
 
         // Create a new ArrayList, then add each row to it individually
         data = new ArrayList<>();
@@ -75,8 +79,11 @@ public class FakeDatabase {
 
     }
 
-    // Simply returns the data
+    // Simply returns other people data
     public List<OneRow> getData() {
         return data;
     }
+
+    // Return my data
+    public OneRow getMyData() {return myData;}
 }
