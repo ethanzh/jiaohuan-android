@@ -3,6 +3,7 @@ package com.jiaohuan.jiaohuan;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class EditMyProfile extends Activity {
     ImageView mLeft;
     ImageView mCenter;
     ImageView mRight;
+    ViewPager mViewPager = null;
 
 
     @Override
@@ -68,10 +70,11 @@ public class EditMyProfile extends Activity {
     }
 
     public void fromEditToCards(View view) {
-
+        finish();
     }
 
     public void fromEditToMain(View view) {
+        finish();
 
     }
 
