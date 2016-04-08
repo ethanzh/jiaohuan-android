@@ -1,6 +1,8 @@
 package com.jiaohuan.jiaohuan;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MyCards extends android.support.v4.app.Fragment {
 
@@ -32,6 +37,14 @@ public class MyCards extends android.support.v4.app.Fragment {
     private TextView mWebsite;
     private ImageView mImageView;
     private ImageView mCard;
+    private int mColor;
+    private RelativeLayout mTopPanel;
+    private LayoutInflater mFullCard;
+    private ImageView mBigCard;
+    int initial = 0;
+    private TextView mShowName;
+    private TextView mShowCompany;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,11 +63,10 @@ public class MyCards extends android.support.v4.app.Fragment {
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                Log.d("CLICK", "" + position);
 
                 // Make card_expand here
                 mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_expand, null);
+                final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_expand, null);
 
                 // Assign all of the pop up's TextViews
                 mPopName = (TextView) mContainer.findViewById(R.id.pop_name);
@@ -68,9 +80,30 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mClose = (TextView) mContainer.findViewById(R.id.close);
                 mTitle = (TextView) mContainer.findViewById(R.id.pop_title);
                 mWebsite = (TextView) mContainer.findViewById(R.id.website);
+                mShowName = (TextView) mContainer.findViewById(R.id.showname);
+                mShowCompany = (TextView) mContainer.findViewById(R.id.showcompany);
+
+                // Get top panel
+                mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
                 // Gets the data of the clicked card
-                OneRow selectedRow = mAdapter.getRow(position);
+                final OneRow selectedRow = mAdapter.getRow(position);
+
+                // Get color
+                mColor = selectedRow.getColor();
+
+                // Set color
+                mTopPanel.setBackgroundColor(mColor);
+
+                Log.wtf("Color", mColor + "");
+
+                // If white background, make top panel text black
+                if(mColor == -1){
+                    mShowName.setTextColor(Color.BLACK);
+                    mShowCompany.setTextColor(Color.BLACK);
+                    mPopName.setTextColor(Color.BLACK);
+                    mPopCompany.setTextColor(Color.BLACK);
+                }
 
                 // Gets text from the (fake) database and prints them to the activity
                 mPopName.setText(selectedRow.getName());
@@ -87,6 +120,24 @@ public class MyCards extends android.support.v4.app.Fragment {
                 // Starts the pop up
                 mPopupWindow = new PopupWindow(mContainer, 930, 1620, true);
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+
+                // Card picture on click listener
+                mCard.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        Log.wtf("HI", "IT WORKED");
+
+                        if(initial == 0){
+                            mCard.setImageResource(selectedRow.getFlipside());
+                            initial = 1;
+                        }else{
+                            mCard.setImageResource(selectedRow.getBusiness_card());
+                            initial = 0;
+                        }
+                    }
+                });
 
                 // Close button click listener
                 mClose.setOnClickListener(new View.OnClickListener() {

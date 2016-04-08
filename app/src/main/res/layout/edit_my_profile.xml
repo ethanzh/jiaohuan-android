@@ -26,87 +26,97 @@
             android:id="@+id/picture"
             android:src="@drawable/pp_xianong"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            />
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Edit"
-            android:id="@+id/edit"
+            android:text="Back"
+            android:id="@+id/textView"
             android:textColor="#FFFFFF"
-            android:onClick="jumpToEdit"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="34dp"
-            android:layout_marginEnd="34dp"/>
+            android:layout_toLeftOf="@+id/picture"
+            android:layout_toStartOf="@+id/picture"
+            android:layout_marginRight="29dp"
+            android:layout_marginEnd="29dp"/>
     </RelativeLayout>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.25"/>
+        android:layout_weight="0.20"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Name"
         android:id="@+id/name"
-        android:textColor="#FFFFFF"
         android:layout_gravity="center_horizontal"
-        android:textSize="18dp"
-        android:paddingBottom="5dp"/>
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_edittext"
+        android:textSize="18dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10"/>
+
+    <EditText
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Email"
         android:id="@+id/email"
-        android:textColor="#FFFFFF"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_edittext"
         android:layout_gravity="center_horizontal"
-        android:textSize="18dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"/>
+        android:textSize="18dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10"/>
+
+    <EditText
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Phone Number"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:id="@+id/phone"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_edittext"
         android:layout_gravity="center_horizontal"
-        android:textSize="18dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"/>
+        android:textSize="18dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"/>
+
+    <EditText
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Location"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:id="@+id/location"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_edittext"
         android:layout_gravity="center_horizontal"
-        android:textSize="18dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"/>
-
-    <ImageView
-        android:layout_width="264dp"
-
-        android:id="@+id/imageView2"
-        android:src="@drawable/card_nyu"
-        android:layout_height="150dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"
-        android:paddingTop="5dp"/>
+        android:textSize="18dp"/>
 
 
 </LinearLayout>

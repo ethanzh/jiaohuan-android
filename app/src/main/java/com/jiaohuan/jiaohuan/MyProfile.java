@@ -20,6 +20,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
     private TextView mEmail;
     private TextView mPhone;
     private TextView mLocation;
+    private TextView mEdit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,12 +33,14 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mEmail = (TextView) view.findViewById(R.id.email);
         mPhone = (TextView) view.findViewById(R.id.phone);
         mLocation = (TextView) view.findViewById(R.id.location);
+        mEdit = (TextView) view.findViewById(R.id.edit);
 
         // Set dummy data, eventually to be replaced with data from server
         mName.setText("Xia Nong");
         mEmail.setText("xianong@gmail.com");
         mPhone.setText("156 6511 1548");
         mLocation.setText("Beijing, China");
+
 
         return view;
     }

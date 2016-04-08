@@ -41,6 +41,7 @@ public class MainActivity extends FragmentActivity {
     private Button mButton;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
+    private TextView mTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class MainActivity extends FragmentActivity {
                 // Connect button and TextView
                 mButton = (Button) findViewById(R.id.button);
                 mGPS = (TextView) findViewById(R.id.gps);
+                mTime = (TextView) findViewById(R.id.time);
 
                 mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 mLocationListener = new LocationListener() {
@@ -195,6 +197,7 @@ public class MainActivity extends FragmentActivity {
         mSettings.setVisibility(View.VISIBLE);
         mViewPager.setCurrentItem(2);
     }
+
     public void jumpToCards(View view) {
         mShaker.pause();
         mSettings.setVisibility(View.INVISIBLE);
@@ -206,7 +209,10 @@ public class MainActivity extends FragmentActivity {
         startActivity(intent);
     }
 
-
+    public void jumpToEdit(View view){
+        mSettings.setVisibility(View.INVISIBLE);
+        mRight.setImageDrawable(null);
+    }
 }
 
 class MyAdapter extends FragmentStatePagerAdapter {

@@ -10,6 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="159dp"
+        android:id="@+id/topPanel"
         android:background="#2a1d76">
 
 
@@ -24,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Name"
-                android:id="@+id/textView15"
+                android:id="@+id/showname"
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignLeft="@+id/pop_name"
@@ -41,7 +42,7 @@
                 android:layout_marginLeft="42dp"
                 android:layout_marginStart="42dp"
                 android:textColor="#ffffff"
-                android:layout_below="@+id/textView15"
+                android:layout_below="@+id/showname"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
 
@@ -50,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Company"
-                android:id="@+id/textView16"
+                android:id="@+id/showcompany"
                 android:textColor="#FFFFFF"
                 android:layout_below="@+id/pop_name"
                 android:layout_alignLeft="@+id/pop_company"
@@ -64,7 +65,7 @@
                 android:text="Company"
                 android:id="@+id/pop_company"
                 android:textColor="#FFFFFF"
-                android:layout_below="@+id/textView16"
+                android:layout_below="@+id/showcompany"
                 android:layout_alignLeft="@+id/pop_name"
                 android:layout_alignStart="@+id/pop_name"/>
 

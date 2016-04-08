@@ -13,6 +13,8 @@ public class OneRow {
     private int business_card;
     private String title;
     private String website;
+    private int color;
+    private int flipside;
 
     // Dummy constructor, just in case there's only a name
     public OneRow(String n) {
@@ -27,7 +29,7 @@ public class OneRow {
     }
 
     // Main constructor
-    public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w) {
+    public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip) {
         names = n;
         company = c;
         phone_nums = p;
@@ -39,6 +41,8 @@ public class OneRow {
         business_card = card;
         title = ti;
         website = w;
+        color = col;
+        flipside = flip;
     }
 
     public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i) {
@@ -86,4 +90,10 @@ public class OneRow {
 
     public String getWebsite() {return website;}
     public void setWebsite(String ti){website = ti;}
+
+    public int getColor() {return color;}
+    public void setColor(int col){color = col;}
+
+    public int getFlipside() {return flipside;}
+    public void setFlipside(int flip){flipside = flip;}
 }

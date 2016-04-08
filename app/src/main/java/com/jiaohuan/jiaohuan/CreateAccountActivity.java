@@ -18,5 +18,9 @@ public class CreateAccountActivity extends Activity {
 
 
     }
+    public void back(View view) {
+        finish();
+    }
+
 
 }
