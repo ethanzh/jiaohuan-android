@@ -130,7 +130,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 int width = size.x;
                 int height = size.y;
 
-                Log.d("Screen", "" + width + "," + height);
+                Log.d("ScreenResolution", "" + width + "," + height);
 
                 double popUpWidth;
                 double popUpHeight;
