@@ -3,14 +3,18 @@ package com.jiaohuan.jiaohuan;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -118,8 +122,27 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mImageView.setImageResource(selectedRow.getPic());
                 mCard.setImageResource(selectedRow.getBusiness_card());
 
-                // Starts the pop up
-                mPopupWindow = new PopupWindow(mContainer, 930, 1620, true);
+                // Gets phone dimensions
+                WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+                Display display = wm.getDefaultDisplay();
+                Point size = new Point();
+                display.getSize(size);
+                int width = size.x;
+                int height = size.y;
+
+                Log.d("Screen", "" + width + "," + height);
+
+                double popUpWidth;
+                double popUpHeight;
+
+                popUpWidth = width * 0.86;
+                popUpHeight = height * 0.84;
+
+                int popWidth = (int) popUpWidth;
+                int popHeight = (int) popUpHeight;
+
+                // Starts the pop up               (930, 1620)
+                mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
 
