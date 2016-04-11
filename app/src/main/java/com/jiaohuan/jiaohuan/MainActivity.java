@@ -42,8 +42,6 @@ public class MainActivity extends FragmentActivity {
     private PopupWindow mPopupWindow;
     private LinearLayout mLinearLayout;
     private TextView mGPS;
-    private LocationManager mLocationManager;
-    private LocationListener mLocationListener;
     private TextView mTime;
 
     @Override
