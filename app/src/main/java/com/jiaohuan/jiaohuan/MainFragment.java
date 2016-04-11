@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 public class MainFragment extends android.support.v4.app.Fragment {
 
-    // Just checking if GitHub works..
+    // GitHub does work!
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
