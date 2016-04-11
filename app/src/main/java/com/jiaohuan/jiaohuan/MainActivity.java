@@ -41,8 +41,11 @@ public class MainActivity extends FragmentActivity {
     private LayoutInflater mLayoutInflater;
     private PopupWindow mPopupWindow;
     private LinearLayout mLinearLayout;
+    private LocationListener mLocationListener;
+    private LocationManager mLocationManager;
     private TextView mGPS;
     private TextView mTime;
+    private Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,7 @@ public class MainActivity extends FragmentActivity {
                 // Connect button and TextView
                 mGPS = (TextView) mPopupWindow.getContentView().findViewById(R.id.gps);
                 mTime = (TextView) mPopupWindow.getContentView().findViewById(R.id.time);
+                mButton = (Button) mPopupWindow.getContentView().findViewById(R.id.gpscords);
 
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
