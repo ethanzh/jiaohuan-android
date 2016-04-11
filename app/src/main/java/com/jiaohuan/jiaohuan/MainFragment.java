@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 public class MainFragment extends android.support.v4.app.Fragment {
 
+    // Just checking if GitHub works..
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
