@@ -42,11 +42,9 @@ public class MainActivity extends FragmentActivity {
     private PopupWindow mPopupWindow;
     private LinearLayout mLinearLayout;
     private TextView mGPS;
-    private Button mButton;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
     private TextView mTime;
-    private TextView mDimensions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,20 +71,18 @@ public class MainActivity extends FragmentActivity {
         mShaker = new ShakeDetector(getApplicationContext());
         mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             public void onShake() {
-
                 // Make card_expand here
-                mLayoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                mLayoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
 
                 // Set the location where the pop up occurs
                 mPopupWindow = new PopupWindow(mContainer, 1000, 1300, true);
-                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
                 // Connect button and TextView
-                mButton = (Button) findViewById(R.id.button);
-                mGPS = (TextView) findViewById(R.id.gps);
-                mTime = (TextView) findViewById(R.id.time);
-                mDimensions = (TextView) findViewById(R.id.xy);
+                mGPS = (TextView) mPopupWindow.getContentView().findViewById(R.id.gps);
+                mTime = (TextView) mPopupWindow.getContentView().findViewById(R.id.time);
+
+                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
                 // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
                 mContainer.setOnTouchListener(new View.OnTouchListener() {
@@ -97,6 +93,12 @@ public class MainActivity extends FragmentActivity {
                         return true;
                     }
                 });
+
+                // Gets current time (UNIX time) and displays it
+                long time= System.currentTimeMillis();
+                Log.d("Time", time + "");
+                String stringTime = Long.toString(time);
+                mTime.setText(stringTime);
 
                 // Shaker is paused when pop up is displayed
                 mShaker.pause();
