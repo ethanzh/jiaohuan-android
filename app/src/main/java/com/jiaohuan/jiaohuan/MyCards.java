@@ -167,13 +167,6 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
-                // Makes card size device independent
-                double cardHeight;
-                cardHeight = height * 0.078;
-                int realCardHeight = (int) cardHeight;
-                int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, realCardHeight, getResources().getDisplayMetrics());
-                mCard.getLayoutParams().height = px;
-
                 // Card picture on click listener
                 mCard.setOnClickListener(new View.OnClickListener() {
 
