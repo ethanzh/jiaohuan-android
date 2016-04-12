@@ -1,10 +1,13 @@
 package com.jiaohuan.jiaohuan;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -16,11 +19,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -49,6 +54,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     int initial = 0;
     private TextView mShowName;
     private TextView mShowCompany;
+    private Button mContactButton;
 
 
     @Override
@@ -63,6 +69,19 @@ public class MyCards extends android.support.v4.app.Fragment {
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), R.dimen.padding_four));
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
+
+        // Long click listener
+        /*ItemClickSupport.addTo(mRecyclerView).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
+
+                Toast.makeText(getActivity(), "this is my Toast message!!! =)",
+                        Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });*/
+
 
         // On click listener for each list item
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -87,6 +106,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mWebsite = (TextView) mContainer.findViewById(R.id.website);
                 mShowName = (TextView) mContainer.findViewById(R.id.showname);
                 mShowCompany = (TextView) mContainer.findViewById(R.id.showcompany);
+                mContactButton = (Button) mContainer.findViewById(R.id.contactButton);
 
                 // Get top panel
                 mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
@@ -103,7 +123,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 Log.wtf("Color", mColor + "");
 
                 // If white background, make top panel text black
-                if(mColor == -1){
+                if (mColor == -1) {
                     mShowName.setTextColor(Color.BLACK);
                     mShowCompany.setTextColor(Color.BLACK);
                     mPopName.setTextColor(Color.BLACK);
@@ -160,13 +180,38 @@ public class MyCards extends android.support.v4.app.Fragment {
                     public void onClick(View v) {
                         Log.wtf("HI", "IT WORKED");
 
-                        if(initial == 0){
+                        if (initial == 0) {
                             mCard.setImageResource(selectedRow.getFlipside());
                             initial = 1;
-                        }else{
+                        } else {
                             mCard.setImageResource(selectedRow.getBusiness_card());
                             initial = 0;
                         }
+                    }
+                });
+
+                mContactButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        ContentValues cv = new ContentValues();
+                        cv.put(Contacts.People.NAME, mPopName.getText().toString());
+
+                        // e1.getText().tostring() is Contact name
+
+                        Uri u =    getContext().getContentResolver().insert(Contacts.People.CONTENT_URI, cv);
+
+                        Uri pathu = Uri.withAppendedPath(u, Contacts.People.Phones.CONTENT_DIRECTORY);
+
+                        cv.clear();
+
+                        cv.put(Contacts.People.NUMBER, mPopPhone.getText().toString());
+
+                        // e2.getText().tostring() is Contact number
+
+                        getContext().getContentResolver().insert(pathu, cv);
+
+                        Toast.makeText(getContext(), "Contact Added",Toast.LENGTH_LONG).show();
                     }
                 });
 
