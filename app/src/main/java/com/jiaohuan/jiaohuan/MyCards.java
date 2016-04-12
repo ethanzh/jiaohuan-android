@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Contacts;
+import android.provider.ContactsContract;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -206,8 +207,6 @@ public class MyCards extends android.support.v4.app.Fragment {
                         cv.clear();
 
                         cv.put(Contacts.People.NUMBER, mPopPhone.getText().toString());
-
-                        // e2.getText().tostring() is Contact number
 
                         getContext().getContentResolver().insert(pathu, cv);
 
