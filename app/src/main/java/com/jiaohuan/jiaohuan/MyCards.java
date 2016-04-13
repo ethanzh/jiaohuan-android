@@ -97,7 +97,6 @@ public class MyCards extends android.support.v4.app.Fragment {
             }
         });*/
 
-
         // On click listener for each list item
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
