@@ -4,6 +4,8 @@ import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.OperationApplicationException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 import android.database.Cursor;
 import android.content.ContentResolver;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MyCards extends android.support.v4.app.Fragment {
@@ -239,6 +242,21 @@ public class MyCards extends android.support.v4.app.Fragment {
                                         ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
                                 .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, selectedRow.getPhoneNum())
                                 .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
+                                .build());
+
+                        // Add notes
+                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                .withValue(ContactsContract.Data.MIMETYPE,
+                                        ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
+                                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, selectedRow.getInfo())
+                                .build());
+
+                        // Add picture WORK IN PROGRESS
+                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
+                                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, selectedRow.getPic())
                                 .build());
 
 
