@@ -193,13 +193,16 @@ public class MyCards extends android.support.v4.app.Fragment {
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(Contacts.People.NAME, mPopName.getText().toString());
 
-                        Uri u = getContext().getContentResolver().insert(Contacts.People.CONTENT_URI, contentValues);
+                        Uri u = getContext().getContentResolver().insert(ContactsContract.Contacts.CONTENT_URI, contentValues);
 
                         Uri pathu = Uri.withAppendedPath(u, Contacts.People.Phones.CONTENT_DIRECTORY);
+                        // Uri pathu = Uri.withAppendedPath(u, Contacts.People.Phones.CONTENT_DIRECTORY);
 
                         contentValues.clear();
 
                         contentValues.put(Contacts.People.NUMBER, mPopPhone.getText().toString());
+
+                        contentValues.put(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY, "China");
 
                         getContext().getContentResolver().insert(pathu, contentValues);
 
@@ -229,7 +232,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         ArrayList<String> nameList = new ArrayList<String>();
         ArrayList<String> phoneList = new ArrayList<String>();
 
-        int numberOfContacts = (cur.getCount() - 1);
+        int numberOfContacts = (cur.getCount());
 
         if (cur.getCount() > 0) {
 
