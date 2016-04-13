@@ -23,11 +23,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.database.Cursor;
+import android.content.ContentResolver;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import org.w3c.dom.Text;
 
 public class MyCards extends android.support.v4.app.Fragment {
@@ -56,6 +60,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     private TextView mShowName;
     private TextView mShowCompany;
     private Button mContactButton;
+    private Button mGetContacts;
 
 
     @Override
@@ -82,6 +87,15 @@ public class MyCards extends android.support.v4.app.Fragment {
                 return false;
             }
         });*/
+
+        mGetContacts = (Button) view.findViewById(R.id.getcontact);
+
+        mGetContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.wtf("Contact", "" + getContacts());
+            }
+        });
 
 
         // On click listener for each list item
@@ -120,8 +134,6 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                 // Set color
                 mTopPanel.setBackgroundColor(mColor);
-
-                Log.wtf("Color", mColor + "");
 
                 // If white background, make top panel text black
                 if (mColor == -1) {
@@ -172,8 +184,6 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                     @Override
                     public void onClick(View v) {
-                        Log.wtf("HI", "IT WORKED");
-
                         if (initial == 0) {
                             mCard.setImageResource(selectedRow.getFlipside());
                             initial = 1;
@@ -184,6 +194,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                     }
                 });
 
+
                 mContactButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -193,7 +204,7 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                         // e1.getText().tostring() is Contact name
 
-                        Uri u =    getContext().getContentResolver().insert(Contacts.People.CONTENT_URI, cv);
+                        Uri u = getContext().getContentResolver().insert(Contacts.People.CONTENT_URI, cv);
 
                         Uri pathu = Uri.withAppendedPath(u, Contacts.People.Phones.CONTENT_DIRECTORY);
 
@@ -203,7 +214,7 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                         getContext().getContentResolver().insert(pathu, cv);
 
-                        Toast.makeText(getContext(), "Contact Added",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Contact Added", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -220,4 +231,38 @@ public class MyCards extends android.support.v4.app.Fragment {
         return view;
     }
 
+    public ArrayList getContacts(){
+        // Make function here to iterate through all the current contacts
+        ContentResolver cr = getContext().getContentResolver();
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+
+        ArrayList<String> nameList = new ArrayList<String>();
+
+        if (cur.getCount() > 0) {
+            while (cur.moveToNext()) {
+                String id = cur.getString(
+                        cur.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cur.getString(cur.getColumnIndex(
+                        ContactsContract.Contacts.DISPLAY_NAME));
+
+                if (Integer.parseInt(cur.getString(cur.getColumnIndex(
+                        ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+                    Cursor pCur = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?",
+                            new String[]{id}, null);
+                    while (pCur.moveToNext()) {
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        nameList.add(name);
+                    }
+                    pCur.close();
+                }
+            }
+        }
+        Log.wtf("Contact", "" + nameList);
+        return nameList;
+    }
 }
