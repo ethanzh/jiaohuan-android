@@ -88,14 +88,14 @@ public class MyCards extends android.support.v4.app.Fragment {
             }
         });*/
 
-        mGetContacts = (Button) view.findViewById(R.id.getcontact);
+        /*mGetContacts = (Button) view.findViewById(R.id.getcontact);
 
         mGetContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.wtf("Contact", "" + getContacts());
+                //Log.wtf("Contact", "" + getContacts());
             }
-        });
+        });*/
 
 
         // On click listener for each list item
