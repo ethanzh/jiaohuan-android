@@ -192,30 +192,6 @@ public class MyCards extends android.support.v4.app.Fragment {
                     }
                 });
 
-
-                /*mContactButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put(Contacts.People.NAME, mPopName.getText().toString());
-
-                        Uri u = getContext().getContentResolver().insert(ContactsContract.Contacts.CONTENT_URI, contentValues);
-
-                        Uri pathu = Uri.withAppendedPath(u, Contacts.People.Phones.CONTENT_DIRECTORY);
-                        // Uri pathu = Uri.withAppendedPath(u, Contacts.People.Phones.CONTENT_DIRECTORY);
-
-                        contentValues.clear();
-
-                        contentValues.put(Contacts.People.NUMBER, mPopPhone.getText().toString());
-
-                        contentValues.put(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY, "China");
-
-                        getContext().getContentResolver().insert(pathu, contentValues);
-
-                        Toast.makeText(getContext(), "Contact Added", Toast.LENGTH_LONG).show();
-                    }
-                });*/
-
                 mContactButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -224,7 +200,7 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                         ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
                                 .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, "accountname@gmail.com")
-                                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.google")
+                                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.cn.jiaohuan.jiaohuan")
                                 .build());
 
                         // Add name
@@ -257,6 +233,21 @@ public class MyCards extends android.support.v4.app.Fragment {
                                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                                 .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
                                 .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, selectedRow.getPic())
+                                .build());
+
+                        // Add email
+                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+                                .withValue(ContactsContract.CommonDataKinds.Email.DATA, selectedRow.getEmail())
+                                .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+                                .build());
+
+                        // Add address
+                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+                                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, selectedRow.getLocation())
                                 .build());
 
 
