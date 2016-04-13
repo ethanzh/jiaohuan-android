@@ -2,7 +2,6 @@ package com.jiaohuan.jiaohuan;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
@@ -11,9 +10,7 @@ import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,16 +20,14 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.database.Cursor;
 import android.content.ContentResolver;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import org.w3c.dom.Text;
 
 public class MyCards extends android.support.v4.app.Fragment {
 
@@ -54,8 +49,6 @@ public class MyCards extends android.support.v4.app.Fragment {
     private ImageView mCard;
     private int mColor;
     private RelativeLayout mTopPanel;
-    private LayoutInflater mFullCard;
-    private ImageView mBigCard;
     int initial = 0;
     private TextView mShowName;
     private TextView mShowCompany;
@@ -88,14 +81,14 @@ public class MyCards extends android.support.v4.app.Fragment {
             }
         });*/
 
-        /*mGetContacts = (Button) view.findViewById(R.id.getcontact);
+        mGetContacts = (Button) view.findViewById(R.id.getcontacts);
 
         mGetContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Log.wtf("Contact", "" + getContacts());
+                Log.wtf("Contact", "" + getContactInfo());
             }
-        });*/
+        });
 
         // On click listener for each list item
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -197,21 +190,18 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mContactButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put(Contacts.People.NAME, mPopName.getText().toString());
 
-                        ContentValues cv = new ContentValues();
-                        cv.put(Contacts.People.NAME, mPopName.getText().toString());
-
-                        // e1.getText().tostring() is Contact name
-
-                        Uri u = getContext().getContentResolver().insert(Contacts.People.CONTENT_URI, cv);
+                        Uri u = getContext().getContentResolver().insert(Contacts.People.CONTENT_URI, contentValues);
 
                         Uri pathu = Uri.withAppendedPath(u, Contacts.People.Phones.CONTENT_DIRECTORY);
 
-                        cv.clear();
+                        contentValues.clear();
 
-                        cv.put(Contacts.People.NUMBER, mPopPhone.getText().toString());
+                        contentValues.put(Contacts.People.NUMBER, mPopPhone.getText().toString());
 
-                        getContext().getContentResolver().insert(pathu, cv);
+                        getContext().getContentResolver().insert(pathu, contentValues);
 
                         Toast.makeText(getContext(), "Contact Added", Toast.LENGTH_LONG).show();
                     }
@@ -230,38 +220,41 @@ public class MyCards extends android.support.v4.app.Fragment {
         return view;
     }
 
-    public ArrayList getContacts(){
+    public ArrayList getContactInfo(){
         // Make function here to iterate through all the current contacts
         ContentResolver cr = getContext().getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
 
         ArrayList<String> nameList = new ArrayList<String>();
+        ArrayList<String> phoneList = new ArrayList<String>();
+
+        int numberOfContacts = (cur.getCount() - 1);
 
         if (cur.getCount() > 0) {
-            while (cur.moveToNext()) {
-                String id = cur.getString(
-                        cur.getColumnIndex(ContactsContract.Contacts._ID));
-                String name = cur.getString(cur.getColumnIndex(
-                        ContactsContract.Contacts.DISPLAY_NAME));
 
-                if (Integer.parseInt(cur.getString(cur.getColumnIndex(
-                        ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-                    Cursor pCur = cr.query(
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                            null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?",
-                            new String[]{id}, null);
+            while (cur.moveToNext()) {
+
+                String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+
+                String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+
+                if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+
+                    Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?", new String[]{id}, null);
+
                     while (pCur.moveToNext()) {
-                        String phoneNo = pCur.getString(pCur.getColumnIndex(
-                                ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
                         nameList.add(name);
+                        phoneList.add(phoneNo);
                     }
                     pCur.close();
                 }
             }
         }
-        Log.wtf("Contact", "" + nameList);
+        Log.wtf("Count", "Number of contacts: " + numberOfContacts);
         return nameList;
     }
 }
