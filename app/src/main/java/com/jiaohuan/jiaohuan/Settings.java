@@ -14,4 +14,8 @@ public class Settings extends Activity {
     public void deflateSettings(View view) {
         finish();
     }
+
+    public void onLogOut(View view){
+        finish();
+    }
 }

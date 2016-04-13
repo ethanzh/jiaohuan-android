@@ -77,4 +77,20 @@
         android:id="@+id/textView7"
         android:layout_gravity="center_horizontal"
         />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.73"/>
+
+    <Button
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:text="LOG OUT"
+        android:background="@drawable/black_rounded_button"
+        android:id="@+id/logout"
+        android:textColor="#FFFFFF"
+        android:onClick="onLogOut"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>
