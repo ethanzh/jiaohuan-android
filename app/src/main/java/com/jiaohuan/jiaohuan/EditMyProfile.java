@@ -2,11 +2,8 @@ package com.jiaohuan.jiaohuan;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -25,7 +22,7 @@ public class EditMyProfile extends Activity {
     private EditText mWebsite;
     private int mColor;
     private int mFlipSide;
-    private OneRow myData;
+    private Contact myData;
     ImageView mLeft;
     ImageView mCenter;
     ImageView mRight;
@@ -38,7 +35,7 @@ public class EditMyProfile extends Activity {
         setContentView(R.layout.edit_my_profile);
 
         // Get my data from fake database
-        myData = (OneRow) FakeDatabase.getInstance().getMyData();
+        myData = (Contact) FakeDatabase.getInstance().getMyData();
 
         // Connect edit texts
         mNames = (EditText) findViewById(R.id.name);

@@ -14,14 +14,14 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
 
     private LayoutInflater mLayoutInflater;
 
-    List<OneRow> data = Collections.emptyList();
+    List<Contact> data = Collections.emptyList();
 
-    public RecycleAdapter(Context context, List<OneRow> data){
+    public RecycleAdapter(Context context, List<Contact> data){
         mLayoutInflater = LayoutInflater.from(context);
         this.data = data;
     }
 
-    public OneRow getRow(int position) {
+    public Contact getRow(int position) {
         return this.data.get(position);
     }
 
@@ -38,7 +38,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     @Override
     public void onBindViewHolder(myViewHolder holder, int position) {
 
-        OneRow current = data.get(position);
+        Contact current = data.get(position);
 
         holder.name.setText(current.getName());
         holder.company.setText(current.getCompany());

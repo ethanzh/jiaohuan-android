@@ -1,11 +1,14 @@
 package com.jiaohuan.jiaohuan;
 
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.OperationApplicationException;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.v7.widget.LinearLayoutManager;
@@ -119,7 +122,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
                 // Gets the data of the clicked card
-                final OneRow selectedRow = mAdapter.getRow(position);
+                final Contact selectedRow = mAdapter.getRow(position);
 
                 // Get color
                 mColor = selectedRow.getColor();
@@ -187,7 +190,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 });
 
 
-                mContactButton.setOnClickListener(new View.OnClickListener() {
+                /*mContactButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ContentValues contentValues = new ContentValues();
@@ -208,7 +211,47 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                         Toast.makeText(getContext(), "Contact Added", Toast.LENGTH_LONG).show();
                     }
+                });*/
+
+                mContactButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ContentResolver cr = getContext().getContentResolver();
+                        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+
+                        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, "accountname@gmail.com")
+                                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.google")
+                                .build());
+
+                        // Add name
+                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                .withValue(ContactsContract.Data.MIMETYPE,
+                                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, selectedRow.getName())
+                                .build());
+
+                        // Add phone number
+                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                .withValue(ContactsContract.Data.MIMETYPE,
+                                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, selectedRow.getPhoneNum())
+                                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
+                                .build());
+
+
+                        try {
+                            cr.applyBatch(ContactsContract.AUTHORITY, ops);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        } catch (OperationApplicationException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 });
+
 
                 // Close button click listener
                 mClose.setOnClickListener(new View.OnClickListener() {
@@ -223,6 +266,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         return view;
     }
 
+    // Work on this later
     public ArrayList getContactInfo(){
         // Make function here to iterate through all the current contacts
         ContentResolver cr = getContext().getContentResolver();

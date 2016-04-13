@@ -1,13 +1,10 @@
 package com.jiaohuan.jiaohuan;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -29,7 +26,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
     private TextView mEdit;
     private ImageView mCard;
     int initial = 0;
-    private OneRow myData;
+    private Contact myData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +43,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mEdit = (TextView) view.findViewById(R.id.edit);
 
         // Get my data from fake database
-        myData = (OneRow) FakeDatabase.getInstance().getMyData();
+        myData = (Contact) FakeDatabase.getInstance().getMyData();
 
         // Set dummy data, eventually to be replaced with data from server
         mImageView.setImageResource(myData.getPic());

@@ -2,7 +2,7 @@ package com.jiaohuan.jiaohuan;
 
 import android.text.Editable;
 
-public class OneRow {
+public class Contact {
 
     private String names;
     private String company;
@@ -19,7 +19,7 @@ public class OneRow {
     private int flipside;
 
     // Dummy constructor, just in case there's only a name
-    public OneRow(String n) {
+    public Contact(String n) {
         names = n;
         company = "Unemployed";
         phone_nums = "No phone";
@@ -31,7 +31,7 @@ public class OneRow {
     }
 
     // Main constructor
-    public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip) {
+    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip) {
         names = n;
         company = c;
         phone_nums = p;
@@ -47,7 +47,7 @@ public class OneRow {
         flipside = flip;
     }
 
-    public OneRow(String n, String c, String p, String e, String l, int pics, String a, String i) {
+    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i) {
         names = n;
         company = c;
         phone_nums = p;
