@@ -20,6 +20,7 @@ public class FakeDatabase {
 
     private List<Contact> unsortedData;
     private Contact myData;
+    private  List<Contact> fullySortedData;
 
     // This is just fake data, it will eventually be replaced with calls to the server
     private FakeDatabase() {
@@ -29,9 +30,6 @@ public class FakeDatabase {
 
         // Create a new ArrayList, then add each row to it individually
         unsortedData = new ArrayList<>();
-
-        // Sorted ArrayList
-        List<Contact> sortedData = new ArrayList<>();
 
         Contact row1 = new Contact("Sangwook Park", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China", R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", R.drawable.card_nyu, "CEO", "www.baidu.com", -12303292, R.drawable.card_flip );;
 
@@ -89,31 +87,30 @@ public class FakeDatabase {
         unsortedData.add(row17);
         unsortedData.add(row18);
 
-        for(int i = 0; i < unsortedData.size(); i++){
-            sortedData.add(unsortedData.get(i));
-        }
 
-        SortTest st = new SortTest();
-        st.Run();
+        fullySortedData = new ArrayList<>();
 
-        // Alphabetize
-        Log.wtf("SortedData", "" + sortedData );
-
-        List<String> nameList = new ArrayList<>();
-
-        for(int i = 0; i < sortedData.size(); i++){
-            String currentName = sortedData.get(i).getName();
-            nameList.add(currentName);
-        }
-        Log.wtf("SortedNames", "" + nameList);
+        fullySortedData = sorter(unsortedData);
 
     }
 
+    public List<Contact> sorter(List<Contact> unsortedData){
+        List<Contact> sortedData = new ArrayList<>();
 
+        ComparatorUser comparator = new ComparatorUser();
+        Collections.sort(unsortedData, comparator);
+
+        for (int i = 0; i < unsortedData.size(); i++) {
+            Contact user_temp = unsortedData.get(i);
+            //Log.wtf("TEST", "" + user_temp.getName());
+            sortedData.add(user_temp);
+        }
+        return sortedData;
+    }
 
     // Simply returns other people data
     public List<Contact> getData() {
-        return unsortedData;
+        return fullySortedData;
     }
 
     // Return my data
