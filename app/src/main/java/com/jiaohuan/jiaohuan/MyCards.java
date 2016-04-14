@@ -31,8 +31,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.database.Cursor;
 import android.content.ContentResolver;
-
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MyCards extends android.support.v4.app.Fragment {

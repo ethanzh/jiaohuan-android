@@ -10,23 +10,13 @@ import android.widget.ImageView;
 public class EditMyProfile extends Activity {
 
     private EditText mNames;
-    private EditText mCompany;
     private EditText mPhone;
     private EditText mEmail;
     private EditText mLocation;
-    private EditText mAddress;
-    private EditText mAdditionalInfo;
-    private int mPicture;
-    private int mCard;
-    private EditText mTitle;
-    private EditText mWebsite;
-    private int mColor;
-    private int mFlipSide;
     private Contact myData;
     ImageView mLeft;
     ImageView mCenter;
     ImageView mRight;
-    ViewPager mViewPager = null;
 
 
     @Override
@@ -35,7 +25,7 @@ public class EditMyProfile extends Activity {
         setContentView(R.layout.edit_my_profile);
 
         // Get my data from fake database
-        myData = (Contact) FakeDatabase.getInstance().getMyData();
+        myData = FakeDatabase.getInstance().getMyData();
 
         // Connect edit texts
         mNames = (EditText) findViewById(R.id.name);
