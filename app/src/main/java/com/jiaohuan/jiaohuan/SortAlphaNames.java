@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ComparatorUser implements Comparator {
+public class SortAlphaNames implements Comparator {
 
     public int compare(Object arg0, Object arg1) {
         Contact user0 = (Contact) arg0;
@@ -32,7 +32,7 @@ class SortTest {
         userlist.add(new Contact("Zack"));
         userlist.add(new Contact("Greg"));
 
-        ComparatorUser comparator = new ComparatorUser();
+        SortAlphaNames comparator = new SortAlphaNames();
         Collections.sort(userlist, comparator);
 
         for (int i = 0; i < userlist.size(); i++) {

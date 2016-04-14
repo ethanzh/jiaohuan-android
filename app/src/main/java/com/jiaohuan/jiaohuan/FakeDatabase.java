@@ -1,11 +1,5 @@
 package com.jiaohuan.jiaohuan;
 
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -87,17 +81,14 @@ public class FakeDatabase {
         unsortedData.add(row17);
         unsortedData.add(row18);
 
-
         fullySortedData = new ArrayList<>();
-
-        fullySortedData = sorter(unsortedData);
-
+        fullySortedData = SortByNames(unsortedData);
     }
 
-    public List<Contact> sorter(List<Contact> unsortedData){
+    public List<Contact> SortByNames(List<Contact> unsortedData){
         List<Contact> sortedData = new ArrayList<>();
 
-        ComparatorUser comparator = new ComparatorUser();
+        SortAlphaNames comparator = new SortAlphaNames();
         Collections.sort(unsortedData, comparator);
 
         for (int i = 0; i < unsortedData.size(); i++) {
