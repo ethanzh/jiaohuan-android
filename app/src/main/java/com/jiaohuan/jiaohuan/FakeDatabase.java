@@ -25,7 +25,7 @@ public class FakeDatabase {
         // Create a new ArrayList, then add each row to it individually
         unsortedData = new ArrayList<>();
 
-        Contact row1 = new Contact("Sangwook Park", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China", R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", R.drawable.card_nyu, "CEO", "www.baidu.com", -12303292, R.drawable.card_flip );;
+        Contact row1 = new Contact("Sangwook Park", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China", R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", R.drawable.card_nyu, "CEO", "www.baidu.com", -12303292, R.drawable.card_flip );
 
         Contact row2 = new Contact("Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China", R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.card_nyu, "CEO", "www.baidu.com", -12303292 , R.drawable.card_flip);
 
@@ -98,6 +98,9 @@ public class FakeDatabase {
         }
         return sortedData;
     }
+
+    // TODO: Sort by data added
+
 
     // Simply returns other people data
     public List<Contact> getData() {
