@@ -165,7 +165,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 double popUpHeight;
 
                 popUpWidth = width * 0.86;
-                popUpHeight = height * 0.84;
+                popUpHeight = height * 0.85;
 
                 int popWidth = (int) popUpWidth;
                 int popHeight = (int) popUpHeight;
