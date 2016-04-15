@@ -1,5 +1,9 @@
 package com.jiaohuan.jiaohuan;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Contact {
 
     private String names;
@@ -16,6 +20,7 @@ public class Contact {
     private int color;
     private int flipside;
     private String date;
+    private Date formattedDate;
 
     // Dummy constructor, just in case there's only a name
     public Contact(String n) {
@@ -61,8 +66,18 @@ public class Contact {
 
 
     // TODO: Write SimpleDateFormat parses
+    public Date parsedDate(String unformatted){
 
+        String pattern = "MM/dd/yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        try {
+            formattedDate = format.parse(unformatted);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        return formattedDate;
+    }
 
     // Various methods for getting/setting the variables
 
@@ -104,4 +119,7 @@ public class Contact {
 
     public int getFlipside() {return flipside;}
     public void setFlipside(int flip){flipside = flip;}
+
+    public String getDate() {return date;}
+    public void setDate(String da){date = da;}
 }

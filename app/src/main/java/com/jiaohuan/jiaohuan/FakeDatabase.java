@@ -2,7 +2,6 @@ package com.jiaohuan.jiaohuan;
 
 import android.util.Log;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,23 +18,11 @@ public class FakeDatabase {
     private List<Contact> unsortedData;
     private Contact myData;
     private  List<Contact> fullySortedData;
-    private Date date;
 
     // This is just fake data, it will eventually be replaced with calls to the server
     private FakeDatabase()  { // Maybe throw exception here?
 
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
-        
-        String pattern = "MM/dd/yyyy";
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
-        try {
-            date = format.parse("12/31/2006");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        Log.wtf("MYDATA", "" + date);
 
         // My own data
         myData = new Contact("Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "ethan.houston@yahoo.com", "Beijing, China", R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.card_nyu, "CEO", "www.baidu.com", -12303292 , R.drawable.card_flip, "12/31/2006");
@@ -99,11 +86,11 @@ public class FakeDatabase {
         unsortedData.add(row17);
         unsortedData.add(row18);
 
+        Date testDate = row1.parsedDate(row1.getDate());
+        Log.wtf("TEST DATE", "" + testDate);
+
         fullySortedData = new ArrayList<>();
         fullySortedData = SortByNames(unsortedData);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Log.wtf("Tag", "" + sdf.getNumberFormat());
     }
 
     public List<Contact> SortByNames(List<Contact> unsortedData){
@@ -119,9 +106,6 @@ public class FakeDatabase {
         }
         return sortedData;
     }
-
-    // TODO: Sort by data added
-
 
     // Simply returns other people data
     public List<Contact> getData() {
