@@ -18,8 +18,9 @@ public class Contact {
     private String website;
     private int color;
     private int flipside;
-    private String date;
-    private SimpleDateFormat formatted;
+    private long unix_time;
+    private String simple_date;
+
 
     // Dummy constructor, just in case there's only a name
     public Contact(String n) {
@@ -34,7 +35,7 @@ public class Contact {
     }
 
     // Main constructor
-    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip, String da, Date formatted) {
+    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip, long ux, String sdf) {
         names = n;
         company = c;
         phone_nums = p;
@@ -48,8 +49,8 @@ public class Contact {
         website = w;
         color = col;
         flipside = flip;
-        date = da;
-
+        unix_time = ux;
+        simple_date = sdf;
     }
 
     public Contact(String n, String c, String p, String e, String l, int pics, String a, String i) {
@@ -106,8 +107,9 @@ public class Contact {
     public int getFlipside() {return flipside;}
     public void setFlipside(int flip){flipside = flip;}
 
-    public String getDate() {return date;}
-    public void setDate(SimpleDateFormat da){formatted = da;}
+    public long getUnix_time() {return unix_time;}
 
-    public String getFormattedDate() {return formatted.toString();}
+    public String getSimple_date() {return simple_date.toString();}
+    public void setSimpleDate(String sdf){simple_date = sdf;}
+
 }

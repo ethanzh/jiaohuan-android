@@ -148,7 +148,6 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mTitle.setText(selectedRow.getTitle());
                 mImageView.setImageResource(selectedRow.getPic());
                 mCard.setImageResource(selectedRow.getBusiness_card());
-                mKnownSince.setText(selectedRow.getFormattedDate());
 
                 // Gets phone dimensions
                 WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
