@@ -1,7 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
-import android.util.Log;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +17,7 @@ public class FakeDatabase {
     private List<Contact> unsortedData;
     private Contact myData;
     private  List<Contact> fullySortedData;
+    private Date formattedDate;
 
     // This is just fake data, it will eventually be replaced with calls to the server
     private FakeDatabase()  { // Maybe throw exception here?
@@ -66,6 +66,8 @@ public class FakeDatabase {
 
         Contact row18 = new Contact("Dave Major", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China", R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", R.drawable.card_nyu, "CEO", "www.baidu.com", -12303292, R.drawable.card_flip, "12/31/2006" );
 
+        row1.setName("Kim Jong Un");
+
         // Add the data
         unsortedData.add(row1);
         unsortedData.add(row2);
@@ -86,11 +88,33 @@ public class FakeDatabase {
         unsortedData.add(row17);
         unsortedData.add(row18);
 
-        Date testDate = row1.parsedDate(row1.getDate());
-        Log.wtf("TEST DATE", "" + testDate);
+        int contactSize = 13;
+
+
+        // Loop through unsorted data, and change date from String to Date
+        for(int i = 0; i < unsortedData.size(); i++){
+
+            String tempdate = unsortedData.get(i).getDate();
+
+            //unsortedData.get(i).setDate(parsedDate(tempdate));
+        }
+
 
         fullySortedData = new ArrayList<>();
         fullySortedData = SortByNames(unsortedData);
+    }
+
+    public Date parsedDate(String unformatted){
+
+        String pattern = "MM/dd/yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        try {
+            formattedDate = format.parse(unformatted);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return formattedDate;
     }
 
     public List<Contact> SortByNames(List<Contact> unsortedData){
