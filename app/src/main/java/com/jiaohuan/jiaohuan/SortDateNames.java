@@ -10,6 +10,7 @@ public class SortDateNames implements Comparator {
         Contact user1 = (Contact) arg1;
 
         int flag = user0.getFormattedDate().compareTo(user1.getFormattedDate());
+        //Log.wtf("Comparing", user0.getFormattedDate() + " : " + user1.getFormattedDate() + "  -  " + flag);
         if (flag == 0) {
             return user0.getFormattedDate().compareTo(user1.getFormattedDate());
         } else {

@@ -1,7 +1,5 @@
 package com.jiaohuan.jiaohuan;
 
-import android.util.Log;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -142,14 +140,14 @@ public class FakeDatabase {
             fullyDateData.add(user_temp);
         }
         for(int i = 0; i < fullyDateData.size(); i++){
-            Log.wtf("Date", "" + fullyDateData.get(i).getFormattedDate());
+            //Log.wtf("Date", "" + fullyDateData.get(i).getFormattedDate());
         }
         return fullyDateData;
     }
 
     // Simply returns other people data
     public List<Contact> getData() {
-        return fullyAlphaData;
+        return fullyDateData;
     }
 
     // Return my data

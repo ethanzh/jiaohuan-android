@@ -1,16 +1,14 @@
 package com.jiaohuan.jiaohuan;
 
 import android.content.ContentProviderOperation;
-import android.content.ContentValues;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.OperationApplicationException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,9 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.database.Cursor;
-import android.content.ContentResolver;
+
 import java.util.ArrayList;
 
 public class MyCards extends android.support.v4.app.Fragment {
@@ -57,6 +53,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     private TextView mShowCompany;
     private Button mContactButton;
     private Button mGetContacts;
+    private TextView mKnownSince;
 
 
     @Override
@@ -117,6 +114,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mShowName = (TextView) mContainer.findViewById(R.id.showname);
                 mShowCompany = (TextView) mContainer.findViewById(R.id.showcompany);
                 mContactButton = (Button) mContainer.findViewById(R.id.contactButton);
+                mKnownSince = (TextView) mContainer.findViewById(R.id.knownsince);
 
                 // Get top panel
                 mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
@@ -150,6 +148,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mTitle.setText(selectedRow.getTitle());
                 mImageView.setImageResource(selectedRow.getPic());
                 mCard.setImageResource(selectedRow.getBusiness_card());
+                mKnownSince.setText(selectedRow.getFormattedDate());
 
                 // Gets phone dimensions
                 WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
