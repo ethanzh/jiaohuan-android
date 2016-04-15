@@ -1,5 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
+import java.util.Date;
+
 public class Contact {
 
     private String names;
@@ -16,6 +18,7 @@ public class Contact {
     private int color;
     private int flipside;
     private String date;
+    private Date formatted;
 
     // Dummy constructor, just in case there's only a name
     public Contact(String n) {
@@ -30,7 +33,7 @@ public class Contact {
     }
 
     // Main constructor
-    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip, String da) {
+    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip, String da, Date formatted) {
         names = n;
         company = c;
         phone_nums = p;
@@ -103,5 +106,7 @@ public class Contact {
     public void setFlipside(int flip){flipside = flip;}
 
     public String getDate() {return date;}
-    public void setDate(String da){date = da;}
+    public void setDate(Date da){formatted = da;}
+
+    public String getFormattedDate() {return formatted.toString();}
 }

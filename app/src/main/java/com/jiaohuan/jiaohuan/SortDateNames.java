@@ -1,22 +1,19 @@
 package com.jiaohuan.jiaohuan;
-/*
 
-public static class MyObject implements Comparable<MyObject> {
 
-    private Date dateTime;
+import java.util.Comparator;
 
-    public Date getDateTime() {
-        return dateTime;
+public class SortDateNames implements Comparator {
+
+    public int compare(Object arg0, Object arg1) {
+        Contact user0 = (Contact) arg0;
+        Contact user1 = (Contact) arg1;
+
+        int flag = user0.getFormattedDate().compareTo(user1.getFormattedDate());
+        if (flag == 0) {
+            return user0.getFormattedDate().compareTo(user1.getFormattedDate());
+        } else {
+            return flag;
+        }
     }
-
-    public void setDateTime(Date datetime) {
-        this.dateTime = datetime;
-    }
-
-    @Override
-    public int compareTo(MyObject o) {
-        if (getDateTime() == null || o.getDateTime() == null)
-            return 0;
-        return getDateTime().compareTo(o.getDateTime());
-    }
-}*/
+}
