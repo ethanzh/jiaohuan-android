@@ -1,8 +1,11 @@
 package com.jiaohuan.jiaohuan;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import android.util.Log;
 
 
 public class FakeDatabase {
@@ -17,7 +20,18 @@ public class FakeDatabase {
     private  List<Contact> fullySortedData;
 
     // This is just fake data, it will eventually be replaced with calls to the server
-    private FakeDatabase() {
+    private FakeDatabase()  { // Maybe throw exception here?
+
+
+       /* String myDate = "23/06/2014";
+        try {
+            SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yy");
+            myDate = df2.format(myDate));
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }*/
+
+        //Log.wtf("MYDATA", "" + myDate);
 
         // My own data
         myData = new Contact("Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "ethan.houston@yahoo.com", "Beijing, China", R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.card_nyu, "CEO", "www.baidu.com", -12303292 , R.drawable.card_flip);
@@ -83,6 +97,9 @@ public class FakeDatabase {
 
         fullySortedData = new ArrayList<>();
         fullySortedData = SortByNames(unsortedData);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Log.wtf("Tag", "" + sdf.getNumberFormat());
     }
 
     public List<Contact> SortByNames(List<Contact> unsortedData){
