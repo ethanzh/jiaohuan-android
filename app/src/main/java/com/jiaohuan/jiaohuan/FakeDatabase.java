@@ -107,8 +107,6 @@ public class FakeDatabase {
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", R.drawable.card_nyu, "CEO",
                 "www.baidu.com", -12303292, R.drawable.card_flip, 123534335, null);
 
-        row1.setName("Kim Jong Un");
-
         // Add the data
         unsortedData.add(row1);
         unsortedData.add(row2);
@@ -132,13 +130,17 @@ public class FakeDatabase {
         fullyAlphaData = new ArrayList<>();
         fullyAlphaData = SortByNames(unsortedData);
 
+        for(int i = 0; i < fullyAlphaData.size(); i++){
+            Log.wtf("ALPHA", fullyAlphaData.get(i).getName());
+        }
+
         convertFromUnix(fullyAlphaData);
 
         fullyUnixData = new ArrayList<>();
         fullyUnixData = SortByUnix(fullyAlphaData);
 
         for(int i = 0; i < fullyUnixData.size(); i++){
-            Log.wtf("WORK", fullyUnixData.get(i).getSimple_date());
+            Log.wtf("UNIX", fullyUnixData.get(i).getSimple_date());
         }
     }
 
