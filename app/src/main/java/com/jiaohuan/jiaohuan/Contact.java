@@ -1,5 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Contact {
@@ -18,7 +19,7 @@ public class Contact {
     private int color;
     private int flipside;
     private String date;
-    private Date formatted;
+    private SimpleDateFormat formatted;
 
     // Dummy constructor, just in case there's only a name
     public Contact(String n) {
@@ -106,7 +107,7 @@ public class Contact {
     public void setFlipside(int flip){flipside = flip;}
 
     public String getDate() {return date;}
-    public void setDate(Date da){formatted = da;}
+    public void setDate(SimpleDateFormat da){formatted = da;}
 
     public String getFormattedDate() {return formatted.toString();}
 }

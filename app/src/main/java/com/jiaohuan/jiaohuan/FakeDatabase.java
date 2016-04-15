@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class FakeDatabase {
@@ -18,7 +17,7 @@ public class FakeDatabase {
     private Contact myData;
     private  List<Contact> fullyAlphaData;
     private  List<Contact> fullyDateData;
-    private Date formattedDate;
+    private SimpleDateFormat formattedDate;
 
     // This is just fake data, it will eventually be replaced with calls to the server
     private FakeDatabase()  { // Maybe throw exception here?
@@ -91,24 +90,24 @@ public class FakeDatabase {
 
         // Loop through unsorted data, and change date from String to Date
         for(int i = 0; i < unsortedData.size(); i++){
-
-            String tempdate = unsortedData.get(i).getDate();
-            unsortedData.get(i).setDate(parsedDate(tempdate));
+            //Log.wtf("UNFORMATTED DATE", "" + unsortedData.get(i).getFormattedDate());
+            //String tempdate = unsortedData.get(i).getDate();
+            //unsortedData.get(i).setDate(parsedDate(tempdate));
         }
 
         fullyAlphaData = new ArrayList<>();
         fullyAlphaData = SortByNames(unsortedData);
 
         fullyDateData = new ArrayList<>();
-        fullyDateData = SortByDate(fullyAlphaData);
+        //fullyDateData = SortByDate(fullyAlphaData);
     }
 
-    public Date parsedDate(String unformatted){
+    public SimpleDateFormat parsedDate(String unformatted){
 
         String pattern = "MM/dd/yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         try {
-            formattedDate = format.parse(unformatted);
+            format.parse(unformatted);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -147,7 +146,7 @@ public class FakeDatabase {
 
     // Simply returns other people data
     public List<Contact> getData() {
-        return fullyDateData;
+        return fullyAlphaData;
     }
 
     // Return my data
