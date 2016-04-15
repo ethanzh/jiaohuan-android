@@ -1,7 +1,5 @@
 package com.jiaohuan.jiaohuan;
 
-import android.text.Editable;
-
 public class Contact {
 
     private String names;
@@ -17,6 +15,7 @@ public class Contact {
     private String website;
     private int color;
     private int flipside;
+    private String date;
 
     // Dummy constructor, just in case there's only a name
     public Contact(String n) {
@@ -31,7 +30,7 @@ public class Contact {
     }
 
     // Main constructor
-    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip) {
+    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip, String da) {
         names = n;
         company = c;
         phone_nums = p;
@@ -45,6 +44,8 @@ public class Contact {
         website = w;
         color = col;
         flipside = flip;
+        date = da;
+
     }
 
     public Contact(String n, String c, String p, String e, String l, int pics, String a, String i) {
@@ -57,6 +58,11 @@ public class Contact {
         address = a;
         additional_info = i;
     }
+
+
+    // TODO: Write SimpleDateFormat parses
+
+
 
     // Various methods for getting/setting the variables
 
