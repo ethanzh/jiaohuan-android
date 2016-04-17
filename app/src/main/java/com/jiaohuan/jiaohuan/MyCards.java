@@ -59,14 +59,13 @@ public class MyCards extends android.support.v4.app.Fragment {
     private Button mDate;
     private Button mName;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
-        mAdapter = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getDateData());
+        mAdapter = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getAlphaSorted());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), R.dimen.padding_four));
@@ -82,9 +81,25 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Log.wtf("Contact", "" + getContactInfo());
+            }
+        });
 
-                mSecond = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getDateData());
-                mRecyclerView.setAdapter(mSecond);
+        mName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mAdapter.swap(FakeDatabase.getInstance().getDateSorted());
+
+            }
+        });
+
+        mDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSecond = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getDateSorted());
+
+                mRecyclerView.swapAdapter(mSecond, false);
+
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
         });

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,5 +70,12 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
             icon = (ImageView) itemView.findViewById(R.id.profile_pic);
             date = (TextView) itemView.findViewById(R.id.date);
         }
+    }
+
+
+    public void swap(List<Contact> datas){
+        data.clear();
+        data.addAll(datas);
+        notifyDataSetChanged();
     }
 }
