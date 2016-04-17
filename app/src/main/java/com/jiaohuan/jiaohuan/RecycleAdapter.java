@@ -44,6 +44,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         holder.company.setText(current.getCompany());
 
         holder.icon.setImageResource(current.getPic());
+
+        holder.date.setText(current.getSimple_date());
     }
 
     @Override
@@ -56,6 +58,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         TextView name;
         TextView company;
         ImageView icon;
+        TextView date;
 
         public myViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +66,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
             name = (TextView) itemView.findViewById(R.id.name);
             company = (TextView) itemView.findViewById(R.id.company);
             icon = (ImageView) itemView.findViewById(R.id.profile_pic);
+            date = (TextView) itemView.findViewById(R.id.date);
         }
     }
 }

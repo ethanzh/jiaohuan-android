@@ -114,7 +114,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mShowName = (TextView) mContainer.findViewById(R.id.showname);
                 mShowCompany = (TextView) mContainer.findViewById(R.id.showcompany);
                 mContactButton = (Button) mContainer.findViewById(R.id.contactButton);
-                mKnownSince = (TextView) mContainer.findViewById(R.id.knownsince);
+                mKnownSince = (TextView) mContainer.findViewById(R.id.knownthing);
 
                 // Get top panel
                 mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
@@ -148,6 +148,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mTitle.setText(selectedRow.getTitle());
                 mImageView.setImageResource(selectedRow.getPic());
                 mCard.setImageResource(selectedRow.getBusiness_card());
+                mKnownSince.setText(selectedRow.getSimple_date());
 
                 // Gets phone dimensions
                 WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);

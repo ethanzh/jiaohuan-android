@@ -140,7 +140,7 @@ public class FakeDatabase {
         fullyUnixData = SortByUnix(fullyAlphaData);
 
         for(int i = 0; i < fullyUnixData.size(); i++){
-            Log.wtf("UNIX", fullyUnixData.get(i).getSimple_date());
+            Log.wtf("UNIX", fullyUnixData.get(i).getSimple_date() + " : " + fullyUnixData.get(i).getName());
         }
     }
 
@@ -185,7 +185,7 @@ public class FakeDatabase {
 
     // Simply returns other people data
     public List<Contact> getData() {
-        return fullyAlphaData;
+        return fullyUnixData;
     }
 
     // Return my data
