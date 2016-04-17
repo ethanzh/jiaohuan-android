@@ -32,6 +32,7 @@ public class MyCards extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
+    private RecycleAdapter mSecond;
     private PopupWindow mPopupWindow;
     private LayoutInflater mLayoutInflater;
     private LinearLayout mLinearLayout;
@@ -55,6 +56,9 @@ public class MyCards extends android.support.v4.app.Fragment {
     private Button mGetContacts;
     private TextView mKnownSince;
 
+    private Button mDate;
+    private Button mName;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,24 +66,15 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
-        mAdapter = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getData());
+        mAdapter = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getDateData());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), R.dimen.padding_four));
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
-        // Long click listener
-        /*ItemClickSupport.addTo(mRecyclerView).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
-
-                Toast.makeText(getActivity(), "this is my Toast message!!! =)",
-                        Toast.LENGTH_LONG).show();
-
-                return false;
-            }
-        });*/
+        mDate = (Button) view.findViewById(R.id.date);
+        mName = (Button) view.findViewById(R.id.name);
 
         mGetContacts = (Button) view.findViewById(R.id.getcontacts);
 
@@ -87,6 +82,10 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Log.wtf("Contact", "" + getContactInfo());
+
+                mSecond = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getDateData());
+                mRecyclerView.setAdapter(mSecond);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
         });
 

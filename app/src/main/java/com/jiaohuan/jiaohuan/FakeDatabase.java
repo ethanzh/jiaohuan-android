@@ -184,8 +184,12 @@ public class FakeDatabase {
     }
 
     // Simply returns other people data
-    public List<Contact> getData() {
+    public List<Contact> getDateData() {
         return fullyUnixData;
+    }
+
+    public List<Contact> getNameData() {
+        return fullyAlphaData;
     }
 
     // Return my data
