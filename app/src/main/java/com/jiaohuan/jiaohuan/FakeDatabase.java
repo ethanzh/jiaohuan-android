@@ -86,11 +86,11 @@ public class FakeDatabase {
 
         Contact row13 = new Contact("Tae Hyung Kim", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
                 R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", R.drawable.card_nyu, "CEO",
-                "www.baidu.com", -12303292 , R.drawable.card_flip, 1572723437, null);
+                "www.baidu.com", -12303292 , R.drawable.card_flip, 1472723437, null);
 
         Contact row14 = new Contact("Austin Kim", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.card_nyu, "CTO",
-                "www.baidu.com", -12303292, R.drawable.card_flip, 1572723137, null);
+                "www.baidu.com", -12303292, R.drawable.card_flip, 1172723137, null);
 
         Contact row15 = new Contact("Mohammed Lee", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", R.drawable.card_nyu, "CFO",
@@ -102,11 +102,11 @@ public class FakeDatabase {
 
         Contact row17 = new Contact("Osuofia", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.card_nyu, "CTO",
-                "www.baidu.com", -12303292, R.drawable.card_flip, 157234335, null);
+                "www.baidu.com", -12303292, R.drawable.card_flip, 137234335, null);
 
         Contact row18 = new Contact("Dave Major", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", R.drawable.card_nyu, "CEO",
-                "www.baidu.com", -12303292, R.drawable.card_flip, 123534335, null);
+                "www.baidu.com", -12303292, R.drawable.card_flip, 198534335, null);
 
         // Add the data
         unsortedData.add(row1);
@@ -142,7 +142,7 @@ public class FakeDatabase {
             long unixSeconds = list.get(i).getUnix_time();
             Date date = new Date(unixSeconds * 1000L);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
 
             String formattedDate = sdf.format(date);
@@ -181,14 +181,14 @@ public class FakeDatabase {
     // Simply returns other people data
     public List<Contact> getDateSorted() {
         for(int i = 0; i < fullyUnixData.size(); i++){
-            Log.wtf("Date sorted", fullyUnixData.get(i).getName() + " : " + fullyUnixData.get(i).getSimple_date());
+            //Log.wtf("Date sorted", fullyUnixData.get(i).getName() + " : " + fullyUnixData.get(i).getSimple_date());
         }
         return fullyUnixData;
     }
 
     public List<Contact> getAlphaSorted() {
         for(int i = 0; i < fullyAlphaData.size(); i++){
-            Log.wtf("Name sorted", fullyAlphaData.get(i).getName());
+            //Log.wtf("Name sorted", fullyAlphaData.get(i).getName());
         }
         return fullyAlphaData;
     }

@@ -56,8 +56,8 @@ public class MyCards extends android.support.v4.app.Fragment {
     private Button mGetContacts;
     private TextView mKnownSince;
 
-    private Button mDate;
-    private Button mName;
+    private TextView mDate;
+    private TextView mName;
 
     private ArrayList<Contact> AlphaSorted;
     private ArrayList<Contact> UnixSorted;
@@ -83,8 +83,10 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
-        mDate = (Button) view.findViewById(R.id.date);
-        mName = (Button) view.findViewById(R.id.name);
+        mDate = (TextView) view.findViewById(R.id.date);
+        mName = (TextView) view.findViewById(R.id.name);
+
+        mName.setTextColor(Color.RED);
 
         mGetContacts = (Button) view.findViewById(R.id.getcontacts);
 
@@ -99,6 +101,8 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Log.wtf("NAME", "" + FakeDatabase.getInstance().getAlphaSorted());
+                mName.setTextColor(Color.RED);
+                mDate.setTextColor(Color.WHITE);
                 mRecyclerView.swapAdapter(mNameAdapter, false);
             }
         });
@@ -107,6 +111,8 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Log.wtf("DATE", "" + FakeDatabase.getInstance().getDateSorted());
+                mName.setTextColor(Color.WHITE);
+                mDate.setTextColor(Color.RED);
                 mRecyclerView.swapAdapter(mDateAdapter, false);
             }
         });
