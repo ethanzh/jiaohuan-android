@@ -31,8 +31,8 @@ import java.util.ArrayList;
 public class MyCards extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
-    private RecycleAdapter mAdapter;
-    private RecycleAdapter mSecond;
+    private RecycleAdapter mNameAdapter;
+    private RecycleAdapter mDateAdapter;
     private PopupWindow mPopupWindow;
     private LayoutInflater mLayoutInflater;
     private LinearLayout mLinearLayout;
@@ -59,15 +59,26 @@ public class MyCards extends android.support.v4.app.Fragment {
     private Button mDate;
     private Button mName;
 
+    private ArrayList<Contact> AlphaSorted;
+    private ArrayList<Contact> UnixSorted;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
+        AlphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
+
+        UnixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
+
+
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
-        mAdapter = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getAlphaSorted());
-        mRecyclerView.setAdapter(mAdapter);
+
+        mNameAdapter = new RecycleAdapter(getActivity(), AlphaSorted);
+        mDateAdapter = new RecycleAdapter(getActivity(), UnixSorted);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mNameAdapter);
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
@@ -87,20 +98,16 @@ public class MyCards extends android.support.v4.app.Fragment {
         mName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                mAdapter.swap(FakeDatabase.getInstance().getDateSorted());
-
+                Log.wtf("NAME", "" + FakeDatabase.getInstance().getAlphaSorted());
+                mRecyclerView.swapAdapter(mNameAdapter, false);
             }
         });
 
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSecond = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getDateSorted());
-
-                mRecyclerView.swapAdapter(mSecond, false);
-
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                Log.wtf("DATE", "" + FakeDatabase.getInstance().getDateSorted());
+                mRecyclerView.swapAdapter(mDateAdapter, false);
             }
         });
 
@@ -134,7 +141,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
                 // Gets the data of the clicked card
-                final Contact selectedRow = mAdapter.getRow(position);
+                final Contact selectedRow = mNameAdapter.getRow(position);
 
                 // Get color
                 mColor = selectedRow.getColor();
@@ -285,7 +292,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         return view;
     }
 
-    // Work on this later
+    // TODO: Work on this later
     public ArrayList getContactInfo(){
         // Make function here to iterate through all the current contacts
         ContentResolver cr = getContext().getContentResolver();

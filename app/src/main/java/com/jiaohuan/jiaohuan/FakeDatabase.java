@@ -1,5 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
+import android.os.Debug;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -130,18 +131,10 @@ public class FakeDatabase {
         fullyAlphaData = new ArrayList<>();
         fullyAlphaData = SortByNames(unsortedData);
 
-        for(int i = 0; i < fullyAlphaData.size(); i++){
-            Log.wtf("ALPHA", fullyAlphaData.get(i).getName());
-        }
-
         convertFromUnix(fullyAlphaData);
 
         fullyUnixData = new ArrayList<>();
         fullyUnixData = SortByUnix(fullyAlphaData);
-
-        for(int i = 0; i < fullyUnixData.size(); i++){
-            Log.wtf("UNIX", fullyUnixData.get(i).getSimple_date() + " : " + fullyUnixData.get(i).getName());
-        }
     }
 
     public void convertFromUnix(List<Contact> list){
@@ -160,13 +153,15 @@ public class FakeDatabase {
     public List<Contact> SortByUnix(List<Contact> unsortedData){
         List<Contact> sortedData = new ArrayList<>();
 
-        SortUnixTime comparator = new SortUnixTime();
-        Collections.sort(unsortedData, comparator);
-
         for (int i = 0; i < unsortedData.size(); i++) {
             Contact user_temp = unsortedData.get(i);
             sortedData.add(user_temp);
         }
+
+        SortUnixTime comparator = new SortUnixTime();
+        Collections.sort(sortedData, comparator);
+
+
         return sortedData;
     }
 
@@ -185,10 +180,16 @@ public class FakeDatabase {
 
     // Simply returns other people data
     public List<Contact> getDateSorted() {
+        for(int i = 0; i < fullyUnixData.size(); i++){
+            Log.wtf("Date sorted", fullyUnixData.get(i).getName() + " : " + fullyUnixData.get(i).getSimple_date());
+        }
         return fullyUnixData;
     }
 
     public List<Contact> getAlphaSorted() {
+        for(int i = 0; i < fullyAlphaData.size(); i++){
+            Log.wtf("Name sorted", fullyAlphaData.get(i).getName());
+        }
         return fullyAlphaData;
     }
 

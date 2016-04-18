@@ -47,7 +47,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
 
         holder.icon.setImageResource(current.getPic());
 
-        holder.date.setText(current.getSimple_date());
+        // TODO:  holder.date.setText(current.getSimple_date());
     }
 
     @Override

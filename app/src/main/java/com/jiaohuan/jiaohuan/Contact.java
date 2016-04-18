@@ -109,7 +109,8 @@ public class Contact {
 
     public long getUnix_time() {return unix_time;}
 
-    public String getSimple_date() {return simple_date.toString();}
+    // TODO:
+    public String getSimple_date() {return simple_date;}
     public void setSimpleDate(String sdf){simple_date = sdf;}
 
 }
