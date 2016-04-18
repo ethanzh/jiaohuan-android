@@ -68,7 +68,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         mAdapter = new RecycleAdapter(getActivity(), FakeDatabase.getInstance().getAlphaSorted());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), R.dimen.padding_four));
+        mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 

@@ -20,9 +20,10 @@ public class ListSpacingDecoration extends RecyclerView.ItemDecoration {
     private int halfSpacing;
 
 
-    public ListSpacingDecoration(Context context, @DimenRes int spacingDimen) {
+    public ListSpacingDecoration(Context context, int spacingDimen) {
 
-        spacing = context.getResources().getDimensionPixelSize(spacingDimen);
+        //spacing = context.getResources().getDimensionPixelSize(spacingDimen);
+        spacing = spacingDimen;
         halfSpacing = spacing / 2;
     }
 
