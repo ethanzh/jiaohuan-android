@@ -64,9 +64,6 @@ public class Contact {
         additional_info = i;
     }
 
-
-
-
     // Various methods for getting/setting the variables
     public String getName() {return names;}
     public void setName(String n) { names = n; }
