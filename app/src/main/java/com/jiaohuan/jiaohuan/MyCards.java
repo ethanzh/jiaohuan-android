@@ -68,6 +68,7 @@ public class MyCards extends android.support.v4.app.Fragment {
 
     private Boolean nameSelected;
     private Boolean dateSelected;
+    private Boolean arrowUp;
 
     private TextView mDate;
     private TextView mName;
@@ -77,6 +78,8 @@ public class MyCards extends android.support.v4.app.Fragment {
 
     private ArrayList<Contact> AlphaReversed;
     private ArrayList<Contact> UnixReversed;
+
+    //public static Contact selectedRow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,6 +100,8 @@ public class MyCards extends android.support.v4.app.Fragment {
         mReverseNameAdapter = new RecycleAdapter(getActivity(), AlphaReversed);
         mReverseDateAdapter = new RecycleAdapter(getActivity(), UnixReversed);
 
+        //mLinearLayoutManager = (LinearLayoutManager) getActivity();
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mNameAdapter);
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
@@ -110,12 +115,15 @@ public class MyCards extends android.support.v4.app.Fragment {
         final int selectedColorValue = Color.parseColor("#FF00FF");
         final int nonSelectedColorValue = Color.parseColor("#FFFFFF");
 
+        arrowUp = false;
+
         mName.setTextColor(selectedColorValue);
 
         mGetContacts = (Button) view.findViewById(R.id.getcontacts);
 
         nameSelected = true;
         dateSelected = false;
+
 
         mGetContacts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,10 +140,12 @@ public class MyCards extends android.support.v4.app.Fragment {
                         mRecyclerView.swapAdapter(mReverseNameAdapter, false);
                         nameSelected = false;
                         mArrow.setImageResource(R.drawable.up);
+                        arrowUp = true;
                     } else{
                         mRecyclerView.swapAdapter(mNameAdapter, false);
                         nameSelected = true;
                         mArrow.setImageResource(R.drawable.down);
+                        arrowUp = false;
                     }
                 }
                 if(DATE){
@@ -143,12 +153,15 @@ public class MyCards extends android.support.v4.app.Fragment {
                         mRecyclerView.swapAdapter(mReverseDateAdapter, false);
                         dateSelected = false;
                         mArrow.setImageResource(R.drawable.up);
+                        arrowUp = true;
                     } else{
                         mRecyclerView.swapAdapter(mDateAdapter, false);
                         dateSelected = true;
                         mArrow.setImageResource(R.drawable.down);
+                        arrowUp = false;
                     }
                 }
+                mRecyclerView.smoothScrollToPosition(0);
             }
         });
 
@@ -157,23 +170,28 @@ public class MyCards extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 NAME = true;
                 DATE = false;
+
                 if(mName.getCurrentTextColor() == nonSelectedColorValue){
                     mArrow.setImageResource(R.drawable.down);
                     mRecyclerView.swapAdapter(mNameAdapter, false);
                     mName.setTextColor(selectedColorValue);
                     mDate.setTextColor(nonSelectedColorValue);
+                    arrowUp = false;
                 } else{
                     if(nameSelected){
                         mRecyclerView.swapAdapter(mReverseNameAdapter, false);
                         nameSelected = false;
                         mArrow.setImageResource(R.drawable.up);
+                        arrowUp = true;
                     } else{
                         mRecyclerView.swapAdapter(mNameAdapter, false);
                         nameSelected = true;
                         mArrow.setImageResource(R.drawable.down);
+                        arrowUp = false;
                     }
 
                 }
+                mRecyclerView.smoothScrollToPosition(0);
             }
         });
 
@@ -182,23 +200,27 @@ public class MyCards extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 NAME = false;
                 DATE = true;
+
                 if(mDate.getCurrentTextColor() == nonSelectedColorValue){
                     mArrow.setImageResource(R.drawable.down);
                     mRecyclerView.swapAdapter(mDateAdapter, false);
                     mName.setTextColor(nonSelectedColorValue);
                     mDate.setTextColor(selectedColorValue);
+                    arrowUp = false;
                 } else{
                     if(dateSelected){
                         mRecyclerView.swapAdapter(mReverseDateAdapter, false);
                         dateSelected = false;
                         mArrow.setImageResource(R.drawable.up);
+                        arrowUp = true;
                     } else{
                         mRecyclerView.swapAdapter(mDateAdapter, false);
                         dateSelected = true;
                         mArrow.setImageResource(R.drawable.down);
+                        arrowUp = false;
                     }
                 }
-
+                mRecyclerView.smoothScrollToPosition(0);
 
             }
         });
@@ -207,6 +229,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
 
                 // Make card_expand here
                 mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -232,11 +255,31 @@ public class MyCards extends android.support.v4.app.Fragment {
                 // Get top panel
                 mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
-                // Gets the data of the clicked card
-                final Contact selectedRow = mNameAdapter.getRow(position);
+                // TODO: fix this - Gets the data of the clicked card
+                Contact selectedRow = mNameAdapter.getRow(position);
+                Log.wtf("THIS", "" + mArrow.getAlpha());
+
+                if(NAME){
+                    if(arrowUp){
+                        //selectedRow = mReverseNameAdapter.getRow(position);
+                        SelectedRow.setCurrent(mReverseNameAdapter.getRow(position));
+                    } else{
+                        SelectedRow.setCurrent(mNameAdapter.getRow(position));
+                    }
+                }
+                else if(DATE){
+                    if(arrowUp){
+                        SelectedRow.setCurrent(mReverseDateAdapter.getRow(position));
+                    } else{
+                        SelectedRow.setCurrent(mDateAdapter.getRow(position));
+                    }
+                }
+
 
                 // Get color
-                mColor = selectedRow.getColor();
+                mColor = SelectedRow.getCurrent().getColor();
+
+
 
                 // Set color
                 mTopPanel.setBackgroundColor(mColor);
@@ -251,17 +294,17 @@ public class MyCards extends android.support.v4.app.Fragment {
                 }
 
                 // Gets text from the (fake) database and prints them to the activity
-                mPopName.setText(selectedRow.getName());
-                mPopCompany.setText(selectedRow.getCompany());
-                mPopEmail.setText(selectedRow.getEmail());
-                mPopAddress.setText(selectedRow.getAddress());
-                mPopInfo.setText(selectedRow.getInfo());
-                mWebsite.setText(selectedRow.getWebsite());
-                mPopPhone.setText(selectedRow.getPhoneNum());
-                mTitle.setText(selectedRow.getTitle());
-                mImageView.setImageResource(selectedRow.getPic());
-                mCard.setImageResource(selectedRow.getBusiness_card());
-                mKnownSince.setText(selectedRow.getSimple_date());
+                mPopName.setText(SelectedRow.getCurrent().getName());
+                mPopCompany.setText(SelectedRow.getCurrent().getCompany());
+                mPopEmail.setText(SelectedRow.getCurrent().getEmail());
+                mPopAddress.setText(SelectedRow.getCurrent().getAddress());
+                mPopInfo.setText(SelectedRow.getCurrent().getInfo());
+                mWebsite.setText(SelectedRow.getCurrent().getWebsite());
+                mPopPhone.setText(SelectedRow.getCurrent().getPhoneNum());
+                mTitle.setText(SelectedRow.getCurrent().getTitle());
+                mImageView.setImageResource(SelectedRow.getCurrent().getPic());
+                mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
+                mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
 
                 // Gets phone dimensions
                 WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -286,16 +329,18 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
+                mRecyclerView.smoothScrollToPosition(position);
+
                 // Card picture on click listener
                 mCard.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         if (initial == 0) {
-                            mCard.setImageResource(selectedRow.getFlipside());
+                            mCard.setImageResource(SelectedRow.getCurrent().getFlipside());
                             initial = 1;
                         } else {
-                            mCard.setImageResource(selectedRow.getBusiness_card());
+                            mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
                             initial = 0;
                         }
                     }
@@ -317,7 +362,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                                 .withValue(ContactsContract.Data.MIMETYPE,
                                         ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, selectedRow.getName())
+                                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, SelectedRow.getCurrent().getName())
                                 .build());
 
                         // Add phone number
@@ -325,7 +370,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                                 .withValue(ContactsContract.Data.MIMETYPE,
                                         ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, selectedRow.getPhoneNum())
+                                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, SelectedRow.getCurrent().getPhoneNum())
                                 .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
                                 .build());
 
@@ -334,21 +379,21 @@ public class MyCards extends android.support.v4.app.Fragment {
                                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                                 .withValue(ContactsContract.Data.MIMETYPE,
                                         ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, selectedRow.getInfo())
+                                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, SelectedRow.getCurrent().getInfo())
                                 .build());
 
                         // Add picture WORK IN PROGRESS
                         ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                                 .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, selectedRow.getPic())
+                                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, SelectedRow.getCurrent().getPic())
                                 .build());
 
                         // Add email
                         ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                                 .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.Email.DATA, selectedRow.getEmail())
+                                .withValue(ContactsContract.CommonDataKinds.Email.DATA, SelectedRow.getCurrent().getEmail())
                                 .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
                                 .build());
 
@@ -356,7 +401,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                         ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                                 .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, selectedRow.getLocation())
+                                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, SelectedRow.getCurrent().getLocation())
                                 .build());
 
 
@@ -367,6 +412,8 @@ public class MyCards extends android.support.v4.app.Fragment {
                         } catch (OperationApplicationException e) {
                             e.printStackTrace();
                         }
+
+
                     }
                 });
 

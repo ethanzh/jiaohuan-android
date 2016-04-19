@@ -102,6 +102,9 @@ public class MainActivity extends FragmentActivity {
                 String stringTime = Long.toString(time);
                 mTime.setText(stringTime);
 
+                // THIS IS THE VALUE THAT GETS SENT TO SERVER
+                // time -> Database
+
                 // Shaker is paused when pop up is displayed
                 mShaker.pause();
             }
