@@ -16,6 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:windowSoftInputMode="adjustPan"
         android:supportsRtl="true"
+        android:label="MBA-JH"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
 

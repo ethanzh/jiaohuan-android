@@ -33,6 +33,8 @@ public class MyCards extends android.support.v4.app.Fragment {
     private RecyclerView mRecyclerView;
     private RecycleAdapter mNameAdapter;
     private RecycleAdapter mDateAdapter;
+    private RecycleAdapter mReverseNameAdapter;
+    private RecycleAdapter mReverseDateAdapter;
     private PopupWindow mPopupWindow;
     private LayoutInflater mLayoutInflater;
     private LinearLayout mLinearLayout;
@@ -62,20 +64,27 @@ public class MyCards extends android.support.v4.app.Fragment {
     private ArrayList<Contact> AlphaSorted;
     private ArrayList<Contact> UnixSorted;
 
+    private ArrayList<Contact> AlphaReversed;
+    private ArrayList<Contact> UnixReversed;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
         AlphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
-
         UnixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
 
+        AlphaReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseAlpha();
+        UnixReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseUnix();
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
 
         mNameAdapter = new RecycleAdapter(getActivity(), AlphaSorted);
         mDateAdapter = new RecycleAdapter(getActivity(), UnixSorted);
+
+        mReverseNameAdapter = new RecycleAdapter(getActivity(), AlphaReversed);
+        mReverseDateAdapter = new RecycleAdapter(getActivity(), UnixReversed);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mNameAdapter);
@@ -100,20 +109,30 @@ public class MyCards extends android.support.v4.app.Fragment {
         mName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.wtf("NAME", "" + FakeDatabase.getInstance().getAlphaSorted());
-                mName.setTextColor(Color.RED);
-                mDate.setTextColor(Color.WHITE);
-                mRecyclerView.swapAdapter(mNameAdapter, false);
+
+                if(mName.getCurrentTextColor() == Color.RED){
+                    mRecyclerView.swapAdapter(mReverseNameAdapter, false);
+                }
+                else{
+                    mDate.setTextColor(Color.WHITE);
+                    mName.setTextColor(Color.RED);
+                    mRecyclerView.swapAdapter(mNameAdapter, false);
+                }
             }
         });
 
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.wtf("DATE", "" + FakeDatabase.getInstance().getDateSorted());
-                mName.setTextColor(Color.WHITE);
-                mDate.setTextColor(Color.RED);
-                mRecyclerView.swapAdapter(mDateAdapter, false);
+                if(mDate.getCurrentTextColor() == Color.RED){
+                    mRecyclerView.swapAdapter(mReverseDateAdapter, false);
+                }
+                else{
+                    mName.setTextColor(Color.WHITE);
+                    mDate.setTextColor(Color.RED);
+                    mRecyclerView.swapAdapter(mDateAdapter, false);
+                }
+
             }
         });
 

@@ -1,9 +1,5 @@
 package com.jiaohuan.jiaohuan;
 
-import android.os.Debug;
-import android.util.Log;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +18,8 @@ public class FakeDatabase {
     private Contact myData;
     private  List<Contact> fullyAlphaData;
     private List<Contact> fullyUnixData;
+    private List<Contact> reverseAlpha;
+    private List<Contact> reverseUnix;
 
     // This is just fake data, it will eventually be replaced with calls to the server
     private FakeDatabase()  { // Maybe throw exception here?
@@ -131,10 +129,16 @@ public class FakeDatabase {
         fullyAlphaData = new ArrayList<>();
         fullyAlphaData = SortByNames(unsortedData);
 
+        reverseAlpha = new ArrayList<>();
+        reverseAlpha = SortByNames(unsortedData);
+
         convertFromUnix(fullyAlphaData);
 
         fullyUnixData = new ArrayList<>();
         fullyUnixData = SortByUnix(fullyAlphaData);
+
+        reverseUnix = new ArrayList<>();
+        reverseUnix = SortByUnix(fullyAlphaData);
     }
 
     public void convertFromUnix(List<Contact> list){
@@ -185,6 +189,17 @@ public class FakeDatabase {
         }
         return fullyUnixData;
     }
+
+    public List<Contact> getReverseAlpha() {
+        Collections.reverse(reverseAlpha);
+        return reverseAlpha;
+    }
+
+    public List<Contact> getReverseUnix() {
+        Collections.reverse(reverseUnix);
+        return reverseUnix;
+    }
+
 
     public List<Contact> getAlphaSorted() {
         for(int i = 0; i < fullyAlphaData.size(); i++){
