@@ -57,6 +57,9 @@ public class MyCards extends android.support.v4.app.Fragment {
     private Button mContactButton;
     private Button mGetContacts;
     private TextView mKnownSince;
+    private int selectedColorValue;
+    private int nonSelectedColorValue;
+    int selected = 0;
 
     private TextView mDate;
     private TextView mName;
@@ -95,7 +98,10 @@ public class MyCards extends android.support.v4.app.Fragment {
         mDate = (TextView) view.findViewById(R.id.date);
         mName = (TextView) view.findViewById(R.id.name);
 
-        mName.setTextColor(Color.RED);
+        final int selectedColorValue = Color.parseColor("#FF00FF");
+        final int nonSelectedColorValue = Color.parseColor("#FFFFFF");
+
+        mName.setTextColor(selectedColorValue);
 
         mGetContacts = (Button) view.findViewById(R.id.getcontacts);
 
@@ -110,28 +116,37 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
-                if(mName.getCurrentTextColor() == Color.RED){
+                if(selected == 1){
                     mRecyclerView.swapAdapter(mReverseNameAdapter, false);
+                    selected = 0;
                 }
-                else{
-                    mDate.setTextColor(Color.WHITE);
-                    mName.setTextColor(Color.RED);
+
+                if (selected == 0){
+                    mDate.setTextColor(nonSelectedColorValue);
+                    mName.setTextColor(selectedColorValue);
                     mRecyclerView.swapAdapter(mNameAdapter, false);
+                    selected = 1;
                 }
+
+                Log.wtf("COLOR", "" + mName.getCurrentTextColor());
+                mRecyclerView.swapAdapter(mReverseNameAdapter, false);
             }
         });
 
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mDate.getCurrentTextColor() == Color.RED){
+                if(selected == 1){
                     mRecyclerView.swapAdapter(mReverseDateAdapter, false);
+                    selected = 0;
                 }
                 else{
-                    mName.setTextColor(Color.WHITE);
-                    mDate.setTextColor(Color.RED);
+                    mName.setTextColor(nonSelectedColorValue);
+                    mDate.setTextColor(selectedColorValue);
                     mRecyclerView.swapAdapter(mDateAdapter, false);
+                    selected = 1;
                 }
+                mRecyclerView.swapAdapter(mReverseDateAdapter, false);
 
             }
         });

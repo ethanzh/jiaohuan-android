@@ -1,7 +1,5 @@
 package com.jiaohuan.jiaohuan;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,7 +35,7 @@ class SortTest {
 
         for (int i = 0; i < userlist.size(); i++) {
             Contact user_temp = (Contact) userlist.get(i);
-            Log.wtf("TEST", "" + user_temp.getName());
+            //Log.wtf("TEST", "" + user_temp.getName());
         }
 
     }

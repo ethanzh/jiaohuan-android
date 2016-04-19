@@ -182,11 +182,12 @@ public class FakeDatabase {
         return sortedData;
     }
 
-    // Simply returns other people data
+    // Methods to return various ArrayList<Contact>'s
+    public List<Contact> getAlphaSorted() {
+        return fullyAlphaData;
+    }
+
     public List<Contact> getDateSorted() {
-        for(int i = 0; i < fullyUnixData.size(); i++){
-            //Log.wtf("Date sorted", fullyUnixData.get(i).getName() + " : " + fullyUnixData.get(i).getSimple_date());
-        }
         return fullyUnixData;
     }
 
@@ -198,14 +199,6 @@ public class FakeDatabase {
     public List<Contact> getReverseUnix() {
         Collections.reverse(reverseUnix);
         return reverseUnix;
-    }
-
-
-    public List<Contact> getAlphaSorted() {
-        for(int i = 0; i < fullyAlphaData.size(); i++){
-            //Log.wtf("Name sorted", fullyAlphaData.get(i).getName());
-        }
-        return fullyAlphaData;
     }
 
     // Return my data
