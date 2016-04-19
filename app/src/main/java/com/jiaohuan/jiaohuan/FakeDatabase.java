@@ -28,8 +28,8 @@ public class FakeDatabase {
 
         // My own data
         myData = new Contact("Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "ethan.houston@yahoo.com", "Beijing, China",
-                R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", R.drawable.card_nyu, "CEO",
-                "www.baidu.com", -12303292 , R.drawable.card_flip, 1366038215, null);
+                R.drawable.pp_ethan, "龙湖滟澜山", "", R.drawable.card_nyu, "CTO",
+                "jiaohuan.com.cn", -12303292 , R.drawable.card_flip, 1366038215, null);
 
         // Create a new ArrayList, then add each row to it individually
         unsortedData = new ArrayList<>();
