@@ -57,9 +57,17 @@ public class MyCards extends android.support.v4.app.Fragment {
     private Button mContactButton;
     private Button mGetContacts;
     private TextView mKnownSince;
+
+    private ImageView mArrow;
+
+    boolean NAME = true;
+    boolean DATE = false;
+
     private int selectedColorValue;
     private int nonSelectedColorValue;
-    int selected = 0;
+
+    private Boolean nameSelected;
+    private Boolean dateSelected;
 
     private TextView mDate;
     private TextView mName;
@@ -97,6 +105,7 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         mDate = (TextView) view.findViewById(R.id.date);
         mName = (TextView) view.findViewById(R.id.name);
+        mArrow = (ImageView) view.findViewById(R.id.arrow);
 
         final int selectedColorValue = Color.parseColor("#FF00FF");
         final int nonSelectedColorValue = Color.parseColor("#FFFFFF");
@@ -105,6 +114,9 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         mGetContacts = (Button) view.findViewById(R.id.getcontacts);
 
+        nameSelected = true;
+        dateSelected = false;
+
         mGetContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,41 +124,81 @@ public class MyCards extends android.support.v4.app.Fragment {
             }
         });
 
+        mArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(NAME){
+                    if(nameSelected){
+                        mRecyclerView.swapAdapter(mReverseNameAdapter, false);
+                        nameSelected = false;
+                        mArrow.setImageResource(R.drawable.up);
+                    } else{
+                        mRecyclerView.swapAdapter(mNameAdapter, false);
+                        nameSelected = true;
+                        mArrow.setImageResource(R.drawable.down);
+                    }
+                }
+                if(DATE){
+                    if(dateSelected){
+                        mRecyclerView.swapAdapter(mReverseDateAdapter, false);
+                        dateSelected = false;
+                        mArrow.setImageResource(R.drawable.up);
+                    } else{
+                        mRecyclerView.swapAdapter(mDateAdapter, false);
+                        dateSelected = true;
+                        mArrow.setImageResource(R.drawable.down);
+                    }
+                }
+            }
+        });
+
         mName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(selected == 1){
-                    mRecyclerView.swapAdapter(mReverseNameAdapter, false);
-                    selected = 0;
-                }
-
-                if (selected == 0){
-                    mDate.setTextColor(nonSelectedColorValue);
-                    mName.setTextColor(selectedColorValue);
+                NAME = true;
+                DATE = false;
+                if(mName.getCurrentTextColor() == nonSelectedColorValue){
+                    mArrow.setImageResource(R.drawable.down);
                     mRecyclerView.swapAdapter(mNameAdapter, false);
-                    selected = 1;
-                }
+                    mName.setTextColor(selectedColorValue);
+                    mDate.setTextColor(nonSelectedColorValue);
+                } else{
+                    if(nameSelected){
+                        mRecyclerView.swapAdapter(mReverseNameAdapter, false);
+                        nameSelected = false;
+                        mArrow.setImageResource(R.drawable.up);
+                    } else{
+                        mRecyclerView.swapAdapter(mNameAdapter, false);
+                        nameSelected = true;
+                        mArrow.setImageResource(R.drawable.down);
+                    }
 
-                Log.wtf("COLOR", "" + mName.getCurrentTextColor());
-                mRecyclerView.swapAdapter(mReverseNameAdapter, false);
+                }
             }
         });
 
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selected == 1){
-                    mRecyclerView.swapAdapter(mReverseDateAdapter, false);
-                    selected = 0;
-                }
-                else{
+                NAME = false;
+                DATE = true;
+                if(mDate.getCurrentTextColor() == nonSelectedColorValue){
+                    mArrow.setImageResource(R.drawable.down);
+                    mRecyclerView.swapAdapter(mDateAdapter, false);
                     mName.setTextColor(nonSelectedColorValue);
                     mDate.setTextColor(selectedColorValue);
-                    mRecyclerView.swapAdapter(mDateAdapter, false);
-                    selected = 1;
+                } else{
+                    if(dateSelected){
+                        mRecyclerView.swapAdapter(mReverseDateAdapter, false);
+                        dateSelected = false;
+                        mArrow.setImageResource(R.drawable.up);
+                    } else{
+                        mRecyclerView.swapAdapter(mDateAdapter, false);
+                        dateSelected = true;
+                        mArrow.setImageResource(R.drawable.down);
+                    }
                 }
-                mRecyclerView.swapAdapter(mReverseDateAdapter, false);
+
 
             }
         });
