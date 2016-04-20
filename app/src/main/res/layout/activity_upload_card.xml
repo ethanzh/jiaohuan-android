@@ -25,11 +25,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="CREATE AN ACCOUNT"
+            android:text="UPLOAD A BUSINESS CARD"
             android:id="@+id/textView19"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:textSize="18dp"/>
+            android:textSize="16dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,77 +66,44 @@
         android:weightSum="1"
         android:paddingTop="40dp">
 
-        <AutoCompleteTextView
-            android:layout_width="337dp"
-            android:layout_height="50dp"
-            android:inputType="textEmailAddress"
-            android:singleLine="true"
-            android:hint="Email"
-            android:cursorVisible="false"
-            android:textColorHint="#000000"
-            android:textColor="#000000"
 
-            android:paddingLeft="50dp"
-            android:ems="10"
-            android:id="@+id/email"
-            android:background="@drawable/rounded_edittext"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Front side"
+            android:id="@+id/textView13"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click Here"
+            android:id="@+id/front_button"
             android:layout_gravity="center_horizontal"/>
 
-        <Space
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.04"/>
-
-        <EditText
-            android:layout_width="337dp"
-            android:layout_height="50dp"
-            android:inputType="phone"
-            android:singleLine="true"
-            android:hint="Mobile"
-            android:cursorVisible="false"
-            android:textColorHint="#000000"
-            android:textColor="#000000"
-
-            android:paddingLeft="50dp"
-            android:ems="10"
-            android:id="@+id/phone"
-            android:background="@drawable/rounded_edittext"
-            android:layout_gravity="center_horizontal"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.04"/>
-
-        <EditText
-            android:layout_width="337dp"
-            android:layout_height="50dp"
-            android:singleLine="true"
-            android:textColorHint="#000000"
-            android:cursorVisible="false"
-            android:textColor="#000000"
-            android:paddingLeft="50dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/password"
-            android:background="@drawable/rounded_edittext"
+            android:id="@+id/image"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="We will never share your personal data with anyone"
-            android:id="@+id/textView24"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Back side"
+            android:id="@+id/textView15"
             android:layout_gravity="center_horizontal"
-            android:textColor="#FFFFFF"
-            android:paddingTop="20dp"
-            android:textSize="12dp"/>
+            android:textColor="#FFFFFF"/>
 
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click Here"
+            android:id="@+id/back_button"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
 </LinearLayout>

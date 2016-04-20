@@ -5,7 +5,7 @@
               android:id="@+id/start_page"
               android:paddingBottom="20dp"
               android:layout_height="match_parent"
-        android:background="@drawable/blurred_shanghai_startpage"
+              android:background="#F0F04F"
               android:weightSum="1">
 
     <TextView

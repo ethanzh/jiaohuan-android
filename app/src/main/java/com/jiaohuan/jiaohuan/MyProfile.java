@@ -62,7 +62,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
 
         // Makes card size device independent
         double cardHeight;
-        cardHeight = height * 0.078;
+        cardHeight = height * 0.1;
         int realCardHeight = (int) cardHeight;
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, realCardHeight, getResources().getDisplayMetrics());
         mCard.getLayoutParams().height = px;

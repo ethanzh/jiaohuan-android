@@ -5,17 +5,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 
 public class StartupPage extends Activity {
 
     private Button mSignin;
     private Button mSignup;
+    private LinearLayout mLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_page);
+
+        mLinearLayout = (LinearLayout) findViewById(R.id.start_page);
+
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            mLinearLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.evenlow) );
+        } else {
+            mLinearLayout.setBackground( getResources().getDrawable(R.drawable.evenlow));
+        }
 
         // Start sign in process
         mSignin = (Button) findViewById(R.id.signin);
