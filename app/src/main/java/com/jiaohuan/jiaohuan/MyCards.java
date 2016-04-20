@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyCards extends android.support.v4.app.Fragment {
 
@@ -106,6 +107,28 @@ public class MyCards extends android.support.v4.app.Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mNameAdapter);
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
+
+       /* //This is the code to provide a sectioned list
+        List<SimpleSectionedRecyclerViewAdapter.Section> sections =
+                new ArrayList<SimpleSectionedRecyclerViewAdapter.Section>();
+
+        //Sections
+        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(0,"Section 1"));
+        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(5,"Section 2"));
+        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(12,"Section 3"));
+        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(14,"Section 4"));
+        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(20,"Section 5"));
+
+        //Add your adapter to the sectionAdapter
+        SimpleSectionedRecyclerViewAdapter.Section[] dummy = new SimpleSectionedRecyclerViewAdapter.Section[sections.size()];
+        SimpleSectionedRecyclerViewAdapter mSectionedAdapter = new
+                SimpleSectionedRecyclerViewAdapter(this,R.layout.section,R.id.section_text, mNameAdapter);
+        mSectionedAdapter.setSections(sections.toArray(dummy));
+
+        //Apply this adapter to the RecyclerView
+        mRecyclerView.setAdapter(mSectionedAdapter);*/
+
+
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 

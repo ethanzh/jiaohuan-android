@@ -14,6 +14,8 @@ import java.util.List;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHolder> {
 
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_CELL = 1;
     private LayoutInflater mLayoutInflater;
 
     List<Contact> data = Collections.emptyList();
@@ -33,6 +35,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         View view = mLayoutInflater.inflate(R.layout.single_row, parent, false);
 
         myViewHolder holder = new myViewHolder(view);
+
+
 
         return holder;
     }
@@ -78,4 +82,5 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         data.addAll(datas);
         notifyDataSetChanged();
     }
+
 }
