@@ -20,23 +20,3 @@ public class SortAlphaNames implements Comparator {
     }
 }
 
-class SortTest {
-
-    public void Run() {
-        List userlist = new ArrayList();
-        userlist.add(new Contact("Dave"));
-        userlist.add(new Contact("Bart"));
-        userlist.add(new Contact("Adam"));
-        userlist.add(new Contact("Zack"));
-        userlist.add(new Contact("Greg"));
-
-        SortAlphaNames comparator = new SortAlphaNames();
-        Collections.sort(userlist, comparator);
-
-        for (int i = 0; i < userlist.size(); i++) {
-            Contact user_temp = (Contact) userlist.get(i);
-            //Log.wtf("TEST", "" + user_temp.getName());
-        }
-
-    }
-}

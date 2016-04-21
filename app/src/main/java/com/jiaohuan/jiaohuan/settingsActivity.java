@@ -1,4 +1,4 @@
 package com.jiaohuan.jiaohuan;
 
-public class settingsActivity {
+public class SettingsActivity {
 }
