@@ -15,7 +15,6 @@ public class EnterDetailsActivity extends Activity {
     private EditText mName;
     private EditText mPassword;
     private EditText mPhone;
-
     private TextView mBack;
 
     @Override
@@ -44,8 +43,11 @@ public class EnterDetailsActivity extends Activity {
                     mPhone.setHintTextColor(Color.RED);
                     return;
                 }else{
-                    // DO STUFF
+                    /*
 
+                    Send email, password, and phone to server
+
+                     */
                 }
             }
         });
