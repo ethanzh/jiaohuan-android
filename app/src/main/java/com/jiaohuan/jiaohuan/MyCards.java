@@ -101,7 +101,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         mName = (TextView) view.findViewById(R.id.name);
         mArrow = (ImageView) view.findViewById(R.id.arrow);
 
-        final int selectedColorValue = Color.parseColor("#FF00FF");
+        final int selectedColorValue = Color.parseColor("#FFAF8CFF");
         final int nonSelectedColorValue = Color.parseColor("#FFFFFF");
 
         nameSelected = true;
@@ -167,6 +167,9 @@ public class MyCards extends android.support.v4.app.Fragment {
                     arrowIsUp = false;
                 }
 
+                mName.setTextColor(selectedColorValue);
+                mDate.setTextColor(nonSelectedColorValue);
+
                 nameSelected = true;
                 dateSelected = false;
 
@@ -188,6 +191,9 @@ public class MyCards extends android.support.v4.app.Fragment {
                     mArrow.setImageResource(R.drawable.down);
                     arrowIsUp = false;
                 }
+
+                mName.setTextColor(nonSelectedColorValue);
+                mDate.setTextColor(selectedColorValue);
 
                 nameSelected = false;
                 dateSelected = true;
