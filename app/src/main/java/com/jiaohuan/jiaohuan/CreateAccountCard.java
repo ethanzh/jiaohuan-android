@@ -75,6 +75,8 @@ public class CreateAccountCard extends Activity {
                 Log.wtf("ORIGINAL", "" + BitmapCompat.getAllocationByteCount(bitmap));
                 //Log.wtf("ORIGINAL", "" + BitmapCompat.getAllocationByteCount(decoded));
 
+                Log.wtf("IMAGE", "" + mImage.getDrawable());
+
             }
         });
 
