@@ -41,7 +41,7 @@ public class StartupPage extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CreateAccountCard.class);
                 startActivityForResult(intent, 2);
             }
         });

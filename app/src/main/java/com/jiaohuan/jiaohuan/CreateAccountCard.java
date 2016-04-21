@@ -13,6 +13,9 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -22,6 +25,9 @@ public class CreateAccountCard extends Activity {
     private Button mFrontButton;
     private Button mBackButton;
     private ImageView mImage;
+
+    private TextView mBack;
+    private TextView mNext;
 
     private static final int REQUEST_CODE_PICTURE= 1;
 
@@ -33,6 +39,24 @@ public class CreateAccountCard extends Activity {
         mFrontButton = (Button) findViewById(R.id.front_button);
         mImage = (ImageView) findViewById(R.id.image);
         mBackButton = (Button) findViewById(R.id.back_button);
+
+        mBack = (TextView) findViewById(R.id.back);
+        mNext = (TextView) findViewById(R.id.next);
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        mNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EnterDetailsActivity.class);
+                startActivityForResult(intent, 2);
+            }
+        });
 
         mFrontButton.setOnClickListener(new View.OnClickListener() {
             @Override
