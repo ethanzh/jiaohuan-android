@@ -212,21 +212,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_expand, null);
 
                 // Assign all of the pop up's TextViews
-                mPopName = (TextView) mContainer.findViewById(R.id.pop_name);
-                mPopCompany = (TextView) mContainer.findViewById(R.id.pop_company);
-                mPopEmail = (TextView) mContainer.findViewById(R.id.pop_email);
-                mPopPhone = (TextView) mContainer.findViewById(R.id.pop_phone);
-                mPopAddress = (TextView) mContainer.findViewById(R.id.pop_address);
-                mPopInfo = (TextView) mContainer.findViewById(R.id.pop_info);
-                mImageView = (ImageView) mContainer.findViewById(R.id.image);
-                mCard = (ImageView) mContainer.findViewById(R.id.card_pic);
-                mClose = (TextView) mContainer.findViewById(R.id.close);
-                mTitle = (TextView) mContainer.findViewById(R.id.pop_title);
-                mWebsite = (TextView) mContainer.findViewById(R.id.website);
-                mShowName = (TextView) mContainer.findViewById(R.id.showname);
-                mShowCompany = (TextView) mContainer.findViewById(R.id.showcompany);
-                mContactButton = (Button) mContainer.findViewById(R.id.contactButton);
-                mKnownSince = (TextView) mContainer.findViewById(R.id.knownthing);
+                assignIDs(mContainer);
 
                 // Get top panel
                 mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
@@ -403,6 +389,24 @@ public class MyCards extends android.support.v4.app.Fragment {
         });
 
         return view;
+    }
+
+    void assignIDs(ViewGroup v){
+        mPopName = (TextView) v.findViewById(R.id.pop_name);
+        mPopCompany = (TextView) v.findViewById(R.id.pop_company);
+        mPopEmail = (TextView) v.findViewById(R.id.pop_email);
+        mPopPhone = (TextView) v.findViewById(R.id.pop_phone);
+        mPopAddress = (TextView) v.findViewById(R.id.pop_address);
+        mPopInfo = (TextView) v.findViewById(R.id.pop_info);
+        mImageView = (ImageView) v.findViewById(R.id.image);
+        mCard = (ImageView) v.findViewById(R.id.card_pic);
+        mClose = (TextView) v.findViewById(R.id.close);
+        mTitle = (TextView) v.findViewById(R.id.pop_title);
+        mWebsite = (TextView) v.findViewById(R.id.website);
+        mShowName = (TextView) v.findViewById(R.id.showname);
+        mShowCompany = (TextView) v.findViewById(R.id.showcompany);
+        mContactButton = (Button) v.findViewById(R.id.contactButton);
+        mKnownSince = (TextView) v.findViewById(R.id.knownthing);
     }
 
     // TODO: Work on this later
