@@ -2,6 +2,7 @@ package com.jiaohuan.jiaohuan;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,27 +11,22 @@ import android.widget.LinearLayout;
 
 public class StartupPage extends Activity {
 
-    private Button mSignin;
-    private Button mSignup;
-    private LinearLayout mLinearLayout;
+    LinearLayout mLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_page);
 
-        mLinearLayout = (LinearLayout) findViewById(R.id.start_page);
+        mLinearLayout = (LinearLayout) findViewById(R.id.start_layout);
 
-        final int sdk = android.os.Build.VERSION.SDK_INT;
-        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            mLinearLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.evenlow) );
-        } else {
-            mLinearLayout.setBackground( getResources().getDrawable(R.drawable.evenlow));
-        }
+        //mLinearLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.blurred_shanghai_startpage));
+
+        mLinearLayout.setBackgroundColor(Color.parseColor("#0e0019"));
 
         // Start sign in process
-        mSignin = (Button) findViewById(R.id.signin);
-        mSignin.setOnClickListener(new View.OnClickListener() {
+        Button signin = (Button) findViewById(R.id.signin);
+        signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -40,8 +36,8 @@ public class StartupPage extends Activity {
         });
 
         // Start sign up process
-        mSignup = (Button) findViewById(R.id.signup);
-        mSignup.setOnClickListener(new View.OnClickListener() {
+        Button signup = (Button) findViewById(R.id.signup);
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

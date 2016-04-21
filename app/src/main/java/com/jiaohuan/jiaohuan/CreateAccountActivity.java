@@ -1,17 +1,13 @@
 package com.jiaohuan.jiaohuan;
 
 import android.app.Activity;
-import android.app.ExpandableListActivity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class CreateAccountActivity extends Activity {
 
@@ -20,6 +16,8 @@ public class CreateAccountActivity extends Activity {
     private EditText mEmail;
     private EditText mPassword;
     private EditText mPhone;
+
+    private TextView mBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +29,7 @@ public class CreateAccountActivity extends Activity {
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
         mPhone = (EditText) findViewById(R.id.phone);
+        mBack = (TextView)findViewById(R.id.back);
 
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,11 +51,14 @@ public class CreateAccountActivity extends Activity {
                 }
             }
         });
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
-    }
-    public void back(View view) {
-        finish();
-    }
 
 
 }

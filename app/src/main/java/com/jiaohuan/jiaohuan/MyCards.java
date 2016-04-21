@@ -26,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,14 +58,10 @@ public class MyCards extends android.support.v4.app.Fragment {
     private Button mContactButton;
     private Button mGetContacts;
     private TextView mKnownSince;
-
     private ImageView mArrow;
 
     boolean NAME = true;
     boolean DATE = false;
-
-    private int selectedColorValue;
-    private int nonSelectedColorValue;
 
     private Boolean nameSelected;
     private Boolean dateSelected;
