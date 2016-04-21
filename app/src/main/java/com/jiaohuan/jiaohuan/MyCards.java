@@ -229,21 +229,20 @@ public class MyCards extends android.support.v4.app.Fragment {
                 Contact selectedRow = mNameAdapter.getRow(position);
                 Log.wtf("THIS", "" + mArrow.getAlpha());
 
-                /*if(NAME){
-                    if(arrowUp){
-                        //selectedRow = mReverseNameAdapter.getRow(position);
+                if(nameSelected){
+                    if(arrowIsUp){
                         SelectedRow.setCurrent(mReverseNameAdapter.getRow(position));
                     } else{
                         SelectedRow.setCurrent(mNameAdapter.getRow(position));
                     }
                 }
-                else if(DATE){
-                    if(arrowUp){
+                else if(dateSelected){
+                    if(arrowIsUp){
                         SelectedRow.setCurrent(mReverseDateAdapter.getRow(position));
                     } else{
                         SelectedRow.setCurrent(mDateAdapter.getRow(position));
                     }
-                }*/
+                }
 
                 // Get color
                 mColor = SelectedRow.getCurrent().getColor();
