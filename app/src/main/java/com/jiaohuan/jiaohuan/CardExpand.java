@@ -14,6 +14,5 @@ public class CardExpand extends Activity{
         setContentView(R.layout.card_expand);
 
         mLinearLayout = (LinearLayout) findViewById(R.id.touch);
-
     }
 }

@@ -7,12 +7,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.graphics.BitmapCompat;
@@ -21,35 +18,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class CreateAccountCard extends Activity {
 
     private Button mFrontButton;
     private Button mBackButton;
     private ImageView mImage;
-
     private TextView mBack;
     private TextView mNext;
-
     int REQUEST_CAMERA = 0;
     int SELECT_FILE = 1;
-
     private Button mStart;
-    private static int RESULT_LOAD_IMAGE = 1;
-    private static final int REQUEST_CODE_PICTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +64,6 @@ public class CreateAccountCard extends Activity {
             }
         });
 
-
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,8 +84,6 @@ public class CreateAccountCard extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQUEST_CAMERA);
-
-
             }
         });
 

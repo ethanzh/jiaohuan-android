@@ -59,24 +59,15 @@ public class MyCards extends android.support.v4.app.Fragment {
     private Button mGetContacts;
     private TextView mKnownSince;
     private ImageView mArrow;
-
-    boolean NAME = true;
-    boolean DATE = false;
-
-    private Boolean nameSelected;
-    private Boolean dateSelected;
-    private Boolean arrowUp;
-
     private TextView mDate;
     private TextView mName;
-
     private ArrayList<Contact> AlphaSorted;
     private ArrayList<Contact> UnixSorted;
-
     private ArrayList<Contact> AlphaReversed;
     private ArrayList<Contact> UnixReversed;
-
-    //public static Contact selectedRow;
+    private boolean arrowIsUp;
+    private boolean nameSelected;
+    private boolean dateSelected;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,27 +94,6 @@ public class MyCards extends android.support.v4.app.Fragment {
         mRecyclerView.setAdapter(mNameAdapter);
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
 
-       /* //This is the code to provide a sectioned list
-        List<SimpleSectionedRecyclerViewAdapter.Section> sections =
-                new ArrayList<SimpleSectionedRecyclerViewAdapter.Section>();
-
-        //Sections
-        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(0,"Section 1"));
-        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(5,"Section 2"));
-        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(12,"Section 3"));
-        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(14,"Section 4"));
-        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(20,"Section 5"));
-
-        //Add your adapter to the sectionAdapter
-        SimpleSectionedRecyclerViewAdapter.Section[] dummy = new SimpleSectionedRecyclerViewAdapter.Section[sections.size()];
-        SimpleSectionedRecyclerViewAdapter mSectionedAdapter = new
-                SimpleSectionedRecyclerViewAdapter(this,R.layout.section,R.id.section_text, mNameAdapter);
-        mSectionedAdapter.setSections(sections.toArray(dummy));
-
-        //Apply this adapter to the RecyclerView
-        mRecyclerView.setAdapter(mSectionedAdapter);*/
-
-
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
@@ -134,15 +104,13 @@ public class MyCards extends android.support.v4.app.Fragment {
         final int selectedColorValue = Color.parseColor("#FF00FF");
         final int nonSelectedColorValue = Color.parseColor("#FFFFFF");
 
-        arrowUp = false;
+        nameSelected = true;
+        dateSelected = false;
+        arrowIsUp = false;
 
         mName.setTextColor(selectedColorValue);
 
         mGetContacts = (Button) view.findViewById(R.id.getcontacts);
-
-        nameSelected = true;
-        dateSelected = false;
-
 
         mGetContacts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,32 +122,32 @@ public class MyCards extends android.support.v4.app.Fragment {
         mArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(NAME){
-                    if(nameSelected){
-                        mRecyclerView.swapAdapter(mReverseNameAdapter, false);
-                        nameSelected = false;
+
+                if (nameSelected){
+                    if(arrowIsUp == false){
+                        mRecyclerView.setAdapter(mReverseNameAdapter);
                         mArrow.setImageResource(R.drawable.up);
-                        arrowUp = true;
-                    } else{
-                        mRecyclerView.swapAdapter(mNameAdapter, false);
-                        nameSelected = true;
+                        arrowIsUp = true;
+                    }
+                    else if(arrowIsUp){
+                        mRecyclerView.setAdapter(mNameAdapter);
                         mArrow.setImageResource(R.drawable.down);
-                        arrowUp = false;
+                        arrowIsUp = false;
                     }
                 }
-                if(DATE){
-                    if(dateSelected){
-                        mRecyclerView.swapAdapter(mReverseDateAdapter, false);
-                        dateSelected = false;
+                else if(dateSelected){
+                    if(arrowIsUp == false){
+                        mRecyclerView.setAdapter(mReverseDateAdapter);
                         mArrow.setImageResource(R.drawable.up);
-                        arrowUp = true;
-                    } else{
-                        mRecyclerView.swapAdapter(mDateAdapter, false);
-                        dateSelected = true;
+                        arrowIsUp = true;
+                    }
+                    else if(arrowIsUp){
+                        mRecyclerView.setAdapter(mDateAdapter);
                         mArrow.setImageResource(R.drawable.down);
-                        arrowUp = false;
+                        arrowIsUp = false;
                     }
                 }
+
                 mRecyclerView.smoothScrollToPosition(0);
             }
         });
@@ -187,29 +155,21 @@ public class MyCards extends android.support.v4.app.Fragment {
         mName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NAME = true;
-                DATE = false;
 
-                if(mName.getCurrentTextColor() == nonSelectedColorValue){
-                    mArrow.setImageResource(R.drawable.down);
-                    mRecyclerView.swapAdapter(mNameAdapter, false);
-                    mName.setTextColor(selectedColorValue);
-                    mDate.setTextColor(nonSelectedColorValue);
-                    arrowUp = false;
-                } else{
-                    if(nameSelected){
-                        mRecyclerView.swapAdapter(mReverseNameAdapter, false);
-                        nameSelected = false;
-                        mArrow.setImageResource(R.drawable.up);
-                        arrowUp = true;
-                    } else{
-                        mRecyclerView.swapAdapter(mNameAdapter, false);
-                        nameSelected = true;
-                        mArrow.setImageResource(R.drawable.down);
-                        arrowUp = false;
-                    }
-
+                if(nameSelected && arrowIsUp == false){
+                    mRecyclerView.setAdapter(mReverseNameAdapter);
+                    mArrow.setImageResource(R.drawable.up);
+                    arrowIsUp = true;
                 }
+                else if(arrowIsUp == true || dateSelected == true){
+                    mRecyclerView.setAdapter(mNameAdapter);
+                    mArrow.setImageResource(R.drawable.down);
+                    arrowIsUp = false;
+                }
+
+                nameSelected = true;
+                dateSelected = false;
+
                 mRecyclerView.smoothScrollToPosition(0);
             }
         });
@@ -217,30 +177,21 @@ public class MyCards extends android.support.v4.app.Fragment {
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NAME = false;
-                DATE = true;
 
-                if(mDate.getCurrentTextColor() == nonSelectedColorValue){
-                    mArrow.setImageResource(R.drawable.down);
-                    mRecyclerView.swapAdapter(mDateAdapter, false);
-                    mName.setTextColor(nonSelectedColorValue);
-                    mDate.setTextColor(selectedColorValue);
-                    arrowUp = false;
-                } else{
-                    if(dateSelected){
-                        mRecyclerView.swapAdapter(mReverseDateAdapter, false);
-                        dateSelected = false;
-                        mArrow.setImageResource(R.drawable.up);
-                        arrowUp = true;
-                    } else{
-                        mRecyclerView.swapAdapter(mDateAdapter, false);
-                        dateSelected = true;
-                        mArrow.setImageResource(R.drawable.down);
-                        arrowUp = false;
-                    }
+                if(dateSelected && arrowIsUp == false){
+                    mRecyclerView.setAdapter(mReverseDateAdapter);
+                    mArrow.setImageResource(R.drawable.up);
+                    arrowIsUp = true;
                 }
-                mRecyclerView.smoothScrollToPosition(0);
+                else if(arrowIsUp == true || nameSelected == true){
+                    mRecyclerView.setAdapter(mDateAdapter);
+                    mArrow.setImageResource(R.drawable.down);
+                    arrowIsUp = false;
+                }
 
+                nameSelected = false;
+                dateSelected = true;
+                mRecyclerView.smoothScrollToPosition(0);
             }
         });
 
@@ -278,7 +229,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 Contact selectedRow = mNameAdapter.getRow(position);
                 Log.wtf("THIS", "" + mArrow.getAlpha());
 
-                if(NAME){
+                /*if(NAME){
                     if(arrowUp){
                         //selectedRow = mReverseNameAdapter.getRow(position);
                         SelectedRow.setCurrent(mReverseNameAdapter.getRow(position));
@@ -292,13 +243,10 @@ public class MyCards extends android.support.v4.app.Fragment {
                     } else{
                         SelectedRow.setCurrent(mDateAdapter.getRow(position));
                     }
-                }
-
+                }*/
 
                 // Get color
                 mColor = SelectedRow.getCurrent().getColor();
-
-
 
                 // Set color
                 mTopPanel.setBackgroundColor(mColor);
@@ -429,8 +377,6 @@ public class MyCards extends android.support.v4.app.Fragment {
                                 .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
                                 .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, SelectedRow.getCurrent().getLocation())
                                 .build());
-
-
                         try {
                             cr.applyBatch(ContactsContract.AUTHORITY, ops);
                         } catch (RemoteException e) {
@@ -438,11 +384,8 @@ public class MyCards extends android.support.v4.app.Fragment {
                         } catch (OperationApplicationException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 });
-
 
                 // Close button click listener
                 mClose.setOnClickListener(new View.OnClickListener() {

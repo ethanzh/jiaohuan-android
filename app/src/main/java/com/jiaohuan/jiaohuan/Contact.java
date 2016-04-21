@@ -21,7 +21,6 @@ public class Contact {
     private long unix_time;
     private String simple_date;
 
-
     // Dummy constructor, just in case there's only a name
     public Contact(String n) {
         names = n;
@@ -106,7 +105,6 @@ public class Contact {
 
     public long getUnix_time() {return unix_time;}
 
-    // TODO:
     public String getSimple_date() {return simple_date;}
     public void setSimpleDate(String sdf){simple_date = sdf;}
 
