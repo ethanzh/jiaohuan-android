@@ -2,6 +2,7 @@ package com.jiaohuan.jiaohuan;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,13 +11,21 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.graphics.BitmapCompat;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -28,41 +37,42 @@ public class CreateAccountCard extends Activity {
 
     private Button mFrontButton;
     private Button mBackButton;
-    private ImageView mImage;
+    private ImageView mTop;
+    private ImageView mBottom;
     private TextView mBack;
     private TextView mNext;
     int REQUEST_CAMERA = 0;
     int SELECT_FILE = 1;
     private Button mStart;
+    private PopupWindow mPopupWindow;
+    private LayoutInflater mLayoutInflater;
+    private LinearLayout mLinearLayout;
+
+    final int FRONT_CARD = 0;
+    final int BACK_CARD = 1;
+
+    private Button mCamera;
+    private Button mLocal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_card);
 
+        mLinearLayout = (LinearLayout) findViewById(R.id.start_page);
         mFrontButton = (Button) findViewById(R.id.front_button);
-        mImage = (ImageView) findViewById(R.id.image);
+        mTop = (ImageView) findViewById(R.id.top);
         mBackButton = (Button) findViewById(R.id.back_button);
-        mStart = (Button) findViewById(R.id.button);
         mBack = (TextView) findViewById(R.id.back);
-        mImage = (ImageView) findViewById(R.id.image);
+        mBottom = (ImageView) findViewById(R.id.bottom);
         mNext = (TextView) findViewById(R.id.next);
 
-        mStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inScaled = false;
-                Bitmap bitmap;
-                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.card_nyu, options);
+        mLayoutInflater = (LayoutInflater) CreateAccountCard.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_select_menu, null);
 
-                Log.wtf("ORIGINAL", "" + BitmapCompat.getAllocationByteCount(bitmap));
-                //Log.wtf("ORIGINAL", "" + BitmapCompat.getAllocationByteCount(decoded));
-
-                Log.wtf("IMAGE", "" + mImage.getDrawable());
-
-            }
-        });
+        mCamera = (Button) mContainer.findViewById(R.id.camera);
+        mLocal = (Button) mContainer.findViewById(R.id.local);
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,21 +92,14 @@ public class CreateAccountCard extends Activity {
         mFrontButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, REQUEST_CAMERA);
+                openWindow(mContainer, 0);
             }
         });
 
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("image/*");
-                startActivityForResult(
-                        Intent.createChooser(intent, "Select File"),
-                        SELECT_FILE);
+                openWindow(mContainer, 1);
             }
         });
     }
@@ -151,7 +154,10 @@ public class CreateAccountCard extends Activity {
                     e.printStackTrace();
                 }
 
-                mImage.setImageBitmap(thumbnail);
+                Log.wtf("REQUEST", "" + requestCode);
+                if(requestCode == 0){
+                    mTop.setImageBitmap(thumbnail);
+                }
 
             } else if (requestCode == SELECT_FILE) {
                 Uri selectedImageUri = data.getData();
@@ -177,9 +183,48 @@ public class CreateAccountCard extends Activity {
                 options.inJustDecodeBounds = false;
                 bm = BitmapFactory.decodeFile(selectedImagePath, options);
 
-                mImage.setImageBitmap(bm);
+                /*if(requestCode == 0){
+                    mTop.setImageBitmap(bm);
+                } else if(requestCode == 1){
+                    mBottom.setImageBitmap(bm);
+                }*/
+
             }
         }
+    }
+    public void openWindow(ViewGroup v, final int code){
+        mPopupWindow = new PopupWindow(v, 1000, 1500, true);
+
+        mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+        // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
+        /*v.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mPopupWindow.dismiss();
+                return true;
+            }
+        });*/
+
+        mCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, code);
+            }
+        });
+        mLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(
+                        Intent.createChooser(intent, "Select File"),
+                        code);
+            }
+        });
     }
 }
 

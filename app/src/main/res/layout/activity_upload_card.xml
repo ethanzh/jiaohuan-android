@@ -86,7 +86,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="150dp"
-            android:id="@+id/image"
+            android:id="@+id/top"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -105,12 +105,12 @@
             android:id="@+id/back_button"
             android:layout_gravity="center_horizontal"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button"
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:id="@+id/bottom"
             android:layout_gravity="center_horizontal"/>
+
     </LinearLayout>
 
 </LinearLayout>
