@@ -92,14 +92,14 @@ public class CreateAccountCard extends Activity {
         mFrontButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openWindow(mContainer, 0);
+                openTopWindow(mContainer);
             }
         });
 
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openWindow(mContainer, 1);
+                openBottomWindow(mContainer);
             }
         });
     }
@@ -134,7 +134,7 @@ public class CreateAccountCard extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_CAMERA) {
+            if (requestCode == 1 || requestCode == 3) {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -155,11 +155,14 @@ public class CreateAccountCard extends Activity {
                 }
 
                 Log.wtf("REQUEST", "" + requestCode);
-                if(requestCode == 0){
+
+                if(requestCode == 1){
                     mTop.setImageBitmap(thumbnail);
+                } else if(requestCode == 3){
+                    mBottom.setImageBitmap(thumbnail);
                 }
 
-            } else if (requestCode == SELECT_FILE) {
+            } else if (requestCode == 2 || requestCode == 4) {
                 Uri selectedImageUri = data.getData();
                 String[] projection = { MediaStore.MediaColumns.DATA };
                 CursorLoader cursorLoader = new CursorLoader(this,selectedImageUri, projection, null, null,
@@ -183,34 +186,34 @@ public class CreateAccountCard extends Activity {
                 options.inJustDecodeBounds = false;
                 bm = BitmapFactory.decodeFile(selectedImagePath, options);
 
-                /*if(requestCode == 0){
+                if(requestCode == 2){
                     mTop.setImageBitmap(bm);
-                } else if(requestCode == 1){
+                } else if(requestCode == 4){
                     mBottom.setImageBitmap(bm);
-                }*/
+                }
 
             }
         }
     }
-    public void openWindow(ViewGroup v, final int code){
+    public void openTopWindow(ViewGroup v){
         mPopupWindow = new PopupWindow(v, 1000, 1500, true);
 
         mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
         // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
-        /*v.setOnTouchListener(new View.OnTouchListener() {
+        v.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mPopupWindow.dismiss();
                 return true;
             }
-        });*/
+        });
 
         mCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, code);
+                startActivityForResult(intent, 1);
             }
         });
         mLocal.setOnClickListener(new View.OnClickListener() {
@@ -222,7 +225,42 @@ public class CreateAccountCard extends Activity {
                 intent.setType("image/*");
                 startActivityForResult(
                         Intent.createChooser(intent, "Select File"),
-                        code);
+                        2);
+            }
+        });
+    }
+
+    public void openBottomWindow(ViewGroup v){
+        mPopupWindow = new PopupWindow(v, 1000, 1500, true);
+
+        mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+        // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
+        v.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mPopupWindow.dismiss();
+                return true;
+            }
+        });
+
+        mCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 3);
+            }
+        });
+        mLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(
+                        Intent.createChooser(intent, "Select File"),
+                        4);
             }
         });
     }
