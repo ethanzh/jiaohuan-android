@@ -61,9 +61,7 @@ public class CreateAccountCard extends Activity {
         setContentView(R.layout.activity_upload_card);
 
         mLinearLayout = (LinearLayout) findViewById(R.id.start_page);
-        mFrontButton = (Button) findViewById(R.id.front_button);
         mTop = (ImageView) findViewById(R.id.top);
-        mBackButton = (Button) findViewById(R.id.back_button);
         mBack = (TextView) findViewById(R.id.back);
         mBottom = (ImageView) findViewById(R.id.bottom);
         mNext = (TextView) findViewById(R.id.next);
@@ -89,14 +87,14 @@ public class CreateAccountCard extends Activity {
             }
         });
 
-        mFrontButton.setOnClickListener(new View.OnClickListener() {
+        mTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openTopWindow(mContainer);
             }
         });
 
-        mBackButton.setOnClickListener(new View.OnClickListener() {
+        mBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openBottomWindow(mContainer);
@@ -161,6 +159,7 @@ public class CreateAccountCard extends Activity {
                 } else if(requestCode == 3){
                     mBottom.setImageBitmap(thumbnail);
                 }
+                mPopupWindow.dismiss();
 
             } else if (requestCode == 2 || requestCode == 4) {
                 Uri selectedImageUri = data.getData();
@@ -191,12 +190,13 @@ public class CreateAccountCard extends Activity {
                 } else if(requestCode == 4){
                     mBottom.setImageBitmap(bm);
                 }
+                mPopupWindow.dismiss();
 
             }
         }
     }
     public void openTopWindow(ViewGroup v){
-        mPopupWindow = new PopupWindow(v, 1000, 1500, true);
+        mPopupWindow = new PopupWindow(v, 1000, 400, true);
 
         mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
@@ -231,7 +231,7 @@ public class CreateAccountCard extends Activity {
     }
 
     public void openBottomWindow(ViewGroup v){
-        mPopupWindow = new PopupWindow(v, 1000, 1500, true);
+        mPopupWindow = new PopupWindow(v, 1000, 400, true);
 
         mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 

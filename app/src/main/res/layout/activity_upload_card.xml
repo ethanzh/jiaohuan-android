@@ -76,18 +76,19 @@
             android:layout_gravity="center_horizontal"
             android:textColor="#FFFFFF"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Click Here"
-            android:id="@+id/front_button"
-            android:layout_gravity="center_horizontal"/>
-
         <ImageView
             android:layout_width="300dp"
             android:layout_height="150dp"
             android:id="@+id/top"
+            android:background="@drawable/background"
+            android:src="@drawable/plus"
             android:layout_gravity="center_horizontal"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.59"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,15 +99,10 @@
             android:layout_gravity="center_horizontal"
             android:textColor="#FFFFFF"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Click Here"
-            android:id="@+id/back_button"
-            android:layout_gravity="center_horizontal"/>
-
         <ImageView
             android:layout_width="300dp"
+            android:src="@drawable/plus"
+            android:background="@drawable/background"
             android:layout_height="150dp"
             android:id="@+id/bottom"
             android:layout_gravity="center_horizontal"/>
