@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,6 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,6 +58,10 @@ public class CreateAccountCard extends Activity {
     private Button mCamera;
     private Button mLocal;
 
+    private Drawable mStartTop;
+    private Drawable mStartBottom;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +80,9 @@ public class CreateAccountCard extends Activity {
         mCamera = (Button) mContainer.findViewById(R.id.camera);
         mLocal = (Button) mContainer.findViewById(R.id.local);
 
+        mStartTop = mTop.getDrawable();
+        mStartBottom = mBottom.getDrawable();
+
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,8 +93,16 @@ public class CreateAccountCard extends Activity {
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EnterDetailsActivity.class);
-                startActivityForResult(intent, 2);
+
+                if(mTop.getDrawable() == mStartBottom || mBottom.getDrawable() == mStartBottom){
+                    Toast.makeText(getApplicationContext(), "You did not upload two pictures", Toast.LENGTH_SHORT).show();
+                } else{
+                    Intent intent = new Intent(getApplicationContext(), EnterDetailsActivity.class);
+                    startActivityForResult(intent, 2);
+                }
+
+
+
             }
         });
 
