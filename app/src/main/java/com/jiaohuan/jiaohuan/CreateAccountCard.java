@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -200,6 +201,9 @@ public class CreateAccountCard extends Activity {
 
         mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
+        mCamera.setBackgroundColor(Color.WHITE);
+        mLocal.setBackgroundColor(Color.WHITE);
+
         // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
         v.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -234,6 +238,9 @@ public class CreateAccountCard extends Activity {
         mPopupWindow = new PopupWindow(v, 1000, 400, true);
 
         mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+        mCamera.setBackgroundColor(Color.WHITE);
+        mLocal.setBackgroundColor(Color.WHITE);
 
         // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
         v.setOnTouchListener(new View.OnTouchListener() {
