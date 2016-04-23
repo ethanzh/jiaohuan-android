@@ -82,6 +82,7 @@
             android:background="@drawable/rounded_edittext"
             android:layout_gravity="center_horizontal"/>
 
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
