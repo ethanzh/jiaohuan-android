@@ -71,8 +71,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Log.wtf("HI", "PRESED");
-                Intent intent = new Intent(getContext(), EditMyProfile.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                Intent intent = new Intent(getContext(), EditMyProfile.class);
                 startActivity(intent);
             }
         });

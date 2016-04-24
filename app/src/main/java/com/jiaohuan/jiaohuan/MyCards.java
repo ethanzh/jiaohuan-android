@@ -217,10 +217,6 @@ public class MyCards extends android.support.v4.app.Fragment {
                 // Get top panel
                 mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
-                // TODO: fix this - Gets the data of the clicked card
-                Contact selectedRow = mNameAdapter.getRow(position);
-                Log.wtf("THIS", "" + mArrow.getAlpha());
-
                 if(nameSelected){
                     if(arrowIsUp){
                         SelectedRow.setCurrent(mReverseNameAdapter.getRow(position));
