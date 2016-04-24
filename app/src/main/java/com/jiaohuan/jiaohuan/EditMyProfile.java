@@ -29,6 +29,7 @@ public class EditMyProfile extends Activity {
     private EditText mLocation;
 
     private Button mFinish;
+    private Button mBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class EditMyProfile extends Activity {
         mLocation = (EditText) findViewById(R.id.location);
 
         mFinish = (Button) findViewById(R.id.finish);
+        mBack = (Button) findViewById(R.id.back);
 
         // Get my data from fake database
         myData = FakeDatabase.getInstance().getMyData();
@@ -56,6 +58,13 @@ public class EditMyProfile extends Activity {
         mPhone.setText(initialPhone);
         mLocation.setText(initialLocation);
 
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         mFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,18 +78,22 @@ public class EditMyProfile extends Activity {
                 if (!finalName.equals(initialName)){
                     Toast.makeText(EditMyProfile.this, "Name was changed",
                             Toast.LENGTH_SHORT).show();
+                    myData.setName(finalName);
                 }
                 if (!finalEmail.equals(initialEmail)){
                     Toast.makeText(EditMyProfile.this, "Email was changed",
                             Toast.LENGTH_SHORT).show();
+                    myData.setEmail(finalEmail);
                 }
                 if (!finalPhone.equals(initialPhone)){
                     Toast.makeText(EditMyProfile.this, "Phone was changed",
                             Toast.LENGTH_SHORT).show();
+                    myData.setPhoneNum(finalPhone);
                 }
                 if (!finalLocation.equals(initialLocation)){
                     Toast.makeText(EditMyProfile.this, "Location was changed",
                             Toast.LENGTH_SHORT).show();
+                    myData.setLocation(finalLocation);
                 }
             }
         });

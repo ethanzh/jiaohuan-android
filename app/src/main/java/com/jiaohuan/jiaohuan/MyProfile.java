@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -81,10 +82,10 @@ public class MyProfile extends android.support.v4.app.Fragment {
 
             @Override
             public void onClick(View v) {
-                if(initial == 0){
+                if (initial == 0) {
                     mCard.setImageResource(myData.getFlipside());
                     initial = 1;
-                }else{
+                } else {
                     mCard.setImageResource(myData.getBusiness_card());
                     initial = 0;
                 }
@@ -92,5 +93,15 @@ public class MyProfile extends android.support.v4.app.Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mName.setText(myData.getName());
+        mEmail.setText(myData.getEmail());
+        mPhone.setText(myData.getPhoneNum());
+        mLocation.setText(myData.getLocation());
     }
 }
