@@ -34,6 +34,26 @@
         android:id="@+id/location"
         android:hint="Location"
         android:layout_gravity="center_horizontal"/>
+    <ImageView
+        android:layout_width="264dp"
+
+        android:id="@+id/frontofcard"
+        android:src="@drawable/card_nyu"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10"
+        android:paddingTop="5dp"/>
+    <ImageView
+        android:layout_width="264dp"
+
+        android:id="@+id/backofcard"
+        android:src="@drawable/card_flip"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10"
+        android:paddingTop="5dp"/>
 
     <Button
         android:layout_width="wrap_content"
