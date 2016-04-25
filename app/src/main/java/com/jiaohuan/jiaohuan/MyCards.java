@@ -73,7 +73,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
-        AlphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
+        AlphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance(this).getAlphaSorted();
         UnixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
 
         AlphaReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseAlpha();
@@ -257,7 +257,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mPopPhone.setText(SelectedRow.getCurrent().getPhoneNum());
                 mTitle.setText(SelectedRow.getCurrent().getTitle());
                 mImageView.setImageResource(SelectedRow.getCurrent().getPic());
-                mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
+                mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
                 mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
 
                 // Gets phone dimensions
@@ -298,10 +298,10 @@ public class MyCards extends android.support.v4.app.Fragment {
                     @Override
                     public void onClick(View v) {
                         if (initial == 0) {
-                            mCard.setImageResource(SelectedRow.getCurrent().getFlipside());
+                            mCard.setImageBitmap(SelectedRow.getCurrent().getFlipside());
                             initial = 1;
                         } else {
-                            mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
+                            mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
                             initial = 0;
                         }
                     }
