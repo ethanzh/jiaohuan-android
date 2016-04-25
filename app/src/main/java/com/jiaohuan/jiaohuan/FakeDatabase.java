@@ -1,5 +1,10 @@
 package com.jiaohuan.jiaohuan;
 
+import android.graphics.drawable.Drawable;
+import android.os.Environment;
+import android.widget.Toast;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -139,6 +144,26 @@ public class FakeDatabase {
 
         reverseUnix = new ArrayList<>();
         reverseUnix = SortByUnix(fullyAlphaData);
+
+        addToDir(fullyAlphaData);
+    }
+
+    public void addToDir(List<Contact> list){
+
+        for(int i = 0; i < list.size(); i++){
+
+            String nameOfFolder = list.get(i).getName();
+
+            String conName = Environment.getExternalStorageDirectory() + "/Jiaohuan/connectedaccounts/" + nameOfFolder;
+            File conDir = new File(conName);
+            if (!conDir.mkdirs()) {
+                if (conDir.exists()) {
+                } else {
+                    return;
+                }
+            }
+
+        }
     }
 
     public void convertFromUnix(List<Contact> list){

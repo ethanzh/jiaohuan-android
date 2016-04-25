@@ -113,16 +113,6 @@ public class EditMyProfile extends Activity {
         mBottom.setImageResource(initialFlip);
 
         String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/myprofile/";
-        File sddir = new File(dirname);
-        if (!sddir.mkdirs()) {
-            if (sddir.exists()) {
-            } else {
-                Toast.makeText(EditMyProfile.this, "Folder error", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-        Log.wtf("EXISTS", "" + sddir.exists());
-
 
         mTop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,7 +250,7 @@ public class EditMyProfile extends Activity {
             if (requestCode == 1 || requestCode == 3) {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                //thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
                 File destination = new File(Environment.getExternalStorageDirectory(),
                         System.currentTimeMillis() + ".jpg");
@@ -333,7 +323,7 @@ public class EditMyProfile extends Activity {
 
                 try {
                     FileOutputStream fos = new FileOutputStream(dirname + "local.jpg");
-                    bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                    //bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
 
                     fos.flush();
                     fos.close();

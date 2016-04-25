@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -29,6 +30,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
 
 public class MainActivity extends FragmentActivity {
 
@@ -109,6 +113,28 @@ public class MainActivity extends FragmentActivity {
                 mShaker.pause();
             }
         });
+
+        // Make directories/check if they exist
+
+        String myDirName = Environment.getExternalStorageDirectory() + "/Jiaohuan/myprofile/";
+        File mySDDir = new File(myDirName);
+        if (!mySDDir.mkdirs()) {
+            if (mySDDir.exists()) {
+            } else {
+                Toast.makeText(MainActivity.this, "Folder error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        String conName = Environment.getExternalStorageDirectory() + "/Jiaohuan/connectedaccounts/";
+        File conDir = new File(conName);
+        if (!conDir.mkdirs()) {
+            if (conDir.exists()) {
+            } else {
+                Toast.makeText(MainActivity.this, "Folder error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
         // Code the start the view pager
         mViewPager = (ViewPager) findViewById(R.id.pager);
