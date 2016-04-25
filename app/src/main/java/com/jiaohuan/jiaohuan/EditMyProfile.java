@@ -112,6 +112,17 @@ public class EditMyProfile extends Activity {
         mTop.setImageResource(initialCard);
         mBottom.setImageResource(initialFlip);
 
+        String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/myprofile/";
+        File sddir = new File(dirname);
+        if (!sddir.mkdirs()) {
+            if (sddir.exists()) {
+            } else {
+                Toast.makeText(EditMyProfile.this, "Folder error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        Log.wtf("EXISTS", "" + sddir.exists());
+
 
         mTop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,7 +260,7 @@ public class EditMyProfile extends Activity {
             if (requestCode == 1 || requestCode == 3) {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
                 File destination = new File(Environment.getExternalStorageDirectory(),
                         System.currentTimeMillis() + ".jpg");
@@ -273,6 +284,19 @@ public class EditMyProfile extends Activity {
                 } else if(requestCode == 3){
                     mBottom.setImageBitmap(thumbnail);
                 }
+
+                String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/myprofile/";
+
+                try {
+                    FileOutputStream fos = new FileOutputStream(dirname + "camera.jpg");
+                    thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+                    fos.flush();
+                    fos.close();
+                } catch (Exception e) {
+                    Log.e("MyLog", e.toString());
+                }
+
                 mPopupWindow.dismiss();
 
             } else if (requestCode == 2 || requestCode == 4) {
@@ -304,6 +328,19 @@ public class EditMyProfile extends Activity {
                 } else if(requestCode == 4){
                     mBottom.setImageBitmap(bm);
                 }
+
+                String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/myprofile/";
+
+                try {
+                    FileOutputStream fos = new FileOutputStream(dirname + "local.jpg");
+                    bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+                    fos.flush();
+                    fos.close();
+                } catch (Exception e) {
+                    Log.e("MyLog", e.toString());
+                }
+
                 mPopupWindow.dismiss();
 
             }
