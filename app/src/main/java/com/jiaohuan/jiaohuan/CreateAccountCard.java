@@ -13,10 +13,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
-import android.support.v4.graphics.BitmapCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +48,7 @@ public class CreateAccountCard extends Activity {
     private PopupWindow mPopupWindow;
     private LayoutInflater mLayoutInflater;
     private LinearLayout mLinearLayout;
+    private Button mPreview;
 
     final int FRONT_CARD = 0;
     final int BACK_CARD = 1;
@@ -73,6 +71,7 @@ public class CreateAccountCard extends Activity {
         mBack = (TextView) findViewById(R.id.back);
         mBottom = (ImageView) findViewById(R.id.bottom);
         mNext = (TextView) findViewById(R.id.next);
+        mPreview = (Button) findViewById(R.id.pview);
 
         mLayoutInflater = (LayoutInflater) CreateAccountCard.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_select_menu, null);
@@ -82,6 +81,14 @@ public class CreateAccountCard extends Activity {
 
         mStartTop = mTop.getDrawable();
         mStartBottom = mBottom.getDrawable();
+
+        mPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(getApplicationContext(), PreviewDemo.class);
+                //startActivity(intent);
+            }
+        });
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +139,7 @@ public class CreateAccountCard extends Activity {
                 if (items[item].equals("Take Photo")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, REQUEST_CAMERA);
+                    Box box = new Box(CreateAccountCard.this);
                 } else if (items[item].equals("Choose from Library")) {
                     Intent intent = new Intent(
                             Intent.ACTION_PICK,
@@ -178,6 +186,9 @@ public class CreateAccountCard extends Activity {
                 } else if(requestCode == 3){
                     mBottom.setImageBitmap(thumbnail);
                 }
+
+
+
                 mPopupWindow.dismiss();
 
             } else if (requestCode == 2 || requestCode == 4) {
@@ -203,6 +214,8 @@ public class CreateAccountCard extends Activity {
                 options.inSampleSize = scale;
                 options.inJustDecodeBounds = false;
                 bm = BitmapFactory.decodeFile(selectedImagePath, options);
+
+                bm = Bitmap.createBitmap(bm, 0, 0, 400, 400);
 
                 if(requestCode == 2){
                     mTop.setImageBitmap(bm);
@@ -236,6 +249,8 @@ public class CreateAccountCard extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 1);
+                Box box = new Box(CreateAccountCard.this);
+                addContentView(box, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
             }
         });
         mLocal.setOnClickListener(new View.OnClickListener() {
@@ -274,6 +289,8 @@ public class CreateAccountCard extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 3);
+                Box box = new Box(CreateAccountCard.this);
+                addContentView(box, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
             }
         });
         mLocal.setOnClickListener(new View.OnClickListener() {
