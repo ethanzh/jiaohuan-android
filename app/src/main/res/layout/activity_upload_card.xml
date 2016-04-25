@@ -81,7 +81,7 @@
             android:layout_height="150dp"
             android:id="@+id/top"
             android:background="@drawable/background"
-            android:src="@drawable/plus"
+            android:src="@drawable/testplus"
             android:layout_gravity="center_horizontal"/>
 
         <Space
@@ -102,7 +102,7 @@
 
         <ImageView
             android:layout_width="300dp"
-            android:src="@drawable/plus"
+            android:src="@drawable/testplus"
             android:background="@drawable/background"
             android:layout_height="150dp"
             android:id="@+id/bottom"
