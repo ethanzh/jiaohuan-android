@@ -40,41 +40,27 @@ public class EditMyProfile extends Activity {
     private String initialEmail;
     private String initialPhone;
     private String initialLocation;
-    private int card_front;
-    private int card_back;
-
     private String finalName;
     private String finalEmail;
     private String finalPhone;
     private String finalLocation;
-
     private EditText mName;
     private EditText mEmail;
     private EditText mPhone;
     private EditText mLocation;
-
-    private Button mFinish;
-    private Button mBack;
-
     private ImageView mTop;
     private ImageView mBottom;
-
     private LinearLayout mLinearLayout;
     private PopupWindow mPopupWindow;
-
     private Button mCamera;
     private Button mLocal;
-
-    private LayoutInflater mLayoutInflater;
-
-    private int initialCard;
-    private int initialFlip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_my_profile);
 
+        // Connect views to IDs
         mLinearLayout = (LinearLayout) findViewById(R.id.main_activity_layout);
 
         mTop = (ImageView) findViewById(R.id.frontofcard);
@@ -85,26 +71,29 @@ public class EditMyProfile extends Activity {
         mPhone = (EditText) findViewById(R.id.phone);
         mLocation = (EditText) findViewById(R.id.location);
 
-        mFinish = (Button) findViewById(R.id.finish);
-        mBack = (Button) findViewById(R.id.back);
+        Button finish = (Button) findViewById(R.id.finish);
+        Button back = (Button) findViewById(R.id.back);
 
-        mLayoutInflater = (LayoutInflater) EditMyProfile.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_select_menu, null);
+        // Initialize PopUp window
+        LayoutInflater layoutInflater = (LayoutInflater) EditMyProfile.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final ViewGroup mContainer = (ViewGroup) layoutInflater.inflate(R.layout.card_select_menu, null);
 
+        // PopUp window buttons
         mCamera = (Button) mContainer.findViewById(R.id.camera);
         mLocal = (Button) mContainer.findViewById(R.id.local);
 
         // Get my data from fake database
         myData = FakeDatabase.getInstance().getMyData();
 
-        // INITIAL VALUES
+        // Initial values, these are used to check for changes
         initialName = myData.getName();
         initialEmail = myData.getEmail();
         initialPhone = myData.getPhoneNum();
         initialLocation = myData.getLocation();
-        initialCard = myData.getBusiness_card();
-        initialFlip = myData.getFlipside();
+        int initialCard = myData.getBusiness_card();
+        int initialFlip = myData.getFlipside();
 
+        // Set EditText's to have current text in them
         mName.setText(initialName);
         mEmail.setText(initialEmail);
         mPhone.setText(initialPhone);
@@ -128,14 +117,14 @@ public class EditMyProfile extends Activity {
             }
         });
 
-        mBack.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        mFinish.setOnClickListener(new View.OnClickListener() {
+        finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
