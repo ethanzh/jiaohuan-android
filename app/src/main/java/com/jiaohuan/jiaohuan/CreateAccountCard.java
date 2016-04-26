@@ -40,36 +40,27 @@ import java.io.IOException;
 
 public class CreateAccountCard extends Activity {
 
-    private Button mFrontButton;
-    private Button mBackButton;
     private ImageView mTop;
     private ImageView mBottom;
     private TextView mBack;
     private TextView mNext;
     int REQUEST_CAMERA = 0;
     int SELECT_FILE = 1;
-    private Button mStart;
     private PopupWindow mPopupWindow;
     private LayoutInflater mLayoutInflater;
     private LinearLayout mLinearLayout;
     private Button mPreview;
-
-    final int FRONT_CARD = 0;
-    final int BACK_CARD = 1;
-
     private Button mCamera;
     private Button mLocal;
-
     private Drawable mStartTop;
     private Drawable mStartBottom;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_card);
 
+        // Connect layouts and IDs
         mLinearLayout = (LinearLayout) findViewById(R.id.start_page);
         mTop = (ImageView) findViewById(R.id.top);
         mBack = (TextView) findViewById(R.id.back);
@@ -77,23 +68,19 @@ public class CreateAccountCard extends Activity {
         mNext = (TextView) findViewById(R.id.next);
         mPreview = (Button) findViewById(R.id.pview);
 
+        // Initialize PopUp window
         mLayoutInflater = (LayoutInflater) CreateAccountCard.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_select_menu, null);
 
+        // Buttons within the PopUp window
         mCamera = (Button) mContainer.findViewById(R.id.camera);
         mLocal = (Button) mContainer.findViewById(R.id.local);
 
+        // These are the values of 'nothing'. They are used to see if 2 pictures are selected
         mStartTop = mTop.getDrawable();
         mStartBottom = mBottom.getDrawable();
 
-        mPreview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(getApplicationContext(), PreviewDemo.class);
-                //startActivity(intent);
-            }
-        });
-
+        // Back button...
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,22 +88,20 @@ public class CreateAccountCard extends Activity {
             }
         });
 
+        // Advance to next menu, checks to see if 2 pictures have been uploaded
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(mTop.getDrawable() == mStartBottom || mBottom.getDrawable() == mStartBottom){
                     Toast.makeText(getApplicationContext(), "You did not upload two pictures", Toast.LENGTH_SHORT).show();
                 } else{
                     Intent intent = new Intent(getApplicationContext(), EnterDetailsActivity.class);
                     startActivityForResult(intent, 2);
                 }
-
-
-
             }
         });
 
+        // Open window for top card
         mTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +109,7 @@ public class CreateAccountCard extends Activity {
             }
         });
 
+        // Open window for bottom card
         mBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,37 +118,13 @@ public class CreateAccountCard extends Activity {
         });
     }
 
-    private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(CreateAccountCard.this);
-        builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Take Photo")) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_CAMERA);
-                    Box box = new Box(CreateAccountCard.this);
-                } else if (items[item].equals("Choose from Library")) {
-                    Intent intent = new Intent(
-                            Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/*");
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Select File"),
-                            SELECT_FILE);
-                } else if (items[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
+    // This will run after a picture is selected
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+
+            // if picture is taken from camera
             if (requestCode == 1 || requestCode == 3) {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -191,11 +153,11 @@ public class CreateAccountCard extends Activity {
                     mBottom.setImageBitmap(thumbnail);
                 }
 
-
-
                 mPopupWindow.dismiss();
+            }
 
-            } else if (requestCode == 2 || requestCode == 4) {
+            // if picture is selected from gallery
+            else if (requestCode == 2 || requestCode == 4) {
                 Uri selectedImageUri = data.getData();
                 String[] projection = { MediaStore.MediaColumns.DATA };
                 CursorLoader cursorLoader = new CursorLoader(this,selectedImageUri, projection, null, null,
@@ -231,6 +193,9 @@ public class CreateAccountCard extends Activity {
             }
         }
     }
+
+    // TODO: Merge openTopWindow and openBottomWindow somehow
+
     public void openTopWindow(ViewGroup v){
         mPopupWindow = new PopupWindow(v, 1000, 400, true);
 
@@ -239,7 +204,7 @@ public class CreateAccountCard extends Activity {
         mCamera.setBackgroundColor(Color.WHITE);
         mLocal.setBackgroundColor(Color.WHITE);
 
-        // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
+        // When anywhere is tapped, the pop up dismisses
         v.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -248,6 +213,7 @@ public class CreateAccountCard extends Activity {
             }
         });
 
+        // Listener for camera button
         mCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -266,6 +232,8 @@ public class CreateAccountCard extends Activity {
 
             }
         });
+
+        // Listener for select button
         mLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

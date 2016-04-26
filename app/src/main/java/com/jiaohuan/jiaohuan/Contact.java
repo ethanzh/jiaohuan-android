@@ -23,18 +23,6 @@ public class Contact {
     private long unix_time;
     private String simple_date;
 
-    // Dummy constructor, just in case there's only a name
-    public Contact(String n) {
-        names = n;
-        company = "Unemployed";
-        phone_nums = "No phone";
-        emails = "No email";
-        locations = "None";
-        pictures = 0;
-        address = "Unknown";
-        additional_info = "Unknown";
-    }
-
     // Main constructor
     public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, Bitmap card, String ti, String w, int col, Bitmap flip, long ux, String sdf) {
         names = n;
@@ -52,17 +40,6 @@ public class Contact {
         flipside = flip;
         unix_time = ux;
         simple_date = sdf;
-    }
-
-    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i) {
-        names = n;
-        company = c;
-        phone_nums = p;
-        emails = e;
-        locations = l;
-        pictures = pics;
-        address = a;
-        additional_info = i;
     }
 
     // Various methods for getting/setting the variables
