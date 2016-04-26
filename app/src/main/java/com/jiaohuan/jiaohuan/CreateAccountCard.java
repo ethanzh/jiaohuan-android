@@ -1,10 +1,13 @@
 package com.jiaohuan.jiaohuan;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.util.Log;
 import android.view.Gravity;
@@ -247,10 +251,19 @@ public class CreateAccountCard extends Activity {
         mCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int permissionCheck = ContextCompat.checkSelfPermission(CreateAccountCard.this,
+                        Manifest.permission.CAMERA);
+
+                Log.wtf("Perms", "" + permissionCheck);
+
+                Boolean thing = hasPermissionInManifest(getApplicationContext(), MediaStore.ACTION_IMAGE_CAPTURE);
+
+                Log.wtf("PERMISSIONS", "" + thing);
+
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 1);
-                Box box = new Box(CreateAccountCard.this);
-                addContentView(box, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+
             }
         });
         mLocal.setOnClickListener(new View.OnClickListener() {
@@ -305,6 +318,24 @@ public class CreateAccountCard extends Activity {
                         4);
             }
         });
+    }
+    public boolean hasPermissionInManifest(Context context, String permissionName) {
+        final String packageName = context.getPackageName();
+        try {
+            final PackageInfo packageInfo = context.getPackageManager()
+                    .getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
+            final String[] declaredPermisisons = packageInfo.requestedPermissions;
+            if (declaredPermisisons != null && declaredPermisisons.length > 0) {
+                for (String p : declaredPermisisons) {
+                    if (p.equals(permissionName)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        }
+        return false;
     }
 }
 

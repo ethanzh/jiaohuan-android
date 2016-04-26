@@ -35,15 +35,9 @@ public class FakeDatabase extends android.app.Application{
     private List<Contact> reverseUnix;
 
     // This is just fake data, it will eventually be replaced with calls to the server
-    private FakeDatabase(Context current)  { // Maybe throw exception here?
-
-        this.context = current;
+    private FakeDatabase()  { // Maybe throw exception here?
 
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
-
-        Bitmap ethan = BitmapFactory.decodeResource(context.getResources(), R.drawable.pp_ethan);
-        Bitmap wook = BitmapFactory.decodeResource(context.getResources(), R.drawable.pp_wookie);
-        Bitmap tiange = BitmapFactory.decodeResource(context.getResources(), R.drawable.pp_tiange);
 
         Bitmap front = BitmapFactory.decodeResource(context.getResources(), R.drawable.card_nyu);
         Bitmap back = BitmapFactory.decodeResource(context.getResources(), R.drawable.card_nyu);

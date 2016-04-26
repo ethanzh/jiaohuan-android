@@ -73,7 +73,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
-        AlphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance(this).getAlphaSorted();
+        AlphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
         UnixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
 
         AlphaReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseAlpha();
