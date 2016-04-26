@@ -5,7 +5,7 @@
               android:id="@+id/start_layout"
               android:paddingBottom="20dp"
               android:layout_height="match_parent"
-              android:background="#F0F04F"
+              android:background="@drawable/blurred_shanghai_startpage"
               android:weightSum="1">
 
     <TextView
@@ -72,7 +72,7 @@
             android:text="Sign In"
             android:textColor="#0e0019"
             android:id="@+id/signin"
-            android:background="@drawable/black_rounded_button"
+            android:background="@drawable/white_rounded_button"
             android:layout_weight="0.26"
             android:layout_marginLeft="29dp"
             android:layout_marginStart="29dp"
@@ -92,7 +92,7 @@
             android:layout_marginRight="37dp"
             android:textColor="#0e0019"
             android:id="@+id/signup"
-            android:background="@drawable/black_rounded_button"
+            android:background="@drawable/white_rounded_button"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.26"
             android:layout_marginEnd="37dp"

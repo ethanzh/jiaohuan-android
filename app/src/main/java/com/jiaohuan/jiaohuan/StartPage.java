@@ -2,8 +2,12 @@ package com.jiaohuan.jiaohuan;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,8 +24,7 @@ public class StartPage extends Activity {
 
         mLinearLayout = (LinearLayout) findViewById(R.id.start_layout);
 
-        //mLinearLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.blurred_shanghai_startpage));
-
+        mLinearLayout.setBackgroundResource(R.drawable.blurred_shanghai_startpage);
         mLinearLayout.setBackgroundColor(Color.parseColor("#0e0019"));
 
         // Start sign in process
