@@ -1,5 +1,9 @@
 package com.jiaohuan.jiaohuan;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.widget.Toast;
@@ -12,7 +16,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class FakeDatabase {
+public class FakeDatabase extends android.app.Application{
+
+    private static Context context;
+
+
     private static FakeDatabase ourInstance = new FakeDatabase();
 
     public static FakeDatabase getInstance() {
@@ -30,6 +38,7 @@ public class FakeDatabase {
     private FakeDatabase()  { // Maybe throw exception here?
 
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
+
 
         // My own data
         myData = new Contact("Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "ethan.houston@yahoo.com", "Beijing, China",

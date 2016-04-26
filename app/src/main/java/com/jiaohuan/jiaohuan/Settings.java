@@ -1,6 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,6 +17,11 @@ public class Settings extends Activity {
     }
 
     public void onLogOut(View view){
-        finish();
+
+        Intent intent = new Intent(getApplicationContext(), StartPage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
+
     }
 }

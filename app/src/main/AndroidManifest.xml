@@ -27,7 +27,7 @@
 
 
         <activity
-            android:name=".StartupPage"
+            android:name="com.jiaohuan.jiaohuan.StartPage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait">
 

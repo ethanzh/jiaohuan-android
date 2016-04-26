@@ -1,5 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
+import android.graphics.Bitmap;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
