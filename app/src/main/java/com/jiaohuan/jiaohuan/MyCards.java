@@ -257,7 +257,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mPopPhone.setText(SelectedRow.getCurrent().getPhoneNum());
                 mTitle.setText(SelectedRow.getCurrent().getTitle());
                 mImageView.setImageResource(SelectedRow.getCurrent().getPic());
-                mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
+                mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
                 mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
 
                 // Gets phone dimensions
@@ -298,10 +298,10 @@ public class MyCards extends android.support.v4.app.Fragment {
                     @Override
                     public void onClick(View v) {
                         if (initial == 0) {
-                            mCard.setImageBitmap(SelectedRow.getCurrent().getFlipside());
+                            mCard.setImageResource(SelectedRow.getCurrent().getFlipside());
                             initial = 1;
                         } else {
-                            mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
+                            mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
                             initial = 0;
                         }
                     }

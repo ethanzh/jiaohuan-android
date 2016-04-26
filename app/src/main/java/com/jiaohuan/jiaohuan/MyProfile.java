@@ -51,7 +51,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mEmail.setText(myData.getEmail());
         mPhone.setText(myData.getPhoneNum());
         mLocation.setText(myData.getLocation());
-        mCard.setImageBitmap(myData.getBusiness_card());
+        mCard.setImageResource(myData.getBusiness_card());
 
         // Gets phone dimensions
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -83,10 +83,10 @@ public class MyProfile extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 if (initial == 0) {
-                    mCard.setImageBitmap(myData.getFlipside());
+                    mCard.setImageResource(myData.getFlipside());
                     initial = 1;
                 } else {
-                    mCard.setImageBitmap(myData.getBusiness_card());
+                    mCard.setImageResource(myData.getBusiness_card());
                     initial = 0;
                 }
             }

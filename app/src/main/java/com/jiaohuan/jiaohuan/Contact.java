@@ -15,16 +15,16 @@ public class Contact {
     private String address;
     private String additional_info;
     private int pictures;
-    private Bitmap business_card;
+    private int business_card;
     private String title;
     private String website;
     private int color;
-    private Bitmap flipside;
+    private int flipside;
     private long unix_time;
     private String simple_date;
 
     // Main constructor
-    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, Bitmap card, String ti, String w, int col, Bitmap flip, long ux, String sdf) {
+    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, int card, String ti, String w, int col, int flip, long ux, String sdf) {
         names = n;
         company = c;
         phone_nums = p;
@@ -67,8 +67,8 @@ public class Contact {
     public int getPic() {return pictures;}
     public void setPic(int pi) {pictures = pi;}
 
-    public Bitmap getBusiness_card() {return business_card;}
-    public void setBusiness_card(Bitmap pi) {business_card = pi;}
+    public int getBusiness_card() {return business_card;}
+    public void setBusiness_card(int pi) {business_card = pi;}
 
     public String getTitle() {return title;}
     public void setTitle(String ti){title = ti;}
@@ -79,8 +79,8 @@ public class Contact {
     public int getColor() {return color;}
     public void setColor(int col){color = col;}
 
-    public Bitmap getFlipside() {return flipside;}
-    public void setFlipside(Bitmap flip){flipside = flip;}
+    public int getFlipside() {return flipside;}
+    public void setFlipside(int flip){flipside = flip;}
 
     public long getUnix_time() {return unix_time;}
 

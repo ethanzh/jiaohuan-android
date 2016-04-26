@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 
-public class StartupPage extends Activity {
+public class StartPage extends Activity {
 
     LinearLayout mLinearLayout;
 
