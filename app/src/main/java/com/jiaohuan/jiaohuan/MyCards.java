@@ -91,8 +91,6 @@ public class MyCards extends android.support.v4.app.Fragment {
         mReverseNameAdapter = new RecycleAdapter(getActivity(), AlphaReversed);
         mReverseDateAdapter = new RecycleAdapter(getActivity(), UnixReversed);
 
-        //mLinearLayoutManager = (LinearLayoutManager) getActivity();
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mNameAdapter);
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
@@ -208,185 +206,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
-
-                // Make card_expand here
-                mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_expand, null);
-
-                // Assign all of the pop up's TextViews
-                assignIDs(mContainer);
-
-                // Get top panel
-                mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
-
-                if(nameSelected){
-                    if(arrowIsUp){
-                        SelectedRow.setCurrent(mReverseNameAdapter.getRow(position));
-                    } else{
-                        SelectedRow.setCurrent(mNameAdapter.getRow(position));
-                    }
-                }
-                else if(dateSelected){
-                    if(arrowIsUp){
-                        SelectedRow.setCurrent(mReverseDateAdapter.getRow(position));
-                    } else{
-                        SelectedRow.setCurrent(mDateAdapter.getRow(position));
-                    }
-                }
-
-                // Get color
-                mColor = SelectedRow.getCurrent().getColor();
-
-                // Set color
-                mTopPanel.setBackgroundColor(mColor);
-
-                // If white background, make top panel text black
-                if (mColor == -1) {
-                    mShowName.setTextColor(Color.BLACK);
-                    mShowCompany.setTextColor(Color.BLACK);
-                    mPopName.setTextColor(Color.BLACK);
-                    mPopCompany.setTextColor(Color.BLACK);
-                    mClose.setTextColor(Color.BLACK);
-                }
-
-                // Gets text from the (fake) database and prints them to the activity
-                mPopName.setText(SelectedRow.getCurrent().getName());
-                mPopCompany.setText(SelectedRow.getCurrent().getCompany());
-                mPopEmail.setText(SelectedRow.getCurrent().getEmail());
-                mPopAddress.setText(SelectedRow.getCurrent().getAddress());
-                mPopInfo.setText(SelectedRow.getCurrent().getInfo());
-                mWebsite.setText(SelectedRow.getCurrent().getWebsite());
-                mPopPhone.setText(SelectedRow.getCurrent().getPhoneNum());
-                mTitle.setText(SelectedRow.getCurrent().getTitle());
-                mImageView.setImageResource(SelectedRow.getCurrent().getPic());
-                mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
-                mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
-
-                // Gets phone dimensions
-                WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-                Display display = wm.getDefaultDisplay();
-                Point size = new Point();
-                display.getSize(size);
-                int width = size.x;
-                int height = size.y;
-
-                Log.d("ScreenResolution", "" + width + "," + height);
-
-                double popUpWidth;
-                double popUpHeight;
-
-                popUpWidth = width * 0.86;
-                popUpHeight = height * 0.85;
-
-                int popWidth = (int) popUpWidth;
-                int popHeight = (int) popUpHeight;
-
-                // Starts the pop up               (930, 1620)
-                mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
-                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
-
-                mRecyclerView.smoothScrollToPosition(position);
-
-                // Makes card size device independent
-                double cardHeight;
-                cardHeight = height * 0.1;
-                int realCardHeight = (int) cardHeight;
-                int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, realCardHeight, getResources().getDisplayMetrics());
-                mCard.getLayoutParams().height = px;
-
-                // Card picture on click listener
-                mCard.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        if (initial == 0) {
-                            mCard.setImageResource(SelectedRow.getCurrent().getFlipside());
-                            initial = 1;
-                        } else {
-                            mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
-                            initial = 0;
-                        }
-                    }
-                });
-
-                mContactButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        checkContactPerms();
-
-                        ContentResolver cr = getContext().getContentResolver();
-                        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
-
-                        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
-                                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, "accountname@gmail.com")
-                                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.cn.jiaohuan.jiaohuan")
-                                .build());
-
-                        // Add name
-                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                                .withValue(ContactsContract.Data.MIMETYPE,
-                                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, SelectedRow.getCurrent().getName())
-                                .build());
-
-                        // Add phone number
-                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                                .withValue(ContactsContract.Data.MIMETYPE,
-                                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, SelectedRow.getCurrent().getPhoneNum())
-                                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
-                                .build());
-
-                        // Add notes
-                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                                .withValue(ContactsContract.Data.MIMETYPE,
-                                        ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, SelectedRow.getCurrent().getInfo())
-                                .build());
-
-                        // Add picture WORK IN PROGRESS
-                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, SelectedRow.getCurrent().getPic())
-                                .build());
-
-                        // Add email
-                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.Email.DATA, SelectedRow.getCurrent().getEmail())
-                                .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
-                                .build());
-
-                        // Add address
-                        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-                                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, SelectedRow.getCurrent().getLocation())
-                                .build());
-                        try {
-                            cr.applyBatch(ContactsContract.AUTHORITY, ops);
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        } catch (OperationApplicationException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-                // Close button click listener
-                mClose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mPopupWindow.dismiss();
-                    }
-                });
+                expandCard(position);
             }
         });
 
@@ -449,6 +269,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         Log.wtf("Count", "Number of contacts: " + numberOfContacts);
         return nameList;
     }
+
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     private void checkContactPerms() {
@@ -458,5 +279,190 @@ public class MyCards extends android.support.v4.app.Fragment {
                     REQUEST_CODE_ASK_PERMISSIONS);
             return;
         }
+
+    }
+
+    public void addContactInfo(){
+        ContentResolver cr = getContext().getContentResolver();
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, "accountname@gmail.com")
+                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.cn.jiaohuan.jiaohuan")
+                .build());
+
+        // Add name
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, SelectedRow.getCurrent().getName())
+                .build());
+
+        // Add phone number
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, SelectedRow.getCurrent().getPhoneNum())
+                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
+                .build());
+
+        // Add notes
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, SelectedRow.getCurrent().getInfo())
+                .build());
+
+        // Add picture WORK IN PROGRESS
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, SelectedRow.getCurrent().getPic())
+                .build());
+
+        // Add email
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Email.DATA, SelectedRow.getCurrent().getEmail())
+                .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+                .build());
+
+        // Add address
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, SelectedRow.getCurrent().getLocation())
+                .build());
+        try {
+            cr.applyBatch(ContactsContract.AUTHORITY, ops);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (OperationApplicationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void expandCard(int position){
+        // Make card_expand here
+        mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_expand, null);
+
+        // Assign all of the pop up's TextViews
+        assignIDs(mContainer);
+
+        // Get top panel
+        mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
+
+        if(nameSelected){
+            if(arrowIsUp){
+                SelectedRow.setCurrent(mReverseNameAdapter.getRow(position));
+            } else{
+                SelectedRow.setCurrent(mNameAdapter.getRow(position));
+            }
+        }
+        else if(dateSelected){
+            if(arrowIsUp){
+                SelectedRow.setCurrent(mReverseDateAdapter.getRow(position));
+            } else{
+                SelectedRow.setCurrent(mDateAdapter.getRow(position));
+            }
+        }
+
+        // Get color
+        mColor = SelectedRow.getCurrent().getColor();
+
+        // Set color
+        mTopPanel.setBackgroundColor(mColor);
+
+        // If white background, make top panel text black
+        if (mColor == -1) {
+            mShowName.setTextColor(Color.BLACK);
+            mShowCompany.setTextColor(Color.BLACK);
+            mPopName.setTextColor(Color.BLACK);
+            mPopCompany.setTextColor(Color.BLACK);
+            mClose.setTextColor(Color.BLACK);
+        }
+
+        // Gets text from the (fake) database and prints them to the activity
+        mPopName.setText(SelectedRow.getCurrent().getName());
+        mPopCompany.setText(SelectedRow.getCurrent().getCompany());
+        mPopEmail.setText(SelectedRow.getCurrent().getEmail());
+        mPopAddress.setText(SelectedRow.getCurrent().getAddress());
+        mPopInfo.setText(SelectedRow.getCurrent().getInfo());
+        mWebsite.setText(SelectedRow.getCurrent().getWebsite());
+        mPopPhone.setText(SelectedRow.getCurrent().getPhoneNum());
+        mTitle.setText(SelectedRow.getCurrent().getTitle());
+        mImageView.setImageResource(SelectedRow.getCurrent().getPic());
+        mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
+        mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
+
+        // Gets phone dimensions
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        Log.d("ScreenResolution", "" + width + "," + height);
+
+        double popUpWidth;
+        double popUpHeight;
+
+        popUpWidth = width * 0.86;
+        popUpHeight = height * 0.85;
+
+        int popWidth = (int) popUpWidth;
+        int popHeight = (int) popUpHeight;
+
+        // Starts the pop up               (930, 1620)
+        mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
+        mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+        mRecyclerView.smoothScrollToPosition(position);
+
+        // Makes card size device independent
+        double cardHeight;
+        cardHeight = height * 0.1;
+        int realCardHeight = (int) cardHeight;
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, realCardHeight, getResources().getDisplayMetrics());
+        mCard.getLayoutParams().height = px;
+
+        // Card picture on click listener
+        mCard.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (initial == 0) {
+                    mCard.setImageResource(SelectedRow.getCurrent().getFlipside());
+                    initial = 1;
+                } else {
+                    mCard.setImageResource(SelectedRow.getCurrent().getBusiness_card());
+                    initial = 0;
+                }
+            }
+        });
+
+        mContactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                checkContactPerms();
+                addContactInfo();
+
+            }
+        });
+
+        // Close button click listener
+        mClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupWindow.dismiss();
+            }
+        });
     }
 }
