@@ -7,6 +7,8 @@ import java.util.Date;
 
 public class Contact {
 
+    // TRYING BITMAP
+
     private String names;
     private String company;
     private String phone_nums;
