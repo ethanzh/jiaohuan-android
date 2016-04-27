@@ -1,15 +1,18 @@
 package com.jiaohuan.jiaohuan;
 
+import android.Manifest;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.OperationApplicationException;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,8 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MyCards extends android.support.v4.app.Fragment {
 
@@ -310,6 +313,9 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mContactButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        checkContactPerms();
+
                         ContentResolver cr = getContext().getContentResolver();
                         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
 
@@ -442,5 +448,15 @@ public class MyCards extends android.support.v4.app.Fragment {
         }
         Log.wtf("Count", "Number of contacts: " + numberOfContacts);
         return nameList;
+    }
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
+    private void checkContactPerms() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_CONTACTS);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] {Manifest.permission.WRITE_CONTACTS},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
     }
 }
