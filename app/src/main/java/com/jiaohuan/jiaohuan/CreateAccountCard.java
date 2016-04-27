@@ -2,9 +2,7 @@ package com.jiaohuan.jiaohuan;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -14,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -268,6 +267,9 @@ public class CreateAccountCard extends Activity {
         mCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                checkCameraPerms();
+
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 3);
                 Box box = new Box(CreateAccountCard.this);
@@ -304,6 +306,19 @@ public class CreateAccountCard extends Activity {
 
         }
         return false;
+    }
+
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
+    private void checkCameraPerms() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(CreateAccountCard.this, Manifest.permission.CAMERA);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[] {Manifest.permission.CAMERA},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+            }
+            return;
+        }
     }
 }
 
