@@ -23,6 +23,7 @@
         android:windowSoftInputMode="adjustPan"
         android:supportsRtl="true"
         android:label="Jiaohuan"
+        android:name=".MyApplication"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
 
@@ -85,5 +86,6 @@
         </activity>
 
     </application>
+
 
 </manifest>

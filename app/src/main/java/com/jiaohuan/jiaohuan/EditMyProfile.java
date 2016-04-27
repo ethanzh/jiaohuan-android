@@ -40,8 +40,6 @@ public class EditMyProfile extends Activity {
     private String initialEmail;
     private String initialPhone;
     private String initialLocation;
-    private int card_front;
-    private int card_back;
 
     private String finalName;
     private String finalEmail;
@@ -67,8 +65,8 @@ public class EditMyProfile extends Activity {
 
     private LayoutInflater mLayoutInflater;
 
-    private int initialCard;
-    private int initialFlip;
+    private Bitmap initialCard;
+    private Bitmap initialFlip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,8 +107,8 @@ public class EditMyProfile extends Activity {
         mEmail.setText(initialEmail);
         mPhone.setText(initialPhone);
         mLocation.setText(initialLocation);
-        mTop.setImageResource(initialCard);
-        mBottom.setImageResource(initialFlip);
+        mTop.setImageBitmap(initialCard);
+        mBottom.setImageBitmap(initialFlip);
 
         String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/myprofile/";
 
