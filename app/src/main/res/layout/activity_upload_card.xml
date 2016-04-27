@@ -106,7 +106,6 @@
             android:background="@drawable/background"
             android:layout_height="150dp"
             android:id="@+id/bottom"
-            android:scaleType="fitStart"
             android:layout_gravity="center_horizontal"/>
 
         <Button
