@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -43,8 +42,6 @@ public class CreateAccountCard extends Activity {
     private ImageView mBottom;
     private TextView mBack;
     private TextView mNext;
-    int REQUEST_CAMERA = 0;
-    int SELECT_FILE = 1;
     private PopupWindow mPopupWindow;
     private LayoutInflater mLayoutInflater;
     private LinearLayout mLinearLayout;
@@ -53,6 +50,7 @@ public class CreateAccountCard extends Activity {
     private Button mLocal;
     private Drawable mStartTop;
     private Drawable mStartBottom;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,17 +215,7 @@ public class CreateAccountCard extends Activity {
             @Override
             public void onClick(View v) {
 
-                int permissionCheck = ContextCompat.checkSelfPermission(CreateAccountCard.this,
-                        Manifest.permission.CAMERA);
-
-                Log.wtf("Perms", "" + permissionCheck);
-
-                Boolean thing = hasPermissionInManifest(getApplicationContext(), MediaStore.ACTION_IMAGE_CAPTURE);
-
-                Log.wtf("PERMISSIONS", "" + thing);
-
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 1);
+            checkCameraPerms(1);
 
             }
         });
@@ -236,13 +224,8 @@ public class CreateAccountCard extends Activity {
         mLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("image/*");
-                startActivityForResult(
-                        Intent.createChooser(intent, "Select File"),
-                        2);
+
+                selectPicture(2);
             }
         });
     }
@@ -267,58 +250,41 @@ public class CreateAccountCard extends Activity {
         mCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                checkCameraPerms();
-
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 3);
-                Box box = new Box(CreateAccountCard.this);
-                addContentView(box, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+                checkCameraPerms(3);
             }
         });
+
         mLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("image/*");
-                startActivityForResult(
-                        Intent.createChooser(intent, "Select File"),
-                        4);
+                selectPicture(4);
             }
         });
     }
-    public boolean hasPermissionInManifest(Context context, String permissionName) {
-        final String packageName = context.getPackageName();
-        try {
-            final PackageInfo packageInfo = context.getPackageManager()
-                    .getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
-            final String[] declaredPermisisons = packageInfo.requestedPermissions;
-            if (declaredPermisisons != null && declaredPermisisons.length > 0) {
-                for (String p : declaredPermisisons) {
-                    if (p.equals(permissionName)) {
-                        return true;
-                    }
-                }
-            }
-        } catch (PackageManager.NameNotFoundException e) {
 
-        }
-        return false;
-    }
 
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-
-    private void checkCameraPerms() {
+    // Check that app has permission to use camera
+    private void checkCameraPerms(int requestCode) {
         int hasWriteContactsPermission = ContextCompat.checkSelfPermission(CreateAccountCard.this, Manifest.permission.CAMERA);
         if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[] {Manifest.permission.CAMERA},
                         REQUEST_CODE_ASK_PERMISSIONS);
             }
-            return;
+
         }
+        takePicture(requestCode);
+    }
+
+    private void takePicture(int requestCode){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, requestCode);
+    }
+
+    private void selectPicture(int requestCode){
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Select File"), requestCode);
     }
 }
 
