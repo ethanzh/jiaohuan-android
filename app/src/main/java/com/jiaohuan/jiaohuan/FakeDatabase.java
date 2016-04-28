@@ -1,5 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
+import android.content.ContentResolver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -7,6 +8,9 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -175,7 +179,7 @@ public class FakeDatabase {
             }
 
             try {
-                FileOutputStream fos = new FileOutputStream(conName + ".jpg", true);
+                FileOutputStream fos = new FileOutputStream(conName + File.separator + list.get(i).getName() +".jpg", true);
                 currentBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
 
                 fos.flush();
@@ -186,6 +190,13 @@ public class FakeDatabase {
         }
     }
 
+    public static void copyStream(InputStream input, OutputStream output) throws IOException {
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = input.read(buffer)) != -1) {
+            output.write(buffer, 0, bytesRead);
+        }
+    }
     public void convertFromUnix(List<Contact> list){
         for(int i = 0; i < list.size(); i++){
             long unixSeconds = list.get(i).getUnix_time();
@@ -248,5 +259,7 @@ public class FakeDatabase {
 
     // Return my data
     public Contact getMyData() {return myData;}
+
+
 }
 
