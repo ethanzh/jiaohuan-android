@@ -40,7 +40,6 @@ public class MyCards extends android.support.v4.app.Fragment {
     private RecycleAdapter mReverseNameAdapter;
     private RecycleAdapter mReverseDateAdapter;
     private PopupWindow mPopupWindow;
-    private LayoutInflater mLayoutInflater;
     private LinearLayout mLinearLayout;
     private TextView mPopName;
     private TextView mPopCompany;
@@ -53,21 +52,14 @@ public class MyCards extends android.support.v4.app.Fragment {
     private TextView mWebsite;
     private ImageView mImageView;
     private ImageView mCard;
-    private int mColor;
-    private RelativeLayout mTopPanel;
     int initial = 0;
     private TextView mShowName;
     private TextView mShowCompany;
     private Button mContactButton;
-    private Button mGetContacts;
     private TextView mKnownSince;
     private ImageView mArrow;
     private TextView mDate;
     private TextView mName;
-    private ArrayList<Contact> AlphaSorted;
-    private ArrayList<Contact> UnixSorted;
-    private ArrayList<Contact> AlphaReversed;
-    private ArrayList<Contact> UnixReversed;
     private boolean arrowIsUp;
     private boolean nameSelected;
     private boolean dateSelected;
@@ -76,20 +68,20 @@ public class MyCards extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
-        AlphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
-        UnixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
+        ArrayList<Contact> alphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
+        ArrayList<Contact> unixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
 
-        AlphaReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseAlpha();
-        UnixReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseUnix();
+        ArrayList<Contact> alphaReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseAlpha();
+        ArrayList<Contact> unixReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseUnix();
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
 
-        mNameAdapter = new RecycleAdapter(getActivity(), AlphaSorted);
-        mDateAdapter = new RecycleAdapter(getActivity(), UnixSorted);
+        mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
+        mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
 
-        mReverseNameAdapter = new RecycleAdapter(getActivity(), AlphaReversed);
-        mReverseDateAdapter = new RecycleAdapter(getActivity(), UnixReversed);
+        mReverseNameAdapter = new RecycleAdapter(getActivity(), alphaReversed);
+        mReverseDateAdapter = new RecycleAdapter(getActivity(), unixReversed);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mNameAdapter);
@@ -111,9 +103,9 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         mName.setTextColor(selectedColorValue);
 
-        mGetContacts = (Button) view.findViewById(R.id.getcontacts);
+        Button getContacts = (Button) view.findViewById(R.id.getcontacts);
 
-        mGetContacts.setOnClickListener(new View.OnClickListener() {
+        getContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.wtf("Contact", "" + getContactInfo());
@@ -125,7 +117,7 @@ public class MyCards extends android.support.v4.app.Fragment {
             public void onClick(View v) {
 
                 if (nameSelected){
-                    if(arrowIsUp == false){
+                    if(!arrowIsUp){
                         mRecyclerView.setAdapter(mReverseNameAdapter);
                         mArrow.setImageResource(R.drawable.up);
                         arrowIsUp = true;
@@ -137,7 +129,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                     }
                 }
                 else if(dateSelected){
-                    if(arrowIsUp == false){
+                    if(!arrowIsUp){
                         mRecyclerView.setAdapter(mReverseDateAdapter);
                         mArrow.setImageResource(R.drawable.up);
                         arrowIsUp = true;
@@ -157,12 +149,12 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
-                if(nameSelected && arrowIsUp == false){
+                if(nameSelected && !arrowIsUp){
                     mRecyclerView.setAdapter(mReverseNameAdapter);
                     mArrow.setImageResource(R.drawable.up);
                     arrowIsUp = true;
                 }
-                else if(arrowIsUp == true || dateSelected == true){
+                else if(arrowIsUp || dateSelected){
                     mRecyclerView.setAdapter(mNameAdapter);
                     mArrow.setImageResource(R.drawable.down);
                     arrowIsUp = false;
@@ -182,12 +174,12 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
-                if(dateSelected && arrowIsUp == false){
+                if(dateSelected && !arrowIsUp){
                     mRecyclerView.setAdapter(mReverseDateAdapter);
                     mArrow.setImageResource(R.drawable.up);
                     arrowIsUp = true;
                 }
-                else if(arrowIsUp == true || nameSelected == true){
+                else if(arrowIsUp || nameSelected){
                     mRecyclerView.setAdapter(mDateAdapter);
                     mArrow.setImageResource(R.drawable.down);
                     arrowIsUp = false;
@@ -348,14 +340,14 @@ public class MyCards extends android.support.v4.app.Fragment {
 
     public void expandCard(int position){
         // Make card_expand here
-        mLayoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_expand, null);
+        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final ViewGroup mContainer = (ViewGroup) layoutInflater.inflate(R.layout.card_expand, null);
 
         // Assign all of the pop up's TextViews
         assignIDs(mContainer);
 
         // Get top panel
-        mTopPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
+        RelativeLayout topPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
         if(nameSelected){
             if(arrowIsUp){
@@ -373,13 +365,13 @@ public class MyCards extends android.support.v4.app.Fragment {
         }
 
         // Get color
-        mColor = SelectedRow.getCurrent().getColor();
+        int color = SelectedRow.getCurrent().getColor();
 
         // Set color
-        mTopPanel.setBackgroundColor(mColor);
+        topPanel.setBackgroundColor(color);
 
         // If white background, make top panel text black
-        if (mColor == -1) {
+        if (color == -1) {
             mShowName.setTextColor(Color.BLACK);
             mShowCompany.setTextColor(Color.BLACK);
             mPopName.setTextColor(Color.BLACK);
