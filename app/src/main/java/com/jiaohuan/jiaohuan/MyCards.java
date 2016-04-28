@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -116,6 +117,9 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getActivity(), "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected,
+                        Toast.LENGTH_LONG).show();
+
                 if (nameSelected){
                     if(!arrowIsUp){
                         mRecyclerView.setAdapter(mReverseNameAdapter);
@@ -149,6 +153,9 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getActivity(), "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected,
+                        Toast.LENGTH_LONG).show();
+
                 if(nameSelected && !arrowIsUp){
                     mRecyclerView.setAdapter(mReverseNameAdapter);
                     mArrow.setImageResource(R.drawable.up);
@@ -173,6 +180,9 @@ public class MyCards extends android.support.v4.app.Fragment {
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getActivity(), "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected,
+                        Toast.LENGTH_LONG).show();
 
                 if(dateSelected && !arrowIsUp){
                     mRecyclerView.setAdapter(mReverseDateAdapter);
