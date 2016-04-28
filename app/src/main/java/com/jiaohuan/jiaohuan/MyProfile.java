@@ -44,7 +44,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mEdit = (TextView) view.findViewById(R.id.edit);
 
         // Get my data from fake database
-        myData = (Contact) FakeDatabase.getInstance().getMyData();
+        myData = FakeDatabase.getInstance().getMyData();
 
         // Set dummy data, eventually to be replaced with data from server
         mImageView.setImageResource(myData.getPic());

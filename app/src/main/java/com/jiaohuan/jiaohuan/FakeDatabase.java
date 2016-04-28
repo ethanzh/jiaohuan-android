@@ -180,7 +180,7 @@ public class FakeDatabase {
 
             try {
                 FileOutputStream fos = new FileOutputStream(conName + File.separator + list.get(i).getName() +".jpg", true);
-                currentBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                currentBitmap.compress(Bitmap.CompressFormat.JPEG, 25, fos);
 
                 fos.flush();
                 fos.close();
