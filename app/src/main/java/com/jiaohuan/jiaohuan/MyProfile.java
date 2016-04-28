@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.BitmapCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -52,6 +53,10 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mPhone.setText(myData.getPhoneNum());
         mLocation.setText(myData.getLocation());
         mCard.setImageBitmap(myData.getBusiness_card());
+
+        int bitmapByteCount= BitmapCompat.getAllocationByteCount(myData.getBusiness_card());
+
+        Log.wtf("Bitmap", "" + bitmapByteCount);
 
         // Gets phone dimensions
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);

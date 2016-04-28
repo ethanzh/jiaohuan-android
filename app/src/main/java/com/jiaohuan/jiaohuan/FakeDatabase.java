@@ -3,8 +3,10 @@ package com.jiaohuan.jiaohuan;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -158,9 +160,13 @@ public class FakeDatabase {
         for(int i = 0; i < list.size(); i++){
 
             String nameOfFolder = list.get(i).getName();
+            Bitmap currentBitmap = list.get(i).getBusiness_card();
 
-            String conName = Environment.getExternalStorageDirectory() + "/Jiaohuan/connectedaccounts/" + nameOfFolder;
+            String conName = Environment.getExternalStorageDirectory() + File.separator + "Jiaohuan" + File.separator +
+                    "Connected Accounts" + File.separator + nameOfFolder;
+
             File conDir = new File(conName);
+
             if (!conDir.mkdirs()) {
                 if (conDir.exists()) {
                 } else {
@@ -168,6 +174,15 @@ public class FakeDatabase {
                 }
             }
 
+            try {
+                FileOutputStream fos = new FileOutputStream(conName + ".jpg", true);
+                currentBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+                fos.flush();
+                fos.close();
+            } catch (Exception e) {
+                Log.e("MyLog", e.toString());
+            }
         }
     }
 

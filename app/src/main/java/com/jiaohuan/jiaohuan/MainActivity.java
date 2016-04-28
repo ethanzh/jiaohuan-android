@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends FragmentActivity {
@@ -48,11 +49,7 @@ public class MainActivity extends FragmentActivity {
     private LayoutInflater mLayoutInflater;
     private PopupWindow mPopupWindow;
     private LinearLayout mLinearLayout;
-    private LocationListener mLocationListener;
-    private LocationManager mLocationManager;
-    private TextView mGPS;
     private TextView mTime;
-    private Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +84,7 @@ public class MainActivity extends FragmentActivity {
                 mPopupWindow = new PopupWindow(mContainer, 1000, 1300, true);
 
                 // Connect button and TextView
-                mGPS = (TextView) mPopupWindow.getContentView().findViewById(R.id.gps);
                 mTime = (TextView) mPopupWindow.getContentView().findViewById(R.id.time);
-                mButton = (Button) mPopupWindow.getContentView().findViewById(R.id.gpscords);
 
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
@@ -116,28 +111,6 @@ public class MainActivity extends FragmentActivity {
                 mShaker.pause();
             }
         });
-
-        // Make directories/check if they exist
-
-        String myDirName = Environment.getExternalStorageDirectory() + "/Jiaohuan/myprofile/";
-        File mySDDir = new File(myDirName);
-        if (!mySDDir.mkdirs()) {
-            if (mySDDir.exists()) {
-            } else {
-                Toast.makeText(MainActivity.this, "Folder error", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-
-        String conName = Environment.getExternalStorageDirectory() + "/Jiaohuan/connectedaccounts/";
-        File conDir = new File(conName);
-        if (!conDir.mkdirs()) {
-            if (conDir.exists()) {
-            } else {
-                Toast.makeText(MainActivity.this, "Folder error", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
 
         // Code the start the view pager
         mViewPager = (ViewPager) findViewById(R.id.pager);
