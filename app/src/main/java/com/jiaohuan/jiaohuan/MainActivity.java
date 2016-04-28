@@ -111,6 +111,7 @@ public class MainActivity extends FragmentActivity {
                 mShaker.pause();
             }
         });
+        mShaker.pause();
 
         // Code the start the view pager
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -129,7 +130,7 @@ public class MainActivity extends FragmentActivity {
             public void onPageSelected(int position) {
                 if (position == 1) {
                     mSettings.setVisibility(View.INVISIBLE);
-                    mShaker.resume();
+                    //mShaker.resume();
                     changeToMain();
                 } else if (position == 2) {
                     mSettings.setVisibility(View.VISIBLE);
@@ -166,7 +167,7 @@ public class MainActivity extends FragmentActivity {
 
     public void jumpToMain(View view) {
         mSettings.setVisibility(View.INVISIBLE);
-        mShaker.resume();
+        //mShaker.resume();
         mViewPager.setCurrentItem(1);
     }
     public void jumpToProfile(View view) {
