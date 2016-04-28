@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyCards extends android.support.v4.app.Fragment {
 
@@ -69,11 +70,15 @@ public class MyCards extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
-        ArrayList<Contact> alphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
-        ArrayList<Contact> unixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
+        final ArrayList<List<Contact>> adapters = createLists();
 
-        ArrayList<Contact> alphaReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseAlpha();
-        ArrayList<Contact> unixReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseUnix();
+        List<Contact> alphaSorted = adapters.get(0);
+        List<Contact> unixSorted = adapters.get(1);
+        List<Contact> alphaReversed = adapters.get(2);
+        List<Contact> unixReversed = adapters.get(3);
+
+        Log.wtf("ARRAYLIST", "Alpha Sorted: " + alphaSorted + "\nUnix Sorted: " + unixSorted +
+                "\nAlpha Reversed" + alphaReversed + "\nUnix Reversed: " + unixReversed);
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
@@ -117,9 +122,6 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getActivity(), "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected,
-                        Toast.LENGTH_LONG).show();
-
                 if (nameSelected){
                     if(!arrowIsUp){
                         mRecyclerView.setAdapter(mReverseNameAdapter);
@@ -145,6 +147,8 @@ public class MyCards extends android.support.v4.app.Fragment {
                     }
                 }
 
+                showValues(adapters);
+
                 mRecyclerView.smoothScrollToPosition(0);
             }
         });
@@ -152,9 +156,6 @@ public class MyCards extends android.support.v4.app.Fragment {
         mName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(getActivity(), "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected,
-                        Toast.LENGTH_LONG).show();
 
                 if(nameSelected && !arrowIsUp){
                     mRecyclerView.setAdapter(mReverseNameAdapter);
@@ -173,6 +174,8 @@ public class MyCards extends android.support.v4.app.Fragment {
                 nameSelected = true;
                 dateSelected = false;
 
+                showValues(adapters);
+
                 mRecyclerView.smoothScrollToPosition(0);
             }
         });
@@ -180,9 +183,6 @@ public class MyCards extends android.support.v4.app.Fragment {
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(getActivity(), "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected,
-                        Toast.LENGTH_LONG).show();
 
                 if(dateSelected && !arrowIsUp){
                     mRecyclerView.setAdapter(mReverseDateAdapter);
@@ -200,6 +200,9 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                 nameSelected = false;
                 dateSelected = true;
+
+                showValues(adapters);
+
                 mRecyclerView.smoothScrollToPosition(0);
             }
         });
@@ -466,5 +469,40 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mPopupWindow.dismiss();
             }
         });
+    }
+
+    public void showValues(ArrayList<List<Contact>> list){
+
+        Log.wtf("Adapter", "");
+
+        //Toast.makeText(getActivity(), "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected,
+        //        Toast.LENGTH_LONG).show();
+
+        Toast.makeText(getActivity(), "Alpha" + list.get(0).get(0),
+                Toast.LENGTH_LONG).show();
+
+        Log.wtf("BOOLEANS", "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected);
+    }
+
+    public ArrayList<List<Contact>> createLists(){
+
+        ArrayList<List<Contact>> list = new ArrayList<>();
+
+        list.add(FakeDatabase.getInstance().getAlphaSorted());
+        list.add(FakeDatabase.getInstance().getDateSorted());
+        list.add(FakeDatabase.getInstance().getReverseAlpha());
+        list.add(FakeDatabase.getInstance().getReverseUnix());
+
+        return list;
+
+        /*ArrayList<Contact> alphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
+        ArrayList<Contact> unixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
+
+        ArrayList<Contact> alphaReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseAlpha();
+        ArrayList<Contact> unixReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseUnix();*/
+    }
+    public List<Contact> getCurrentList(ArrayList<List<Contact>> wholeList, int list){
+
+        return wholeList.get(list);
     }
 }

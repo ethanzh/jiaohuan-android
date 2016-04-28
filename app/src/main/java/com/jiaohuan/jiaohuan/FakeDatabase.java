@@ -1,12 +1,8 @@
 package com.jiaohuan.jiaohuan;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Environment;
-import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -26,7 +22,7 @@ public class FakeDatabase {
 
     private List<Contact> unsortedData;
     private Contact myData;
-    private  List<Contact> fullyAlphaData;
+    private List<Contact> fullyAlphaData;
     private List<Contact> fullyUnixData;
     private List<Contact> reverseAlpha;
     private List<Contact> reverseUnix;
