@@ -27,7 +27,7 @@ public class FakeDatabase {
     }
 
     private List<Contact> unsortedData;
-    private Contact myData;
+    private static Contact myData;
     private List<Contact> fullyAlphaData;
     private List<Contact> fullyUnixData;
     private List<Contact> reverseAlpha;
@@ -157,7 +157,43 @@ public class FakeDatabase {
         reverseUnix = SortByUnix(fullyAlphaData);
 
         addToDir(fullyAlphaData);
+
+        addOwnContact(myData);
     }
+
+    public void addOwnContact(Contact me){
+
+        String nameOfFolder = Integer.toString(me.getID());
+
+        Bitmap currentBitmap = me.getBusiness_card();
+
+        String conName = Environment.getExternalStorageDirectory() + File.separator + "Jiaohuan" + File.separator +
+                "My Account" + File.separator + nameOfFolder;
+
+        File conDir = new File(conName);
+
+        if (!conDir.mkdirs()) {
+            if (conDir.exists()) {
+            } else {
+                return;
+            }
+        }
+
+        if(!imageExists(me.getID())){
+
+            try {
+                FileOutputStream fos = new FileOutputStream(conName + File.separator + me.getID() +".jpg", true);
+                currentBitmap.compress(Bitmap.CompressFormat.JPEG, 25, fos);
+
+                fos.flush();
+                fos.close();
+            } catch (Exception e) {
+                Log.e("MyLog", e.toString());
+            }
+        }
+
+    }
+
 
     public void addToDir(List<Contact> list){
 
@@ -273,7 +309,7 @@ public class FakeDatabase {
     }
 
     // Return my data
-    public Contact getMyData() {return myData;}
+    public static Contact getMyData() {return myData;}
 
 
 }

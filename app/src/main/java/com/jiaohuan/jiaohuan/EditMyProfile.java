@@ -10,16 +10,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,7 +27,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -123,7 +119,7 @@ public class EditMyProfile extends Activity {
         mTop.setImageBitmap(initialCard);
         mBottom.setImageBitmap(initialFlip);
 
-        String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/myprofile/";
+        String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/My Profile/";
 
         mTop.setOnClickListener(new View.OnClickListener() {
             @Override
