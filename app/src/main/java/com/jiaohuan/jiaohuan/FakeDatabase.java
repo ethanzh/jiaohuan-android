@@ -204,10 +204,10 @@ public class FakeDatabase {
         File file = new File(conName);
 
         if(file.exists()){
-            Log.e("FILE", "Does exist");
+            //Log.e("FILE", "Does exist");
             return true;
         } else{
-            Log.e("FILE", "Doesnt exist");
+            //Log.e("FILE", "Doesnt exist");
             return false;
         }
     }
