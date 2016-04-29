@@ -179,15 +179,36 @@ public class FakeDatabase {
                 }
             }
 
-            try {
-                FileOutputStream fos = new FileOutputStream(conName + File.separator + list.get(i).getID() +".jpg", true);
-                currentBitmap.compress(Bitmap.CompressFormat.JPEG, 25, fos);
+            if(!imageExists(list.get(i).getID())){
 
-                fos.flush();
-                fos.close();
-            } catch (Exception e) {
-                Log.e("MyLog", e.toString());
+                try {
+                    FileOutputStream fos = new FileOutputStream(conName + File.separator + list.get(i).getID() +".jpg", true);
+                    currentBitmap.compress(Bitmap.CompressFormat.JPEG, 25, fos);
+
+                    fos.flush();
+                    fos.close();
+                } catch (Exception e) {
+                    Log.e("MyLog", e.toString());
+                }
             }
+        }
+    }
+
+    public Boolean imageExists(int id){
+
+        String nameOfFolder = Integer.toString(id);
+
+        String conName = Environment.getExternalStorageDirectory() + File.separator + "Jiaohuan" + File.separator +
+                "Connected Accounts" + File.separator + nameOfFolder + File.separator + id +".jpg";
+
+        File file = new File(conName);
+
+        if(file.exists()){
+            Log.e("FILE", "Does exist");
+            return true;
+        } else{
+            Log.e("FILE", "Doesnt exist");
+            return false;
         }
     }
 
