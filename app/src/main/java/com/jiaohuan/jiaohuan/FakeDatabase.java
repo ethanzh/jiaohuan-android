@@ -43,82 +43,82 @@ public class FakeDatabase {
         Bitmap flip = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.card_flip);
         
         // My own data
-        myData = new Contact("Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "ethan.houston@yahoo.com", "Beijing, China",
+        myData = new Contact(15435876, "Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "ethan.houston@yahoo.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "", nyu, "CTO",
                 "jiaohuan.com.cn", -12303292 , flip, 1366038215, null);
 
         // Create a new ArrayList, then add each row to it individually
         unsortedData = new ArrayList<>();
 
-        Contact row1 = new Contact("Sangwook Park", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+        Contact row1 = new Contact(65973147, "Sangwook Park", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
                 R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
                 "www.baidu.com", -12303292, flip, 1366211015, null);
 
-        Contact row2 = new Contact("Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+        Contact row2 = new Contact(14379862,"Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 1260732717, null);
 
-        Contact row3 = new Contact("Tian Ge Liu", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row3 = new Contact(75135972, "Tian Ge Liu", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 1260342717, null);
 
-        Contact row4 = new Contact("Xia Nong", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+        Contact row4 = new Contact(64793125, "Xia Nong", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
                 R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 1260346717, null);
 
-        Contact row5 = new Contact("Larry David", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+        Contact row5 = new Contact(75431597, "Larry David", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 1220346717, null);
 
-        Contact row6 = new Contact("Donald Duck", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row6 = new Contact(32136985, "Donald Duck", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 1120346717, null);
 
-        Contact row7 = new Contact("Joseph Kwok", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+        Contact row7 = new Contact(98653265, "Joseph Kwok", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
                 R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
                 "www.baidu.com", -12303292, flip, 1120526717, null);
 
-        Contact row8 = new Contact("Weston Liu", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+        Contact row8 = new Contact(44556213, "Weston Liu", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 1120546727, null);
 
-        Contact row9 = new Contact("Gilbert Choy", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row9 = new Contact(78543264, "Gilbert Choy", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 1120543727, null);
 
-        Contact row10 = new Contact("Yong Ik", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+        Contact row10 = new Contact(96325653, "Yong Ik", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
                 R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 1122123727, null);
 
-        Contact row11 = new Contact("Wang Peng", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+        Contact row11 = new Contact(74859645, "Wang Peng", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 1122123437, null);
 
-        Contact row12 = new Contact("Guo Ao Choi", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row12 = new Contact(22532658, "Guo Ao Choi", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 1121723437, null);
 
-        Contact row13 = new Contact("Tae Hyung Kim", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+        Contact row13 = new Contact(96485969, "Tae Hyung Kim", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
                 R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 1472723437, null);
 
-        Contact row14 = new Contact("Austin Kim", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+        Contact row14 = new Contact(14741214, "Austin Kim", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 1172723137, null);
 
-        Contact row15 = new Contact("Mohammed Lee", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row15 = new Contact(78976542, "Mohammed Lee", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 157274337, null);
 
-        Contact row16 = new Contact("Dominus", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+        Contact row16 = new Contact(13696454, "Dominus", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
                 R.drawable.pp_wookie, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 157234337, null);
 
-        Contact row17 = new Contact("Osuofia", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+        Contact row17 = new Contact(12967489, "Osuofia", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 R.drawable.pp_ethan, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 137234335, null);
 
-        Contact row18 = new Contact("Dave Major", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row18 = new Contact(46879321, "Dave Major", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 R.drawable.pp_tiange, "Capital Paradise", "Is a watch collector", nyu, "CEO",
                 "www.baidu.com", -12303292, flip, 198534335, null);
 
@@ -163,7 +163,8 @@ public class FakeDatabase {
 
         for(int i = 0; i < list.size(); i++){
 
-            String nameOfFolder = list.get(i).getName();
+            String nameOfFolder = Integer.toString(list.get(i).getID());
+
             Bitmap currentBitmap = list.get(i).getBusiness_card();
 
             String conName = Environment.getExternalStorageDirectory() + File.separator + "Jiaohuan" + File.separator +
@@ -179,7 +180,7 @@ public class FakeDatabase {
             }
 
             try {
-                FileOutputStream fos = new FileOutputStream(conName + File.separator + list.get(i).getName() +".jpg", true);
+                FileOutputStream fos = new FileOutputStream(conName + File.separator + list.get(i).getID() +".jpg", true);
                 currentBitmap.compress(Bitmap.CompressFormat.JPEG, 25, fos);
 
                 fos.flush();
@@ -190,13 +191,6 @@ public class FakeDatabase {
         }
     }
 
-    public static void copyStream(InputStream input, OutputStream output) throws IOException {
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = input.read(buffer)) != -1) {
-            output.write(buffer, 0, bytesRead);
-        }
-    }
     public void convertFromUnix(List<Contact> list){
         for(int i = 0; i < list.size(); i++){
             long unixSeconds = list.get(i).getUnix_time();

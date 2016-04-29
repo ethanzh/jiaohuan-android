@@ -24,9 +24,12 @@ public class Contact {
     private Bitmap flipside;
     private long unix_time;
     private String simple_date;
+    private int IDnumber;
 
     // Main constructor
-    public Contact(String n, String c, String p, String e, String l, int pics, String a, String i, Bitmap card, String ti, String w, int col, Bitmap flip, long ux, String sdf) {
+    public Contact(int id, String n, String c, String p, String e, String l, int pics, String a, String i, Bitmap card, String ti, String w, int col, Bitmap flip, long ux, String sdf) {
+
+        IDnumber = id;
         names = n;
         company = c;
         phone_nums = p;
@@ -45,6 +48,9 @@ public class Contact {
     }
 
     // Various methods for getting/setting the variables
+    public int getID() {return IDnumber;}
+    public void setID(int id){IDnumber = id;}
+
     public String getName() {return names;}
     public void setName(String n) { names = n; }
 

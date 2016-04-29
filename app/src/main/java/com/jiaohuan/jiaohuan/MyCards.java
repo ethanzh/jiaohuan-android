@@ -80,8 +80,8 @@ public class MyCards extends android.support.v4.app.Fragment {
         List<Contact> alphaReversed = adapters.get(2);
         List<Contact> unixReversed = adapters.get(3);
 
-        Log.wtf("ARRAYLIST", "Alpha Sorted: " + alphaSorted + "\nUnix Sorted: " + unixSorted +
-                "\nAlpha Reversed" + alphaReversed + "\nUnix Reversed: " + unixReversed);
+        //Log.wtf("ARRAYLIST", "Alpha Sorted: " + alphaSorted + "\nUnix Sorted: " + unixSorted +
+        //        "\nAlpha Reversed" + alphaReversed + "\nUnix Reversed: " + unixReversed);
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
@@ -476,15 +476,15 @@ public class MyCards extends android.support.v4.app.Fragment {
 
     public void showValues(ArrayList<List<Contact>> list){
 
-        Log.wtf("Adapter", "");
+        //Log.wtf("Adapter", "");
 
         //Toast.makeText(getActivity(), "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected,
         //        Toast.LENGTH_LONG).show();
 
-        Toast.makeText(getActivity(), "Alpha" + list.get(0).get(0),
-                Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), "Alpha" + list.get(0).get(0),
+        //        Toast.LENGTH_LONG).show();
 
-        Log.wtf("BOOLEANS", "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected);
+        //Log.wtf("BOOLEANS", "Arrow:" + arrowIsUp + "\nName Selected: " + nameSelected + "\nDate Selected: " + dateSelected);
     }
 
     public ArrayList<List<Contact>> createLists(){

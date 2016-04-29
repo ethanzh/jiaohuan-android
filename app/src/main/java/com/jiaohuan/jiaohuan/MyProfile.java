@@ -56,7 +56,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
 
         int bitmapByteCount= BitmapCompat.getAllocationByteCount(myData.getBusiness_card());
 
-        Log.wtf("Bitmap", "" + bitmapByteCount);
+        //Log.wtf("Bitmap", "" + bitmapByteCount);
 
         // Gets phone dimensions
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
