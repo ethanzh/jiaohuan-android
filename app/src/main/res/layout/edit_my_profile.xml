@@ -4,56 +4,115 @@
     android:orientation="vertical"
     android:id="@+id/main_activity_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
 
-    <EditText
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:hint="Name"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09"/>
 
     <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:cursorVisible="false"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:background="@drawable/edit_rounded"
+        android:hint="Name"
+        android:singleLine="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.14"/>
+
+    <Space
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07"/>
+
+    <EditText
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/email"
         android:hint="Email"
-        android:layout_gravity="center_horizontal"/>
+        android:cursorVisible="false"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:background="@drawable/edit_rounded"
+        android:singleLine="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.14"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/phone"
         android:hint="Phone"
-        android:layout_gravity="center_horizontal"/>
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:background="@drawable/edit_rounded"
+        android:cursorVisible="false"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.14"/>
 
-    <EditText
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:id="@+id/location"
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:background="@drawable/edit_rounded"
         android:hint="Location"
-        android:layout_gravity="center_horizontal"/>
-    <ImageView
-        android:layout_width="264dp"
-
-        android:id="@+id/frontofcard"
-        android:src="@drawable/card_nyu"
-        android:layout_height="150dp"
-        android:scaleType="fitXY"
+        android:cursorVisible="false"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"
-        android:paddingTop="5dp"/>
-    <ImageView
-        android:layout_width="264dp"
+        android:layout_weight="0.14"/>
 
-        android:id="@+id/backofcard"
-        android:src="@drawable/card_flip"
-        android:layout_height="150dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"
-        android:paddingTop="5dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="155dp"
+
+            android:id="@+id/frontofcard"
+            android:src="@drawable/card_nyu"
+            android:layout_height="126dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="5dp"/>
+        <ImageView
+            android:layout_width="133dp"
+
+            android:id="@+id/backofcard"
+            android:src="@drawable/card_flip"
+            android:layout_height="129dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="5dp"
+            android:layout_weight="0.14"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
 
     <Button
         android:layout_width="wrap_content"
@@ -62,10 +121,4 @@
         android:id="@+id/finish"
         android:layout_gravity="center_horizontal"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GO BACK"
-        android:id="@+id/back"
-        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

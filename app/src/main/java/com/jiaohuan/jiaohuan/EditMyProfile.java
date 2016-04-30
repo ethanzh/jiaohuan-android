@@ -58,7 +58,6 @@ public class EditMyProfile extends Activity {
     private EditText mLocation;
 
     private Button mFinish;
-    private Button mBack;
 
     private ImageView mTop;
     private ImageView mBottom;
@@ -93,7 +92,6 @@ public class EditMyProfile extends Activity {
         mLocation = (EditText) findViewById(R.id.location);
 
         mFinish = (Button) findViewById(R.id.finish);
-        mBack = (Button) findViewById(R.id.back);
 
         mLayoutInflater = (LayoutInflater) EditMyProfile.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.card_select_menu, null);
@@ -135,13 +133,6 @@ public class EditMyProfile extends Activity {
             }
         });
 
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         mFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,37 +144,25 @@ public class EditMyProfile extends Activity {
                 finalCard = ((BitmapDrawable)mTop.getDrawable()).getBitmap();
                 finalFlip = ((BitmapDrawable)mBottom.getDrawable()).getBitmap();
 
-
                 if (!finalName.equals(initialName)){
-                    Toast.makeText(EditMyProfile.this, "Name was changed",
-                            Toast.LENGTH_SHORT).show();
                     myData.setName(finalName);
                 }
                 if (!finalEmail.equals(initialEmail)){
-                    Toast.makeText(EditMyProfile.this, "Email was changed",
-                            Toast.LENGTH_SHORT).show();
                     myData.setEmail(finalEmail);
                 }
                 if (!finalPhone.equals(initialPhone)){
-                    Toast.makeText(EditMyProfile.this, "Phone was changed",
-                            Toast.LENGTH_SHORT).show();
                     myData.setPhoneNum(finalPhone);
                 }
                 if (!finalLocation.equals(initialLocation)){
-                    Toast.makeText(EditMyProfile.this, "Location was changed",
-                            Toast.LENGTH_SHORT).show();
                     myData.setLocation(finalLocation);
                 }
                 if(finalCard != initialCard){
-                    Toast.makeText(EditMyProfile.this, "Card was changed",
-                            Toast.LENGTH_SHORT).show();
                     myData.setBusiness_card(finalCard);
                 }
                 if(finalFlip != initialFlip){
-                    Toast.makeText(EditMyProfile.this, "Flip was changed",
-                            Toast.LENGTH_SHORT).show();
                     myData.setFlipside(finalFlip);
                 }
+                finish();
 
             }
         });
