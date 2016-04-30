@@ -33,12 +33,12 @@ public class StartPage extends Activity {
         mLinearLayout.setBackground(background);
 
         // Start sign in process
-        Button signin = (Button) findViewById(R.id.signin);
+        final Button signin = (Button) findViewById(R.id.signin);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkContactPermissions(0);
-
+                //checkContactPermissions(0);
+                login();
             }
         });
 
@@ -47,8 +47,7 @@ public class StartPage extends Activity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkContactPermissions(1);
-
+                signup();
             }
         });
     }

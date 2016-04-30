@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -36,7 +38,10 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends FragmentActivity {
 
@@ -50,13 +55,22 @@ public class MainActivity extends FragmentActivity {
     private PopupWindow mPopupWindow;
     private LinearLayout mLinearLayout;
     private TextView mTime;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private Button mGPS;
+    private LocationManager mLocationManager;
+    private LocationListener mLocationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        mLocationListener = new MyLocationListener();
+
         mLinearLayout = (LinearLayout) findViewById(R.id.main_activity_layout);
+        mGPS = (Button) findViewById(R.id.gps);
 
         // These are the bottom buttons
         mLeft = (ImageView) findViewById(R.id.left);
@@ -71,6 +85,23 @@ public class MainActivity extends FragmentActivity {
         // Settings is off by default, because app starts on the 'main' screen
         mSettings = (TextView) findViewById(R.id.settings);
         mSettings.setVisibility(View.INVISIBLE);
+
+        mGPS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                mLocationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 5000, 10, mLocationListener);
+            }
+        });
 
         // Shake listener
         mShaker = new ShakeDetector(getApplicationContext());
@@ -191,6 +222,27 @@ public class MainActivity extends FragmentActivity {
         mSettings.setVisibility(View.INVISIBLE);
         mRight.setImageDrawable(null);
     }
+
+    private void getGPSWrapper() {
+        int hasLocationPermission = 0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            hasLocationPermission = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (hasLocationPermission != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+            }
+            return;
+        }
+
+        getGPS();
+    }
+
+    private void getGPS(){
+
+    }
+
 }
 
 class MyAdapter extends FragmentStatePagerAdapter {
@@ -218,4 +270,28 @@ class MyAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 3;
     }
+}
+/*---------- Listener class to get coordinates ------------- */
+class MyLocationListener implements LocationListener {
+
+    @Override
+    public void onLocationChanged(Location loc) {
+
+        Log.wtf("CODE", "RUNNING");
+
+        String longitude = "Longitude: " + loc.getLongitude();
+        Log.e("HI", longitude);
+        String latitude = "Latitude: " + loc.getLatitude();
+        Log.e("HI", latitude);
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {}
+
+    @Override
+    public void onProviderEnabled(String provider) {}
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {}
 }
