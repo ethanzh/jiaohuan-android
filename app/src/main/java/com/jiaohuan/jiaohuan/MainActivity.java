@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.Location;
@@ -17,11 +18,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -90,8 +93,25 @@ public class MainActivity extends FragmentActivity {
                 mLayoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
 
-                // Set the location where the pop up occurs
-                mPopupWindow = new PopupWindow(mContainer, 1000, 1300, true);
+                // Gets phone dimensions
+                WindowManager wm = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+                Display display = wm.getDefaultDisplay();
+                Point size = new Point();
+                display.getSize(size);
+                int width = size.x;
+                int height = size.y;
+
+                double popUpWidth;
+                double popUpHeight;
+
+                popUpWidth = width * 0.93;
+                popUpHeight = height * 0.67;
+
+                int popWidth = (int) popUpWidth;
+                int popHeight = (int) popUpHeight;
+
+                // 1000, 400
+                mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
 
                 // Connect button and TextView
                 mTime = (TextView) mPopupWindow.getContentView().findViewById(R.id.time);

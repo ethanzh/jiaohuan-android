@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -17,11 +18,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -126,7 +129,30 @@ public class CreateAccountCard extends Activity {
     }
 
     public void openWindow(ViewGroup v, int position){
-        mPopupWindow = new PopupWindow(v, 1000, 400, true);
+
+        // Gets phone dimensions
+        WindowManager wm = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        double popUpWidth;
+        double popUpHeight;
+
+        popUpWidth = width * 0.93;
+        popUpHeight = height * 0.20;
+
+        int popWidth = (int) popUpWidth;
+        int popHeight = (int) popUpHeight;
+
+        // 1000, 400
+        mPopupWindow = new PopupWindow(v, popWidth, popHeight, true);
+
+        // 0.93, 0.20
+
+
 
         mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
