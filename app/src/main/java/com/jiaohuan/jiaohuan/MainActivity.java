@@ -84,7 +84,7 @@ public class MainActivity extends FragmentActivity {
         mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             public void onShake() {
 
-                barometerLister();
+                boolean hasBarometer = barometerLister();
 
                 // Make card_expand here
                 mLayoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -92,8 +92,6 @@ public class MainActivity extends FragmentActivity {
 
                 // Set the location where the pop up occurs
                 mPopupWindow = new PopupWindow(mContainer, 1000, 1300, true);
-
-
 
                 // Connect button and TextView
                 mTime = (TextView) mPopupWindow.getContentView().findViewById(R.id.time);
@@ -108,10 +106,12 @@ public class MainActivity extends FragmentActivity {
                     public boolean onTouch(View v, MotionEvent event) {
                         mPopupWindow.dismiss();
                         mShaker.resume();
-
+                        mSensorManager.unregisterListener(blis);
                         return true;
                     }
                 });
+
+                Log.e("FIRST", "" + Barometer.getInstance().getValue());
 
                 // Gets current time (UNIX time) and displays it
                 long time= System.currentTimeMillis();
@@ -119,33 +119,29 @@ public class MainActivity extends FragmentActivity {
                 String stringTime = Long.toString(time);
                 mTime.setText(stringTime);
 
-
-                float currentBar = Barometer.getInstance().getValue();
-
-                Log.d("FINAL", "" + currentBar);
-                Toast.makeText(getApplicationContext(), "" + currentBar,
-                        Toast.LENGTH_LONG).show();
-
-                Log.d("Pressure", currentBar + "");
-                String stringPressure = Float.toString(currentBar);
-
-                try{
-                    mBarText.setText(stringPressure.toString());
-                }catch (NullPointerException e){
-                    e.printStackTrace();
+                if (Barometer.getInstance().getValue() == 0){
+                    //
                 }
 
-                mBarButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mBarText.setText("" + Float.toString(Barometer.getInstance().getValue()));
+                if(hasBarometer){
+                    try{
+                        mBarText.setText("" + Barometer.getInstance().getValue());
+                    }catch (NullPointerException e){
+                        e.printStackTrace();
                     }
-                });
 
-                //mSensorManager.unregisterListener(blis);
+                    mBarButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            float barometerValue = Barometer.getInstance().getValue();
+                            mBarText.setText("" + barometerValue);
+                        }
+                    });
+                }
 
                 // THIS IS THE VALUE THAT GETS SENT TO SERVER
                 // time -> Database
+                //
 
                 // Shaker is paused when pop up is displayed
                 mShaker.pause();
