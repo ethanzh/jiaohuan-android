@@ -7,10 +7,12 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -179,7 +181,9 @@ public class FakeDatabase {
             }
         }
 
-        if(!imageExists(me.getID())){
+        Log.d("IMAGE", "" + imageExists(true, me.getID()));
+
+        if(!imageExists(true, me.getID())){
 
             try {
                 FileOutputStream fos = new FileOutputStream(conName + File.separator + me.getID() +".jpg", true);
@@ -190,6 +194,29 @@ public class FakeDatabase {
             } catch (Exception e) {
                 Log.e("MyLog", e.toString());
             }
+        }
+
+        File txtDir = new File(conName);
+
+        try{
+            OutputStream stream = new FileOutputStream(txtDir + File.separator + "information.txt");
+            OutputStreamWriter writer = new OutputStreamWriter(stream);
+
+            writer.write(me.getName());
+            writer.write("\n");
+            writer.write(me.getEmail());
+            writer.write("\n");
+            writer.write(me.getPhoneNum());
+            writer.write("\n");
+            writer.write(me.getLocation());
+
+            writer.close();
+            stream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -215,7 +242,9 @@ public class FakeDatabase {
                 }
             }
 
-            if(!imageExists(list.get(i).getID())){
+            Log.d("DIR", "" + imageExists(false, list.get(i).getID()));
+
+            if(!imageExists(false, list.get(i).getID())){
 
                 try {
                     FileOutputStream fos = new FileOutputStream(conName + File.separator + list.get(i).getID() +".jpg", true);
@@ -230,12 +259,19 @@ public class FakeDatabase {
         }
     }
 
-    public Boolean imageExists(int id){
+    public Boolean imageExists(boolean myOwn, int id){
 
         String nameOfFolder = Integer.toString(id);
 
-        String conName = Environment.getExternalStorageDirectory() + File.separator + "Jiaohuan" + File.separator +
-                "Connected Accounts" + File.separator + nameOfFolder + File.separator + id +".jpg";
+        String conName;
+
+        if(myOwn){
+            conName = Environment.getExternalStorageDirectory() + File.separator + "Jiaohuan" + File.separator +
+                    "My Account" + File.separator + nameOfFolder + File.separator + id + ".jpg";
+        }else{
+            conName = Environment.getExternalStorageDirectory() + File.separator + "Jiaohuan" + File.separator +
+                    "Connected Accounts" + File.separator + nameOfFolder + File.separator + id + ".jpg";
+        }
 
         File file = new File(conName);
 

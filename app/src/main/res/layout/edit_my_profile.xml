@@ -1,117 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/main_activity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#0e0019">
 
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.09"/>
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:cursorVisible="false"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:background="@drawable/edit_rounded"
-        android:hint="Name"
-        android:singleLine="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.14"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.07"/>
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/email"
-        android:hint="Email"
-        android:cursorVisible="false"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:background="@drawable/edit_rounded"
-        android:singleLine="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.14"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.07"/>
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/phone"
-        android:hint="Phone"
-        android:singleLine="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:background="@drawable/edit_rounded"
-        android:cursorVisible="false"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.14"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.07"/>
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/location"
-        android:singleLine="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:background="@drawable/edit_rounded"
-        android:hint="Location"
-        android:cursorVisible="false"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.14"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="155dp"
-
-            android:id="@+id/frontofcard"
-            android:src="@drawable/card_nyu"
-            android:layout_height="126dp"
-            android:scaleType="fitXY"
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:cursorVisible="false"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:background="@drawable/edit_rounded"
+            android:hint="Name"
+            android:singleLine="true"
             android:layout_gravity="center_horizontal"
-            android:paddingTop="5dp"/>
-        <ImageView
-            android:layout_width="133dp"
-
-            android:id="@+id/backofcard"
-            android:src="@drawable/card_flip"
-            android:layout_height="129dp"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="5dp"
             android:layout_weight="0.14"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_above="@+id/email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"/>
 
-    </RelativeLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.07"/>
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:hint="Email"
+            android:cursorVisible="false"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:background="@drawable/edit_rounded"
+            android:singleLine="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.14"
+            android:layout_above="@+id/phone"
+            android:layout_alignLeft="@+id/phone"
+            android:layout_alignStart="@+id/phone"
+            android:layout_marginBottom="35dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.07"/>
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/phone"
+            android:hint="Phone"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:background="@drawable/edit_rounded"
+            android:cursorVisible="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.14"
+            android:layout_above="@+id/location"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.07"/>
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/location"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:background="@drawable/edit_rounded"
+            android:hint="Location"
+            android:cursorVisible="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.14"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
 
     <Button
@@ -119,6 +96,35 @@
         android:layout_height="wrap_content"
         android:text="FINISH"
         android:id="@+id/finish"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="150dp"
+
+        android:id="@+id/frontofcard"
+        android:src="@drawable/card_nyu"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:layout_alignBottom="@+id/backofcard"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <ImageView
+        android:layout_width="150dp"
+
+        android:id="@+id/backofcard"
+        android:src="@drawable/card_flip"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:layout_weight="0.14"
+        android:layout_above="@+id/finish"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

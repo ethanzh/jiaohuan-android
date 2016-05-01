@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -62,7 +63,7 @@ public class EditMyProfile extends Activity {
     private ImageView mTop;
     private ImageView mBottom;
 
-    private LinearLayout mLinearLayout;
+    private RelativeLayout mRelativeLayout;
     private PopupWindow mPopupWindow;
 
     private Button mCamera;
@@ -81,7 +82,7 @@ public class EditMyProfile extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_my_profile);
 
-        mLinearLayout = (LinearLayout) findViewById(R.id.main_activity_layout);
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.main_activity_layout);
 
         mTop = (ImageView) findViewById(R.id.frontofcard);
         mBottom = (ImageView) findViewById(R.id.backofcard);
@@ -182,7 +183,7 @@ public class EditMyProfile extends Activity {
     public void openWindow(ViewGroup v, int position){
         mPopupWindow = new PopupWindow(v, 1000, 400, true);
 
-        mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+        mPopupWindow.showAtLocation(mRelativeLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
         mCamera.setBackgroundColor(Color.WHITE);
         mLocal.setBackgroundColor(Color.WHITE);
