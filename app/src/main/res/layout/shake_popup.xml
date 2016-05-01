@@ -18,21 +18,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="GPS Locaton"
-        android:id="@+id/gps"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#FFFFFF"
-        android:paddingTop="40dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Time"
         android:id="@+id/time"
         android:layout_gravity="center_horizontal"
         android:textColor="#FFFFFF"
         android:paddingTop="0dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Barometer"
+        android:id="@+id/bar"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#FFFFFF"
+        android:paddingTop="0dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BAROMETER"
+        android:id="@+id/barbutton"
+        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:layout_width="wrap_content"

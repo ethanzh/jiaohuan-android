@@ -4,26 +4,19 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.location.Address;
-import android.location.Geocoder;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -36,12 +29,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import org.w3c.dom.Text;
 
 public class MainActivity extends FragmentActivity {
 
@@ -59,6 +47,12 @@ public class MainActivity extends FragmentActivity {
     private Button mGPS;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
+    private Button mBarButton;
+    private TextView mBarText;
+    private Barometer blis;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +64,6 @@ public class MainActivity extends FragmentActivity {
         mLocationListener = new MyLocationListener();
 
         mLinearLayout = (LinearLayout) findViewById(R.id.main_activity_layout);
-        mGPS = (Button) findViewById(R.id.gps);
 
         // These are the bottom buttons
         mLeft = (ImageView) findViewById(R.id.left);
@@ -86,27 +79,13 @@ public class MainActivity extends FragmentActivity {
         mSettings = (TextView) findViewById(R.id.settings);
         mSettings.setVisibility(View.INVISIBLE);
 
-        mGPS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                mLocationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 5000, 10, mLocationListener);
-            }
-        });
-
         // Shake listener
         mShaker = new ShakeDetector(getApplicationContext());
         mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             public void onShake() {
+
+                barometerLister();
+
                 // Make card_expand here
                 mLayoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
@@ -114,8 +93,12 @@ public class MainActivity extends FragmentActivity {
                 // Set the location where the pop up occurs
                 mPopupWindow = new PopupWindow(mContainer, 1000, 1300, true);
 
+
+
                 // Connect button and TextView
                 mTime = (TextView) mPopupWindow.getContentView().findViewById(R.id.time);
+                mBarText = (TextView) mPopupWindow.getContentView().findViewById(R.id.bar);
+                mBarButton = (Button) mPopupWindow.getContentView().findViewById(R.id.barbutton);
 
                 mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
@@ -125,6 +108,7 @@ public class MainActivity extends FragmentActivity {
                     public boolean onTouch(View v, MotionEvent event) {
                         mPopupWindow.dismiss();
                         mShaker.resume();
+
                         return true;
                     }
                 });
@@ -135,6 +119,31 @@ public class MainActivity extends FragmentActivity {
                 String stringTime = Long.toString(time);
                 mTime.setText(stringTime);
 
+
+                float currentBar = Barometer.getInstance().getValue();
+
+                Log.d("FINAL", "" + currentBar);
+                Toast.makeText(getApplicationContext(), "" + currentBar,
+                        Toast.LENGTH_LONG).show();
+
+                Log.d("Pressure", currentBar + "");
+                String stringPressure = Float.toString(currentBar);
+
+                try{
+                    mBarText.setText(stringPressure.toString());
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+
+                mBarButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mBarText.setText("" + Float.toString(Barometer.getInstance().getValue()));
+                    }
+                });
+
+                //mSensorManager.unregisterListener(blis);
+
                 // THIS IS THE VALUE THAT GETS SENT TO SERVER
                 // time -> Database
 
@@ -142,7 +151,8 @@ public class MainActivity extends FragmentActivity {
                 mShaker.pause();
             }
         });
-        mShaker.pause();
+
+        mShaker.resume();
 
         // Code the start the view pager
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -161,7 +171,7 @@ public class MainActivity extends FragmentActivity {
             public void onPageSelected(int position) {
                 if (position == 1) {
                     mSettings.setVisibility(View.INVISIBLE);
-                    //mShaker.resume();
+                    mShaker.resume();
                     changeToMain();
                 } else if (position == 2) {
                     mSettings.setVisibility(View.VISIBLE);
@@ -198,9 +208,10 @@ public class MainActivity extends FragmentActivity {
 
     public void jumpToMain(View view) {
         mSettings.setVisibility(View.INVISIBLE);
-        //mShaker.resume();
+        mShaker.resume();
         mViewPager.setCurrentItem(1);
     }
+
     public void jumpToProfile(View view) {
         mShaker.pause();
         mSettings.setVisibility(View.VISIBLE);
@@ -218,11 +229,6 @@ public class MainActivity extends FragmentActivity {
         startActivity(intent);
     }
 
-    public void jumpToEdit(View view){
-        mSettings.setVisibility(View.INVISIBLE);
-        mRight.setImageDrawable(null);
-    }
-
     private void getGPSWrapper() {
         int hasLocationPermission = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -236,14 +242,27 @@ public class MainActivity extends FragmentActivity {
             return;
         }
 
-        getGPS();
+        //getGPS();
     }
 
-    private void getGPS(){
+    public boolean barometerLister(){
 
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+
+        if (mSensor == null){
+            return false;
+        } else {
+            blis = Barometer.getInstance();
+
+            mSensorManager.registerListener(blis, mSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+
+            return true;
+        }
     }
-
 }
+
 
 class MyAdapter extends FragmentStatePagerAdapter {
 
