@@ -57,83 +57,83 @@ public class FakeDatabase {
         Bitmap pp_ma = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.ma);
         
         // My own data
-        myData = new Contact(15435876, "Xia Nong", "Starwood Hotels", "+8615811556736", "nongxia@starwood.cn", "Beijing, China",
+        myData = new Contact(15435876, "安华", "Starwood Hotels", "+8615811556736", "nongxia@starwood.cn", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "", nyu, "CTO",
                 "starwood.cn", -12303292 , flip, 1366038215, null);
 
         // Create a new ArrayList, then add each row to it individually
         unsortedData = new ArrayList<>();
 
-        Contact row1 = new Contact(65973147, "Sangwook Park", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
-                pp_wookie, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
+        Contact row1 = new Contact(65973147, "王朋", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+                pp_wookie, "北京望京", "很喜欢游泳", nyu, "CEO",
                 "www.baidu.com", -12303292, flip, 1366211015, null);
 
-        Contact row2 = new Contact(14379862,"Ethan Houston", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
-                pp_tiange, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CEO",
+        Contact row2 = new Contact(14379862,"王小明", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+                pp_tiange, "龙湖滟澜山", "力学是我最爱的课", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 1260732717, null);
 
-        Contact row3 = new Contact(75135972, "Tian Ge Liu", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
-                pp_lin, "Capital Paradise", "Is a watch collector", nyu, "CFO",
+        Contact row3 = new Contact(75135972, "六天个", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+                pp_lin, "Capital Paradise", "去过法国三次", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 1260342717, null);
 
-        Contact row4 = new Contact(64793125, "Xia Nong", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
-                pp_lin, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
+        Contact row4 = new Contact(64793125, "王先生", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+                pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 1260346717, null);
 
-        Contact row5 = new Contact(75431597, "Larry David", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
-                pp_xia, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
+        Contact row5 = new Contact(75431597, "安华", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+                pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 1220346717, null);
 
-        Contact row6 = new Contact(32136985, "Donald Duck", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
-                pp_ma, "Capital Paradise", "Is a watch collector", nyu, "CFO",
+        Contact row6 = new Contact(32136985, "郭岛礼", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+                pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 1120346717, null);
 
-        Contact row7 = new Contact(98653265, "Joseph Kwok", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
-                pp_lin, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
+        Contact row7 = new Contact(98653265, "马宁", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+                pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
                 "www.baidu.com", -12303292, flip, 1120526717, null);
 
-        Contact row8 = new Contact(44556213, "Weston Liu", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
-                pp_xia, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
+        Contact row8 = new Contact(44556213, "爸爸", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+                pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 1120546727, null);
 
-        Contact row9 = new Contact(78543264, "Gilbert Choy", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
-                pp_ma, "Capital Paradise", "Is a watch collector", nyu, "CFO",
+        Contact row9 = new Contact(78543264, "国奥", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+                pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 1120543727, null);
 
-        Contact row10 = new Contact(96325653, "Yong Ik", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
-                pp_lin, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
+        Contact row10 = new Contact(96325653, "魔月", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+                pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 1122123727, null);
 
-        Contact row11 = new Contact(74859645, "Wang Peng", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
-                pp_xia, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
+        Contact row11 = new Contact(74859645, "郭熬", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+                pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 1122123437, null);
 
-        Contact row12 = new Contact(22532658, "Guo Ao Choi", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
-                pp_ma, "Capital Paradise", "Is a watch collector", nyu, "CFO",
+        Contact row12 = new Contact(22532658, "本附近", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+                pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 1121723437, null);
 
-        Contact row13 = new Contact(96485969, "Tae Hyung Kim", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
-                pp_lin, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
+        Contact row13 = new Contact(96485969, "陈老师", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+                pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 1472723437, null);
 
-        Contact row14 = new Contact(14741214, "Austin Kim", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
-                pp_xia, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
+        Contact row14 = new Contact(14741214, "力王", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+                pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 1172723137, null);
 
-        Contact row15 = new Contact(78976542, "Mohammed Lee", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
-                pp_ma, "Capital Paradise", "Is a watch collector", nyu, "CFO",
+        Contact row15 = new Contact(78976542, "模特", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+                pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
                 "www.baidu.com", -12303292, flip, 157274337, null);
 
-        Contact row16 = new Contact(13696454, "Dominus", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
-                pp_lin, "北京望京", "Is a valuble member of STUCO!", nyu, "CEO",
+        Contact row16 = new Contact(13696454, "哦所", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+                pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
                 "www.baidu.com", -12303292 , flip, 157234337, null);
 
-        Contact row17 = new Contact(12967489, "Osuofia", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
-                pp_xia, "龙湖滟澜山", "Enjoys lifting weights!", nyu, "CTO",
+        Contact row17 = new Contact(12967489, "懂你", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+                pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
                 "www.baidu.com", -12303292, flip, 137234335, null);
 
-        Contact row18 = new Contact(46879321, "Dave Major", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
-                pp_ma, "Capital Paradise", "Is a watch collector", nyu, "CEO",
+        Contact row18 = new Contact(46879321, "挖聪", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+                pp_ma, "Capital Paradise", "去过法国三次", nyu, "CEO",
                 "www.baidu.com", -12303292, flip, 198534335, null);
 
         // Add the data

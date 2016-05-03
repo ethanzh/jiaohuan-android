@@ -265,7 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Phone Number"
+                android:text="电话号码"
                 android:id="@+id/textView18"
                 android:layout_marginLeft="38dp"
                 android:layout_marginTop="30dp"
