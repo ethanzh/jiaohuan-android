@@ -118,7 +118,7 @@ public class MainActivity extends FragmentActivity {
                 mBarText = (TextView) mPopupWindow.getContentView().findViewById(R.id.bar);
                 mBarButton = (Button) mPopupWindow.getContentView().findViewById(R.id.barbutton);
 
-                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
+                //mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
                 // When anywhere is tapped, the pop up dismisses, it also resumes the shaker
                 mContainer.setOnTouchListener(new View.OnTouchListener() {

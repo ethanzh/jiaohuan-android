@@ -49,7 +49,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         holder.name.setText(current.getName());
         holder.company.setText(current.getCompany());
 
-        holder.icon.setImageResource(current.getPic());
+        holder.icon.setImageBitmap(current.getPic());
 
         holder.date.setText(current.getSimple_date());
     }

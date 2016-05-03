@@ -47,7 +47,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         myData = FakeDatabase.getInstance().getMyData();
 
         // Set dummy data, eventually to be replaced with data from server
-        mImageView.setImageResource(myData.getPic());
+        mImageView.setImageBitmap(myData.getPic());
         mName.setText(myData.getName());
         mEmail.setText(myData.getEmail());
         mPhone.setText(myData.getPhoneNum());

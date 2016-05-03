@@ -16,7 +16,7 @@ public class Contact {
     private String locations;
     private String address;
     private String additional_info;
-    private int pictures;
+    private Bitmap pictures;
     private Bitmap business_card;
     private String title;
     private String website;
@@ -27,7 +27,7 @@ public class Contact {
     private int IDnumber;
 
     // Main constructor
-    public Contact(int id, String n, String c, String p, String e, String l, int pics, String a, String i, Bitmap card, String ti, String w, int col, Bitmap flip, long ux, String sdf) {
+    public Contact(int id, String n, String c, String p, String e, String l, Bitmap pics, String a, String i, Bitmap card, String ti, String w, int col, Bitmap flip, long ux, String sdf) {
 
         IDnumber = id;
         names = n;
@@ -72,8 +72,8 @@ public class Contact {
     public String getInfo() {return additional_info;}
     public void setInfo(String i) {additional_info = i;}
 
-    public int getPic() {return pictures;}
-    public void setPic(int pi) {pictures = pi;}
+    public Bitmap getPic() {return pictures;}
+    public void setPic(Bitmap pi) {pictures = pi;}
 
     public Bitmap getBusiness_card() {return business_card;}
     public void setBusiness_card(Bitmap pi) {business_card = pi;}

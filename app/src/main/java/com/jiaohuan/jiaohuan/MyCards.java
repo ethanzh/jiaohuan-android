@@ -160,7 +160,7 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
-                if(nameSelected && !arrowIsUp){
+                /*if(nameSelected && !arrowIsUp){
                     mRecyclerView.setAdapter(mReverseNameAdapter);
                     mArrow.setImageResource(R.drawable.up);
                     arrowIsUp = true;
@@ -171,11 +171,13 @@ public class MyCards extends android.support.v4.app.Fragment {
                     arrowIsUp = false;
                 }
 
+                nameSelected = true;
+                dateSelected = false;*/
+
                 mName.setTextColor(selectedColorValue);
                 mDate.setTextColor(nonSelectedColorValue);
 
-                nameSelected = true;
-                dateSelected = false;
+                mRecyclerView.setAdapter(mNameAdapter);
 
                 showValues(adapters);
 
@@ -187,7 +189,7 @@ public class MyCards extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
-                if(dateSelected && !arrowIsUp){
+                /*if(dateSelected && !arrowIsUp){
                     mRecyclerView.setAdapter(mReverseDateAdapter);
                     mArrow.setImageResource(R.drawable.up);
                     arrowIsUp = true;
@@ -198,11 +200,13 @@ public class MyCards extends android.support.v4.app.Fragment {
                     arrowIsUp = false;
                 }
 
+                nameSelected = false;
+                dateSelected = true;*/
+
                 mName.setTextColor(nonSelectedColorValue);
                 mDate.setTextColor(selectedColorValue);
 
-                nameSelected = false;
-                dateSelected = true;
+                mRecyclerView.setAdapter(mDateAdapter);
 
                 showValues(adapters);
 
@@ -404,7 +408,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         mWebsite.setText(SelectedRow.getCurrent().getWebsite());
         mPopPhone.setText(SelectedRow.getCurrent().getPhoneNum());
         mTitle.setText(SelectedRow.getCurrent().getTitle());
-        mImageView.setImageResource(SelectedRow.getCurrent().getPic());
+        mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
         mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
         mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
 
