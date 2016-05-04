@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.Location;
@@ -16,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.util.LruCache;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Display;
@@ -55,12 +58,30 @@ public class MainActivity extends FragmentActivity {
     private Button mBarButton;
     private TextView mBarText;
     private Barometer blis;
+    private LruCache<String, Bitmap> mMemoryCache;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        // Get max available VM memory, exceeding this amount will throw an
+        // OutOfMemory exception. Stored in kilobytes as LruCache takes an
+        // int in its constructor.
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+
+        // Use 1/7th of the available memory for this memory cache.
+        final int cacheSize = maxMemory / 7;
+
+        mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(String key, Bitmap bitmap) {
+                // The cache size will be measured in kilobytes rather than
+                // number of items.
+                return bitmap.getByteCount() / 1024;
+            }
+        };
 
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -74,9 +95,10 @@ public class MainActivity extends FragmentActivity {
         mRight = (ImageView) findViewById(R.id.right);
 
         // App starts on the main page, so obviously the arrow will be the 'on' one
-        mCenter.setImageResource(R.drawable.white_arrow);
-        mLeft.setImageDrawable(null);
-        mRight.setImageDrawable(null);
+        mCenter.setImageResource(R.drawable.highlighted_arrow);
+        mLeft.setImageResource(R.drawable.white_card);
+        mRight.setImageResource(R.drawable.white_profile);
+
 
         // Settings is off by default, because app starts on the 'main' screen
         mSettings = (TextView) findViewById(R.id.settings);
@@ -205,21 +227,21 @@ public class MainActivity extends FragmentActivity {
     // Various methods to change the pictures
 
     public void changeToCards(){
-        mLeft.setImageResource(R.drawable.white_card);
-        mCenter.setImageDrawable(null);
-        mRight.setImageDrawable(null);
+        mLeft.setImageResource(R.drawable.highlighted_card);
+        mCenter.setImageResource(R.drawable.white_arrow);
+        mRight.setImageResource(R.drawable.white_profile);
     }
 
     public void changeToMain (){
-        mLeft.setImageDrawable(null);
-        mCenter.setImageResource(R.drawable.white_arrow);
-        mRight.setImageDrawable(null);
+        mLeft.setImageResource(R.drawable.white_card);
+        mCenter.setImageResource(R.drawable.highlighted_arrow);
+        mRight.setImageResource(R.drawable.white_profile);
     }
 
     public void changeToProfile (){
-        mLeft.setImageDrawable(null);
-        mCenter.setImageDrawable(null);
-        mRight.setImageResource(R.drawable.white_profile);
+        mLeft.setImageResource(R.drawable.white_card);
+        mCenter.setImageResource(R.drawable.white_arrow);
+        mRight.setImageResource(R.drawable.highlighted_profile);
     }
 
     public void jumpToMain(View view) {
@@ -276,6 +298,15 @@ public class MainActivity extends FragmentActivity {
 
             return true;
         }
+    }
+    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+        if (getBitmapFromMemCache(key) == null) {
+            mMemoryCache.put(key, bitmap);
+        }
+    }
+
+    public Bitmap getBitmapFromMemCache(String key) {
+        return mMemoryCache.get(key);
     }
 }
 
