@@ -36,8 +36,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
 
         myViewHolder holder = new myViewHolder(view);
 
-
-
         return holder;
     }
 
@@ -82,5 +80,4 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         data.addAll(datas);
         notifyDataSetChanged();
     }
-
 }

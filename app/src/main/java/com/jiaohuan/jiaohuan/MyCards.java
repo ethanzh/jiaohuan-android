@@ -32,7 +32,9 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.app.SearchManager;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,8 @@ public class MyCards extends android.support.v4.app.Fragment {
     private boolean arrowIsUp;
     private boolean nameSelected;
     private boolean dateSelected;
+    private SearchView mSearchView;
+    private RecycleAdapter mNewAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,7 +79,7 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         final ArrayList<List<Contact>> adapters = createLists();
 
-        List<Contact> alphaSorted = adapters.get(0);
+        final List<Contact> alphaSorted = adapters.get(0);
         List<Contact> unixSorted = adapters.get(1);
         List<Contact> alphaReversed = adapters.get(2);
         List<Contact> unixReversed = adapters.get(3);
@@ -95,6 +99,38 @@ public class MyCards extends android.support.v4.app.Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mNameAdapter);
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
+
+        mSearchView = (SearchView) view.findViewById(R.id.search);
+        mSearchView.setOnQueryTextListener(new OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                query = query.toLowerCase();
+
+                final List<Contact> filteredList = new ArrayList<>();
+
+                for (int i = 0; i < alphaSorted.size(); i++) {
+
+                    final String text = alphaSorted.get(i).getName().toLowerCase();
+                    if (text.contains(query)) {
+
+                        filteredList.add(alphaSorted.get(i));
+                    }
+                }
+
+                mNewAdapter = new RecycleAdapter(getActivity(), filteredList);
+                mRecyclerView.setAdapter(mNewAdapter);
+                mNewAdapter.notifyDataSetChanged();  // data set changed
+
+                return true;
+            }
+
+        });
 
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
