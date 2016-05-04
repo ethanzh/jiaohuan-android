@@ -116,9 +116,13 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                 for (int i = 0; i < alphaSorted.size(); i++) {
 
-                    final String text = alphaSorted.get(i).getName().toLowerCase();
-                    if (text.contains(query)) {
+                    final String name = alphaSorted.get(i).getName().toLowerCase();
+                    final String company = alphaSorted.get(i).getCompany().toLowerCase();
 
+                    if (name.contains(query)) {
+                        filteredList.add(alphaSorted.get(i));
+
+                    } else if(company.contains(query)){
                         filteredList.add(alphaSorted.get(i));
                     }
                 }
