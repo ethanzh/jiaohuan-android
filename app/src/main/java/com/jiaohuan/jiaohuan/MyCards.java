@@ -88,9 +88,6 @@ public class MyCards extends android.support.v4.app.Fragment {
         List<Contact> alphaReversed = adapters.get(2);
         List<Contact> unixReversed = adapters.get(3);
 
-        //Log.wtf("ARRAYLIST", "Alpha Sorted: " + alphaSorted + "\nUnix Sorted: " + unixSorted +
-        //        "\nAlpha Reversed" + alphaReversed + "\nUnix Reversed: " + unixReversed);
-
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
 
