@@ -105,12 +105,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="www.baidu.com"
+                    android:text="hi"
                     android:id="@+id/website"
-                    android:autoLink="web"
                     android:layout_marginLeft="39dp"
                     android:layout_marginStart="39dp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#FF0095FF"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -252,8 +251,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Email"
                 android:id="@+id/pop_email"
-                android:textColor="#2a1d76"
-                android:autoLink="web|email"
+                android:textColor="#FF0095FF"
                 android:textSize="24dp"
                 android:layout_marginLeft="38dp"
                 android:layout_marginStart="38dp"
@@ -285,11 +283,10 @@
                 android:layout_marginStart="38dp"
                 android:textSize="24dp"
                 android:id="@+id/pop_phone"
-                android:autoLink="phone"
                 android:layout_below="@+id/textView18"
                 android:layout_alignLeft="@+id/textView18"
                 android:layout_alignStart="@+id/textView18"
-                android:textColor="#2a1d76"/>
+                android:textColor="#FF0095FF"/>
 
             <TextView
                 android:layout_width="wrap_content"
