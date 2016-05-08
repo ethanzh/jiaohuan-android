@@ -433,7 +433,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         int popWidth = (int) popUpWidth;
         int popHeight = (int) popUpHeight;
 
-        // Starts the pop up               (930, 1620)
+        // Starts the pop up (930, 1620)
         mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
         mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
 
