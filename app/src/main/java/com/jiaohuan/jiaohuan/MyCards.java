@@ -360,6 +360,10 @@ public class MyCards extends android.support.v4.app.Fragment {
             mClose.setTextColor(Color.BLACK);
         }
 
+        // Take +86 off the front of the phone number
+        String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
+        shortendPhone = shortendPhone.substring(3);
+
         // Gets text from the (fake) database and prints them to the activity
         mPopName.setText(SelectedRow.getCurrent().getName());
         mPopCompany.setText(SelectedRow.getCurrent().getCompany());
@@ -367,7 +371,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         mPopAddress.setText(SelectedRow.getCurrent().getAddress());
         mPopInfo.setText(SelectedRow.getCurrent().getInfo());
         mWebsite.setText(SelectedRow.getCurrent().getWebsite());
-        mPopPhone.setText(SelectedRow.getCurrent().getPhoneNum());
+        mPopPhone.setText(shortendPhone);
         mTitle.setText(SelectedRow.getCurrent().getTitle());
         mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
         mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
