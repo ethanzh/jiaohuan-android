@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -39,9 +40,17 @@ import android.widget.Toast;
 import android.app.SearchManager;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyCards extends android.support.v4.app.Fragment {
 
@@ -377,6 +386,21 @@ public class MyCards extends android.support.v4.app.Fragment {
         mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
         mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
 
+        // Unicode testing
+        String name = SelectedRow.getCurrent().getName();
+        name = name.substring(0, 1);
+        char single = name.charAt(0);
+        String hex = String.format("%04X", (int)single);
+        Log.wtf("Hex", hex + "");
+
+        try {
+            readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        getFromAssets();
+
         // Open website
         mWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -503,6 +527,42 @@ public class MyCards extends android.support.v4.app.Fragment {
         return wholeList.get(list);
     }
 
+    void getFromAssets() {
+
+         AssetManager assetManager = MyApplication.getContext().getAssets();
+        try {
+            String[] files = assetManager.list("");
+            Log.wtf("Files", files + "");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void readFile() throws IOException {
+
+        File sdcard = Environment.getExternalStorageDirectory();
+
+        //Get the text file
+        File file = new File(sdcard,"pinyin.txt");
+
+        //Read text from file
+        StringBuilder text = new StringBuilder();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            /*while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+                //Log.wtf("Line", "" + br.readLine());
+            }*/
+            br.close();
+        }
+        catch (IOException e) {
+            //You'll need to add proper error handling here
+        }
+    }
 
 
 }
