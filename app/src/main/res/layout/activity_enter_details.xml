@@ -58,7 +58,7 @@
     </RelativeLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -80,17 +80,21 @@
             android:ems="10"
             android:id="@+id/email"
             android:background="@drawable/rounded_edittext"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_alignTop="@+id/space"
+            android:layout_alignLeft="@+id/password"
+            android:layout_alignStart="@+id/password"/>
 
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.04"/>
+            android:layout_weight="0.04"
+            android:id="@+id/space"/>
 
         <EditText
-            android:layout_width="337dp"
+            android:layout_width="256dp"
             android:layout_height="50dp"
             android:inputType="phone"
             android:singleLine="true"
@@ -103,7 +107,10 @@
             android:ems="10"
             android:id="@+id/phone"
             android:background="@drawable/rounded_edittext"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_marginTop="18dp"
+            android:layout_below="@+id/email"
+            android:layout_alignRight="@+id/password"
+            android:layout_alignEnd="@+id/password"/>
 
         <Space
             android:layout_width="match_parent"
@@ -124,7 +131,10 @@
             android:ems="10"
             android:id="@+id/password"
             android:background="@drawable/rounded_edittext"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="17dp"
+            android:layout_below="@+id/phone"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -135,9 +145,24 @@
             android:layout_gravity="center_horizontal"
             android:textColor="#FFFFFF"
             android:paddingTop="20dp"
-            android:textSize="12dp"/>
+            android:textSize="12dp"
+            android:layout_below="@+id/password"
+            android:layout_centerHorizontal="true"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+
+            android:layout_marginRight="20dip"
+            android:layout_alignTop="@+id/phone"
+            android:layout_alignLeft="@+id/password"
+            android:layout_alignStart="@+id/password"
+            android:layout_above="@+id/password"
+            android:layout_toStartOf="@+id/phone"
+            android:background="@drawable/rounded_edittext"/>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

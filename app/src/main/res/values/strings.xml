@@ -13,4 +13,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="num_prompt">Choose a country</string>
+    <string-array name="nums">
+        <item>+86</item>
+    </string-array>
+
 </resources>

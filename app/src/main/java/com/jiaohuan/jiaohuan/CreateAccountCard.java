@@ -85,7 +85,9 @@ public class CreateAccountCard extends Activity {
             @Override
             public void onClick(View v) {
                 if(mTop.getDrawable() == mStartBottom || mBottom.getDrawable() == mStartBottom){
-                    Toast.makeText(getApplicationContext(), "You did not upload two pictures", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "You did not upload two pictures", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), EnterDetailsActivity.class);
+                    startActivityForResult(intent, 2);
                 } else{
                     Intent intent = new Intent(getApplicationContext(), EnterDetailsActivity.class);
                     startActivityForResult(intent, 2);
