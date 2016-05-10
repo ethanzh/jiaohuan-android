@@ -6,9 +6,11 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -59,82 +61,82 @@ public class FakeDatabase {
         // My own data
         myData = new Contact(15435876, "安华", "Starwood Hotels", "15811556736", "nongxia@starwood.cn", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "", nyu, "CTO",
-                "starwood.cn", -12303292 , flip, 1366038215, null);
+                "starwood.cn", -12303292 , flip, 1366038215, null, null);
 
         // Create a new ArrayList, then add each row to it individually
         unsortedData = new ArrayList<>();
 
         Contact row1 = new Contact(65973147, "王朋", "Gate Education", "15811556736", "SWP@hotmail.com", "Beijing, China",
                 pp_wookie, "北京望京", "很喜欢游泳", nyu, "CEO",
-                "http://www.baidu.com/", -12303292, flip, 1366211015, null);
+                "http://www.baidu.com/", -12303292, flip, 1366211015, null, null);
 
         Contact row2 = new Contact(14379862,"王小明", "Jiao Huan Inc.", "15811556736", "e@gmail.com", "Beijing, China",
                 pp_tiange, "龙湖滟澜山", "力学是我最爱的课", nyu, "CEO",
-                "http://www.baidu.com/", -12303292 , flip, 1260732717, null);
+                "http://www.baidu.com/", -12303292 , flip, 1260732717, null, null);
 
         Contact row3 = new Contact(75135972, "六天个", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 pp_lin, "Capital Paradise", "去过法国三次", nyu, "CFO",
-                "http://www.baidu.com/", -12303292, flip, 1260342717, null);
+                "http://www.baidu.com/", -12303292, flip, 1260342717, null, null);
 
         Contact row4 = new Contact(64793125, "王先生", "Gate Education", "15811556736", "SWP@hotmail.com", "Beijing, China",
                 pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
-                "http://www.baidu.com/", -12303292 , flip, 1260346717, null);
+                "http://www.baidu.com/", -12303292 , flip, 1260346717, null, null);
 
         Contact row5 = new Contact(75431597, "安华", "Jiao Huan Inc.", "15811556736", "e@gmail.com", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
-                "http://www.baidu.com/", -12303292, flip, 1220346717, null);
+                "http://www.baidu.com/", -12303292, flip, 1220346717, null, null);
 
         Contact row6 = new Contact(32136985, "郭岛礼", "CCP", "15811556736", "LTG@gmail.com", "Beijing, China",
                 pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
-                "http://www.baidu.com/", -12303292, flip, 1120346717, null);
+                "http://www.baidu.com/", -12303292, flip, 1120346717, null, null);
 
         Contact row7 = new Contact(98653265, "马宁", "Gate Education", "15811556736", "SWP@hotmail.com", "Beijing, China",
                 pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
-                "http://www.baidu.com/", -12303292, flip, 1120526717, null);
+                "http://www.baidu.com/", -12303292, flip, 1120526717, null, null);
 
         Contact row8 = new Contact(44556213, "爸爸", "Jiao Huan Inc.", "15811556736", "e@gmail.com", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
-                "http://www.baidu.com/", -12303292, flip, 1120546727, null);
+                "http://www.baidu.com/", -12303292, flip, 1120546727, null, null);
 
         Contact row9 = new Contact(78543264, "国奥", "CCP", "15811556736", "LTG@gmail.com", "Beijing, China",
                 pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
-                "http://www.baidu.com/", -12303292, flip, 1120543727, null);
+                "http://www.baidu.com/", -12303292, flip, 1120543727, null, null);
 
         Contact row10 = new Contact(96325653, "魔月", "Gate Education", "15811556736", "SWP@hotmail.com", "Beijing, China",
                 pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
-                "http://www.baidu.com/", -12303292 , flip, 1122123727, null);
+                "http://www.baidu.com/", -12303292 , flip, 1122123727, null, null);
 
         Contact row11 = new Contact(74859645, "郭熬", "Jiao Huan Inc.", "15811556736", "e@gmail.com", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
-                "http://www.baidu.com/", -12303292, flip, 1122123437, null);
+                "http://www.baidu.com/", -12303292, flip, 1122123437, null, null);
 
         Contact row12 = new Contact(22532658, "本附近", "CCP", "15811556736", "LTG@gmail.com", "Beijing, China",
                 pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
-                "http://www.baidu.com/", -12303292, flip, 1121723437, null);
+                "http://www.baidu.com/", -12303292, flip, 1121723437, null, null);
 
         Contact row13 = new Contact(96485969, "陈老师", "Gate Education", "15811556736", "SWP@hotmail.com", "Beijing, China",
                 pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
-                "http://www.baidu.com/", -12303292 , flip, 1472723437, null);
+                "http://www.baidu.com/", -12303292 , flip, 1472723437, null, null);
 
         Contact row14 = new Contact(14741214, "力王", "Jiao Huan Inc.", "15811556736", "e@gmail.com", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
-                "http://www.baidu.com/", -12303292, flip, 1172723137, null);
+                "http://www.baidu.com/", -12303292, flip, 1172723137, null, null);
 
         Contact row15 = new Contact(78976542, "模特", "CCP", "15811556736", "LTG@gmail.com", "Beijing, China",
                 pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
-                "http://www.baidu.com/", -12303292, flip, 157274337, null);
+                "http://www.baidu.com/", -12303292, flip, 157274337, null, null);
 
         Contact row16 = new Contact(13696454, "哦所", "Gate Education", "15811556736", "SWP@hotmail.com", "Beijing, China",
                 pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
-                "http://www.baidu.com/", -12303292 , flip, 157234337, null);
+                "http://www.baidu.com/", -12303292 , flip, 157234337, null, null);
 
         Contact row17 = new Contact(12967489, "懂你", "Jiao Huan Inc.", "15811556736", "e@gmail.com", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
-                "http://www.baidu.com/", -12303292, flip, 137234335, null);
+                "http://www.baidu.com/", -12303292, flip, 137234335, null, null);
 
         Contact row18 = new Contact(46879321, "挖聪", "CCP", "15811556736", "LTG@gmail.com", "Beijing, China",
                 pp_ma, "Capital Paradise", "去过法国三次", nyu, "CEO",
-                "http://www.baidu.com/", -12303292, flip, 198534335, null);
+                "http://www.baidu.com/", -12303292, flip, 198534335, null, null);
 
         // Add the data
         unsortedData.add(row1);
@@ -156,6 +158,13 @@ public class FakeDatabase {
         unsortedData.add(row17);
         unsortedData.add(row18);
 
+        try {
+            Log.wtf("SIZE", "" + unsortedData.size());
+            setPinyinValue(unsortedData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         fullyAlphaData = new ArrayList<>();
         fullyAlphaData = SortByNames(unsortedData);
 
@@ -173,6 +182,9 @@ public class FakeDatabase {
         addToDir(fullyAlphaData);
 
         addOwnContact(myData);
+
+        Log.wtf("RAND", "" + fullyAlphaData.get(0).getPinyin());
+
     }
 
     public void addOwnContact(Contact me){
@@ -308,6 +320,7 @@ public class FakeDatabase {
     }
 
     public List<Contact> SortByUnix(List<Contact> unsortedData){
+
         List<Contact> sortedData = new ArrayList<>();
 
         for (int i = 0; i < unsortedData.size(); i++) {
@@ -357,6 +370,52 @@ public class FakeDatabase {
     // Return my data
     public static Contact getMyData() {return myData;}
 
+    // Get pinyin names
+    public void setPinyinValue(List<Contact> list) throws IOException {
+
+        File sdcard = Environment.getExternalStorageDirectory();
+
+        //Get the text file
+        File file = new File(sdcard,"short.txt");
+
+        //Read text from file
+        StringBuilder text = new StringBuilder();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+
+                String fullLine = br.readLine();
+                String hex = fullLine.substring(0,4);
+
+                for(int i = 0; i < list.size(); i++){
+
+                    String name = list.get(i).getName();
+                    name = name.substring(0, 1);
+                    char single = name.charAt(0);
+                    String myhex = String.format("%04X", (int)single);
+
+                    String pinyin = fullLine.substring(6);
+                    pinyin = pinyin.substring(0, pinyin.length() - 2);
+
+                    if(myhex.equals(hex)){
+                        Log.wtf("MATCH", "there's a match");
+                        list.get(i).setPinyin(pinyin);
+                    }else{
+                        // No match
+                    }
+                }
+            }
+            br.close();
+        }
+        catch (IOException e) {
+            //You'll need to add proper error handling here
+        }
+    }
 
 }
 

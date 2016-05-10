@@ -25,9 +25,12 @@ public class Contact {
     private long unix_time;
     private String simple_date;
     private int IDnumber;
+    private String pinyin;
 
     // Main constructor
-    public Contact(int id, String n, String c, String p, String e, String l, Bitmap pics, String a, String i, Bitmap card, String ti, String w, int col, Bitmap flip, long ux, String sdf) {
+    public Contact(int id, String n, String c, String p, String e, String l, Bitmap pics,
+                   String a, String i, Bitmap card, String ti, String w, int col, Bitmap flip,
+                   long ux, String sdf, String pin) {
 
         IDnumber = id;
         names = n;
@@ -45,6 +48,7 @@ public class Contact {
         flipside = flip;
         unix_time = ux;
         simple_date = sdf;
+        pinyin = pin;
     }
 
     // Various methods for getting/setting the variables
@@ -94,5 +98,8 @@ public class Contact {
 
     public String getSimple_date() {return simple_date;}
     public void setSimpleDate(String sdf){simple_date = sdf;}
+
+    public String getPinyin() {return pinyin;}
+    public void setPinyin(String pin){pinyin = pin;}
 
 }
