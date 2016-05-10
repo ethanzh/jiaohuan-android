@@ -76,7 +76,7 @@ public class FakeDatabase {
 
         Contact row3 = new Contact(75135972, "六天个", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 pp_lin, "Capital Paradise", "去过法国三次", nyu, "CFO",
-                "http://www.baidu.com/", -12303292, flip, 1260342717, null, null);
+                "https://www.baidu.com/", -12303292, flip, 1260342717, null, null);
 
         Contact row4 = new Contact(64793125, "王先生", "Gate Education", "15811556736", "SWP@hotmail.com", "Beijing, China",
                 pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
@@ -168,22 +168,14 @@ public class FakeDatabase {
         fullyAlphaData = new ArrayList<>();
         fullyAlphaData = SortByNames(unsortedData);
 
-        reverseAlpha = new ArrayList<>();
-        reverseAlpha = SortByNames(unsortedData);
-
         convertFromUnix(fullyAlphaData);
 
         fullyUnixData = new ArrayList<>();
         fullyUnixData = SortByUnix(fullyAlphaData);
 
-        reverseUnix = new ArrayList<>();
-        reverseUnix = SortByUnix(fullyAlphaData);
-
         addToDir(fullyAlphaData);
 
         addOwnContact(myData);
-
-        Log.wtf("RAND", "" + fullyAlphaData.get(0).getPinyin());
 
     }
 
@@ -244,7 +236,6 @@ public class FakeDatabase {
         }
 
     }
-
 
     public void addToDir(List<Contact> list){
 
@@ -348,23 +339,12 @@ public class FakeDatabase {
         return sortedData;
     }
 
-    // Methods to return various ArrayList<Contact>'s
     public List<Contact> getAlphaSorted() {
         return fullyAlphaData;
     }
 
     public List<Contact> getDateSorted() {
         return fullyUnixData;
-    }
-
-    public List<Contact> getReverseAlpha() {
-        Collections.reverse(reverseAlpha);
-        return reverseAlpha;
-    }
-
-    public List<Contact> getReverseUnix() {
-        Collections.reverse(reverseUnix);
-        return reverseUnix;
     }
 
     // Return my data
@@ -403,7 +383,6 @@ public class FakeDatabase {
                     pinyin = pinyin.substring(0, pinyin.length() - 2);
 
                     if(myhex.equals(hex)){
-                        Log.wtf("MATCH", "there's a match");
                         list.get(i).setPinyin(pinyin);
                     }else{
                         // No match

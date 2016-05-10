@@ -86,6 +86,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     private boolean dateSelected;
     private SearchView mSearchView;
     private RecycleAdapter mNewAdapter;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,17 +96,12 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         final List<Contact> alphaSorted = adapters.get(0);
         List<Contact> unixSorted = adapters.get(1);
-        List<Contact> alphaReversed = adapters.get(2);
-        List<Contact> unixReversed = adapters.get(3);
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
 
         mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
         mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
-
-        mReverseNameAdapter = new RecycleAdapter(getActivity(), alphaReversed);
-        mReverseDateAdapter = new RecycleAdapter(getActivity(), unixReversed);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mNameAdapter);
@@ -133,7 +129,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                     if (name.contains(query)) {
                         filteredList.add(alphaSorted.get(i));
 
-                    } else if(company.contains(query)){
+                    } else if (company.contains(query)) {
                         filteredList.add(alphaSorted.get(i));
                     }
                 }
@@ -146,7 +142,6 @@ public class MyCards extends android.support.v4.app.Fragment {
             }
 
         });
-
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
@@ -196,140 +191,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         return view;
     }
 
-    void assignIDs(ViewGroup v){
-        mPopName = (TextView) v.findViewById(R.id.pop_name);
-        mPopCompany = (TextView) v.findViewById(R.id.pop_company);
-        mPopEmail = (TextView) v.findViewById(R.id.pop_email);
-        mPopPhone = (TextView) v.findViewById(R.id.pop_phone);
-        mPopAddress = (TextView) v.findViewById(R.id.pop_address);
-        mPopInfo = (TextView) v.findViewById(R.id.pop_info);
-        mImageView = (ImageView) v.findViewById(R.id.image);
-        mCard = (ImageView) v.findViewById(R.id.card_pic);
-        mClose = (TextView) v.findViewById(R.id.close);
-        mTitle = (TextView) v.findViewById(R.id.pop_title);
-        mWebsite = (TextView) v.findViewById(R.id.website);
-        mShowName = (TextView) v.findViewById(R.id.showname);
-        mShowCompany = (TextView) v.findViewById(R.id.showcompany);
-        mContactButton = (Button) v.findViewById(R.id.contactButton);
-        mKnownSince = (TextView) v.findViewById(R.id.knownthing);
-    }
-
-    // TODO: Work on this later
-    public ArrayList getContactInfo(){
-        // Make function here to iterate through all the current contacts
-        ContentResolver cr = getContext().getContentResolver();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
-
-        ArrayList<String> nameList = new ArrayList<String>();
-        ArrayList<String> phoneList = new ArrayList<String>();
-
-        int numberOfContacts = (cur.getCount());
-
-        if (cur.getCount() > 0) {
-
-            while (cur.moveToNext()) {
-
-                String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
-
-                String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
-                if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-
-                    Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?", new String[]{id}, null);
-
-                    while (pCur.moveToNext()) {
-                        String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-                        nameList.add(name);
-                        phoneList.add(phoneNo);
-                    }
-                    pCur.close();
-                }
-            }
-        }
-        Log.wtf("Count", "Number of contacts: " + numberOfContacts);
-        return nameList;
-    }
-
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-
-    private void checkContactPerms() {
-        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_CONTACTS);
-        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[] {Manifest.permission.WRITE_CONTACTS},
-                    REQUEST_CODE_ASK_PERMISSIONS);
-            return;
-        }
-
-    }
-
-    public void addContactInfo(){
-        ContentResolver cr = getContext().getContentResolver();
-        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
-
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
-                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, "accountname@gmail.com")
-                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.cn.jiaohuan.jiaohuan")
-                .build());
-
-        // Add name
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, SelectedRow.getCurrent().getName())
-                .build());
-
-        // Add phone number
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, SelectedRow.getCurrent().getPhoneNum())
-                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
-                .build());
-
-        // Add notes
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, SelectedRow.getCurrent().getInfo())
-                .build());
-
-        // Add picture WORK IN PROGRESS
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, SelectedRow.getCurrent().getPic())
-                .build());
-
-        // Add email
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Email.DATA, SelectedRow.getCurrent().getEmail())
-                .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
-                .build());
-
-        // Add address
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, SelectedRow.getCurrent().getLocation())
-                .build());
-        try {
-            cr.applyBatch(ContactsContract.AUTHORITY, ops);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (OperationApplicationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void expandCard(int position){
+    public void expandCard(int position) {
         // Make card_expand here
         LayoutInflater layoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final ViewGroup mContainer = (ViewGroup) layoutInflater.inflate(R.layout.card_expand, null);
@@ -340,17 +202,16 @@ public class MyCards extends android.support.v4.app.Fragment {
         // Get top panel
         RelativeLayout topPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
-        if(nameSelected){
-            if(arrowIsUp){
+        if (nameSelected) {
+            if (arrowIsUp) {
                 SelectedRow.setCurrent(mReverseNameAdapter.getRow(position));
-            } else{
+            } else {
                 SelectedRow.setCurrent(mNameAdapter.getRow(position));
             }
-        }
-        else if(dateSelected){
-            if(arrowIsUp){
+        } else if (dateSelected) {
+            if (arrowIsUp) {
                 SelectedRow.setCurrent(mReverseDateAdapter.getRow(position));
-            } else{
+            } else {
                 SelectedRow.setCurrent(mDateAdapter.getRow(position));
             }
         }
@@ -374,13 +235,36 @@ public class MyCards extends android.support.v4.app.Fragment {
         String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
         shortendPhone = shortendPhone.substring(3);
 
+        // Take beginning off of website
+        String website = SelectedRow.getCurrent().getWebsite();
+        String http = website.substring(0, 5);
+
+        // Remove http:// or https://
+        if(http.equals("http:")){
+            website = website.substring(7);
+        }else if(http.equals("https")){
+            website = website.substring(8);
+        }
+
+        // Remove www.
+        String www = website.substring(0, 4);
+        if(www.equals("www.")){
+            website = website.substring(4);
+        }
+
+        // Remove ending '/' if it's there
+        String end = website.substring(website.length() - 1);
+        if(end.equals("/")){
+            website = website.substring(0, website.length() - 1);
+        }
+
         // Gets text from the (fake) database and prints them to the activity
         mPopName.setText(SelectedRow.getCurrent().getName());
         mPopCompany.setText(SelectedRow.getCurrent().getCompany());
         mPopEmail.setText(SelectedRow.getCurrent().getEmail());
         mPopAddress.setText(SelectedRow.getCurrent().getAddress());
         mPopInfo.setText(SelectedRow.getCurrent().getInfo());
-        mWebsite.setText(SelectedRow.getCurrent().getWebsite());
+        mWebsite.setText(website);
         mPopPhone.setText(shortendPhone);
         mTitle.setText(SelectedRow.getCurrent().getTitle());
         mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
@@ -491,36 +375,144 @@ public class MyCards extends android.support.v4.app.Fragment {
         });
     }
 
-    public ArrayList<List<Contact>> createLists(){
+    void assignIDs(ViewGroup v) {
+        mPopName = (TextView) v.findViewById(R.id.pop_name);
+        mPopCompany = (TextView) v.findViewById(R.id.pop_company);
+        mPopEmail = (TextView) v.findViewById(R.id.pop_email);
+        mPopPhone = (TextView) v.findViewById(R.id.pop_phone);
+        mPopAddress = (TextView) v.findViewById(R.id.pop_address);
+        mPopInfo = (TextView) v.findViewById(R.id.pop_info);
+        mImageView = (ImageView) v.findViewById(R.id.image);
+        mCard = (ImageView) v.findViewById(R.id.card_pic);
+        mClose = (TextView) v.findViewById(R.id.close);
+        mTitle = (TextView) v.findViewById(R.id.pop_title);
+        mWebsite = (TextView) v.findViewById(R.id.website);
+        mShowName = (TextView) v.findViewById(R.id.showname);
+        mShowCompany = (TextView) v.findViewById(R.id.showcompany);
+        mContactButton = (Button) v.findViewById(R.id.contactButton);
+        mKnownSince = (TextView) v.findViewById(R.id.knownthing);
+    }
+
+    // TODO: Work on this later
+    public ArrayList getContactInfo() {
+        // Make function here to iterate through all the current contacts
+        ContentResolver cr = getContext().getContentResolver();
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+
+        ArrayList<String> nameList = new ArrayList<String>();
+        ArrayList<String> phoneList = new ArrayList<String>();
+
+        int numberOfContacts = (cur.getCount());
+
+        if (cur.getCount() > 0) {
+
+            while (cur.moveToNext()) {
+
+                String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+
+                String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+
+                if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+
+                    Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[]{id}, null);
+
+                    while (pCur.moveToNext()) {
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+                        nameList.add(name);
+                        phoneList.add(phoneNo);
+                    }
+                    pCur.close();
+                }
+            }
+        }
+        Log.wtf("Count", "Number of contacts: " + numberOfContacts);
+        return nameList;
+    }
+
+    private void checkContactPerms() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_CONTACTS);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
+
+    }
+
+    public void addContactInfo() {
+        ContentResolver cr = getContext().getContentResolver();
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, "accountname@gmail.com")
+                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.cn.jiaohuan.jiaohuan")
+                .build());
+
+        // Add name
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, SelectedRow.getCurrent().getName())
+                .build());
+
+        // Add phone number
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, SelectedRow.getCurrent().getPhoneNum())
+                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
+                .build());
+
+        // Add notes
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, SelectedRow.getCurrent().getInfo())
+                .build());
+
+        // Add picture WORK IN PROGRESS
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, SelectedRow.getCurrent().getPic())
+                .build());
+
+        // Add email
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Email.DATA, SelectedRow.getCurrent().getEmail())
+                .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+                .build());
+
+        // Add address
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, SelectedRow.getCurrent().getLocation())
+                .build());
+        try {
+            cr.applyBatch(ContactsContract.AUTHORITY, ops);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (OperationApplicationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<List<Contact>> createLists() {
 
         ArrayList<List<Contact>> list = new ArrayList<>();
 
         list.add(FakeDatabase.getInstance().getAlphaSorted());
         list.add(FakeDatabase.getInstance().getDateSorted());
-        list.add(FakeDatabase.getInstance().getReverseAlpha());
-        list.add(FakeDatabase.getInstance().getReverseUnix());
 
         return list;
-
-        /*ArrayList<Contact> alphaSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getAlphaSorted();
-        ArrayList<Contact> unixSorted = (ArrayList<Contact>) FakeDatabase.getInstance().getDateSorted();
-
-        ArrayList<Contact> alphaReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseAlpha();
-        ArrayList<Contact> unixReversed = (ArrayList<Contact>) FakeDatabase.getInstance().getReverseUnix();*/
-    }
-    public List<Contact> getCurrentList(ArrayList<List<Contact>> wholeList, int list){
-
-        return wholeList.get(list);
-    }
-
-    void getFromAssets() {
-
-         AssetManager assetManager = MyApplication.getContext().getAssets();
-        try {
-            String[] files = assetManager.list("");
-            Log.wtf("Files", files + "");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
