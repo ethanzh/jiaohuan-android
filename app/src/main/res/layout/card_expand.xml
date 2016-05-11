@@ -105,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="hi"
+                    android:text="Website"
                     android:id="@+id/website"
                     android:layout_marginLeft="39dp"
                     android:layout_marginStart="39dp"

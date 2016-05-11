@@ -1,6 +1,6 @@
 package com.jiaohuan.jiaohuan;
 
-import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -10,9 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
@@ -21,6 +20,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FakeDatabase {
     
@@ -158,9 +159,14 @@ public class FakeDatabase {
         unsortedData.add(row17);
         unsortedData.add(row18);
 
-        try {
-            Log.wtf("SIZE", "" + unsortedData.size());
+        /*try {
             setPinyinValue(unsortedData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+        try {
+            readFromAssets(MyApplication.getContext(), "pinyin.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -353,23 +359,24 @@ public class FakeDatabase {
     // Get pinyin names
     public void setPinyinValue(List<Contact> list) throws IOException {
 
-        File sdcard = Environment.getExternalStorageDirectory();
+        String parsedTextFile = readFromAssets(MyApplication.getContext(), "pinyin.txt");
 
-        //Get the text file
-        File file = new File(sdcard,"short.txt");
+        String yourInput = parsedTextFile;
+        Matcher m = Pattern.compile("\r\n|\r|\n").matcher(yourInput);
+        int lines = 1;
+        while (m.find())
+        {
+            lines ++;
+        }
+        Log.wtf("LINES", "" + lines);
 
-        //Read text from file
-        StringBuilder text = new StringBuilder();
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        /*try {
+            BufferedReader bufReader = new BufferedReader(new StringReader(parsedTextFile));
             String line;
 
-            while ((line = br.readLine()) != null) {
-                text.append(line);
-                text.append('\n');
-
-                String fullLine = br.readLine();
+            while( (line = bufReader.readLine()) != null ) {
+                Log.wtf("LINE", line);
+                String fullLine = bufReader.readLine();
                 String hex = fullLine.substring(0,4);
 
                 for(int i = 0; i < list.size(); i++){
@@ -384,17 +391,45 @@ public class FakeDatabase {
 
                     if(myhex.equals(hex)){
                         list.get(i).setPinyin(pinyin);
+                        Log.wtf("MATCH", "matcH");
                     }else{
-                        // No match
+                        Log.wtf("NO", "none");
                     }
                 }
             }
-            br.close();
-        }
-        catch (IOException e) {
-            //You'll need to add proper error handling here
-        }
+        }catch (IOException e){
+            e.printStackTrace();
+        }*/
     }
 
+    public static String readFromAssets(Context context, String filename) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(context.getAssets().open(filename)));
+
+        // do reading, usually loop until end of file reading
+        StringBuilder sb = new StringBuilder();
+        String mLine;
+
+        for(int i = 0; i < 10; i++){
+
+            if( (mLine = reader.readLine()) != null && i < 10){
+
+                sb.append(mLine + "\n"); // process line
+                mLine = reader.readLine();
+
+                //String hex = mLine.substring(0,4);
+
+                //String length = hex.toString();
+                //Log.wtf("HEX", length);
+
+                //String pinyin = mLine.substring(6);
+                //pinyin = pinyin.substring(0, pinyin.length() - 2);
+                //Log.wtf("PINYIN", pinyin);
+                Log.wtf("LINE", mLine);
+            }
+        }
+
+        reader.close();
+        return sb.toString();
+    }
 }
 
