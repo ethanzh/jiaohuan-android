@@ -369,6 +369,8 @@ public class FakeDatabase {
 
             Log.wtf("PINYIN", chineseName + " : " + pinyin);
 
+            list.get(i).setPinyin(pinyin);
+
         }
 
     }

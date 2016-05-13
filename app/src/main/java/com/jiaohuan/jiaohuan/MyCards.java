@@ -86,6 +86,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     private boolean dateSelected;
     private SearchView mSearchView;
     private RecycleAdapter mNewAdapter;
+    private TextView mPinyin;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     @Override
@@ -270,6 +271,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
         mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
         mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
+        mPinyin.setText(SelectedRow.getCurrent().getPinyin());
 
         // Open website
         mWebsite.setOnClickListener(new View.OnClickListener() {
@@ -391,6 +393,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         mShowCompany = (TextView) v.findViewById(R.id.showcompany);
         mContactButton = (Button) v.findViewById(R.id.contactButton);
         mKnownSince = (TextView) v.findViewById(R.id.knownthing);
+        mPinyin = (TextView) v.findViewById(R.id.pinyin);
     }
 
     // TODO: Work on this later
