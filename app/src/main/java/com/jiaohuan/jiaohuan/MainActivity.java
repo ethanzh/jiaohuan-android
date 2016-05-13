@@ -222,21 +222,21 @@ public class MainActivity extends FragmentActivity {
     // Various methods to change the pictures
 
     public void changeToCards(){
-        mLeft.setImageResource(R.drawable.highlighted_card);
+        /*mLeft.setImageResource(R.drawable.highlighted_card);
         mCenter.setImageResource(R.drawable.white_arrow);
-        mRight.setImageResource(R.drawable.white_profile);
+        mRight.setImageResource(R.drawable.white_profile);*/
     }
 
     public void changeToMain (){
-        mLeft.setImageResource(R.drawable.white_card);
+        /*mLeft.setImageResource(R.drawable.white_card);
         mCenter.setImageResource(R.drawable.highlighted_arrow);
-        mRight.setImageResource(R.drawable.white_profile);
+        mRight.setImageResource(R.drawable.white_profile);*/
     }
 
     public void changeToProfile (){
-        mLeft.setImageResource(R.drawable.white_card);
+       /* mLeft.setImageResource(R.drawable.white_card);
         mCenter.setImageResource(R.drawable.white_arrow);
-        mRight.setImageResource(R.drawable.highlighted_profile);
+        mRight.setImageResource(R.drawable.highlighted_profile);*/
     }
 
     public void jumpToMain(View view) {
