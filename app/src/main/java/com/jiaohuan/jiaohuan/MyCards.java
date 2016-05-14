@@ -204,17 +204,10 @@ public class MyCards extends android.support.v4.app.Fragment {
         RelativeLayout topPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
         if (nameSelected) {
-            if (arrowIsUp) {
-                SelectedRow.setCurrent(mReverseNameAdapter.getRow(position));
-            } else {
-                SelectedRow.setCurrent(mNameAdapter.getRow(position));
-            }
+            SelectedRow.setCurrent(mNameAdapter.getRow(position));
+
         } else if (dateSelected) {
-            if (arrowIsUp) {
-                SelectedRow.setCurrent(mReverseDateAdapter.getRow(position));
-            } else {
-                SelectedRow.setCurrent(mDateAdapter.getRow(position));
-            }
+            SelectedRow.setCurrent(mDateAdapter.getRow(position));
         }
 
         // Get color

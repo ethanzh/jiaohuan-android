@@ -11,9 +11,9 @@ public class SortAlphaNames implements Comparator {
         Contact user0 = (Contact) arg0;
         Contact user1 = (Contact) arg1;
 
-        int flag = user0.getName().compareTo(user1.getName());
+        int flag = user0.getPinyin().compareTo(user1.getPinyin());
         if (flag == 0) {
-            return user0.getName().compareTo(user1.getName());
+            return user0.getPinyin().compareTo(user1.getPinyin());
         } else {
             return flag;
         }

@@ -361,18 +361,21 @@ public class FakeDatabase {
 
         for(int i = 0; i < list.size(); i++){
 
-            String chineseName = list.get(i).getName().substring(0, 1);
-            char single = chineseName.charAt(0);
-            String myhex = String.format("%04X", (int)single);
+            String chineseName = list.get(i).getName();
+            StringBuilder fullPinyin = new StringBuilder();
 
-            String pinyin = data.get(myhex);
+            for(int j = 0; j < chineseName.length(); j++){
+                String character = list.get(i).getName().substring(j, j + 1);
+                char single = character.charAt(0);
+                String myhex = String.format("%04X", (int)single);
 
-            Log.wtf("PINYIN", chineseName + " : " + pinyin);
+                String pinyin = data.get(myhex);
+                fullPinyin.append(pinyin);
 
-            list.get(i).setPinyin(pinyin);
-
+            }
+            Log.wtf("PINYIN", chineseName + " : " + fullPinyin.toString());
+            list.get(i).setPinyin(fullPinyin.toString());
         }
-
     }
 
     public static Map<String, String> readFromAssets(Context context, String filename) throws IOException {
