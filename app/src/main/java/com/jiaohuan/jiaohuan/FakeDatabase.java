@@ -10,10 +10,13 @@ import com.amazonaws.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
@@ -373,46 +376,93 @@ public class FakeDatabase {
                 fullPinyin.append(pinyin);
 
             }
-            Log.wtf("PINYIN", chineseName + " : " + fullPinyin.toString());
+            //Log.wtf("PINYIN", chineseName + " : " + fullPinyin.toString());
             list.get(i).setPinyin(fullPinyin.toString());
         }
     }
 
     public static Map<String, String> readFromAssets(Context context, String filename) throws IOException {
+        long startTime = System.nanoTime();
         BufferedReader reader = new BufferedReader(new InputStreamReader(context.getAssets().open(filename)));
+
+        String conName = Environment.getExternalStorageDirectory() + File.separator + "Jiaohuan" + File.separator + "hashmap.ser";
+        File conDir = new File(conName);
 
         // do reading, usually loop until end of file reading
         String mLine;
         Map<String, String> data = new HashMap<>();
         Character lastChar = null;
 
-        for(int i = 0; i < 20982; i++){
-
-            mLine = reader.readLine();
-
-            String hex = mLine.substring(0,4);
-            String pinyin = mLine.substring(6);
-
-            pinyin = pinyin.substring(0, pinyin.length() - 2);
-
-            while (pinyin.contains(",")){
-                pinyin = pinyin.split(",", 2)[0];
+        if (conDir.exists()) {
+            Log.wtf("EXISTS", "Using existing map");
+            try
+            {
+                FileInputStream fis = new FileInputStream(conDir);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                data = (HashMap) ois.readObject();
+                ois.close();
+                fis.close();
+            }catch(IOException ioe)
+            {
+                ioe.printStackTrace();
+                return null;
+            }catch(ClassNotFoundException c)
+            {
+                System.out.println("Class not found");
+                c.printStackTrace();
+                return null;
             }
 
-            if (pinyin.length() > 1){
-                lastChar = pinyin.charAt(pinyin.length() - 1);
+            long endTime = System.nanoTime();
+            long duration = (endTime - startTime);
+            Log.wtf("TIME", duration + "");
+        }
+        else{
+            Log.wtf("DOESNT", "making new map");
+            for(int i = 0; i < 20982; i++){
+
+                mLine = reader.readLine();
+
+                String hex = mLine.substring(0,4);
+                String pinyin = mLine.substring(6);
+
+                pinyin = pinyin.substring(0, pinyin.length() - 2);
+
+                while (pinyin.contains(",")){
+                    pinyin = pinyin.split(",", 2)[0];
+                }
+
+                if (pinyin.length() > 1){
+                    lastChar = pinyin.charAt(pinyin.length() - 1);
+                }
+
+                String finalChar = String.valueOf(lastChar);
+
+                if (finalChar.matches(".*[0-9].*")){
+                    pinyin = pinyin.substring(0, (pinyin.length() - 1));
+                }
+
+                data.put(hex, pinyin);
+            }
+            try {
+                FileOutputStream fos = new FileOutputStream(conName);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(data);
+                oos.close();
+                fos.close();
+
+            }catch(IOException ioe)
+            {
+                ioe.printStackTrace();
             }
 
-            String finalChar = String.valueOf(lastChar);
-
-            if (finalChar.matches(".*[0-9].*")){
-                pinyin = pinyin.substring(0, (pinyin.length() - 1));
-            }
-
-            data.put(hex, pinyin);
+            reader.close();
+            long endTime = System.nanoTime();
+            long duration = (endTime - startTime);
+            Log.wtf("TIME", duration + "");
         }
 
-        reader.close();
+
         return data;
     }
 }

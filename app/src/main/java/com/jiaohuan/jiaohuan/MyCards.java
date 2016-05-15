@@ -155,13 +155,16 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         nameSelected = true;
         dateSelected = false;
-        arrowIsUp = false;
 
         mName.setTextColor(selectedColorValue);
 
         mName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                nameSelected = true;
+                dateSelected = false;
+
                 mName.setTextColor(selectedColorValue);
                 mDate.setTextColor(nonSelectedColorValue);
 
@@ -173,6 +176,10 @@ public class MyCards extends android.support.v4.app.Fragment {
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                nameSelected = false;
+                dateSelected = true;
+
                 mName.setTextColor(nonSelectedColorValue);
                 mDate.setTextColor(selectedColorValue);
 
