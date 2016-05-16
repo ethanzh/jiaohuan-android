@@ -46,11 +46,16 @@ public class MyProfile extends android.support.v4.app.Fragment {
         // Get my data from fake database
         myData = FakeDatabase.getInstance().getMyData();
 
+        // Take +86 off the front of the phone number
+        String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
+        shortendPhone = shortendPhone.substring(3);
+        Log.wtf("SHORT", shortendPhone);
+
         // Set dummy data, eventually to be replaced with data from server
         mImageView.setImageBitmap(myData.getPic());
         mName.setText(myData.getName());
         mEmail.setText(myData.getEmail());
-        mPhone.setText(myData.getPhoneNum());
+        mPhone.setText(shortendPhone);
         mLocation.setText(myData.getLocation());
         mCard.setImageBitmap(myData.getBusiness_card());
 

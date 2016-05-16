@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.SearchManager;
@@ -88,6 +89,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     private RecycleAdapter mNewAdapter;
     private TextView mPinyin;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private ScrollView mScrollView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -200,9 +202,13 @@ public class MyCards extends android.support.v4.app.Fragment {
     }
 
     public void expandCard(int position) {
+
         // Make card_expand here
         LayoutInflater layoutInflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final ViewGroup mContainer = (ViewGroup) layoutInflater.inflate(R.layout.card_expand, null);
+
+        final ScrollView mainScrollView=(ScrollView)mContainer.findViewById(R.id.scroll);
+        mainScrollView.smoothScrollTo(0, 0);
 
         // Assign all of the pop up's TextViews
         assignIDs(mContainer);
@@ -235,6 +241,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         // Take +86 off the front of the phone number
         String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
         shortendPhone = shortendPhone.substring(3);
+        Log.wtf("SHORT", shortendPhone);
 
         // Take beginning off of website
         String website = SelectedRow.getCurrent().getWebsite();
@@ -285,7 +292,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         });
 
         // Open email client
-        mPopEmail.setOnClickListener(new View.OnClickListener() {
+        /*mPopEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = SelectedRow.getCurrent().getEmail();
@@ -298,7 +305,9 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                 startActivity(Intent.createChooser(intent, "Send Email"));
             }
-        });
+        });*/
+        mPopEmail.setTextIsSelectable(true);
+
 
         //Call phone number
         // TODO: Test this

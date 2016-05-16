@@ -49,15 +49,19 @@ public class EnterDetailsActivity extends Activity {
                 String password = mPassword.getText().toString();
                 String phone = mSpinner.getSelectedItem().toString() + mPhone.getText().toString();
 
-                Log.e("PHONE", phone);
-
                 if (email.matches("") || password.matches("") || phone.matches("")){
                     Toast.makeText(getApplicationContext(), "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mName.setHintTextColor(Color.RED);
                     mPassword.setHintTextColor(Color.RED);
                     mPhone.setHintTextColor(Color.RED);
                     return;
-                }else{
+                }else if(phone.length() != 13){
+                    Toast.makeText(getApplicationContext(), "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
+                    mPhone.setTextColor(Color.RED);
+                }
+
+
+                else{
                     /*
 
                     Send email, password, and phone to server
