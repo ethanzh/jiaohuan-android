@@ -1,25 +1,16 @@
 package com.jiaohuan.jiaohuan;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.util.LruCache;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,7 +19,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -42,12 +32,7 @@ public class MainActivity extends FragmentActivity {
     private ShakeDetector mShaker;
     private LayoutInflater mLayoutInflater;
     private PopupWindow mPopupWindow;
-    private LinearLayout mLinearLayout;
     private TextView mTime;
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    private Button mGPS;
-    private LocationManager mLocationManager;
-    private LocationListener mLocationListener;
     private SensorManager mSensorManager;
     private Sensor mSensor;
     private Button mBarButton;
@@ -61,6 +46,94 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        // The app works without this for now...
+        //setBitmapMemory();
+
+        initializeBottomButtons();
+
+        setInitialValues();
+
+        setShakeListener();
+
+        startViewPager();
+
+        viewPagerListener();
+    }
+
+    public void startViewPager() {
+        // Code the start the view pager
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        mViewPager.setAdapter(new ViewPagerAdapter(fragmentManager));
+        mViewPager.setCurrentItem(1);
+    }
+
+    public void viewPagerListener() {
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            public void onPageScrollStateChanged(int state) {
+            }
+
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            // Either pause or resume shaker, and assign appropriate bottom icon
+            public void onPageSelected(int position) {
+                if (position == 1) {
+                    mSettings.setVisibility(View.INVISIBLE);
+                    mShaker.resume();
+                } else if (position == 2) {
+                    mSettings.setVisibility(View.VISIBLE);
+                    mShaker.pause();
+                } else if (position == 0) {
+                    mSettings.setVisibility(View.INVISIBLE);
+                    mShaker.pause();
+                }
+            }
+        });
+
+    }
+
+    public void jumpToMain(View view) {
+        mSettings.setVisibility(View.INVISIBLE);
+        mShaker.resume();
+        mViewPager.setCurrentItem(1);
+    }
+
+    public void jumpToProfile(View view) {
+        mShaker.pause();
+        mSettings.setVisibility(View.VISIBLE);
+        mViewPager.setCurrentItem(2);
+    }
+
+    public void jumpToCards(View view) {
+        mShaker.pause();
+        mSettings.setVisibility(View.INVISIBLE);
+        mViewPager.setCurrentItem(0);
+    }
+
+    public void inflateSettings(View view) {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+
+    public boolean barometerLister() {
+
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+
+        if (mSensor == null) {
+            return false;
+        } else {
+            blis = Barometer.getInstance();
+
+            mSensorManager.registerListener(blis, mSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+
+            return true;
+        }
+    }
+
+    public void setBitmapMemory() {
         // Get max available VM memory, exceeding this amount will throw an
         // OutOfMemory exception. Stored in kilobytes as LruCache takes an
         // int in its constructor.
@@ -77,18 +150,16 @@ public class MainActivity extends FragmentActivity {
                 return bitmap.getByteCount() / 1024;
             }
         };
+    }
 
-        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        mLocationListener = new MyLocationListener();
-
-        mLinearLayout = (LinearLayout) findViewById(R.id.main_activity_layout);
-
+    public void initializeBottomButtons() {
         // These are the bottom buttons
         mLeft = (ImageView) findViewById(R.id.left);
         mCenter = (ImageView) findViewById(R.id.center);
         mRight = (ImageView) findViewById(R.id.right);
+    }
 
+    public void setInitialValues() {
         // App starts on the main page, so obviously the arrow will be the 'on' one
         mCenter.setImageResource(R.drawable.highlighted_arrow);
         mLeft.setImageResource(R.drawable.white_card);
@@ -98,7 +169,9 @@ public class MainActivity extends FragmentActivity {
         // Settings is off by default, because app starts on the 'main' screen
         mSettings = (TextView) findViewById(R.id.settings);
         mSettings.setVisibility(View.INVISIBLE);
+    }
 
+    public void setShakeListener() {
         // Shake listener
         mShaker = new ShakeDetector(getApplicationContext());
         mShaker.setOnShakeListener(new ShakeDetector.OnShakeListener() {
@@ -110,25 +183,7 @@ public class MainActivity extends FragmentActivity {
                 mLayoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup mContainer = (ViewGroup) mLayoutInflater.inflate(R.layout.shake_popup, null);
 
-                // Gets phone dimensions
-                WindowManager wm = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-                Display display = wm.getDefaultDisplay();
-                Point size = new Point();
-                display.getSize(size);
-                int width = size.x;
-                int height = size.y;
-
-                double popUpWidth;
-                double popUpHeight;
-
-                popUpWidth = width * 0.93;
-                popUpHeight = height * 0.67;
-
-                int popWidth = (int) popUpWidth;
-                int popHeight = (int) popUpHeight;
-
-                // 1000, 400
-                mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
+                getPhoneDimens(mContainer);
 
                 // Connect button and TextView
                 mTime = (TextView) mPopupWindow.getContentView().findViewById(R.id.time);
@@ -148,22 +203,18 @@ public class MainActivity extends FragmentActivity {
                     }
                 });
 
-                Log.e("FIRST", "" + Barometer.getInstance().getValue());
-
-                // Gets current time (UNIX time) and displays it
-                long time= System.currentTimeMillis();
-                Log.d("Time", time + "");
+                long time = System.currentTimeMillis();
                 String stringTime = Long.toString(time);
                 mTime.setText(stringTime);
 
-                if (Barometer.getInstance().getValue() == 0){
+                if (Barometer.getInstance().getValue() == 0) {
                     //
                 }
 
-                if(hasBarometer){
-                    try{
+                if (hasBarometer) {
+                    try {
                         mBarText.setText("" + Barometer.getInstance().getValue());
-                    }catch (NullPointerException e){
+                    } catch (NullPointerException e) {
                         e.printStackTrace();
                     }
 
@@ -186,173 +237,27 @@ public class MainActivity extends FragmentActivity {
         });
 
         mShaker.resume();
-
-        // Code the start the view pager
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        mViewPager.setAdapter(new MyAdapter(fragmentManager));
-        mViewPager.setCurrentItem(1);
-
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {
-            }
-
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            // Either pause or resume shaker, and assign appropriate bottom icon
-            public void onPageSelected(int position) {
-                if (position == 1) {
-                    mSettings.setVisibility(View.INVISIBLE);
-                    mShaker.resume();
-                    changeToMain();
-                } else if (position == 2) {
-                    mSettings.setVisibility(View.VISIBLE);
-                    mShaker.pause();
-                    changeToProfile();
-                } else if (position == 0) {
-                    mSettings.setVisibility(View.INVISIBLE);
-                    mShaker.pause();
-                    changeToCards();
-                }
-            }
-        });
     }
 
-    // Various methods to change the pictures
+    public void getPhoneDimens(ViewGroup mContainer) {
+        // Gets phone dimensions
+        WindowManager wm = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
 
-    public void changeToCards(){
-        /*mLeft.setImageResource(R.drawable.highlighted_card);
-        mCenter.setImageResource(R.drawable.white_arrow);
-        mRight.setImageResource(R.drawable.white_profile);*/
+        double popUpWidth;
+        double popUpHeight;
+
+        popUpWidth = width * 0.93;
+        popUpHeight = height * 0.67;
+
+        int popWidth = (int) popUpWidth;
+        int popHeight = (int) popUpHeight;
+
+        // 1000, 400
+        mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
     }
-
-    public void changeToMain (){
-        /*mLeft.setImageResource(R.drawable.white_card);
-        mCenter.setImageResource(R.drawable.highlighted_arrow);
-        mRight.setImageResource(R.drawable.white_profile);*/
-    }
-
-    public void changeToProfile (){
-       /* mLeft.setImageResource(R.drawable.white_card);
-        mCenter.setImageResource(R.drawable.white_arrow);
-        mRight.setImageResource(R.drawable.highlighted_profile);*/
-    }
-
-    public void jumpToMain(View view) {
-        mSettings.setVisibility(View.INVISIBLE);
-        mShaker.resume();
-        mViewPager.setCurrentItem(1);
-    }
-
-    public void jumpToProfile(View view) {
-        mShaker.pause();
-        mSettings.setVisibility(View.VISIBLE);
-        mViewPager.setCurrentItem(2);
-    }
-
-    public void jumpToCards(View view) {
-        mShaker.pause();
-        mSettings.setVisibility(View.INVISIBLE);
-        mViewPager.setCurrentItem(0);
-    }
-
-    public void inflateSettings(View view){
-        Intent intent = new Intent(this, Settings.class);
-        startActivity(intent);
-    }
-
-    private void getGPSWrapper() {
-        int hasLocationPermission = 0;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            hasLocationPermission = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-        if (hasLocationPermission != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_CODE_ASK_PERMISSIONS);
-            }
-            return;
-        }
-
-        //getGPS();
-    }
-
-    public boolean barometerLister(){
-
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
-
-        if (mSensor == null){
-            return false;
-        } else {
-            blis = Barometer.getInstance();
-
-            mSensorManager.registerListener(blis, mSensor,
-                    SensorManager.SENSOR_DELAY_NORMAL);
-
-            return true;
-        }
-    }
-    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
-        if (getBitmapFromMemCache(key) == null) {
-            mMemoryCache.put(key, bitmap);
-        }
-    }
-
-    public Bitmap getBitmapFromMemCache(String key) {
-        return mMemoryCache.get(key);
-    }
-}
-
-
-class MyAdapter extends FragmentStatePagerAdapter {
-
-    public MyAdapter(FragmentManager fm) {
-        super(fm);
-    }
-
-    @Override
-    public Fragment getItem(int i){
-        Fragment fragment = null;
-        if(i == 0){
-            fragment = new MyCards();
-        }
-        if(i == 1){
-            fragment = new MainFragment();
-        }
-        if(i == 2){
-            fragment = new MyProfile();
-        }
-        return fragment;
-    }
-
-    @Override
-    public int getCount() {
-        return 3;
-    }
-}
-/*---------- Listener class to get coordinates ------------- */
-class MyLocationListener implements LocationListener {
-
-    @Override
-    public void onLocationChanged(Location loc) {
-
-        Log.wtf("CODE", "RUNNING");
-
-        String longitude = "Longitude: " + loc.getLongitude();
-        Log.e("HI", longitude);
-        String latitude = "Latitude: " + loc.getLatitude();
-        Log.e("HI", latitude);
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {}
-
-    @Override
-    public void onProviderEnabled(String provider) {}
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {}
 }

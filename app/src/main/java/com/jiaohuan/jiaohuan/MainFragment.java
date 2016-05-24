@@ -40,14 +40,14 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
         mNetwork = (Button) view.findViewById(R.id.network);
 
-        mNetwork.setOnClickListener(new View.OnClickListener() {
+        /*mNetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                new TestServer().execute();
+
 
             }
-        });
+        });*/
 
         return view;
     }
