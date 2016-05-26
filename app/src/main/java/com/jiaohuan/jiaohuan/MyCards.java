@@ -7,21 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -36,31 +31,17 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.app.SearchManager;
 import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
+import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class MyCards extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mNameAdapter;
     private RecycleAdapter mDateAdapter;
-    private RecycleAdapter mReverseNameAdapter;
-    private RecycleAdapter mReverseDateAdapter;
     private PopupWindow mPopupWindow;
     private LinearLayout mLinearLayout;
     private TextView mPopName;
@@ -79,17 +60,14 @@ public class MyCards extends android.support.v4.app.Fragment {
     private TextView mShowCompany;
     private Button mContactButton;
     private TextView mKnownSince;
-    private ImageView mArrow;
     private TextView mDate;
     private TextView mName;
-    private boolean arrowIsUp;
     private boolean nameSelected;
     private boolean dateSelected;
     private SearchView mSearchView;
     private RecycleAdapter mNewAdapter;
     private TextView mPinyin;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    private ScrollView mScrollView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,55 +80,19 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
-
-        mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
-        mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mNameAdapter);
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
 
-        mSearchView = (SearchView) view.findViewById(R.id.search);
-        mSearchView.setOnQueryTextListener(new OnQueryTextListener() {
+        mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
+        mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
 
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                query = query.toLowerCase();
-
-                final List<Contact> filteredList = new ArrayList<>();
-
-                for (int i = 0; i < alphaSorted.size(); i++) {
-
-                    final String name = alphaSorted.get(i).getName().toLowerCase();
-                    final String company = alphaSorted.get(i).getCompany().toLowerCase();
-
-                    if (name.contains(query)) {
-                        filteredList.add(alphaSorted.get(i));
-
-                    } else if (company.contains(query)) {
-                        filteredList.add(alphaSorted.get(i));
-                    }
-                }
-
-                mNewAdapter = new RecycleAdapter(getActivity(), filteredList);
-                mRecyclerView.setAdapter(mNewAdapter);
-                mNewAdapter.notifyDataSetChanged();  // data set changed
-
-                return true;
-            }
-
-        });
+        makeSearch(view, alphaSorted);
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
         mDate = (TextView) view.findViewById(R.id.date);
         mName = (TextView) view.findViewById(R.id.name);
-        mArrow = (ImageView) view.findViewById(R.id.arrow);
 
         final int selectedColorValue = Color.parseColor("#FFAF8CFF");
         final int nonSelectedColorValue = Color.parseColor("#FFFFFF");
@@ -241,44 +183,10 @@ public class MyCards extends android.support.v4.app.Fragment {
         // Take +86 off the front of the phone number
         String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
         shortendPhone = shortendPhone.substring(3);
-        Log.wtf("SHORT", shortendPhone);
 
-        // Take beginning off of website
-        String website = SelectedRow.getCurrent().getWebsite();
-        String http = website.substring(0, 5);
+        String website = trimURL();
 
-        // Remove http:// or https://
-        if(http.equals("http:")){
-            website = website.substring(7);
-        }else if(http.equals("https")){
-            website = website.substring(8);
-        }
-
-        // Remove www.
-        String www = website.substring(0, 4);
-        if(www.equals("www.")){
-            website = website.substring(4);
-        }
-
-        // Remove ending '/' if it's there
-        String end = website.substring(website.length() - 1);
-        if(end.equals("/")){
-            website = website.substring(0, website.length() - 1);
-        }
-
-        // Gets text from the (fake) database and prints them to the activity
-        mPopName.setText(SelectedRow.getCurrent().getName());
-        mPopCompany.setText(SelectedRow.getCurrent().getCompany());
-        mPopEmail.setText(SelectedRow.getCurrent().getEmail());
-        mPopAddress.setText(SelectedRow.getCurrent().getAddress());
-        mPopInfo.setText(SelectedRow.getCurrent().getInfo());
-        mWebsite.setText(website);
-        mPopPhone.setText(shortendPhone);
-        mTitle.setText(SelectedRow.getCurrent().getTitle());
-        mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
-        mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
-        mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
-        mPinyin.setText(SelectedRow.getCurrent().getPinyin());
+        setExpandValues(website, shortendPhone);
 
         // Open website
         mWebsite.setOnClickListener(new View.OnClickListener() {
@@ -292,22 +200,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         });
 
         // Open email client
-        /*mPopEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = SelectedRow.getCurrent().getEmail();
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/html");
-
-                // Maybe consider using this in the future
-                //intent.setType(android.content.Intent.ACTION_SENDTO (new Intent(Intent.ACTION_SENDTO);))
-                intent.putExtra(Intent.EXTRA_EMAIL, email);
-
-                startActivity(Intent.createChooser(intent, "Send Email"));
-            }
-        });*/
-        mPopEmail.setTextIsSelectable(true);
-
+        emailListener(mPopEmail);
 
         //Call phone number
         // TODO: Test this
@@ -320,34 +213,15 @@ public class MyCards extends android.support.v4.app.Fragment {
             }
         });
 
-        // Gets phone dimensions
-        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        Log.d("ScreenResolution", "" + width + "," + height);
-
-        double popUpWidth;
-        double popUpHeight;
-
-        popUpWidth = width * 0.86;
-        popUpHeight = height * 0.85;
-
-        int popWidth = (int) popUpWidth;
-        int popHeight = (int) popUpHeight;
+        List<Integer> dimensions = getPhoneDimens();
 
         // Starts the pop up (930, 1620)
-        mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
+        mPopupWindow = new PopupWindow(mContainer, dimensions.get(0), dimensions.get(1), true);
         mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER_HORIZONTAL, 0, 0);
-
-        mRecyclerView.smoothScrollToPosition(position);
 
         // Makes card size device independent
         double cardHeight;
-        cardHeight = height * 0.1;
+        cardHeight = dimensions.get(3) * 0.1;
         int realCardHeight = (int) cardHeight;
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, realCardHeight, getResources().getDisplayMetrics());
         mCard.getLayoutParams().height = px;
@@ -384,6 +258,42 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mPopupWindow.dismiss();
             }
         });
+    }
+
+    public List<Integer> getPhoneDimens(){
+
+        // Returns:
+        // popWdith
+        // popHeight
+        // Width
+        // Height
+
+        List<Integer> array = new ArrayList<>();
+
+        // Gets phone dimensions
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        double popUpWidth;
+        double popUpHeight;
+
+        popUpWidth = width * 0.86;
+        popUpHeight = height * 0.85;
+
+        int popWidth = (int) popUpWidth;
+        int popHeight = (int) popUpHeight;
+
+        array.add(popWidth);
+        array.add(popHeight);
+
+        array.add(width);
+        array.add(height);
+
+        return array;
     }
 
     void assignIDs(ViewGroup v) {
@@ -526,5 +436,105 @@ public class MyCards extends android.support.v4.app.Fragment {
         list.add(FakeDatabase.getInstance().getDateSorted());
 
         return list;
+    }
+
+    public void makeSearch(View view, final List<Contact> alphaSorted) {
+        mSearchView = (SearchView) view.findViewById(R.id.search);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                query = query.toLowerCase();
+
+                final List<Contact> filteredList = new ArrayList<>();
+
+                for (int i = 0; i < alphaSorted.size(); i++) {
+
+                    final String name = alphaSorted.get(i).getName().toLowerCase();
+                    final String company = alphaSorted.get(i).getCompany().toLowerCase();
+
+                    if (name.contains(query)) {
+                        filteredList.add(alphaSorted.get(i));
+
+                    } else if (company.contains(query)) {
+                        filteredList.add(alphaSorted.get(i));
+                    }
+                }
+
+                mNewAdapter = new RecycleAdapter(getActivity(), filteredList);
+                mRecyclerView.setAdapter(mNewAdapter);
+                mNewAdapter.notifyDataSetChanged();  // data set changed
+
+                return true;
+            }
+
+        });
+    }
+
+    public String trimURL(){
+
+        // Take beginning off of website
+        String website = SelectedRow.getCurrent().getWebsite();
+        String http = website.substring(0, 5);
+
+        // Remove http:// or https://
+        if(http.equals("http:")){
+            website = website.substring(7);
+        }else if(http.equals("https")){
+            website = website.substring(8);
+        }
+
+        // Remove www.
+        String www = website.substring(0, 4);
+        if(www.equals("www.")){
+            website = website.substring(4);
+        }
+
+        // Remove ending '/' if it's there
+        String end = website.substring(website.length() - 1);
+        if(end.equals("/")){
+            website = website.substring(0, website.length() - 1);
+        }
+
+        return website;
+    }
+
+    public void setExpandValues(String website, String shortendPhone){
+        // Gets text from the (fake) database and prints them to the activity
+        mPopName.setText(SelectedRow.getCurrent().getName());
+        mPopCompany.setText(SelectedRow.getCurrent().getCompany());
+        mPopEmail.setText(SelectedRow.getCurrent().getEmail());
+        mPopAddress.setText(SelectedRow.getCurrent().getAddress());
+        mPopInfo.setText(SelectedRow.getCurrent().getInfo());
+        mWebsite.setText(website);
+        mPopPhone.setText(shortendPhone);
+        mTitle.setText(SelectedRow.getCurrent().getTitle());
+        mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
+        mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
+        mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
+        mPinyin.setText(SelectedRow.getCurrent().getPinyin());
+    }
+
+    public void emailListener(TextView PopEmail){
+        PopEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = SelectedRow.getCurrent().getEmail();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/html");
+
+                // Maybe consider using this in the future
+                //intent.setType(android.content.Intent.ACTION_SENDTO (new Intent(Intent.ACTION_SENDTO);))
+                intent.putExtra(Intent.EXTRA_EMAIL, email);
+
+                startActivity(Intent.createChooser(intent, "Send Email"));
+            }
+        });
+        PopEmail.setTextIsSelectable(true);
     }
 }
