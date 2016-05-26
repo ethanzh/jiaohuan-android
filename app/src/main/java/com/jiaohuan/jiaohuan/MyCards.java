@@ -64,10 +64,8 @@ public class MyCards extends android.support.v4.app.Fragment {
     private TextView mName;
     private boolean nameSelected;
     private boolean dateSelected;
-    private SearchView mSearchView;
     private RecycleAdapter mNewAdapter;
     private TextView mPinyin;
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,16 +76,17 @@ public class MyCards extends android.support.v4.app.Fragment {
         final List<Contact> alphaSorted = adapters.get(0);
         List<Contact> unixSorted = adapters.get(1);
 
+        makeSearch(view, alphaSorted);
+
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mNameAdapter);
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
 
         mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
         mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
 
-        makeSearch(view, alphaSorted);
+        mRecyclerView.setAdapter(mNameAdapter);
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
@@ -357,6 +356,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     private void checkContactPerms() {
         int hasWriteContactsPermission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_CONTACTS);
         if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            int REQUEST_CODE_ASK_PERMISSIONS = 123;
             requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS},
                     REQUEST_CODE_ASK_PERMISSIONS);
             return;
@@ -439,8 +439,8 @@ public class MyCards extends android.support.v4.app.Fragment {
     }
 
     public void makeSearch(View view, final List<Contact> alphaSorted) {
-        mSearchView = (SearchView) view.findViewById(R.id.search);
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        SearchView searchView = (SearchView) view.findViewById(R.id.search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -455,13 +455,17 @@ public class MyCards extends android.support.v4.app.Fragment {
 
                 for (int i = 0; i < alphaSorted.size(); i++) {
 
-                    final String name = alphaSorted.get(i).getName().toLowerCase();
+                    final String chineseName = alphaSorted.get(i).getName().toLowerCase();
+                    final String pinyinName = alphaSorted.get(i).getPinyin().toLowerCase();
                     final String company = alphaSorted.get(i).getCompany().toLowerCase();
 
-                    if (name.contains(query)) {
+                    if (chineseName.contains(query)) {
                         filteredList.add(alphaSorted.get(i));
-
-                    } else if (company.contains(query)) {
+                    }
+                    else if (company.contains(query)) {
+                        filteredList.add(alphaSorted.get(i));
+                    }
+                    else if (pinyinName.contains(query)){
                         filteredList.add(alphaSorted.get(i));
                     }
                 }
