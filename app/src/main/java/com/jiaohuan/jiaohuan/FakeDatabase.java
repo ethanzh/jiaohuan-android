@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
-import com.amazonaws.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
