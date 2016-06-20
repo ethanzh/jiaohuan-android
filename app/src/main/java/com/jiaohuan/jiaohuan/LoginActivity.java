@@ -24,6 +24,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.future.ResponseFuture;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -218,6 +221,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+
+
+//            Ion.with(getApplicationContext())
+//                    .load("http://nutshoo.com/users/login")
+//                    .setBodyParameter("username", "ethanzh")
+//                    .setBodyParameter("password", "38243874")
+//                    .asString()
+
+
+
 
             return true;
         }
