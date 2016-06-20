@@ -93,7 +93,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mPOST.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request = new StringRequest(Request.Method.POST, "http://nutshoo.com/users/login/", new Response.Listener<String>(){
+                request = new StringRequest(Request.Method.POST, "http://nutshoo.com/users/mobile_login/", new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response) {
 
