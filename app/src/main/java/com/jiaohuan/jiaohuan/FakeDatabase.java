@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FakeDatabase {
     
@@ -38,6 +41,8 @@ public class FakeDatabase {
     private static Contact myData;
     private List<Contact> fullyAlphaData;
     private List<Contact> fullyUnixData;
+    private List<Contact> reverseAlpha;
+    private List<Contact> reverseUnix;
 
     // This is just fake data, it will eventually be replaced with calls to the server
     private FakeDatabase()  { // Maybe throw exception here?
@@ -61,7 +66,7 @@ public class FakeDatabase {
         Bitmap pp_ma = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.ma);
         
         // My own data
-        myData = new Contact(15435876, "李友", "Starwood Hotels", "+8615811556736", "nongxia@starwood.cn", "Beijing, China",
+        myData = new Contact(15435876, "安华", "Starwood Hotels", "+8615811556736", "nongxia@starwood.cn", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "", nyu, "CTO",
                 "starwood.cn", -12303292 , flip, 1366038215, null, null);
 
@@ -76,19 +81,19 @@ public class FakeDatabase {
                 pp_tiange, "龙湖滟澜山", "力学是我最爱的课", nyu, "CEO",
                 "http://www.baidu.com/", -12303292 , flip, 1260732717, null, null);
 
-        Contact row3 = new Contact(75135972, "刘天哥", "CCP", "+86+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row3 = new Contact(75135972, "六天个", "CCP", "+86+8615811556736", "LTG@gmail.com", "Beijing, China",
                 pp_lin, "Capital Paradise", "去过法国三次", nyu, "CFO",
                 "https://www.baidu.com/", -12303292, flip, 1260342717, null, null);
 
-        Contact row4 = new Contact(64793125, "王绍明", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
+        Contact row4 = new Contact(64793125, "王先生", "Gate Education", "+8615811556736", "SWP@hotmail.com", "Beijing, China",
                 pp_lin, "北京望京", "很喜欢游泳", nyu, "CEO",
                 "http://www.baidu.com/", -12303292 , flip, 1260346717, null, null);
 
-        Contact row5 = new Contact(75431597, "郭岛礼", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
+        Contact row5 = new Contact(75431597, "安华", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
                 pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
                 "http://www.baidu.com/", -12303292, flip, 1220346717, null, null);
 
-        Contact row6 = new Contact(32136985, "妈妈", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row6 = new Contact(32136985, "郭岛礼", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
                 "http://www.baidu.com/", -12303292, flip, 1120346717, null, null);
 
@@ -100,7 +105,7 @@ public class FakeDatabase {
                 pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
                 "http://www.baidu.com/", -12303292, flip, 1120546727, null, null);
 
-        Contact row9 = new Contact(78543264, "马克", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
+        Contact row9 = new Contact(78543264, "国奥", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",
                 pp_ma, "Capital Paradise", "去过法国三次", nyu, "CFO",
                 "http://www.baidu.com/", -12303292, flip, 1120543727, null, null);
 
@@ -121,7 +126,7 @@ public class FakeDatabase {
                 "http://www.baidu.com/", -12303292 , flip, 1472723437, null, null);
 
         Contact row14 = new Contact(14741214, "力王", "Jiao Huan Inc.", "+8615811556736", "e@gmail.com", "Beijing, China",
-                pp_xia, "龙湖滟澜山", "物理是我最爱的课", nyu, "CTO",
+                pp_xia, "龙湖滟澜山", "力学是我最爱的课", nyu, "CTO",
                 "http://www.baidu.com/", -12303292, flip, 1172723137, null, null);
 
         Contact row15 = new Contact(78976542, "模特", "CCP", "+8615811556736", "LTG@gmail.com", "Beijing, China",

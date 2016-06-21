@@ -28,15 +28,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile 'com.amazonaws:aws-android-sdk-cognito:+'
-    compile 'com.amazonaws:aws-android-sdk-s3:+'
-    compile 'com.amazonaws:aws-android-sdk-ddb:+'
-    compile 'com.amazonaws:aws-android-sdk-ec2:+'
-    compile files('libs/aws-android-sdk-cognito-2.2.17.jar')
-    compile files('libs/aws-android-sdk-core-2.2.17.jar')
+    compile files('libs/volley.jar')
+    compile files('libs/ion-2.1.6.jar')
 }
 repositories {
-    mavenCentral()
+    maven  {
+        url "http://repo1.maven.org/maven2"
+    }
 }
 allprojects {
     repositories {
