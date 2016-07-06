@@ -1,6 +1,5 @@
 package com.jiaohuan.jiaohuan;
 
-import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -14,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,26 +21,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.koushikdutta.ion.Ion;
-import com.koushikdutta.ion.future.ResponseFuture;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import java.util.List;
-import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -65,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private TextView mLogin;
     private StringRequest request;
     RequestQueue mRequestQueue;
+
+    public static final String ENDPOINT = "http://www.nutshoo.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,48 +224,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            mRequestQueue = Volley.newRequestQueue(LoginActivity.this);
-
-            request = new StringRequest(Request.Method.POST, "http://nutshoo.com/users/mobile_login/", new Response.Listener<String>(){
-                @Override
-                public void onResponse(String response) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-
-                        if(jsonObject.names().get(0).equals("admin")){
-                            Toast.makeText(MyApplication.getContext(), "SUCCESS " +
-                                    jsonObject.getString("admin"), Toast.LENGTH_SHORT).show();
-                        } else{
-
-                            Toast.makeText(MyApplication.getContext(), "ERROR " +
-                                    jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
-
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
 
 
-                }
-            }, new Response.ErrorListener(){
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            }){
-
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    HashMap<String, String> hashMap = new HashMap<String, String>();
-                    hashMap.put("username",mEmail);
-                    hashMap.put("password",mPassword);
-                    return hashMap;
-                }
-            };
-
-            mRequestQueue.add(request);
 
 
 
