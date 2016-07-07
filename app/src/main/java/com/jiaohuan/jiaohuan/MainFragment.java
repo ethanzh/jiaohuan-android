@@ -10,9 +10,10 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.jiaohuan.jiaohuan.jsonData.JsonObject;
+import com.jiaohuan.jiaohuan.jsonData.GeneratedJSON;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,28 +38,38 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mGET = (Button) view.findViewById(R.id.network);
         mPOST = (Button) view.findViewById(R.id.post);
 
-        mRequestQueue = Volley.newRequestQueue(MyApplication.getContext());
-
-
-
         mGET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                UserAPI.Factory.getInstance().getUsers().enqueue(new Callback<JsonObject>() {
+                UserAPI.Factory.getInstance().getUsers().enqueue(new Callback<ArrayList<GeneratedJSON>>() {
                     @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    public void onResponse(Call<ArrayList<GeneratedJSON>> call, Response<ArrayList<GeneratedJSON>> response) {
 
-                        Log.wtf("Response", "" + response.body());
+                        Log.wtf("LENGTH", "" + response.body().size());
 
+                        int arrayLength = response.body().size();
+
+                        for(int i = 0; i < arrayLength; i++){
+
+                            String printme = "Username: ";
+
+                            printme += response.body().get(i).getUsername();
+
+                            printme += "\nEmail: ";
+
+                            printme += response.body().get(i).getEmail() + "\n";
+
+                            Log.wtf("JSON", printme);
+                        }
                     }
 
                     @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
-                        Log.wtf("FAIL", "This failed...");
-
+                    public void onFailure(Call<ArrayList<GeneratedJSON>> call, Throwable t) {
+                        Log.wtf("FAIL",""+t.getMessage());
                     }
+
                 });
 
             }

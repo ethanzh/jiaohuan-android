@@ -1,6 +1,8 @@
 package com.jiaohuan.jiaohuan.jsonData;
 
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,7 +14,7 @@ public interface UserAPI {
 
 
     @GET("/json.json")
-    Call<JsonObject> getUsers();
+    Call<ArrayList<GeneratedJSON>> getUsers();
 
 
 
