@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.jiaohuan.jiaohuan.jsonData.GeneratedJSON;
+import com.jiaohuan.jiaohuan.jsonData.TokenJSON;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import java.util.ArrayList;
@@ -47,21 +48,25 @@ public class MainFragment extends android.support.v4.app.Fragment {
                     @Override
                     public void onResponse(Call<ArrayList<GeneratedJSON>> call, Response<ArrayList<GeneratedJSON>> response) {
 
-                        Log.wtf("LENGTH", "" + response.body().size());
+                        try{
+                            Log.wtf("LENGTH", "" + response.body().size());
 
-                        int arrayLength = response.body().size();
+                            int arrayLength = response.body().size();
 
-                        for(int i = 0; i < arrayLength; i++){
+                            for(int i = 0; i < arrayLength; i++){
 
-                            String printme = "Username: ";
+                                String printme = "Username: ";
 
-                            printme += response.body().get(i).getUsername();
+                                printme += response.body().get(i).getUsername();
 
-                            printme += "\nEmail: ";
+                                printme += "\nEmail: ";
 
-                            printme += response.body().get(i).getEmail() + "\n";
+                                printme += response.body().get(i).getEmail() + "\n";
 
-                            Log.wtf("JSON", printme);
+                                Log.wtf("JSON", printme);
+                            }
+                        }catch (NullPointerException t){
+                            t.printStackTrace();
                         }
                     }
 
@@ -80,7 +85,23 @@ public class MainFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
+                UserAPI.Factory.getInstance().getToken().enqueue(new Callback<TokenJSON>() {
+                    @Override
+                    public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
 
+                        try {
+                            Log.wtf("TOKEN", "" + response.body().getToken());
+                        }
+                        catch (NullPointerException t){
+                            t.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TokenJSON> call, Throwable t) {
+                        Log.wtf("FAIL",""+t.getMessage());
+                    }
+                });
 
             }
         });
