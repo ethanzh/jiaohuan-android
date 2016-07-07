@@ -89,12 +89,9 @@ public class MainFragment extends android.support.v4.app.Fragment {
                     @Override
                     public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
 
-                        try {
-                            Log.wtf("TOKEN", "" + response.body().getToken());
-                        }
-                        catch (NullPointerException t){
-                            t.printStackTrace();
-                        }
+                        Log.wtf("TOKEN", "" + response.body().getToken());
+
+
                     }
 
                     @Override

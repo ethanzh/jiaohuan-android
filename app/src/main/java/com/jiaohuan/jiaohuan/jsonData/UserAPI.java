@@ -18,11 +18,12 @@ public interface UserAPI {
     @GET("/json.json")
     Call<ArrayList<GeneratedJSON>> getUsers();
 
-    @Headers({
-            "username: testuser",
-            "password: Ethan3824"
-    })
-    @POST("/api-token-auth")
+//    @Headers("Content-Type: application/json")
+//    @POST("/api-token-auth")
+//    Call<TokenJSON> getToken();
+
+
+    @POST("/api-token-auth/")
     Call<TokenJSON> getToken();
 
 
