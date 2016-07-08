@@ -23,7 +23,7 @@ public class RetrofitLogin {
 
     void logInTask(String username, String password, final LoginCallback callback){
 
-        UserAPI.Factory.getInstance().authenticateUser("testuser", "Ethan3824").enqueue(new Callback<TokenJSON>() {
+        UserAPI.Factory.getInstance().authenticateUser(username, password).enqueue(new Callback<TokenJSON>() {
             @Override
             public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
 

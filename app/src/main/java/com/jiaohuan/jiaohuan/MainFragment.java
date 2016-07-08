@@ -79,33 +79,13 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        final String username = "testuser";
-        final String password = "Ethan3824";
+//        final String username = "testuser";
+//        final String password = "Ethan3824";
 
 
         mPOST.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-                UserAPI.Factory.getInstance().createUser("HELLOOO", "38243874").enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-
-                        try{
-                            Log.wtf("WORKS",""+ response.body().getUsername());
-                        }catch (NullPointerException t){
-                            Log.wtf("NO", "Didn't work, most likely incorrect username+password");
-                            t.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Log.wtf("FAIL",""+t.getMessage());
-                    }
-                });
 
             }
         });

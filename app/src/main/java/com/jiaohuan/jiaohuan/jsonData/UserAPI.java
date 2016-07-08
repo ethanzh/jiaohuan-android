@@ -29,8 +29,8 @@ public interface UserAPI {
     Call<TokenJSON> authenticateUser(@Field("username") String username, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("/register/")
-    Call<User> createUser(@Field("username") String username, @Field("password") String password /*, @Field("first_name") String first_name*/);
+    @POST("/mobile_register/")
+    Call<SignupUserJSON> createUser(@Field("username") String username, @Field("password") String password /*, @Field("first_name") String first_name*/);
 
 
 
@@ -39,19 +39,18 @@ public interface UserAPI {
 
         private static UserAPI service;
 
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        //interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
         public static UserAPI getInstance(){
 
             if(service == null){
 
+                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
                 Retrofit retrofit = new Retrofit.Builder()
                         .addConverterFactory(GsonConverterFactory.create())
                         .baseUrl(BASE_URL)
-
+                        .client(client)
                         .build();
 
                 service = retrofit.create(UserAPI.class);
