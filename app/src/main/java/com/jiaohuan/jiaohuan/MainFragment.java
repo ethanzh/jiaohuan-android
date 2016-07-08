@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
-import com.jiaohuan.jiaohuan.jsonData.GeneratedJSON;
-import com.jiaohuan.jiaohuan.jsonData.TokenJSON;
+import com.jiaohuan.jiaohuan.jsonData.User;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import java.util.ArrayList;
@@ -44,9 +43,9 @@ public class MainFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
 
 
-                UserAPI.Factory.getInstance().getUsers().enqueue(new Callback<ArrayList<GeneratedJSON>>() {
+                UserAPI.Factory.getInstance().getUsers().enqueue(new Callback<ArrayList<User>>() {
                     @Override
-                    public void onResponse(Call<ArrayList<GeneratedJSON>> call, Response<ArrayList<GeneratedJSON>> response) {
+                    public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
 
                         try{
                             Log.wtf("LENGTH", "" + response.body().size());
@@ -71,7 +70,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<ArrayList<GeneratedJSON>> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<User>> call, Throwable t) {
                         Log.wtf("FAIL",""+t.getMessage());
                     }
 
@@ -90,12 +89,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
 
 
-                UserAPI.Factory.getInstance().authenticateUser(username, password).enqueue(new Callback<TokenJSON>() {
+                UserAPI.Factory.getInstance().createUser("HELLOOO", "38243874", "Donald").enqueue(new Callback<User>() {
                     @Override
-                    public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
+                    public void onResponse(Call<User> call, Response<User> response) {
 
                         try{
-                            Log.wtf("WORKS",""+ response.body().getToken());
+                            Log.wtf("WORKS",""+ response.body().getUsername());
                         }catch (NullPointerException t){
                             Log.wtf("NO", "Didn't work, most likely incorrect username+password");
                             t.printStackTrace();
@@ -103,7 +102,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<TokenJSON> call, Throwable t) {
+                    public void onFailure(Call<User> call, Throwable t) {
                         Log.wtf("FAIL",""+t.getMessage());
                     }
                 });

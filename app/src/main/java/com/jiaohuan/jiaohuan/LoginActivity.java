@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.wtf("LOGIN", "Starting login");
                 attemptLogin();
             }
         });
@@ -124,11 +126,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
-
-        Log.wtf("WORK", "This works");
+//        if (mAuthTask != null) {
+//            return;
+//        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -161,8 +161,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onLoginFailure() {
                 Log.wtf("AUTH", "Unable to login");
+
+                Toast.makeText(LoginActivity.this, "Unable to login", Toast.LENGTH_SHORT).show();
+
+                return;
             }
         });
+
+        return;
 
     }
 
