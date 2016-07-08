@@ -145,7 +145,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //mAuthTask.execute((Void) null);
 
         mAuthTask = new RetrofitLogin(email, password);
-        mAuthTask.LogInTask(email, password);
+        mAuthTask.logInTask(email, password, new LoginCallback(){
+
+            @Override
+            public void onLoginSuccess() {
+
+                // Start the new activity, with no animation
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+
+            }
+
+            @Override
+            public void onLoginFailure() {
+                Log.wtf("AUTH", "Unable to login");
+            }
+        });
 
     }
 
@@ -222,7 +239,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
 
-    public class RetrofitLogin{
+    public class RetrofitLogin {
 
         String mUsername;
         String mPassword;
@@ -234,46 +251,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         }
 
-        boolean LogInTask(String username, String password){
+        void logInTask(String username, String password, final LoginCallback callback){
 
-            final boolean hi;
-
-
-            AuthOrNot.setCurrent(true);
-            Log.wtf("START", "" + AuthOrNot.getCurrent());
-
-            UserAPI.Factory.getInstance().authenticateUser("sdfds", "Ethan3824").enqueue(new Callback<TokenJSON>() {
+            UserAPI.Factory.getInstance().authenticateUser("testuser", "Ethan3824").enqueue(new Callback<TokenJSON>() {
                 @Override
                 public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
 
                     try{
                         String token = response.body().getToken();
-                        Log.wtf("WORKS",""+ token);
+                        Log.wtf("TOKEN",""+ token);
 
-                        AuthOrNot.setCurrent(false);
-
-                        Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
-
+                        callback.onLoginSuccess();
 
                     }catch (NullPointerException t){
-                        Log.wtf("NO", "Didn't work, most likely incorrect username+password");
-                        AuthOrNot.setCurrent(false);
+
+                        callback.onLoginFailure();
+
                         t.printStackTrace();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<TokenJSON> call, Throwable t) {
-                    Log.wtf("FAIL",""+t.getMessage());
-                    AuthOrNot.setCurrent(false);
+
+                    callback.onLoginFailure();
                 }
             });
-
-            Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
-
-            return AuthOrNot.getCurrent();
         }
-
     }
 
 
