@@ -2,7 +2,7 @@ package com.jiaohuan.jiaohuan;
 
 import android.util.Log;
 
-import com.jiaohuan.jiaohuan.jsonData.TokenJSON;
+import com.jiaohuan.jiaohuan.jsonData.GetTokenJSON;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import retrofit2.Call;
@@ -23,9 +23,9 @@ public class RetrofitLogin {
 
     void logInTask(String username, String password, final LoginCallback callback){
 
-        UserAPI.Factory.getInstance().authenticateUser(username, password).enqueue(new Callback<TokenJSON>() {
+        UserAPI.Factory.getInstance().authenticateUser(username, password).enqueue(new Callback<GetTokenJSON>() {
             @Override
-            public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
+            public void onResponse(Call<GetTokenJSON> call, Response<GetTokenJSON> response) {
 
                 try{
                     String token = response.body().getToken();
@@ -42,7 +42,7 @@ public class RetrofitLogin {
             }
 
             @Override
-            public void onFailure(Call<TokenJSON> call, Throwable t) {
+            public void onFailure(Call<GetTokenJSON> call, Throwable t) {
 
                 callback.onLoginFailure();
             }

@@ -26,11 +26,11 @@ public interface UserAPI {
 
     @FormUrlEncoded
     @POST("/api-token-auth/")
-    Call<TokenJSON> authenticateUser(@Field("username") String username, @Field("password") String password);
+    Call<GetTokenJSON> authenticateUser(@Field("username") String username, @Field("password") String password);
 
     @FormUrlEncoded
     @POST("/mobile_register/")
-    Call<SignupUserJSON> createUser(@Field("username") String username, @Field("password") String password /*, @Field("first_name") String first_name*/);
+    Call<MobileAuthUserJSON> createUser(@Field("username") String username, @Field("password") String password /*, @Field("first_name") String first_name*/);
 
 
 

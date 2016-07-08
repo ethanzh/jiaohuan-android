@@ -257,9 +257,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //            AuthOrNot.setCurrent(true);
 //            Log.wtf("START", "" + AuthOrNot.getCurrent());
 //
-//            UserAPI.Factory.getInstance().authenticateUser("sdfds", "Ethan3824").enqueue(new Callback<TokenJSON>() {
+//            UserAPI.Factory.getInstance().authenticateUser("sdfds", "Ethan3824").enqueue(new Callback<GetTokenJSON>() {
 //                @Override
-//                public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
+//                public void onResponse(Call<GetTokenJSON> call, Response<GetTokenJSON> response) {
 //
 //                    try{
 //                        String token = response.body().getToken();
@@ -282,7 +282,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //                }
 //
 //                @Override
-//                public void onFailure(Call<TokenJSON> call, Throwable t) {
+//                public void onFailure(Call<GetTokenJSON> call, Throwable t) {
 //                    Log.wtf("FAIL",""+t.getMessage());
 //                    AuthOrNot.setCurrent(false);
 //                }

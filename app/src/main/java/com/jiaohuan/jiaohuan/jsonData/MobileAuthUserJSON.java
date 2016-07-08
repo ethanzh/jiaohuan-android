@@ -7,7 +7,7 @@ import javax.annotation.Generated;
 ;
 
 @Generated("org.jsonschema2pojo")
-public class SignupUserJSON {
+public class MobileAuthUserJSON {
 
     @SerializedName("Username")
     @Expose

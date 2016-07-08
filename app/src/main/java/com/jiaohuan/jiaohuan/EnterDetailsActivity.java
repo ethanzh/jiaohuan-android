@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jiaohuan.jiaohuan.jsonData.SignupUserJSON;
+import com.jiaohuan.jiaohuan.jsonData.MobileAuthUserJSON;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import retrofit2.Call;
@@ -75,10 +75,10 @@ public class EnterDetailsActivity extends Activity {
 
                     Send email, password, and phone to server*/
 
-                    UserAPI.Factory.getInstance().createUser(email, password).enqueue(new Callback<SignupUserJSON>() {
+                    UserAPI.Factory.getInstance().createUser(email, password).enqueue(new Callback<MobileAuthUserJSON>() {
 
                     @Override
-                    public void onResponse(Call<SignupUserJSON> call, Response<SignupUserJSON> response) {
+                    public void onResponse(Call<MobileAuthUserJSON> call, Response<MobileAuthUserJSON> response) {
 
                         try{
 
@@ -113,7 +113,7 @@ public class EnterDetailsActivity extends Activity {
                     }
 
                     @Override
-                    public void onFailure(Call<SignupUserJSON> call, Throwable t) {
+                    public void onFailure(Call<MobileAuthUserJSON> call, Throwable t) {
                         Log.wtf("FAIL",""+t.getMessage());
                     }
                 });
