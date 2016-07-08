@@ -16,7 +16,9 @@ public interface UserAPI {
 
     String BASE_URL = "http://www.nutshoo.com";
 
-    @Headers("Authorization: Token " + "3cbe3746e3bd0d63dd0db4ca81dce844d586f43c")
+    String auth_token = "3cbe3746e3bd0d63dd0db4ca81dce844d586f43c";
+
+    @Headers("Authorization: Token " + auth_token)
     @GET("/json.json")
     Call<ArrayList<User>> getUsers();
 

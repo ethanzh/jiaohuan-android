@@ -11,6 +11,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jiaohuan.jiaohuan.jsonData.User;
+import com.jiaohuan.jiaohuan.jsonData.UserAPI;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class EnterDetailsActivity extends Activity {
 
     private TextView mNext;
@@ -54,19 +61,37 @@ public class EnterDetailsActivity extends Activity {
                     mName.setHintTextColor(Color.RED);
                     mPassword.setHintTextColor(Color.RED);
                     mPhone.setHintTextColor(Color.RED);
-                    return;
-                }else if(phone.length() != 13){
-                    Toast.makeText(getApplicationContext(), "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
-                    mPhone.setTextColor(Color.RED);
-                }
+                    return;}
+//                else if(phone.length() != 12){
+//                    Toast.makeText(getApplicationContext(), "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
+//                    mPhone.setTextColor(Color.RED);
+//                }
 
 
                 else{
                     /*
 
-                    Send email, password, and phone to server
+                    Send email, password, and phone to server*/
 
-                     */
+                    UserAPI.Factory.getInstance().createUser(email, password, "Donald").enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+
+                        try{
+                            Log.wtf("WORKS",""+ response.body().getUsername());
+                        }catch (NullPointerException t){
+                            Log.wtf("NO", "Didn't work, most likely incorrect username+password");
+                            t.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Log.wtf("FAIL",""+t.getMessage());
+                    }
+                });
+
+                    /* */
                 }
             }
         });

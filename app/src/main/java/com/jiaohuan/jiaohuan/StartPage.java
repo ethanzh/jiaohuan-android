@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class StartPage extends Activity {
@@ -91,7 +89,8 @@ public class StartPage extends Activity {
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivityForResult(intent, requestCode);
                     }else if(requestCode == 1){
-                        Intent intent = new Intent(getApplicationContext(), CreateAccountCard.class);
+                        //Intent intent = new Intent(getApplicationContext(), CreateAccountCard.class);
+                        Intent intent = new Intent(getApplicationContext(), EnterDetailsActivity.class);
                         startActivityForResult(intent, requestCode);
                     }
 
