@@ -80,18 +80,26 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        final String username = "testuser";
+        final String password = "Ethan3824";
+
 
         mPOST.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                UserAPI.Factory.getInstance().getToken().enqueue(new Callback<TokenJSON>() {
+
+
+                UserAPI.Factory.getInstance().authenticateUser(username, password).enqueue(new Callback<TokenJSON>() {
                     @Override
                     public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
 
-                        Log.wtf("TOKEN", "" + response.body().getToken());
-
-
+                        try{
+                            Log.wtf("WORKS",""+ response.body().getToken());
+                        }catch (NullPointerException t){
+                            Log.wtf("NO", "Didn't work, most likely incorrect username+password");
+                            t.printStackTrace();
+                        }
                     }
 
                     @Override

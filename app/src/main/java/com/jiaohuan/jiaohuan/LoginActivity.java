@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -24,9 +25,15 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
+import com.jiaohuan.jiaohuan.jsonData.TokenJSON;
+import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -40,7 +47,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    private UserLoginTask mAuthTask = null;
+    //private UserLoginTask mAuthTask = null;
+
+    private RetrofitLogin mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -119,6 +128,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return;
         }
 
+        Log.wtf("WORK", "This works");
+
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -130,8 +141,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         boolean cancel = false;
         View focusView = null;
 
-        mAuthTask = new UserLoginTask(email, password);
-        mAuthTask.execute((Void) null);
+        //mAuthTask = new UserLoginTask(email, password);
+        //mAuthTask.execute((Void) null);
+
+        mAuthTask = new RetrofitLogin(email, password);
+        mAuthTask.LogInTask(email, password);
 
     }
 
@@ -206,17 +220,75 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
+
+
+    public class RetrofitLogin{
+
+        String mUsername;
+        String mPassword;
+
+        public RetrofitLogin(String email, String password) {
+
+            mUsername = email;
+            mPassword = password;
+
+        }
+
+        boolean LogInTask(String username, String password){
+
+            final boolean hi;
+
+
+            AuthOrNot.setCurrent(true);
+            Log.wtf("START", "" + AuthOrNot.getCurrent());
+
+            UserAPI.Factory.getInstance().authenticateUser("sdfds", "Ethan3824").enqueue(new Callback<TokenJSON>() {
+                @Override
+                public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
+
+                    try{
+                        String token = response.body().getToken();
+                        Log.wtf("WORKS",""+ token);
+
+                        AuthOrNot.setCurrent(false);
+
+                        Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
+
+
+                    }catch (NullPointerException t){
+                        Log.wtf("NO", "Didn't work, most likely incorrect username+password");
+                        AuthOrNot.setCurrent(false);
+                        t.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<TokenJSON> call, Throwable t) {
+                    Log.wtf("FAIL",""+t.getMessage());
+                    AuthOrNot.setCurrent(false);
+                }
+            });
+
+            Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
+
+            return AuthOrNot.getCurrent();
+        }
+
+    }
+
+
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
+        private final String mUsername;
         private final String mPassword;
 
         UserLoginTask(String email, String password) {
-            mEmail = email;
+            mUsername = email;
             mPassword = password;
         }
 
@@ -224,12 +296,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            AuthOrNot.setCurrent(true);
+            Log.wtf("START", "" + AuthOrNot.getCurrent());
+
+            UserAPI.Factory.getInstance().authenticateUser("sdfds", "Ethan3824").enqueue(new Callback<TokenJSON>() {
+                @Override
+                public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
+
+                    try{
+                        String token = response.body().getToken();
+                        Log.wtf("WORKS",""+ token);
+
+                        if (token.isEmpty() == false){
+                            AuthOrNot.setCurrent(true);
+                        }else{
+                            AuthOrNot.setCurrent(false);
+                        }
+
+                        Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
 
 
+                    }catch (NullPointerException t){
+                        Log.wtf("NO", "Didn't work, most likely incorrect username+password");
+                        AuthOrNot.setCurrent(false);
+                        t.printStackTrace();
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<TokenJSON> call, Throwable t) {
+                    Log.wtf("FAIL",""+t.getMessage());
+                    AuthOrNot.setCurrent(false);
+                }
+            });
 
+            Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
 
-            return true;
+            return AuthOrNot.getCurrent();
         }
 
         @Override
