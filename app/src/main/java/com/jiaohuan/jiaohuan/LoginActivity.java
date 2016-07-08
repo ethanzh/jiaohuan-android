@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -26,15 +26,9 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
-import com.jiaohuan.jiaohuan.jsonData.TokenJSON;
-import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -162,14 +156,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onLoginFailure() {
                 Log.wtf("AUTH", "Unable to login");
 
-                Toast.makeText(LoginActivity.this, "Unable to login", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Incorrect Login Details", Toast.LENGTH_SHORT).show();
 
-                return;
+                mEmailView.setTextColor(Color.RED);
+                mPasswordView.setTextColor(Color.RED);
+
             }
         });
-
-        return;
-
     }
 
     private boolean isEmailValid(String email) {
@@ -243,130 +236,86 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
-
-
-    public class RetrofitLogin {
-
-        String mUsername;
-        String mPassword;
-
-        public RetrofitLogin(String email, String password) {
-
-            mUsername = email;
-            mPassword = password;
-
-        }
-
-        void logInTask(String username, String password, final LoginCallback callback){
-
-            UserAPI.Factory.getInstance().authenticateUser("testuser", "Ethan3824").enqueue(new Callback<TokenJSON>() {
-                @Override
-                public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
-
-                    try{
-                        String token = response.body().getToken();
-                        Log.wtf("TOKEN",""+ token);
-
-                        callback.onLoginSuccess();
-
-                    }catch (NullPointerException t){
-
-                        callback.onLoginFailure();
-
-                        t.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<TokenJSON> call, Throwable t) {
-
-                    callback.onLoginFailure();
-                }
-            });
-        }
-    }
-
-
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mUsername;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mUsername = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            AuthOrNot.setCurrent(true);
-            Log.wtf("START", "" + AuthOrNot.getCurrent());
-
-            UserAPI.Factory.getInstance().authenticateUser("sdfds", "Ethan3824").enqueue(new Callback<TokenJSON>() {
-                @Override
-                public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
-
-                    try{
-                        String token = response.body().getToken();
-                        Log.wtf("WORKS",""+ token);
-
-                        if (token.isEmpty() == false){
-                            AuthOrNot.setCurrent(true);
-                        }else{
-                            AuthOrNot.setCurrent(false);
-                        }
-
-                        Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
-
-
-                    }catch (NullPointerException t){
-                        Log.wtf("NO", "Didn't work, most likely incorrect username+password");
-                        AuthOrNot.setCurrent(false);
-                        t.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<TokenJSON> call, Throwable t) {
-                    Log.wtf("FAIL",""+t.getMessage());
-                    AuthOrNot.setCurrent(false);
-                }
-            });
-
-            Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
-
-            return AuthOrNot.getCurrent();
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-
-            if (success) {
-                // Start the new activity, with no animation
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            } else {
-                //mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-
-        }
-
-    }
-
+//    /**
+//     * Represents an asynchronous login/registration task used to authenticate
+//     * the user.
+//     */
+//    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+//
+//        private final String mUsername;
+//        private final String mPassword;
+//
+//        UserLoginTask(String email, String password) {
+//            mUsername = email;
+//            mPassword = password;
+//        }
+//
+//        @Override
+//        protected Boolean doInBackground(Void... params) {
+//            // TODO: attempt authentication against a network service.
+//
+//            AuthOrNot.setCurrent(true);
+//            Log.wtf("START", "" + AuthOrNot.getCurrent());
+//
+//            UserAPI.Factory.getInstance().authenticateUser("sdfds", "Ethan3824").enqueue(new Callback<TokenJSON>() {
+//                @Override
+//                public void onResponse(Call<TokenJSON> call, Response<TokenJSON> response) {
+//
+//                    try{
+//                        String token = response.body().getToken();
+//                        Log.wtf("WORKS",""+ token);
+//
+//                        if (token.isEmpty() == false){
+//                            AuthOrNot.setCurrent(true);
+//                        }else{
+//                            AuthOrNot.setCurrent(false);
+//                        }
+//
+//                        Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
+//
+//
+//                    }catch (NullPointerException t){
+//                        Log.wtf("NO", "Didn't work, most likely incorrect username+password");
+//                        AuthOrNot.setCurrent(false);
+//                        t.printStackTrace();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<TokenJSON> call, Throwable t) {
+//                    Log.wtf("FAIL",""+t.getMessage());
+//                    AuthOrNot.setCurrent(false);
+//                }
+//            });
+//
+//            Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
+//
+//            return AuthOrNot.getCurrent();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(final Boolean success) {
+//            mAuthTask = null;
+//
+//            if (success) {
+//                // Start the new activity, with no animation
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+//                finish();
+//            } else {
+//                //mPasswordView.setError(getString(R.string.error_incorrect_password));
+//                mPasswordView.requestFocus();
+//            }
+//        }
+//
+//        @Override
+//        protected void onCancelled() {
+//            mAuthTask = null;
+//
+//        }
+//
+//    }
+//
+//
 }

@@ -111,7 +111,7 @@ public class StartPage extends Activity {
     }
 
     public void signup(){
-        Intent intent = new Intent(getApplicationContext(), CreateAccountCard.class);
+        Intent intent = new Intent(getApplicationContext(), EnterDetailsActivity.class);
         startActivityForResult(intent, 1);
     }
 }

@@ -1,6 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class EnterDetailsActivity extends Activity {
 
     private TextView mNext;
@@ -28,13 +30,14 @@ public class EnterDetailsActivity extends Activity {
     private TextView mBack;
     private Spinner mSpinner;
 
+    private RetrofitLogin mAuthTask = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_details);
 
         mNext = (TextView) findViewById(R.id.next);
-
         mName = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
         mPhone = (EditText) findViewById(R.id.phone);
@@ -52,8 +55,8 @@ public class EnterDetailsActivity extends Activity {
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mName.getText().toString();
-                String password = mPassword.getText().toString();
+                final String email = mName.getText().toString();
+                final String password = mPassword.getText().toString();
                 String phone = mSpinner.getSelectedItem().toString() + mPhone.getText().toString();
 
                 if (email.matches("") || password.matches("") || phone.matches("")){
@@ -67,18 +70,39 @@ public class EnterDetailsActivity extends Activity {
 //                    mPhone.setTextColor(Color.RED);
 //                }
 
-
                 else{
                     /*
 
                     Send email, password, and phone to server*/
 
-                    UserAPI.Factory.getInstance().createUser(email, password, "Donald").enqueue(new Callback<User>() {
+                    UserAPI.Factory.getInstance().createUser(email, password).enqueue(new Callback<User>() {
+
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
 
                         try{
                             Log.wtf("WORKS",""+ response.body().getUsername());
+
+                            mAuthTask = new RetrofitLogin(email, password);
+                            mAuthTask.logInTask(email, password, new LoginCallback(){
+
+                                @Override
+                                public void onLoginSuccess() {
+
+                                    // Start the new activity, with no animation
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                    finish();
+
+                                }
+
+                                @Override
+                                public void onLoginFailure() {
+                                    Log.wtf("AUTH", "Unable to login");
+
+                                }
+                            });
                         }catch (NullPointerException t){
                             Log.wtf("NO", "Didn't work, most likely incorrect username+password");
                             t.printStackTrace();
@@ -90,8 +114,6 @@ public class EnterDetailsActivity extends Activity {
                         Log.wtf("FAIL",""+t.getMessage());
                     }
                 });
-
-                    /* */
                 }
             }
         });

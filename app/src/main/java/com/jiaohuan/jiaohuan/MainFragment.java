@@ -89,7 +89,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
 
 
-                UserAPI.Factory.getInstance().createUser("HELLOOO", "38243874", "Donald").enqueue(new Callback<User>() {
+                UserAPI.Factory.getInstance().createUser("HELLOOO", "38243874").enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
 

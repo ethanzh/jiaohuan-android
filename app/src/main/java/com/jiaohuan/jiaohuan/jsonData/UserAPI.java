@@ -3,6 +3,8 @@ package com.jiaohuan.jiaohuan.jsonData;
 
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -28,12 +30,19 @@ public interface UserAPI {
 
     @FormUrlEncoded
     @POST("/register/")
-    Call<User> createUser(@Field("username") String username, @Field("password") String password, @Field("first_name") String first_name);
+    Call<User> createUser(@Field("username") String username, @Field("password") String password /*, @Field("first_name") String first_name*/);
+
+
 
 
     class Factory {
 
         private static UserAPI service;
+
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        //interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         public static UserAPI getInstance(){
 
@@ -42,6 +51,7 @@ public interface UserAPI {
                 Retrofit retrofit = new Retrofit.Builder()
                         .addConverterFactory(GsonConverterFactory.create())
                         .baseUrl(BASE_URL)
+
                         .build();
 
                 service = retrofit.create(UserAPI.class);
