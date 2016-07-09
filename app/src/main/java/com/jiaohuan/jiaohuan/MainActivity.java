@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.jiaohuan.jiaohuan.jsonData.User;
+
 public class MainActivity extends FragmentActivity {
 
     ViewPager mViewPager = null;
@@ -39,6 +41,11 @@ public class MainActivity extends FragmentActivity {
     private TextView mBarText;
     private Barometer blis;
     private LruCache<String, Bitmap> mMemoryCache;
+    public User cu;
+
+    public void getUser(){
+        cu = new CurrentUser().getInstance().getUsername();
+    }
 
 
     @Override
@@ -48,6 +55,8 @@ public class MainActivity extends FragmentActivity {
 
         // The app works without this for now...
         //setBitmapMemory();
+
+        getUser();
 
         initializeBottomButtons();
 
@@ -132,6 +141,8 @@ public class MainActivity extends FragmentActivity {
             return true;
         }
     }
+
+
 
     public void setBitmapMemory() {
         // Get max available VM memory, exceeding this amount will throw an

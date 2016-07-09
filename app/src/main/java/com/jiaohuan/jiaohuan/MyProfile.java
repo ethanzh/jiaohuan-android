@@ -49,12 +49,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         //shortendPhone = shortendPhone.substring(3);
         //Log.wtf("SHORT", shortendPhone);
 
-        // Set dummy data, eventually to be replaced with data from server
-//        mImageView.setImageBitmap(myData.getPic());
-//        mName.setText(myData.getName());
-//        mEmail.setText(myData.getEmail());
-//        mLocation.setText(myData.getLocation());
-//        mCard.setImageBitmap(myData.getBusiness_card());
+
 
         // Gets phone dimensions
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
