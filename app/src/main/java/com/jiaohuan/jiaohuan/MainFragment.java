@@ -17,8 +17,6 @@ import retrofit2.Response;
 
 public class MainFragment extends android.support.v4.app.Fragment {
 
-    // GitHub does work!
-
     private Button mGET;
     private TextView mTextView;
     private Button mPOST;
@@ -32,25 +30,21 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mPOST = (Button) view.findViewById(R.id.post);
         mTextView = (TextView) view.findViewById(R.id.welcome);
 
-        //3cbe3746e3bd0d63dd0db4ca81dce844d586f43c
-        authorization += "5a99b2e1f4a9be61029ee2b37120ce544a872608";
+        authorization += CurrentToken.getCurrent();
 
         UserAPI.Factory.getInstance().getPrimaryKey(authorization).enqueue(new Callback<User>() {
 
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
 
-                Log.wtf("AUTH", authorization);
                 String name = response.body().getUsername();
 
                 String welcome = "Welcome, " + name;
-
                 mTextView.setText(welcome);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.wtf("AUTH", authorization);
                 Log.wtf("FAIL",""+t.getMessage());
             }
         });

@@ -1,7 +1,5 @@
 package com.jiaohuan.jiaohuan;
 
-import android.util.Log;
-
 import com.jiaohuan.jiaohuan.jsonData.GetTokenJSON;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
@@ -29,7 +27,8 @@ public class RetrofitLogin {
 
                 try{
                     String token = response.body().getToken();
-                    Log.wtf("TOKEN",""+ token);
+
+                    CurrentToken.setCurrent(token);
 
                     callback.onLoginSuccess();
 
