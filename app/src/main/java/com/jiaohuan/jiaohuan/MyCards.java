@@ -86,7 +86,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
         mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
 
-        mRecyclerView.setAdapter(mNameAdapter);
+        //mRecyclerView.setAdapter(mNameAdapter);
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
@@ -111,8 +111,8 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mName.setTextColor(selectedColorValue);
                 mDate.setTextColor(nonSelectedColorValue);
 
-                mRecyclerView.setAdapter(mNameAdapter);
-                mRecyclerView.smoothScrollToPosition(0);
+//                mRecyclerView.setAdapter(mNameAdapter);
+//                mRecyclerView.smoothScrollToPosition(0);
             }
         });
 
@@ -126,8 +126,8 @@ public class MyCards extends android.support.v4.app.Fragment {
                 mName.setTextColor(nonSelectedColorValue);
                 mDate.setTextColor(selectedColorValue);
 
-                mRecyclerView.setAdapter(mDateAdapter);
-                mRecyclerView.smoothScrollToPosition(0);
+//                mRecyclerView.setAdapter(mDateAdapter);
+//                mRecyclerView.smoothScrollToPosition(0);
             }
         });
 
@@ -471,7 +471,7 @@ public class MyCards extends android.support.v4.app.Fragment {
                 }
 
                 mNewAdapter = new RecycleAdapter(getActivity(), filteredList);
-                mRecyclerView.setAdapter(mNewAdapter);
+//                mRecyclerView.setAdapter(mNewAdapter);
                 mNewAdapter.notifyDataSetChanged();  // data set changed
 
                 return true;

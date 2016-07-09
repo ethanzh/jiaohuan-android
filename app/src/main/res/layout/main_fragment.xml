@@ -17,10 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome to Jiao Huan."
         android:textSize="20dp"
         android:layout_marginTop="30dp"
-        android:id="@+id/textView3"
+        android:id="@+id/welcome"
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff"/>
 

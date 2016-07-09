@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.graphics.BitmapCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -44,7 +42,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mEdit = (TextView) view.findViewById(R.id.edit);
 
         // Get my data from fake database
-        myData = FakeDatabase.getInstance().getMyData();
+        // myData = FakeDatabase.getInstance().getMyData();
 
         // Take +86 off the front of the phone number
         //String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
@@ -52,12 +50,11 @@ public class MyProfile extends android.support.v4.app.Fragment {
         //Log.wtf("SHORT", shortendPhone);
 
         // Set dummy data, eventually to be replaced with data from server
-        mImageView.setImageBitmap(myData.getPic());
-        mName.setText(myData.getName());
-        mEmail.setText(myData.getEmail());
-        //mPhone.setText(shortendPhone);
-        mLocation.setText(myData.getLocation());
-        mCard.setImageBitmap(myData.getBusiness_card());
+//        mImageView.setImageBitmap(myData.getPic());
+//        mName.setText(myData.getName());
+//        mEmail.setText(myData.getEmail());
+//        mLocation.setText(myData.getLocation());
+//        mCard.setImageBitmap(myData.getBusiness_card());
 
         // Gets phone dimensions
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -89,10 +86,10 @@ public class MyProfile extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 if (initial == 0) {
-                    mCard.setImageBitmap(myData.getFlipside());
+//                    mCard.setImageBitmap(myData.getFlipside());
                     initial = 1;
                 } else {
-                    mCard.setImageBitmap(myData.getBusiness_card());
+//                    mCard.setImageBitmap(myData.getBusiness_card());
                     initial = 0;
                 }
             }
@@ -105,9 +102,9 @@ public class MyProfile extends android.support.v4.app.Fragment {
     public void onResume() {
         super.onResume();
 
-        mName.setText(myData.getName());
-        mEmail.setText(myData.getEmail());
-        mPhone.setText(myData.getPhoneNum());
-        mLocation.setText(myData.getLocation());
+//        mName.setText(myData.getName());
+//        mEmail.setText(myData.getEmail());
+//        mPhone.setText(myData.getPhoneNum());
+//        mLocation.setText(myData.getLocation());
     }
 }

@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -32,6 +33,9 @@ public interface UserAPI {
     @POST("/mobile_register/")
     Call<MobileAuthUserJSON> createUser(@Field("username") String username, @Field("password") String password /*, @Field("first_name") String first_name*/);
 
+    //@Headers("Authorization: Token " + auth_token)
+    @GET("/current_user/")
+    Call<User> getPrimaryKey(@Header("Authorization") String token);
 
 
 
