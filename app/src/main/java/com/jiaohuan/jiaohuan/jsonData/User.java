@@ -1,11 +1,17 @@
 
 package com.jiaohuan.jiaohuan.jsonData;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.jiaohuan.jiaohuan.CurrentToken;
 
 import javax.annotation.Generated;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 @Generated("org.jsonschema2pojo")
@@ -136,6 +142,39 @@ public class User {
      */
     public void setDateJoined(String dateJoined) {
         this.dateJoined = dateJoined;
+    }
+
+
+    private static User ourInstance = getUserDataFromServer();
+
+    public static User getInstance() {
+
+        return ourInstance;
+
+    }
+
+    public static User getUserDataFromServer(){
+        final User cu = new User();
+        String authentication = "Token " + CurrentToken.getCurrent();
+
+        UserAPI.Factory.getInstance().getPrimaryKey(authentication).enqueue(new Callback<User>() {
+
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                String username = response.body().getUsername();
+                Log.wtf("SETTING", "setting username");
+                cu.setUsername(username);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.wtf("FAIL",""+t.getMessage());
+            }
+        });
+        return cu;
     }
 
 }

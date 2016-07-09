@@ -14,6 +14,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jiaohuan.jiaohuan.jsonData.User;
+
 public class MyProfile extends android.support.v4.app.Fragment {
     @Nullable
 
@@ -49,7 +51,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         //shortendPhone = shortendPhone.substring(3);
         //Log.wtf("SHORT", shortendPhone);
 
-
+        mName.setText(User.getInstance().getUsername());
 
         // Gets phone dimensions
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);

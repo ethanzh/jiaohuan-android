@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.LruCache;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -44,7 +45,7 @@ public class MainActivity extends FragmentActivity {
     public User cu;
 
     public void getUser(){
-        cu = new CurrentUser().getInstance().getUsername();
+        Log.wtf("CU", cu.getInstance().getUsername());
     }
 
 
@@ -56,8 +57,6 @@ public class MainActivity extends FragmentActivity {
         // The app works without this for now...
         //setBitmapMemory();
 
-        getUser();
-
         initializeBottomButtons();
 
         setInitialValues();
@@ -67,6 +66,8 @@ public class MainActivity extends FragmentActivity {
         startViewPager();
 
         viewPagerListener();
+
+        getUser();
     }
 
     public void startViewPager() {

@@ -10,17 +10,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CurrentUser {
-
-    public static User create = new User();
-
-    private static User ourInstance = create;
+    private static User ourInstance = new User();
 
     public static User getInstance() {
         return ourInstance;
     }
 
     private CurrentUser() {
+    }
+
+
+    public User getUserDataFromServer(){
         String authentication = "Token " + CurrentToken.getCurrent();
+
+        final User cu = new User();
+
         UserAPI.Factory.getInstance().getPrimaryKey(authentication).enqueue(new Callback<User>() {
 
             @Override
@@ -29,8 +33,8 @@ public class CurrentUser {
                 String username = response.body().getUsername();
                 String email = response.body().getEmail();
 
-                create.setUsername(username);
-                create.setEmail(email);
+                cu.setUsername(username);
+
             }
 
             @Override
@@ -38,7 +42,7 @@ public class CurrentUser {
                 Log.wtf("FAIL",""+t.getMessage());
             }
         });
+        return cu;
     }
 
-    public static User getMyData() {return create;}
 }

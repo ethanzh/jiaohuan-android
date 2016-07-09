@@ -1,6 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
 import com.jiaohuan.jiaohuan.jsonData.GetTokenJSON;
+import com.jiaohuan.jiaohuan.jsonData.User;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import retrofit2.Call;
@@ -29,6 +30,8 @@ public class RetrofitLogin {
                     String token = response.body().getToken();
 
                     CurrentToken.setCurrent(token);
+
+                    User.getInstance();
 
                     callback.onLoginSuccess();
 
