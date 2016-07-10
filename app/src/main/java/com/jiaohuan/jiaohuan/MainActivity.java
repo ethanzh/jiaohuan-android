@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.LruCache;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,8 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
-import com.jiaohuan.jiaohuan.jsonData.User;
 
 public class MainActivity extends FragmentActivity {
 
@@ -42,12 +39,6 @@ public class MainActivity extends FragmentActivity {
     private TextView mBarText;
     private Barometer blis;
     private LruCache<String, Bitmap> mMemoryCache;
-    public User cu;
-
-    public void getUser(){
-        Log.wtf("CU", cu.getInstance().getUsername());
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +57,6 @@ public class MainActivity extends FragmentActivity {
         startViewPager();
 
         viewPagerListener();
-
-        getUser();
     }
 
     public void startViewPager() {

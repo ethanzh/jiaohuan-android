@@ -14,8 +14,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jiaohuan.jiaohuan.jsonData.User;
-
 public class MyProfile extends android.support.v4.app.Fragment {
     @Nullable
 
@@ -45,13 +43,14 @@ public class MyProfile extends android.support.v4.app.Fragment {
 
         // Get my data from fake database
         // myData = FakeDatabase.getInstance().getMyData();
+        mName.setText(CurrentUserObject.getCurrent().getUsername());
+        mEmail.setText(CurrentUserObject.getCurrent().getEmail());
 
         // Take +86 off the front of the phone number
         //String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
         //shortendPhone = shortendPhone.substring(3);
         //Log.wtf("SHORT", shortendPhone);
 
-        mName.setText(User.getInstance().getUsername());
 
         // Gets phone dimensions
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);

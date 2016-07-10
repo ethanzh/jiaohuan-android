@@ -29,13 +29,19 @@ public interface UserAPI {
     @POST("/api-token-auth/")
     Call<GetTokenJSON> authenticateUser(@Field("username") String username, @Field("password") String password);
 
+
     @FormUrlEncoded
     @POST("/mobile_register/")
-    Call<MobileAuthUserJSON> createUser(@Field("username") String username, @Field("password") String password /*, @Field("first_name") String first_name*/);
+    Call<MobileAuthUserJSON> createUser(@Field("username") String username, @Field("password") String password,
+                                        @Field("company") String company/*, @Field("first_name") String first_name*/);
 
     //@Headers("Authorization: Token " + auth_token)
     @GET("/current_user/")
     Call<User> getPrimaryKey(@Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @POST("/edit_email/")
+    Call<Void> updateEmail(@Field("email") String email, @Field("id_number") Integer id);
 
 
 

@@ -1,22 +1,17 @@
 
 package com.jiaohuan.jiaohuan.jsonData;
 
-import android.util.Log;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.jiaohuan.jiaohuan.CurrentToken;
 
 import javax.annotation.Generated;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 
 @Generated("org.jsonschema2pojo")
 public class User {
 
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("username")
     @Expose
     private String username;
@@ -35,11 +30,35 @@ public class User {
     @SerializedName("date_joined")
     @Expose
     private String dateJoined;
+    @SerializedName("company")
+    @Expose
+    private String company;
+    @SerializedName("location")
+    @Expose
+    private String location;
 
     /**
      *
      * @return
-     * The username
+     * The id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @param id
+     * The id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     * @return
+     *     The username
      */
     public String getUsername() {
         return username;
@@ -48,7 +67,7 @@ public class User {
     /**
      *
      * @param username
-     * The username
+     *     The username
      */
     public void setUsername(String username) {
         this.username = username;
@@ -57,7 +76,7 @@ public class User {
     /**
      *
      * @return
-     * The email
+     *     The email
      */
     public String getEmail() {
         return email;
@@ -66,7 +85,7 @@ public class User {
     /**
      *
      * @param email
-     * The email
+     *     The email
      */
     public void setEmail(String email) {
         this.email = email;
@@ -75,7 +94,7 @@ public class User {
     /**
      *
      * @return
-     * The firstName
+     *     The firstName
      */
     public String getFirstName() {
         return firstName;
@@ -84,7 +103,7 @@ public class User {
     /**
      *
      * @param firstName
-     * The first_name
+     *     The first_name
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -93,7 +112,7 @@ public class User {
     /**
      *
      * @return
-     * The lastName
+     *     The lastName
      */
     public String getLastName() {
         return lastName;
@@ -102,7 +121,7 @@ public class User {
     /**
      *
      * @param lastName
-     * The last_name
+     *     The last_name
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -111,7 +130,7 @@ public class User {
     /**
      *
      * @return
-     * The isStaff
+     *     The isStaff
      */
     public Boolean getIsStaff() {
         return isStaff;
@@ -120,7 +139,7 @@ public class User {
     /**
      *
      * @param isStaff
-     * The is_staff
+     *     The is_staff
      */
     public void setIsStaff(Boolean isStaff) {
         this.isStaff = isStaff;
@@ -129,7 +148,7 @@ public class User {
     /**
      *
      * @return
-     * The dateJoined
+     *     The dateJoined
      */
     public String getDateJoined() {
         return dateJoined;
@@ -138,43 +157,56 @@ public class User {
     /**
      *
      * @param dateJoined
-     * The date_joined
+     *     The date_joined
      */
     public void setDateJoined(String dateJoined) {
         this.dateJoined = dateJoined;
     }
 
-
-    private static User ourInstance = getUserDataFromServer();
-
-    public static User getInstance() {
-
-        return ourInstance;
-
+    /**
+     *
+     * @return
+     *     The company
+     */
+    public String getCompany() {
+        return company;
     }
 
-    public static User getUserDataFromServer(){
-        final User cu = new User();
-        String authentication = "Token " + CurrentToken.getCurrent();
-
-        UserAPI.Factory.getInstance().getPrimaryKey(authentication).enqueue(new Callback<User>() {
-
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-
-                String username = response.body().getUsername();
-                Log.wtf("SETTING", "setting username");
-                cu.setUsername(username);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.wtf("FAIL",""+t.getMessage());
-            }
-        });
-        return cu;
+    /**
+     *
+     * @param company
+     *     The company
+     */
+    public void setCompany(String company) {
+        this.company = company;
     }
+
+    /**
+     *
+     * @return
+     * The location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     *
+     * @param location
+     * The location
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    User user;
+
+    private void setInstance(User u){
+        user = u;
+    }
+
+    public User getInstance() {return user;}
+
+
 
 }

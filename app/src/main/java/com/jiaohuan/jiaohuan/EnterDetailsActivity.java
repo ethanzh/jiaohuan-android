@@ -75,7 +75,7 @@ public class EnterDetailsActivity extends Activity {
 
                     Send email, password, and phone to server*/
 
-                    UserAPI.Factory.getInstance().createUser(email, password).enqueue(new Callback<MobileAuthUserJSON>() {
+                    UserAPI.Factory.getInstance().createUser(email, password, "Jiaohuan").enqueue(new Callback<MobileAuthUserJSON>() {
 
                     @Override
                     public void onResponse(Call<MobileAuthUserJSON> call, Response<MobileAuthUserJSON> response) {
@@ -91,6 +91,12 @@ public class EnterDetailsActivity extends Activity {
 
                                 @Override
                                 public void onLoginSuccess() {
+
+                                    try {
+                                        Thread.sleep(1500);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
 
                                     // Start the new activity, with no animation
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

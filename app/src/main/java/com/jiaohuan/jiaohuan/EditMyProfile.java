@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,16 +29,20 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+
+import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditMyProfile extends Activity {
 
@@ -114,8 +119,8 @@ public class EditMyProfile extends Activity {
         initialCard = myData.getBusiness_card();
         initialFlip = myData.getFlipside();
 
-        mName.setText(initialName);
-        mEmail.setText(initialEmail);
+        mName.setText(CurrentUserObject.getCurrent().getUsername());
+        mEmail.setText(CurrentUserObject.getCurrent().getEmail());
         mPhone.setText(initialPhone);
         mLocation.setText(initialLocation);
         mTop.setImageBitmap(initialCard);
@@ -152,7 +157,23 @@ public class EditMyProfile extends Activity {
                     myData.setName(finalName);
                 }
                 if (!finalEmail.equals(initialEmail)){
-                    myData.setEmail(finalEmail);
+                    //myData.setEmail(finalEmail);
+
+                    UserAPI.Factory.getInstance().updateEmail("test@gmail.com", CurrentUserObject.getCurrent().getId()).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.wtf("WORK", "this worked");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.wtf("ERROR", t.getMessage());
+                        }
+                    });
+
+
+
+
                 }
                 if (!finalPhone.equals(initialPhone)){
                     myData.setPhoneNum(finalPhone);

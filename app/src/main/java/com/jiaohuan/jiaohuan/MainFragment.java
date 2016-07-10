@@ -1,14 +1,11 @@
 package com.jiaohuan.jiaohuan;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.jiaohuan.jiaohuan.jsonData.User;
 
 public class MainFragment extends android.support.v4.app.Fragment {
 
@@ -24,15 +21,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mPOST = (Button) view.findViewById(R.id.post);
         mTextView = (TextView) view.findViewById(R.id.welcome);
 
-        final User cu = User.getInstance();
-
-        mTextView.setText(cu.getUsername());
+        mTextView.setText(CurrentUserObject.getCurrent().getUsername());
 
         mGET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Log.wtf("CU", cu.getUsername());
-
+                mTextView.setText(CurrentUserObject.getCurrent().getUsername());
 
             }
         });

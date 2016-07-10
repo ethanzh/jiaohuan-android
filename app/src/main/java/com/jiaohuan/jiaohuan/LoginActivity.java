@@ -21,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private TextView mLogin;
     private StringRequest request;
     RequestQueue mRequestQueue;
-
+    private ProgressBar mProgressBar;
     public static final String ENDPOINT = "http://www.nutshoo.com";
 
     @Override
@@ -143,6 +144,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             @Override
             public void onLoginSuccess() {
+
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 // Start the new activity, with no animation
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

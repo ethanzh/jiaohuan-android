@@ -1,5 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
+import android.util.Log;
+
 import com.jiaohuan.jiaohuan.jsonData.GetTokenJSON;
 import com.jiaohuan.jiaohuan.jsonData.User;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
@@ -31,7 +33,9 @@ public class RetrofitLogin {
 
                     CurrentToken.setCurrent(token);
 
-                    User.getInstance();
+                    User mUser = getUserFromServer();
+
+                    CurrentUserObject.setCurrent(mUser);
 
                     callback.onLoginSuccess();
 
@@ -49,5 +53,45 @@ public class RetrofitLogin {
                 callback.onLoginFailure();
             }
         });
+    }
+
+    User cu = new User();
+
+    public User getUserFromServer(){
+
+        String authentication = "Token " + CurrentToken.getCurrent();
+
+        UserAPI.Factory.getInstance().getPrimaryKey(authentication).enqueue(new Callback<User>() {
+
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                String username = response.body().getUsername();
+                String email = response.body().getEmail();
+                String first_name = response.body().getFirstName();
+                String last_name = response.body().getLastName();
+                boolean is_staff = response.body().getIsStaff();
+                String date_joined = response.body().getDateJoined();
+                Integer id = response.body().getId();
+                String location = response.body().getLocation();
+
+                cu.setUsername(username);
+                cu.setEmail(email);
+                cu.setFirstName(first_name);
+                cu.setLastName(last_name);
+                cu.setIsStaff(is_staff);
+                cu.setDateJoined(date_joined);
+                cu.setId(id);
+                cu.setLocation(location);
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.wtf("FAIL",""+t.getMessage());
+            }
+        });
+
+        return cu;
     }
 }
