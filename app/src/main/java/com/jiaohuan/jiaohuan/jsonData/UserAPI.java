@@ -32,16 +32,19 @@ public interface UserAPI {
 
     @FormUrlEncoded
     @POST("/mobile_register/")
-    Call<MobileAuthUserJSON> createUser(@Field("username") String username, @Field("password") String password,
-                                        @Field("company") String company/*, @Field("first_name") String first_name*/);
+    Call<MobileAuthUserJSON> createUser(@Field("username") String username, @Field("password") String password);
 
     //@Headers("Authorization: Token " + auth_token)
     @GET("/current_user/")
     Call<User> getPrimaryKey(@Header("Authorization") String token);
 
     @FormUrlEncoded
-    @POST("/edit_email/")
+    @POST("/update_email/")
     Call<Void> updateEmail(@Field("email") String email, @Field("id_number") Integer id);
+
+    @FormUrlEncoded
+    @POST("/update_location/")
+    Call<Void> updateLocation(@Field("location") String location, @Field("id_number") Integer id);
 
 
 

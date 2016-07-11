@@ -57,7 +57,9 @@ public class EnterDetailsActivity extends Activity {
             public void onClick(View v) {
                 final String email = mName.getText().toString();
                 final String password = mPassword.getText().toString();
-                String phone = mSpinner.getSelectedItem().toString() + mPhone.getText().toString();
+                String phone = mPhone.getText().toString();
+
+                //int phone_number = Integer.parseInt(phone);
 
                 if (email.matches("") || password.matches("") || phone.matches("")){
                     Toast.makeText(getApplicationContext(), "You did not enter a username", Toast.LENGTH_SHORT).show();
@@ -75,7 +77,7 @@ public class EnterDetailsActivity extends Activity {
 
                     Send email, password, and phone to server*/
 
-                    UserAPI.Factory.getInstance().createUser(email, password, "Jiaohuan").enqueue(new Callback<MobileAuthUserJSON>() {
+                    UserAPI.Factory.getInstance().createUser(email, password).enqueue(new Callback<MobileAuthUserJSON>() {
 
                     @Override
                     public void onResponse(Call<MobileAuthUserJSON> call, Response<MobileAuthUserJSON> response) {
@@ -84,6 +86,7 @@ public class EnterDetailsActivity extends Activity {
 
                             Log.wtf("CREDENTIALS", response.body().getUsername());
                             Log.wtf("CREDENTIALS", response.body().getAuthenticated() + "");
+
 
 
                             mAuthTask = new RetrofitLogin(email, password);

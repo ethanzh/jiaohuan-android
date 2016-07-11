@@ -146,6 +146,8 @@ public class EditMyProfile extends Activity {
             @Override
             public void onClick(View v) {
 
+                Integer account_id = CurrentUserObject.getCurrent().getId();
+
                 finalName = mName.getText().toString();
                 finalEmail = mEmail.getText().toString();
                 finalPhone = mPhone.getText().toString();
@@ -159,15 +161,15 @@ public class EditMyProfile extends Activity {
                 if (!finalEmail.equals(initialEmail)){
                     //myData.setEmail(finalEmail);
 
-                    UserAPI.Factory.getInstance().updateEmail("test@gmail.com", CurrentUserObject.getCurrent().getId()).enqueue(new Callback<Void>() {
+                    UserAPI.Factory.getInstance().updateEmail(finalEmail, account_id).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.wtf("WORK", "this worked");
+                            Log.wtf("HTTP", "Email updated");
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Log.wtf("ERROR", t.getMessage());
+                            Log.wtf("HTTP", t.getMessage());
                         }
                     });
 
@@ -179,7 +181,21 @@ public class EditMyProfile extends Activity {
                     myData.setPhoneNum(finalPhone);
                 }
                 if (!finalLocation.equals(initialLocation)){
-                    myData.setLocation(finalLocation);
+
+
+                    UserAPI.Factory.getInstance().updateLocation(finalLocation, account_id).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.wtf("HTTP", "Location updated");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.wtf("HTTP", t.getMessage());
+                        }
+                    });
+
+                    //myData.setLocation(finalLocation);
                 }
                 if(finalCard != initialCard){
                     myData.setBusiness_card(finalCard);

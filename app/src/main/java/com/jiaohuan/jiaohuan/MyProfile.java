@@ -45,6 +45,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         // myData = FakeDatabase.getInstance().getMyData();
         mName.setText(CurrentUserObject.getCurrent().getUsername());
         mEmail.setText(CurrentUserObject.getCurrent().getEmail());
+        mLocation.setText(CurrentUserObject.getCurrent().getLocation());
 
         // Take +86 off the front of the phone number
         //String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
