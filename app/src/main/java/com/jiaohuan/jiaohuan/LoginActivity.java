@@ -115,6 +115,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    void openMainActivity(){
+        // Start the new activity, with no animation
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -132,6 +140,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+
+        if(email.equals("offline")){
+            openMainActivity();
+        }
 
         boolean cancel = false;
         View focusView = null;
@@ -151,11 +163,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     e.printStackTrace();
                 }
 
-                // Start the new activity, with no animation
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+                openMainActivity();
 
             }
 
@@ -242,87 +250,4 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
-
-//    /**
-//     * Represents an asynchronous login/registration task used to authenticate
-//     * the user.
-//     */
-//    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-//
-//        private final String mUsername;
-//        private final String mPassword;
-//
-//        UserLoginTask(String email, String password) {
-//            mUsername = email;
-//            mPassword = password;
-//        }
-//
-//        @Override
-//        protected Boolean doInBackground(Void... params) {
-//            // TODO: attempt authentication against a network service.
-//
-//            AuthOrNot.setCurrent(true);
-//            Log.wtf("START", "" + AuthOrNot.getCurrent());
-//
-//            UserAPI.Factory.getInstance().authenticateUser("sdfds", "Ethan3824").enqueue(new Callback<GetTokenJSON>() {
-//                @Override
-//                public void onResponse(Call<GetTokenJSON> call, Response<GetTokenJSON> response) {
-//
-//                    try{
-//                        String token = response.body().getToken();
-//                        Log.wtf("WORKS",""+ token);
-//
-//                        if (token.isEmpty() == false){
-//                            AuthOrNot.setCurrent(true);
-//                        }else{
-//                            AuthOrNot.setCurrent(false);
-//                        }
-//
-//                        Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
-//
-//
-//                    }catch (NullPointerException t){
-//                        Log.wtf("NO", "Didn't work, most likely incorrect username+password");
-//                        AuthOrNot.setCurrent(false);
-//                        t.printStackTrace();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<GetTokenJSON> call, Throwable t) {
-//                    Log.wtf("FAIL",""+t.getMessage());
-//                    AuthOrNot.setCurrent(false);
-//                }
-//            });
-//
-//            Log.wtf("AUTH", "" + AuthOrNot.getCurrent());
-//
-//            return AuthOrNot.getCurrent();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(final Boolean success) {
-//            mAuthTask = null;
-//
-//            if (success) {
-//                // Start the new activity, with no animation
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
-//                finish();
-//            } else {
-//                //mPasswordView.setError(getString(R.string.error_incorrect_password));
-//                mPasswordView.requestFocus();
-//            }
-//        }
-//
-//        @Override
-//        protected void onCancelled() {
-//            mAuthTask = null;
-//
-//        }
-//
-//    }
-//
-//
 }

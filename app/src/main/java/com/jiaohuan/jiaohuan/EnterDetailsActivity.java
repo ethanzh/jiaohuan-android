@@ -68,11 +68,7 @@ public class EnterDetailsActivity extends Activity {
                     mName.setHintTextColor(Color.RED);
                     mPassword.setHintTextColor(Color.RED);
                     mPhone.setHintTextColor(Color.RED);
-                    return;}
-//                else if(phone.length() != 12){
-//                    Toast.makeText(getApplicationContext(), "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
-//                    mPhone.setTextColor(Color.RED);
-//                }
+                }
 
                 else{
                     /*
@@ -104,11 +100,7 @@ public class EnterDetailsActivity extends Activity {
                                         e.printStackTrace();
                                     }
 
-                                    // Start the new activity, with no animation
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                    finish();
+                                    openMainActivity();
 
                                 }
 
@@ -140,6 +132,13 @@ public class EnterDetailsActivity extends Activity {
         });
     }
 
+    void openMainActivity(){
+        // Start the new activity, with no animation
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
 
 
 }
