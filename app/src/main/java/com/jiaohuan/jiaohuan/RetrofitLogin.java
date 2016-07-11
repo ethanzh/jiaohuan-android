@@ -74,6 +74,7 @@ public class RetrofitLogin {
                 String date_joined = response.body().getDateJoined();
                 Integer id = response.body().getId();
                 String location = response.body().getLocation();
+                String phone_number = response.body().getPhoneNumber();
 
                 cu.setUsername(username);
                 cu.setEmail(email);
@@ -83,6 +84,7 @@ public class RetrofitLogin {
                 cu.setDateJoined(date_joined);
                 cu.setId(id);
                 cu.setLocation(location);
+                cu.setPhoneNumber(phone_number);
 
             }
 

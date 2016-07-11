@@ -36,6 +36,9 @@ public class User {
     @SerializedName("location")
     @Expose
     private String location;
+    @SerializedName("phone_number")
+    @Expose
+    private String phoneNumber;
 
     /**
      *
@@ -197,6 +200,23 @@ public class User {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+    /**
+     *
+     * @return
+     * The phoneNumber
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     *
+     * @param phoneNumber
+     * The phone_number
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     User user;

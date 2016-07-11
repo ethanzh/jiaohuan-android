@@ -32,7 +32,8 @@ public interface UserAPI {
 
     @FormUrlEncoded
     @POST("/mobile_register/")
-    Call<MobileAuthUserJSON> createUser(@Field("username") String username, @Field("password") String password);
+    Call<MobileAuthUserJSON> createUser(@Field("username") String username, @Field("password") String password,
+                                        @Field("phone_number") String phone_number);
 
     //@Headers("Authorization: Token " + auth_token)
     @GET("/current_user/")
