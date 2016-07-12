@@ -8,23 +8,7 @@
     android:weightSum="1"
     android:background="#0e0019">
 
-        <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/name"
-            android:cursorVisible="false"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:background="@drawable/edit_rounded"
-            android:hint="Name"
-            android:singleLine="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.14"
-            android:layout_above="@+id/email"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="40dp"/>
-
-        <Space
+    <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -33,7 +17,7 @@
         <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/email"
+            android:id="@+id/email_tv"
             android:hint="Email"
             android:cursorVisible="false"
             android:textColor="#FFFFFF"
@@ -42,9 +26,9 @@
             android:singleLine="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.14"
-            android:layout_above="@+id/phone"
-            android:layout_alignLeft="@+id/phone"
-            android:layout_alignStart="@+id/phone"
+            android:layout_above="@+id/phone_tv"
+            android:layout_alignLeft="@+id/phone_tv"
+            android:layout_alignStart="@+id/phone_tv"
             android:layout_marginBottom="35dp"/>
 
         <Space
@@ -56,7 +40,7 @@
         <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/phone"
+            android:id="@+id/phone_tv"
             android:hint="Phone"
             android:singleLine="true"
             android:textColor="#FFFFFF"
@@ -65,7 +49,7 @@
             android:cursorVisible="false"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.14"
-            android:layout_above="@+id/location"
+            android:layout_above="@+id/location_tv"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="40dp"/>
 
@@ -78,7 +62,7 @@
         <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/location"
+            android:id="@+id/location_tv"
             android:singleLine="true"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
@@ -126,5 +110,23 @@
         android:layout_above="@+id/finish"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/company_edit"
+        android:hint="Company"
+        android:cursorVisible="false"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:background="@drawable/edit_rounded"
+        android:singleLine="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.14"
+        android:layout_above="@+id/email_tv"
+        android:layout_alignLeft="@+id/email_tv"
+        android:layout_alignStart="@+id/email_tv"
+        android:layout_marginBottom="42dp"
+        />
 
 </RelativeLayout>

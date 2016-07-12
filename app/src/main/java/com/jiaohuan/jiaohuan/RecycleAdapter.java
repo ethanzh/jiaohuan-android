@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
         public myViewHolder(View itemView) {
             super(itemView);
 
-            name = (TextView) itemView.findViewById(R.id.name);
+            name = (TextView) itemView.findViewById(R.id.name_tv);
             company = (TextView) itemView.findViewById(R.id.company);
             icon = (ImageView) itemView.findViewById(R.id.profile_pic);
             date = (TextView) itemView.findViewById(R.id.date);

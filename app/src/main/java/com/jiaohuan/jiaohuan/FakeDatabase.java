@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,8 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FakeDatabase {
     
@@ -50,20 +47,28 @@ public class FakeDatabase {
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
 
         Bitmap nyu = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.card_nyu);
+        nyu = null;
 
         Bitmap flip = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.card_flip);
+        flip = null;
 
         Bitmap pp_xia = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.xia);
+        pp_xia = null;
 
         Bitmap pp_ethan = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.pp_ethan);
+        pp_ethan = null;
 
         Bitmap pp_wookie = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.lin);
+        pp_wookie = null;
 
         Bitmap pp_tiange = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.pp_tiange);
-        
+        pp_tiange = null;
+
         Bitmap pp_lin = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.lin);
+        pp_lin = null;
 
         Bitmap pp_ma = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.ma);
+        pp_ma = null;
         
         // My own data
         myData = new Contact(15435876, "安华", "Starwood Hotels", "+8615811556736", "nongxia@starwood.cn", "Beijing, China",

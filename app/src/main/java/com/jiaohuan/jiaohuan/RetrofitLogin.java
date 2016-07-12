@@ -75,12 +75,14 @@ public class RetrofitLogin {
                 Integer id = response.body().getId();
                 String location = response.body().getLocation();
                 String phone_number = response.body().getPhoneNumber();
+                String company = response.body().getCompany();
 
                 cu.setUsername(username);
                 cu.setEmail(email);
                 cu.setFirstName(first_name);
                 cu.setLastName(last_name);
                 cu.setIsStaff(is_staff);
+                cu.setCompany(company);
                 cu.setDateJoined(date_joined);
                 cu.setId(id);
                 cu.setLocation(location);

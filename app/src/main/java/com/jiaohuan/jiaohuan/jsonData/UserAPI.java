@@ -44,6 +44,14 @@ public interface UserAPI {
     Call<Void> updateEmail(@Field("email") String email, @Field("id_number") Integer id);
 
     @FormUrlEncoded
+    @POST("/update_company/")
+    Call<Void> updateCompany(@Field("company") String email, @Field("id_number") Integer id);
+
+    @FormUrlEncoded
+    @POST("/update_phone/")
+    Call<Void> updatePhone(@Field("phone_number") String email, @Field("id_number") Integer id);
+
+    @FormUrlEncoded
     @POST("/update_location/")
     Call<Void> updateLocation(@Field("location") String location, @Field("id_number") Integer id);
 

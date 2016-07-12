@@ -71,27 +71,27 @@ public class MyCards extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
-        final ArrayList<List<Contact>> adapters = createLists();
+        //final ArrayList<List<Contact>> adapters = createLists();
 
-        final List<Contact> alphaSorted = adapters.get(0);
-        List<Contact> unixSorted = adapters.get(1);
+        //final List<Contact> alphaSorted = adapters.get(0);
+        //List<Contact> unixSorted = adapters.get(1);
 
-        makeSearch(view, alphaSorted);
+        //makeSearch(view, alphaSorted);
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
 
-        mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
-        mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
+        //mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
+        //mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
 
         //mRecyclerView.setAdapter(mNameAdapter);
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
         mDate = (TextView) view.findViewById(R.id.date);
-        mName = (TextView) view.findViewById(R.id.name);
+        mName = (TextView) view.findViewById(R.id.name_tv);
 
         final int selectedColorValue = Color.parseColor("#FFAF8CFF");
         final int nonSelectedColorValue = Color.parseColor("#FFFFFF");
@@ -432,8 +432,8 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         ArrayList<List<Contact>> list = new ArrayList<>();
 
-        list.add(FakeDatabase.getInstance().getAlphaSorted());
-        list.add(FakeDatabase.getInstance().getDateSorted());
+//        list.add(FakeDatabase.getInstance().getAlphaSorted());
+//        list.add(FakeDatabase.getInstance().getDateSorted());
 
         return list;
     }

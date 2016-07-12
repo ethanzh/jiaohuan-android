@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,6 +52,7 @@ public class EditMyProfile extends Activity {
     private String initialEmail;
     private String initialPhone;
     private String initialLocation;
+    private String initialCompany;
 
     private String finalName;
     private String finalEmail;
@@ -60,11 +60,13 @@ public class EditMyProfile extends Activity {
     private String finalLocation;
     private Bitmap finalCard;
     private Bitmap finalFlip;
+    private String finalCompany;
 
     private EditText mName;
     private EditText mEmail;
     private EditText mPhone;
     private EditText mLocation;
+    private EditText mCompany;
 
     private Button mFinish;
 
@@ -95,10 +97,10 @@ public class EditMyProfile extends Activity {
         mTop = (ImageView) findViewById(R.id.frontofcard);
         mBottom = (ImageView) findViewById(R.id.backofcard);
 
-        mName = (EditText) findViewById(R.id.name);
-        mEmail = (EditText) findViewById(R.id.email);
-        mPhone = (EditText) findViewById(R.id.phone);
-        mLocation = (EditText) findViewById(R.id.location);
+        mEmail = (EditText) findViewById(R.id.email_tv);
+        mPhone = (EditText) findViewById(R.id.phone_tv);
+        mLocation = (EditText) findViewById(R.id.location_tv);
+        mCompany = (EditText) findViewById(R.id.company_edit);
 
         mFinish = (Button) findViewById(R.id.finish);
 
@@ -108,18 +110,15 @@ public class EditMyProfile extends Activity {
         mCamera = (Button) mContainer.findViewById(R.id.camera);
         mLocal = (Button) mContainer.findViewById(R.id.local);
 
-        // Get my data from fake database
-        myData = FakeDatabase.getInstance().getMyData();
-
         // INITIAL VALUES
-        initialName = myData.getName();
-        initialEmail = myData.getEmail();
-        initialPhone = myData.getPhoneNum();
-        initialLocation = myData.getLocation();
-        initialCard = myData.getBusiness_card();
-        initialFlip = myData.getFlipside();
+        initialName = CurrentUserObject.getCurrent().getUsername();
+        initialEmail = CurrentUserObject.getCurrent().getEmail();
+        initialPhone = CurrentUserObject.getCurrent().getPhoneNumber();
+        initialLocation = CurrentUserObject.getCurrent().getLocation();
+        initialCard = null;
+        initialFlip = null;
+        initialCompany = CurrentUserObject.getCurrent().getCompany();
 
-        mName.setText(CurrentUserObject.getCurrent().getUsername());
         mEmail.setText(CurrentUserObject.getCurrent().getEmail());
         mPhone.setText(initialPhone);
         mLocation.setText(initialLocation);
@@ -148,16 +147,11 @@ public class EditMyProfile extends Activity {
 
                 Integer account_id = CurrentUserObject.getCurrent().getId();
 
-                finalName = mName.getText().toString();
                 finalEmail = mEmail.getText().toString();
                 finalPhone = mPhone.getText().toString();
                 finalLocation = mLocation.getText().toString();
-                finalCard = ((BitmapDrawable)mTop.getDrawable()).getBitmap();
-                finalFlip = ((BitmapDrawable)mBottom.getDrawable()).getBitmap();
+                finalCompany = mCompany.getText().toString();
 
-                if (!finalName.equals(initialName)){
-                    myData.setName(finalName);
-                }
                 if (!finalEmail.equals(initialEmail)){
                     //myData.setEmail(finalEmail);
 
@@ -172,13 +166,36 @@ public class EditMyProfile extends Activity {
                             Log.wtf("HTTP", t.getMessage());
                         }
                     });
-
-
-
-
                 }
                 if (!finalPhone.equals(initialPhone)){
-                    myData.setPhoneNum(finalPhone);
+
+                    UserAPI.Factory.getInstance().updatePhone(finalPhone, account_id).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.wtf("HTTP", "Phone updated");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+
+                        }
+                    });
+
+                }
+                if (!finalCompany.equals(initialCompany)){
+
+                    UserAPI.Factory.getInstance().updateCompany(finalCompany, account_id).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.wtf("HTTP", "Company updated");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+
+                        }
+                    });
+
                 }
                 if (!finalLocation.equals(initialLocation)){
 
@@ -194,8 +211,6 @@ public class EditMyProfile extends Activity {
                             Log.wtf("HTTP", t.getMessage());
                         }
                     });
-
-                    //myData.setLocation(finalLocation);
                 }
                 if(finalCard != initialCard){
                     myData.setBusiness_card(finalCard);

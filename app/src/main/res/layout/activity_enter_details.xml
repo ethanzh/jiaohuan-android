@@ -78,7 +78,7 @@
 
             android:paddingLeft="50dp"
             android:ems="10"
-            android:id="@+id/email"
+            android:id="@+id/email_tv"
             android:background="@drawable/rounded_edittext"
             android:layout_gravity="center_horizontal"
             android:layout_alignTop="@+id/space"
@@ -105,10 +105,10 @@
 
             android:paddingLeft="50dp"
             android:ems="10"
-            android:id="@+id/phone"
+            android:id="@+id/phone_tv"
             android:background="@drawable/rounded_edittext"
             android:layout_marginTop="18dp"
-            android:layout_below="@+id/email"
+            android:layout_below="@+id/email_tv"
             android:layout_alignRight="@+id/password"
             android:layout_alignEnd="@+id/password"/>
 
@@ -133,7 +133,7 @@
             android:background="@drawable/rounded_edittext"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="17dp"
-            android:layout_below="@+id/phone"
+            android:layout_below="@+id/phone_tv"
             android:layout_centerHorizontal="true"/>
 
         <TextView
@@ -155,11 +155,11 @@
             android:id="@+id/spinner"
 
             android:layout_marginRight="20dip"
-            android:layout_alignTop="@+id/phone"
+            android:layout_alignTop="@+id/phone_tv"
             android:layout_alignLeft="@+id/password"
             android:layout_alignStart="@+id/password"
             android:layout_above="@+id/password"
-            android:layout_toStartOf="@+id/phone"
+            android:layout_toStartOf="@+id/phone_tv"
             android:background="@drawable/rounded_edittext"/>
 
 

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,7 +30,8 @@ public class StartPage extends Activity {
 
         Drawable background = getDrawable(StartPage.this, R.drawable.hk);
 
-        mLinearLayout.setBackground(background);
+        //mLinearLayout.setBackground(background);
+        mLinearLayout.setBackgroundColor(Color.BLACK);
 
         // Start sign in process
         final Button signin = (Button) findViewById(R.id.signin);

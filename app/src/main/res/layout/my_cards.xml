@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Name"
-            android:id="@+id/name"
+            android:id="@+id/name_tv"
             android:textColor="#FFFFFF"
             android:paddingLeft="110dp"
             android:layout_centerVertical="true"
@@ -40,7 +40,7 @@
             android:id="@+id/date"
             android:textColor="#FFFFFF"
             android:paddingRight="110dp"
-            android:layout_alignTop="@+id/name"
+            android:layout_alignTop="@+id/name_tv"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 

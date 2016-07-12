@@ -23,6 +23,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
     private TextView mPhone;
     private TextView mLocation;
     private TextView mEdit;
+    private TextView mCompany;
     private ImageView mCard;
     int initial = 0;
     private Contact myData;
@@ -35,17 +36,19 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mCard = (ImageView) view.findViewById(R.id.pic);
 
         // Connect the TextViews to their ids
-        mName = (TextView) view.findViewById(R.id.name);
-        mEmail = (TextView) view.findViewById(R.id.email);
-        mPhone = (TextView) view.findViewById(R.id.phone);
-        mLocation = (TextView) view.findViewById(R.id.location);
+        mName = (TextView) view.findViewById(R.id.name_tv);
+        mEmail = (TextView) view.findViewById(R.id.email_tv);
+        mPhone = (TextView) view.findViewById(R.id.phone_tv);
+        mLocation = (TextView) view.findViewById(R.id.location_tv);
+        mCompany = (TextView) view.findViewById(R.id.company_tv);
+
         mEdit = (TextView) view.findViewById(R.id.edit);
 
-        // Get my data from fake database
-        // myData = FakeDatabase.getInstance().getMyData();
         mName.setText(CurrentUserObject.getCurrent().getUsername());
         mEmail.setText(CurrentUserObject.getCurrent().getEmail());
+        mPhone.setText(CurrentUserObject.getCurrent().getPhoneNumber());
         mLocation.setText(CurrentUserObject.getCurrent().getLocation());
+        mCompany.setText(CurrentUserObject.getCurrent().getCompany());
 
         // Take +86 off the front of the phone number
         //String shortendPhone = SelectedRow.getCurrent().getPhoneNum();

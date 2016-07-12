@@ -38,9 +38,9 @@ public class EnterDetailsActivity extends Activity {
         setContentView(R.layout.activity_enter_details);
 
         mNext = (TextView) findViewById(R.id.next);
-        mName = (EditText) findViewById(R.id.email);
+        mName = (EditText) findViewById(R.id.email_tv);
         mPassword = (EditText) findViewById(R.id.password);
-        mPhone = (EditText) findViewById(R.id.phone);
+        mPhone = (EditText) findViewById(R.id.phone_tv);
         mBack = (TextView) findViewById(R.id.back);
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
