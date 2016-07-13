@@ -37,16 +37,30 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="POST"
-        android:id="@+id/post"
-        android:layout_gravity="right"
+        android:text="EMAIL"
+        android:id="@+id/email"
         android:layout_weight="0.14"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GET"
-        android:id="@+id/network"
+        android:text="COMPANY"
+        android:id="@+id/company"
+        android:layout_weight="0.14"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PHONE"
+        android:id="@+id/phone"
+        android:layout_weight="0.14"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOCATION"
+        android:id="@+id/location"
         android:layout_weight="0.14"/>
 
     <TextView

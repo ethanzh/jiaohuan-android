@@ -45,11 +45,11 @@ public interface UserAPI {
 
     @FormUrlEncoded
     @POST("/update_company/")
-    Call<Void> updateCompany(@Field("company") String email, @Field("id_number") Integer id);
+    Call<Void> updateCompany(@Field("company") String company, @Field("id_number") Integer id);
 
     @FormUrlEncoded
     @POST("/update_phone/")
-    Call<Void> updatePhone(@Field("phone_number") String email, @Field("id_number") Integer id);
+    Call<Void> updatePhone(@Field("phone_number") String phone_number, @Field("id_number") Integer id);
 
     @FormUrlEncoded
     @POST("/update_location/")

@@ -111,19 +111,16 @@ public class EditMyProfile extends Activity {
         mLocal = (Button) mContainer.findViewById(R.id.local);
 
         // INITIAL VALUES
-        initialName = CurrentUserObject.getCurrent().getUsername();
         initialEmail = CurrentUserObject.getCurrent().getEmail();
         initialPhone = CurrentUserObject.getCurrent().getPhoneNumber();
+        initialCompany = CurrentUserObject.getCurrent().getCompany();
         initialLocation = CurrentUserObject.getCurrent().getLocation();
+
         initialCard = null;
         initialFlip = null;
-        initialCompany = CurrentUserObject.getCurrent().getCompany();
 
-        mEmail.setText(CurrentUserObject.getCurrent().getEmail());
-        mPhone.setText(initialPhone);
-        mLocation.setText(initialLocation);
-        mTop.setImageBitmap(initialCard);
-        mBottom.setImageBitmap(initialFlip);
+//        mTop.setImageBitmap(initialCard);
+//        mBottom.setImageBitmap(initialFlip);
 
         String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/My Profile/";
 
@@ -152,10 +149,8 @@ public class EditMyProfile extends Activity {
                 finalLocation = mLocation.getText().toString();
                 finalCompany = mCompany.getText().toString();
 
-                if (!finalEmail.equals(initialEmail)){
-                    //myData.setEmail(finalEmail);
-
-                    UserAPI.Factory.getInstance().updateEmail(finalEmail, account_id).enqueue(new Callback<Void>() {
+                if (true){
+                    UserAPI.Factory.getInstance().updateEmail("steve@bob.com", account_id).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Log.wtf("HTTP", "Email updated");
@@ -167,57 +162,64 @@ public class EditMyProfile extends Activity {
                         }
                     });
                 }
-                if (!finalPhone.equals(initialPhone)){
+//                if (true){
+//
+//                    UserAPI.Factory.getInstance().updatePhone("909909909", account_id).enqueue(new Callback<Void>() {
+//                        @Override
+//                        public void onResponse(Call<Void> call, Response<Void> response) {
+//                            Log.wtf("HTTP", "Phone updated");
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Void> call, Throwable t) {
+//
+//                        }
+//                    });
+//
+//                }
+//                if (true){
+//
+//                    UserAPI.Factory.getInstance().updateCompany("Cisco Enterprises", account_id).enqueue(new Callback<Void>() {
+//                        @Override
+//                        public void onResponse(Call<Void> call, Response<Void> response) {
+//                            Log.wtf("HTTP", "Company updated");
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Void> call, Throwable t) {
+//
+//                        }
+//                    });
+//
+//                }
+//                if (true){
+//
+//
+//                    UserAPI.Factory.getInstance().updateLocation("Jamaica", account_id).enqueue(new Callback<Void>() {
+//                        @Override
+//                        public void onResponse(Call<Void> call, Response<Void> response) {
+//                            Log.wtf("HTTP", "Location updated");
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Void> call, Throwable t) {
+//                            Log.wtf("HTTP", t.getMessage());
+//                        }
+//                    });
+//                }
+//                if(finalCard != initialCard){
+//                    myData.setBusiness_card(finalCard);
+//                }
+//                if(finalFlip != initialFlip){
+//                    myData.setFlipside(finalFlip);
+//                }
 
-                    UserAPI.Factory.getInstance().updatePhone(finalPhone, account_id).enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.wtf("HTTP", "Phone updated");
-                        }
-
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-
-                        }
-                    });
-
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                if (!finalCompany.equals(initialCompany)){
 
-                    UserAPI.Factory.getInstance().updateCompany(finalCompany, account_id).enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.wtf("HTTP", "Company updated");
-                        }
-
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-
-                        }
-                    });
-
-                }
-                if (!finalLocation.equals(initialLocation)){
-
-
-                    UserAPI.Factory.getInstance().updateLocation(finalLocation, account_id).enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.wtf("HTTP", "Location updated");
-                        }
-
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            Log.wtf("HTTP", t.getMessage());
-                        }
-                    });
-                }
-                if(finalCard != initialCard){
-                    myData.setBusiness_card(finalCard);
-                }
-                if(finalFlip != initialFlip){
-                    myData.setFlipside(finalFlip);
-                }
                 finish();
 
             }

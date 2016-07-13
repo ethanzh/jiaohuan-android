@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -44,11 +45,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
 
         mEdit = (TextView) view.findViewById(R.id.edit);
 
-        mName.setText(CurrentUserObject.getCurrent().getUsername());
-        mEmail.setText(CurrentUserObject.getCurrent().getEmail());
-        mPhone.setText(CurrentUserObject.getCurrent().getPhoneNumber());
-        mLocation.setText(CurrentUserObject.getCurrent().getLocation());
-        mCompany.setText(CurrentUserObject.getCurrent().getCompany());
+        setLabelValues();
 
         // Take +86 off the front of the phone number
         //String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
@@ -75,6 +72,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         mEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(getContext(), EditMyProfile.class);
                 startActivity(intent);
             }
@@ -102,9 +100,18 @@ public class MyProfile extends android.support.v4.app.Fragment {
     public void onResume() {
         super.onResume();
 
-//        mName.setText(myData.getName());
-//        mEmail.setText(myData.getEmail());
-//        mPhone.setText(myData.getPhoneNum());
-//        mLocation.setText(myData.getLocation());
+        setLabelValues();
+        Log.wtf("RESTART", "Activity restarted");
+
+
+    }
+
+
+    public void setLabelValues(){
+        mName.setText(CurrentUserObject.getCurrent().getUsername());
+        mEmail.setText(CurrentUserObject.getCurrent().getEmail());
+        mPhone.setText(CurrentUserObject.getCurrent().getPhoneNumber());
+        mLocation.setText(CurrentUserObject.getCurrent().getLocation());
+        mCompany.setText(CurrentUserObject.getCurrent().getCompany());
     }
 }
