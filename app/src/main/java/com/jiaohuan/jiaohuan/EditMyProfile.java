@@ -62,11 +62,18 @@ public class EditMyProfile extends Activity {
     private Bitmap finalFlip;
     private String finalCompany;
 
+    String request_email;
+    String request_phone;
+    String request_location;
+    String request_company;
+
     private EditText mName;
     private EditText mEmail;
     private EditText mPhone;
     private EditText mLocation;
     private EditText mCompany;
+
+    private Button mPost;
 
     private Button mFinish;
 
@@ -94,6 +101,8 @@ public class EditMyProfile extends Activity {
 
         mRelativeLayout = (RelativeLayout) findViewById(R.id.main_activity_layout);
 
+        mPost = (Button) findViewById(R.id.post);
+
         mTop = (ImageView) findViewById(R.id.frontofcard);
         mBottom = (ImageView) findViewById(R.id.backofcard);
 
@@ -115,6 +124,9 @@ public class EditMyProfile extends Activity {
         initialPhone = CurrentUserObject.getCurrent().getPhoneNumber();
         initialCompany = CurrentUserObject.getCurrent().getCompany();
         initialLocation = CurrentUserObject.getCurrent().getLocation();
+
+        Log.wtf("Initial Values", "Email: " + initialEmail + "\n" + "Phone: " + initialPhone + "\n" + "Company: " + initialCompany + "\n"
+        + "Location: " + initialLocation);
 
         initialCard = null;
         initialFlip = null;
@@ -149,70 +161,53 @@ public class EditMyProfile extends Activity {
                 finalLocation = mLocation.getText().toString();
                 finalCompany = mCompany.getText().toString();
 
-                if (true){
-                    UserAPI.Factory.getInstance().updateEmail("steve@bob.com", account_id).enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.wtf("HTTP", "Email updated");
-                        }
+                Log.wtf("Final Values", "Email: " + finalEmail + "\n" + "Phone: " + finalPhone + "\n" + "Company: " + finalCompany + "\n"
+                        + "Location: " + finalLocation);
 
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            Log.wtf("HTTP", t.getMessage());
-                        }
-                    });
+                if(!finalEmail.equals(initialEmail) || finalEmail.equals("")){
+                    request_email = "";
+                } else{
+                    request_email = finalEmail;
+                    CurrentUserObject.getCurrent().setEmail(request_email);
                 }
-//                if (true){
-//
-//                    UserAPI.Factory.getInstance().updatePhone("909909909", account_id).enqueue(new Callback<Void>() {
-//                        @Override
-//                        public void onResponse(Call<Void> call, Response<Void> response) {
-//                            Log.wtf("HTTP", "Phone updated");
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<Void> call, Throwable t) {
-//
-//                        }
-//                    });
-//
-//                }
-//                if (true){
-//
-//                    UserAPI.Factory.getInstance().updateCompany("Cisco Enterprises", account_id).enqueue(new Callback<Void>() {
-//                        @Override
-//                        public void onResponse(Call<Void> call, Response<Void> response) {
-//                            Log.wtf("HTTP", "Company updated");
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<Void> call, Throwable t) {
-//
-//                        }
-//                    });
-//
-//                }
-//                if (true){
-//
-//
-//                    UserAPI.Factory.getInstance().updateLocation("Jamaica", account_id).enqueue(new Callback<Void>() {
-//                        @Override
-//                        public void onResponse(Call<Void> call, Response<Void> response) {
-//                            Log.wtf("HTTP", "Location updated");
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<Void> call, Throwable t) {
-//                            Log.wtf("HTTP", t.getMessage());
-//                        }
-//                    });
-//                }
-//                if(finalCard != initialCard){
-//                    myData.setBusiness_card(finalCard);
-//                }
-//                if(finalFlip != initialFlip){
-//                    myData.setFlipside(finalFlip);
-//                }
+
+                if(!finalPhone.equals(initialPhone) || finalPhone.equals("")){
+                    request_phone = "";
+                }else{
+                    request_phone = finalPhone;
+                    CurrentUserObject.getCurrent().setPhoneNumber(request_phone);
+                }
+
+                if(!finalLocation.equals(initialLocation) || finalLocation.equals("")){
+                    request_location = "";
+                } else{
+                    request_location = finalLocation;
+                    CurrentUserObject.getCurrent().setLocation(request_location);
+                }
+
+                if(!finalCompany.equals(initialCompany) || finalCompany.equals("")){
+                    request_company = "";
+                } else{
+                    request_company = finalCompany;
+                    CurrentUserObject.getCurrent().setCompany(request_company);
+                }
+
+                Log.wtf("Request Values", "Email: " + request_email + "\n" + "Phone: " + request_phone + "\n" + "Company: " + request_company + "\n"
+                        + "Location: " + request_location);
+
+                UserAPI.Factory.getInstance().updateAll(request_email, request_company, request_phone,
+                        request_location, account_id).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Log.wtf("SUCCESSFUL", "Request worked");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.wtf("FAILED", t.getMessage());
+                    }
+                });
+
 
                 try {
                     Thread.sleep(1500);
@@ -224,6 +219,7 @@ public class EditMyProfile extends Activity {
 
             }
         });
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

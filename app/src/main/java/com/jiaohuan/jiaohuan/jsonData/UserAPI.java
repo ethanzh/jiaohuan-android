@@ -56,6 +56,17 @@ public interface UserAPI {
     Call<Void> updateLocation(@Field("location") String location, @Field("id_number") Integer id);
 
 
+    ////////////////////
+
+    @FormUrlEncoded
+    @POST("/update/")
+    Call<Void> updateAll(@Field("email") String email,
+                         @Field("company") String company,
+                         @Field("phone_number") String phone_number,
+                         @Field("location") String location,
+                         @Field("id_number") Integer id);
+
+
 
     class Factory {
 

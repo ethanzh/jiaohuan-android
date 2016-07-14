@@ -1,6 +1,7 @@
 package com.jiaohuan.jiaohuan;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private Button mPhone;
     private Button mLocation;
     private Button mCompany;
+    private Button mPost;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,11 +33,31 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mLocation = (Button) view.findViewById(R.id.location);
         mCompany = (Button) view.findViewById(R.id.company);
 
+        mPost = (Button) view.findViewById(R.id.post);
+
         mTextView = (TextView) view.findViewById(R.id.welcome);
 
         mTextView.setText(CurrentUserObject.getCurrent().getUsername());
 
         final int account_id = CurrentUserObject.getCurrent().getId();
+
+        mPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserAPI.Factory.getInstance().updateAll("", "", "",
+                        "", account_id).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Log.wtf("WORKED", "This worked");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.wtf("ERROR", t.getMessage());
+                    }
+                });
+            }
+        });
 
         mEmail.setOnClickListener(new View.OnClickListener() {
             @Override

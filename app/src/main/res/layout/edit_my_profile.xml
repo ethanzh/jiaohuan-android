@@ -129,4 +129,12 @@
         android:layout_marginBottom="42dp"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST FUNCTION"
+        android:id="@+id/post"
+        android:layout_above="@+id/frontofcard"
+        android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>

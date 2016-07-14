@@ -37,6 +37,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="TEST FUNCTION"
+        android:id="@+id/post"
+        android:layout_weight="0.14"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="EMAIL"
         android:id="@+id/email"
         android:layout_weight="0.14"/>
