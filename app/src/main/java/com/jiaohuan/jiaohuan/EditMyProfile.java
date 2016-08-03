@@ -103,13 +103,15 @@ public class EditMyProfile extends Activity {
 
         mPost = (Button) findViewById(R.id.post);
 
-        mTop = (ImageView) findViewById(R.id.frontofcard);
-        mBottom = (ImageView) findViewById(R.id.backofcard);
-
         mEmail = (EditText) findViewById(R.id.email_tv);
         mPhone = (EditText) findViewById(R.id.phone_tv);
         mLocation = (EditText) findViewById(R.id.location_tv);
-        mCompany = (EditText) findViewById(R.id.company_edit);
+        mCompany = (EditText) findViewById(R.id.company_tv);
+
+        mEmail.setText("");
+        mPhone.setText("");
+        mLocation.setText("");
+        mCompany.setText("");
 
         mFinish = (Button) findViewById(R.id.finish);
 
@@ -125,6 +127,12 @@ public class EditMyProfile extends Activity {
         initialCompany = CurrentUserObject.getCurrent().getCompany();
         initialLocation = CurrentUserObject.getCurrent().getLocation();
 
+        mEmail.setHint(initialEmail);
+        mPhone.setHint(initialPhone);
+        mLocation.setHint(initialLocation);
+        mCompany.setHint(initialCompany);
+
+
         Log.wtf("Initial Values", "Email: " + initialEmail + "\n" + "Phone: " + initialPhone + "\n" + "Company: " + initialCompany + "\n"
         + "Location: " + initialLocation);
 
@@ -135,20 +143,6 @@ public class EditMyProfile extends Activity {
 //        mBottom.setImageBitmap(initialFlip);
 
         String dirname = Environment.getExternalStorageDirectory() + "/Jiaohuan/My Profile/";
-
-        mTop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openWindow(mContainer, 0);
-            }
-        });
-
-        mBottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openWindow(mContainer, 1);
-            }
-        });
 
         mFinish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,28 +158,28 @@ public class EditMyProfile extends Activity {
                 Log.wtf("Final Values", "Email: " + finalEmail + "\n" + "Phone: " + finalPhone + "\n" + "Company: " + finalCompany + "\n"
                         + "Location: " + finalLocation);
 
-                if(!finalEmail.equals(initialEmail) || finalEmail.equals("")){
+                if(finalEmail.equals(initialEmail) || finalEmail.equals("")){
                     request_email = "";
                 } else{
                     request_email = finalEmail;
                     CurrentUserObject.getCurrent().setEmail(request_email);
                 }
 
-                if(!finalPhone.equals(initialPhone) || finalPhone.equals("")){
+                if(finalPhone.equals(initialPhone) || finalPhone.equals("")){
                     request_phone = "";
                 }else{
                     request_phone = finalPhone;
                     CurrentUserObject.getCurrent().setPhoneNumber(request_phone);
                 }
 
-                if(!finalLocation.equals(initialLocation) || finalLocation.equals("")){
+                if(finalLocation.equals(initialLocation) || finalLocation.equals("")){
                     request_location = "";
                 } else{
                     request_location = finalLocation;
                     CurrentUserObject.getCurrent().setLocation(request_location);
                 }
 
-                if(!finalCompany.equals(initialCompany) || finalCompany.equals("")){
+                if(finalCompany.equals(initialCompany) || finalCompany.equals("")){
                     request_company = "";
                 } else{
                     request_company = finalCompany;

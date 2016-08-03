@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jiaohuan.jiaohuan.jsonData.User;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -17,14 +19,14 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     private static final int TYPE_CELL = 1;
     private LayoutInflater mLayoutInflater;
 
-    List<Contact> data = Collections.emptyList();
+    List<User> data = Collections.emptyList();
 
-    public RecycleAdapter(Context context, List<Contact> data){
+    public RecycleAdapter(Context context, List<User> data){
         mLayoutInflater = LayoutInflater.from(context);
         this.data = data;
     }
 
-    public Contact getRow(int position) {
+    public User getRow(int position) {
         return this.data.get(position);
     }
 
@@ -41,14 +43,15 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     @Override
     public void onBindViewHolder(myViewHolder holder, int position) {
 
-        Contact current = data.get(position);
+        User current = data.get(position);
 
-        holder.name.setText(current.getName());
+        holder.name.setText(current.getUsername());
+
         holder.company.setText(current.getCompany());
 
-        holder.icon.setImageBitmap(current.getPic());
+        //holder.icon.setImageBitmap(current.getPic());
 
-        holder.date.setText(current.getSimple_date());
+        //holder.date.setText(current.getSimple_date());
     }
 
     @Override
@@ -74,7 +77,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     }
 
 
-    public void swap(List<Contact> datas){
+    public void swap(List<User> datas){
         data.clear();
         data.addAll(datas);
         notifyDataSetChanged();

@@ -1,13 +1,15 @@
 package com.jiaohuan.jiaohuan;
 
-public class SelectedRow {
-    public static Contact current;
+import com.jiaohuan.jiaohuan.jsonData.User;
 
-    public static Contact getCurrent(){
+public class SelectedRow {
+    public static User current;
+
+    public static User getCurrent(){
         return current;
     }
 
-    public static void setCurrent(Contact c){
+    public static void setCurrent(User c){
         current = c;
     }
 }

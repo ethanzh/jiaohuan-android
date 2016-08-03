@@ -1,18 +1,14 @@
 package com.jiaohuan.jiaohuan;
 
 import android.Manifest;
-import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.OperationApplicationException;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.jiaohuan.jiaohuan.jsonData.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +64,7 @@ public class MyCards extends android.support.v4.app.Fragment {
     private boolean dateSelected;
     private RecycleAdapter mNewAdapter;
     private TextView mPinyin;
+    RecycleAdapter mTestAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,6 +77,13 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         //makeSearch(view, alphaSorted);
 
+        ArrayList<User> listOfUsers = new ArrayList<>();
+        listOfUsers.add(CurrentUserObject.getCurrent());
+        listOfUsers.add(CurrentUserObject.getCurrent());
+        listOfUsers.add(CurrentUserObject.getCurrent());
+        listOfUsers.add(CurrentUserObject.getCurrent());
+        listOfUsers.add(CurrentUserObject.getCurrent());
+
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -85,6 +91,9 @@ public class MyCards extends android.support.v4.app.Fragment {
 
         //mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
         //mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
+
+        mTestAdapter = new RecycleAdapter(getActivity(), listOfUsers);
+        mRecyclerView.setAdapter(mTestAdapter);
 
         //mRecyclerView.setAdapter(mNameAdapter);
 
@@ -157,60 +166,60 @@ public class MyCards extends android.support.v4.app.Fragment {
         // Get top panel
         RelativeLayout topPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
 
-        if (nameSelected) {
-            SelectedRow.setCurrent(mNameAdapter.getRow(position));
-
-        } else if (dateSelected) {
-            SelectedRow.setCurrent(mDateAdapter.getRow(position));
-        }
+//        if (nameSelected) {
+//            SelectedRow.setCurrent(mNameAdapter.getRow(position));
+//
+//        } else if (dateSelected) {
+//            SelectedRow.setCurrent(mDateAdapter.getRow(position));
+//        }
 
         // Get color
-        int color = SelectedRow.getCurrent().getColor();
+        //int color = SelectedRow.getCurrent().getColor();
 
         // Set color
-        topPanel.setBackgroundColor(color);
+        //topPanel.setBackgroundColor(color);
 
         // If white background, make top panel text black
-        if (color == -1) {
-            mShowName.setTextColor(Color.BLACK);
-            mShowCompany.setTextColor(Color.BLACK);
-            mPopName.setTextColor(Color.BLACK);
-            mPopCompany.setTextColor(Color.BLACK);
-            mClose.setTextColor(Color.BLACK);
-        }
+//        if (color == -1) {
+//            mShowName.setTextColor(Color.BLACK);
+//            mShowCompany.setTextColor(Color.BLACK);
+//            mPopName.setTextColor(Color.BLACK);
+//            mPopCompany.setTextColor(Color.BLACK);
+//            mClose.setTextColor(Color.BLACK);
+//        }
 
         // Take +86 off the front of the phone number
-        String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
-        shortendPhone = shortendPhone.substring(3);
+        //String shortendPhone = SelectedRow.getCurrent().getPhoneNum();
+        //shortendPhone = shortendPhone.substring(3);
 
-        String website = trimURL();
+        //String website = trimURL();
 
-        setExpandValues(website, shortendPhone);
+        //setExpandValues(website, shortendPhone);
 
         // Open website
-        mWebsite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = SelectedRow.getCurrent().getWebsite();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
+//        mWebsite.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String url = SelectedRow.getCurrent().getWebsite();
+//                Intent i = new Intent(Intent.ACTION_VIEW);
+//                i.setData(Uri.parse(url));
+//                startActivity(i);
+//            }
+//        });
 
         // Open email client
         emailListener(mPopEmail);
 
         //Call phone number
         // TODO: Test this
-        mPopPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String phonnum = SelectedRow.getCurrent().getPhoneNum();
-
-                startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phonnum, null)));
-            }
-        });
+//        mPopPhone.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String phonnum = SelectedRow.getCurrent().getPhoneNum();
+//
+//                startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phonnum, null)));
+//            }
+//        });
 
         List<Integer> dimensions = getPhoneDimens();
 
@@ -226,26 +235,26 @@ public class MyCards extends android.support.v4.app.Fragment {
         mCard.getLayoutParams().height = px;
 
         // Card picture on click listener
-        mCard.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (initial == 0) {
-                    mCard.setImageBitmap(SelectedRow.getCurrent().getFlipside());
-                    initial = 1;
-                } else {
-                    mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
-                    initial = 0;
-                }
-            }
-        });
+//        mCard.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                if (initial == 0) {
+//                    mCard.setImageBitmap(SelectedRow.getCurrent().getFlipside());
+//                    initial = 1;
+//                } else {
+//                    mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
+//                    initial = 0;
+//                }
+//            }
+//        });
 
         mContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 checkContactPerms();
-                addContactInfo();
+                //addContactInfo();
 
             }
         });
@@ -364,69 +373,69 @@ public class MyCards extends android.support.v4.app.Fragment {
 
     }
 
-    public void addContactInfo() {
-        ContentResolver cr = getContext().getContentResolver();
-        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
-
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
-                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, "accountname@gmail.com")
-                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.cn.jiaohuan.jiaohuan")
-                .build());
-
-        // Add name
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, SelectedRow.getCurrent().getName())
-                .build());
-
-        // Add phone number
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, SelectedRow.getCurrent().getPhoneNum())
-                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
-                .build());
-
-        // Add notes
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, SelectedRow.getCurrent().getInfo())
-                .build());
-
-        // Add picture WORK IN PROGRESS
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, SelectedRow.getCurrent().getPic())
-                .build());
-
-        // Add email
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Email.DATA, SelectedRow.getCurrent().getEmail())
-                .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
-                .build());
-
-        // Add address
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, SelectedRow.getCurrent().getLocation())
-                .build());
-        try {
-            cr.applyBatch(ContactsContract.AUTHORITY, ops);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (OperationApplicationException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void addContactInfo() {
+//        ContentResolver cr = getContext().getContentResolver();
+//        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+//
+//        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+//                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, "accountname@gmail.com")
+//                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, "com.cn.jiaohuan.jiaohuan")
+//                .build());
+//
+//        // Add name
+//        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+//                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                .withValue(ContactsContract.Data.MIMETYPE,
+//                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+//                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, SelectedRow.getCurrent().getName())
+//                .build());
+//
+//        // Add phone number
+//        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+//                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                .withValue(ContactsContract.Data.MIMETYPE,
+//                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+//                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, SelectedRow.getCurrent().getPhoneNum())
+//                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK_MOBILE)
+//                .build());
+//
+//        // Add notes
+//        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+//                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                .withValue(ContactsContract.Data.MIMETYPE,
+//                        ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE)
+//                .withValue(ContactsContract.CommonDataKinds.Note.NOTE, SelectedRow.getCurrent().getInfo())
+//                .build());
+//
+//        // Add picture WORK IN PROGRESS
+//        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+//                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
+//                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, SelectedRow.getCurrent().getPic())
+//                .build());
+//
+//        // Add email
+//        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+//                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+//                .withValue(ContactsContract.CommonDataKinds.Email.DATA, SelectedRow.getCurrent().getEmail())
+//                .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+//                .build());
+//
+//        // Add address
+//        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+//                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+//                .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, SelectedRow.getCurrent().getLocation())
+//                .build());
+//        try {
+//            cr.applyBatch(ContactsContract.AUTHORITY, ops);
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        } catch (OperationApplicationException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public ArrayList<List<Contact>> createLists() {
 
@@ -470,9 +479,9 @@ public class MyCards extends android.support.v4.app.Fragment {
                     }
                 }
 
-                mNewAdapter = new RecycleAdapter(getActivity(), filteredList);
+                //mNewAdapter = new RecycleAdapter(getActivity(), filteredList);
 //                mRecyclerView.setAdapter(mNewAdapter);
-                mNewAdapter.notifyDataSetChanged();  // data set changed
+               // mNewAdapter.notifyDataSetChanged();  // data set changed
 
                 return true;
             }
@@ -480,48 +489,48 @@ public class MyCards extends android.support.v4.app.Fragment {
         });
     }
 
-    public String trimURL(){
-
-        // Take beginning off of website
-        String website = SelectedRow.getCurrent().getWebsite();
-        String http = website.substring(0, 5);
-
-        // Remove http:// or https://
-        if(http.equals("http:")){
-            website = website.substring(7);
-        }else if(http.equals("https")){
-            website = website.substring(8);
-        }
-
-        // Remove www.
-        String www = website.substring(0, 4);
-        if(www.equals("www.")){
-            website = website.substring(4);
-        }
-
-        // Remove ending '/' if it's there
-        String end = website.substring(website.length() - 1);
-        if(end.equals("/")){
-            website = website.substring(0, website.length() - 1);
-        }
-
-        return website;
-    }
+//    public String trimURL(){
+//
+//        // Take beginning off of website
+//        String website = SelectedRow.getCurrent().getWebsite();
+//        String http = website.substring(0, 5);
+//
+//        // Remove http:// or https://
+//        if(http.equals("http:")){
+//            website = website.substring(7);
+//        }else if(http.equals("https")){
+//            website = website.substring(8);
+//        }
+//
+//        // Remove www.
+//        String www = website.substring(0, 4);
+//        if(www.equals("www.")){
+//            website = website.substring(4);
+//        }
+//
+//        // Remove ending '/' if it's there
+//        String end = website.substring(website.length() - 1);
+//        if(end.equals("/")){
+//            website = website.substring(0, website.length() - 1);
+//        }
+//
+//        return website;
+//    }
 
     public void setExpandValues(String website, String shortendPhone){
         // Gets text from the (fake) database and prints them to the activity
-        mPopName.setText(SelectedRow.getCurrent().getName());
+        mPopName.setText(SelectedRow.getCurrent().getUsername());
         mPopCompany.setText(SelectedRow.getCurrent().getCompany());
         mPopEmail.setText(SelectedRow.getCurrent().getEmail());
-        mPopAddress.setText(SelectedRow.getCurrent().getAddress());
-        mPopInfo.setText(SelectedRow.getCurrent().getInfo());
+        //mPopAddress.setText(SelectedRow.getCurrent().ge());
+        //mPopInfo.setText(SelectedRow.getCurrent().getInfo());
         mWebsite.setText(website);
         mPopPhone.setText(shortendPhone);
-        mTitle.setText(SelectedRow.getCurrent().getTitle());
-        mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
-        mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
-        mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
-        mPinyin.setText(SelectedRow.getCurrent().getPinyin());
+        //mTitle.setText(SelectedRow.getCurrent().getTitle());
+        //mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
+        //mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());
+        //mKnownSince.setText(SelectedRow.getCurrent().getSimple_date());
+        //mPinyin.setText(SelectedRow.getCurrent().getPinyin());
     }
 
     public void emailListener(TextView PopEmail){
