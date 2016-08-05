@@ -55,6 +55,11 @@ public interface UserAPI {
     @POST("/update_location/")
     Call<Void> updateLocation(@Field("location") String location, @Field("id_number") Integer id);
 
+    @FormUrlEncoded
+    @POST("/add_friend/")
+    Call<Void> addFriend(@Field("my_pk") Integer my_pk, @Field("their_pk") Integer their_pk);
+
+
 
     ////////////////////
 

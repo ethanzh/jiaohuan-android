@@ -101,8 +101,6 @@ public class EditMyProfile extends Activity {
 
         mRelativeLayout = (RelativeLayout) findViewById(R.id.main_activity_layout);
 
-        mPost = (Button) findViewById(R.id.post);
-
         mEmail = (EditText) findViewById(R.id.email_tv);
         mPhone = (EditText) findViewById(R.id.phone_tv);
         mLocation = (EditText) findViewById(R.id.location_tv);
