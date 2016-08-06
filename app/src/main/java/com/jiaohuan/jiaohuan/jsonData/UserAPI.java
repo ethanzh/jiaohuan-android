@@ -1,6 +1,8 @@
 package com.jiaohuan.jiaohuan.jsonData;
 
 
+import com.jiaohuan.jiaohuan.CurrentUserObject;
+
 import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
@@ -40,28 +42,18 @@ public interface UserAPI {
     Call<User> getPrimaryKey(@Header("Authorization") String token);
 
     @FormUrlEncoded
-    @POST("/update_email/")
-    Call<Void> updateEmail(@Field("email") String email, @Field("id_number") Integer id);
-
-    @FormUrlEncoded
-    @POST("/update_company/")
-    Call<Void> updateCompany(@Field("company") String company, @Field("id_number") Integer id);
-
-    @FormUrlEncoded
-    @POST("/update_phone/")
-    Call<Void> updatePhone(@Field("phone_number") String phone_number, @Field("id_number") Integer id);
-
-    @FormUrlEncoded
-    @POST("/update_location/")
-    Call<Void> updateLocation(@Field("location") String location, @Field("id_number") Integer id);
-
-    @FormUrlEncoded
     @POST("/add_friend/")
     Call<Void> addFriend(@Field("my_pk") Integer my_pk, @Field("their_pk") Integer their_pk);
 
+    @FormUrlEncoded
+    @POST("/friend_list/")
+    Call<Void> friendList(@Field("my_pk") Integer my_pk);
 
 
-    ////////////////////
+    @GET("/auth/")
+    Call<Void> getAuthOrNot(@Header("Authorization") String token);
+
+
 
     @FormUrlEncoded
     @POST("/update/")

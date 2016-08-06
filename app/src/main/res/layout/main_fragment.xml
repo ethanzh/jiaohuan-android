@@ -70,4 +70,12 @@
         android:textColor="#ffffff"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GET LIST"
+        android:id="@+id/list"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.14"/>
+
 </LinearLayout>

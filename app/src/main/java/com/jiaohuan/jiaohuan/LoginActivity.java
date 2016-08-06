@@ -25,9 +25,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,10 +49,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private EditText mEmail;
     private TextView mLogin;
-    private StringRequest request;
-    RequestQueue mRequestQueue;
-    private ProgressBar mProgressBar;
-    public static final String ENDPOINT = "http://www.nutshoo.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
