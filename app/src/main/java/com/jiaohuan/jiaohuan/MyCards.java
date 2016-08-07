@@ -30,10 +30,16 @@ import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.jiaohuan.jiaohuan.jsonData.FriendsListJSON;
 import com.jiaohuan.jiaohuan.jsonData.User;
+import com.jiaohuan.jiaohuan.jsonData.UserAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyCards extends android.support.v4.app.Fragment {
 
@@ -70,32 +76,14 @@ public class MyCards extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cards, container, false);
 
-        //final ArrayList<List<Contact>> adapters = createLists();
-
-        //final List<Contact> alphaSorted = adapters.get(0);
-        //List<Contact> unixSorted = adapters.get(1);
-
-        //makeSearch(view, alphaSorted);
-
-        ArrayList<User> listOfUsers = new ArrayList<>();
-        listOfUsers.add(CurrentUserObject.getCurrent());
-        listOfUsers.add(CurrentUserObject.getCurrent());
-        listOfUsers.add(CurrentUserObject.getCurrent());
-        listOfUsers.add(CurrentUserObject.getCurrent());
-        listOfUsers.add(CurrentUserObject.getCurrent());
 
         // Start the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
 
-        //mNameAdapter = new RecycleAdapter(getActivity(), alphaSorted);
-        //mDateAdapter = new RecycleAdapter(getActivity(), unixSorted);
-
-        mTestAdapter = new RecycleAdapter(getActivity(), listOfUsers);
+        mTestAdapter = new RecycleAdapter(getActivity(), UserList.getCurrent());
         mRecyclerView.setAdapter(mTestAdapter);
-
-        //mRecyclerView.setAdapter(mNameAdapter);
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
 
@@ -151,6 +139,12 @@ public class MyCards extends android.support.v4.app.Fragment {
         return view;
     }
 
+    public void setLabelValues(){
+        mPopName.setText(SelectedRow.getCurrent().getUsername());
+        mPopCompany.setText(SelectedRow.getCurrent().getCompany());
+
+    }
+
     public void expandCard(int position) {
 
         // Make card_expand here
@@ -160,8 +154,11 @@ public class MyCards extends android.support.v4.app.Fragment {
         final ScrollView mainScrollView=(ScrollView)mContainer.findViewById(R.id.scroll);
         mainScrollView.smoothScrollTo(0, 0);
 
+        SelectedRow.setCurrent(mTestAdapter.getRow(position));
+
         // Assign all of the pop up's TextViews
         assignIDs(mContainer);
+        setLabelValues();
 
         // Get top panel
         RelativeLayout topPanel = (RelativeLayout) mContainer.findViewById(R.id.topPanel);
@@ -517,15 +514,15 @@ public class MyCards extends android.support.v4.app.Fragment {
 //        return website;
 //    }
 
-    public void setExpandValues(String website, String shortendPhone){
+    public void setExpandValues(){
         // Gets text from the (fake) database and prints them to the activity
         mPopName.setText(SelectedRow.getCurrent().getUsername());
         mPopCompany.setText(SelectedRow.getCurrent().getCompany());
         mPopEmail.setText(SelectedRow.getCurrent().getEmail());
         //mPopAddress.setText(SelectedRow.getCurrent().ge());
         //mPopInfo.setText(SelectedRow.getCurrent().getInfo());
-        mWebsite.setText(website);
-        mPopPhone.setText(shortendPhone);
+        //mWebsite.setText(website);
+        //mPopPhone.setText(shortendPhone);
         //mTitle.setText(SelectedRow.getCurrent().getTitle());
         //mImageView.setImageBitmap(SelectedRow.getCurrent().getPic());
         //mCard.setImageBitmap(SelectedRow.getCurrent().getBusiness_card());

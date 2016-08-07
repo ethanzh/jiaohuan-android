@@ -9,8 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.jiaohuan.jiaohuan.jsonData.FriendsListJSON;
 import com.jiaohuan.jiaohuan.jsonData.User;
 import com.jiaohuan.jiaohuan.jsonData.UserAPI;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,14 +43,24 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
                 String token = CurrentToken.getCurrent();
 
-                UserAPI.Factory.getInstance().friendList(7).enqueue(new Callback<Void>() {
+                UserAPI.Factory.getInstance().friendList(7).enqueue(new Callback<ArrayList<FriendsListJSON>>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        Log.wtf("SUCCESSFUL", "Request worked");
+                    public void onResponse(Call<ArrayList<FriendsListJSON>> call, Response<ArrayList<FriendsListJSON>> response) {
+
+//                        int numberOfUsers = response.body().size();
+//
+//                        String logger = "";
+//
+//                        for(int i = 0; i < numberOfUsers; i++){
+//                            logger += response.body().get(i).getFields().getUsername() + "\n";
+//                        }
+//
+                       // Log.wtf("LOGGER", logger);
+
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<FriendsListJSON>> call, Throwable t) {
                         Log.wtf("FAILED", t.getMessage());
                     }
                 });

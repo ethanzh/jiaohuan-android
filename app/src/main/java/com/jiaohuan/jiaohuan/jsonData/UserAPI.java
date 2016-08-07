@@ -47,7 +47,7 @@ public interface UserAPI {
 
     @FormUrlEncoded
     @POST("/friend_list/")
-    Call<Void> friendList(@Field("my_pk") Integer my_pk);
+    Call<ArrayList<FriendsListJSON>> friendList(@Field("my_pk") Integer my_pk);
 
 
     @GET("/auth/")

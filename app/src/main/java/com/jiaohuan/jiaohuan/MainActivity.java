@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.LruCache;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,6 +22,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.jiaohuan.jiaohuan.jsonData.FriendsListJSON;
+import com.jiaohuan.jiaohuan.jsonData.User;
+import com.jiaohuan.jiaohuan.jsonData.UserAPI;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends FragmentActivity {
 
@@ -261,4 +272,6 @@ public class MainActivity extends FragmentActivity {
         // 1000, 400
         mPopupWindow = new PopupWindow(mContainer, popWidth, popHeight, true);
     }
+
+
 }
