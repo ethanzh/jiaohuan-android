@@ -6,6 +6,11 @@ import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
 
+
+import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 @Generated("org.jsonschema2pojo")
 public class User {
 
@@ -15,6 +20,15 @@ public class User {
     @SerializedName("username")
     @Expose
     private String username;
+    @SerializedName("phone_number")
+    @Expose
+    private String phoneNumber;
+    @SerializedName("company")
+    @Expose
+    private String company;
+    @SerializedName("location")
+    @Expose
+    private String location;
     @SerializedName("email")
     @Expose
     private String email;
@@ -30,15 +44,15 @@ public class User {
     @SerializedName("date_joined")
     @Expose
     private String dateJoined;
-    @SerializedName("company")
+    @SerializedName("website")
     @Expose
-    private String company;
-    @SerializedName("location")
+    private String website;
+    @SerializedName("title")
     @Expose
-    private String location;
-    @SerializedName("phone_number")
+    private String title;
+    @SerializedName("info")
     @Expose
-    private String phoneNumber;
+    private String info;
 
     /**
      *
@@ -61,7 +75,7 @@ public class User {
     /**
      *
      * @return
-     *     The username
+     * The username
      */
     public String getUsername() {
         return username;
@@ -70,7 +84,7 @@ public class User {
     /**
      *
      * @param username
-     *     The username
+     * The username
      */
     public void setUsername(String username) {
         this.username = username;
@@ -79,97 +93,25 @@ public class User {
     /**
      *
      * @return
-     *     The email
+     * The phoneNumber
      */
-    public String getEmail() {
-        return email;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     /**
      *
-     * @param email
-     *     The email
+     * @param phoneNumber
+     * The phone_number
      */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     *
-     * @return
-     *     The firstName
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     *
-     * @param firstName
-     *     The first_name
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     /**
      *
      * @return
-     *     The lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     *
-     * @param lastName
-     *     The last_name
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     *
-     * @return
-     *     The isStaff
-     */
-    public Boolean getIsStaff() {
-        return isStaff;
-    }
-
-    /**
-     *
-     * @param isStaff
-     *     The is_staff
-     */
-    public void setIsStaff(Boolean isStaff) {
-        this.isStaff = isStaff;
-    }
-
-    /**
-     *
-     * @return
-     *     The dateJoined
-     */
-    public String getDateJoined() {
-        return dateJoined;
-    }
-
-    /**
-     *
-     * @param dateJoined
-     *     The date_joined
-     */
-    public void setDateJoined(String dateJoined) {
-        this.dateJoined = dateJoined;
-    }
-
-    /**
-     *
-     * @return
-     *     The company
+     * The company
      */
     public String getCompany() {
         return company;
@@ -178,7 +120,7 @@ public class User {
     /**
      *
      * @param company
-     *     The company
+     * The company
      */
     public void setCompany(String company) {
         this.company = company;
@@ -201,32 +143,149 @@ public class User {
     public void setLocation(String location) {
         this.location = location;
     }
+
     /**
      *
      * @return
-     * The phoneNumber
+     * The email
      */
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getEmail() {
+        return email;
     }
 
     /**
      *
-     * @param phoneNumber
-     * The phone_number
+     * @param email
+     * The email
      */
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    User user;
-
-    private void setInstance(User u){
-        user = u;
+    /**
+     *
+     * @return
+     * The firstName
+     */
+    public String getFirstName() {
+        return firstName;
     }
 
-    public User getInstance() {return user;}
+    /**
+     *
+     * @param firstName
+     * The first_name
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
+    /**
+     *
+     * @return
+     * The lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
 
+    /**
+     *
+     * @param lastName
+     * The last_name
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     *
+     * @return
+     * The isStaff
+     */
+    public Boolean getIsStaff() {
+        return isStaff;
+    }
+
+    /**
+     *
+     * @param isStaff
+     * The is_staff
+     */
+    public void setIsStaff(Boolean isStaff) {
+        this.isStaff = isStaff;
+    }
+
+    /**
+     *
+     * @return
+     * The dateJoined
+     */
+    public String getDateJoined() {
+        return dateJoined;
+    }
+
+    /**
+     *
+     * @param dateJoined
+     * The date_joined
+     */
+    public void setDateJoined(String dateJoined) {
+        this.dateJoined = dateJoined;
+    }
+
+    /**
+     *
+     * @return
+     * The website
+     */
+    public String getWebsite() {
+        return website;
+    }
+
+    /**
+     *
+     * @param website
+     * The website
+     */
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    /**
+     *
+     * @return
+     * The title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     *
+     * @param title
+     * The title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     *
+     * @return
+     * The info
+     */
+    public String getInfo() {
+        return info;
+    }
+
+    /**
+     *
+     * @param info
+     * The info
+     */
+    public void setInfo(String info) {
+        this.info = info;
+    }
 
 }

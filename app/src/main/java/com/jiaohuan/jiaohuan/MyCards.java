@@ -142,6 +142,12 @@ public class MyCards extends android.support.v4.app.Fragment {
     public void setLabelValues(){
         mPopName.setText(SelectedRow.getCurrent().getUsername());
         mPopCompany.setText(SelectedRow.getCurrent().getCompany());
+        mWebsite.setText(SelectedRow.getCurrent().getWebsite());
+        mTitle.setText(SelectedRow.getCurrent().getTitle());
+        mPopEmail.setText(SelectedRow.getCurrent().getEmail());
+        mPopPhone.setText(SelectedRow.getCurrent().getPhoneNumber());
+        mPopAddress.setText(SelectedRow.getCurrent().getLocation());
+        mPopInfo.setText(SelectedRow.getCurrent().getInfo());
 
     }
 
