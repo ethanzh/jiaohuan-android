@@ -49,6 +49,7 @@ public class RetrofitLogin {
 
             @Override
             public void onFailure(Call<GetTokenJSON> call, Throwable t) {
+                Log.wtf("FAIL",""+t.getMessage());
 
                 callback.onLoginFailure();
             }
