@@ -72,6 +72,7 @@ public interface UserAPI {
 
         public static UserAPI getInstance(){
 
+
             if(service == null){
 
                 HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
