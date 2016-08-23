@@ -25,6 +25,7 @@ public class RetrofitLogin {
 
     }
 
+
     void logInTask(String username, String password, final LoginCallback callback){
 
         UserAPI.Factory.getInstance().authenticateUser(username, password).enqueue(new Callback<GetTokenJSON>() {
