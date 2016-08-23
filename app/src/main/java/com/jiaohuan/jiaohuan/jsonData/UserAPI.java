@@ -9,7 +9,7 @@ import okhttp3.OkHttpClient;
 //import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
-//import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -78,7 +78,7 @@ public interface UserAPI {
 //                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
                 Retrofit retrofit = new Retrofit.Builder()
-//                        .addConverterFactory(GsonConverterFactory.create())
+                        .addConverterFactory(GsonConverterFactory.create())
                         .baseUrl(BASE_URL)
 //                        .client(client)
                         .build();
