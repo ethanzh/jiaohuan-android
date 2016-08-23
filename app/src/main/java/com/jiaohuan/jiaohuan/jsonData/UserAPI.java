@@ -6,7 +6,8 @@ import com.jiaohuan.jiaohuan.CurrentUserObject;
 import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
-//import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -73,14 +74,14 @@ public interface UserAPI {
 
             if(service == null){
 
-//                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
                 Retrofit retrofit = new Retrofit.Builder()
                         .addConverterFactory(GsonConverterFactory.create())
                         .baseUrl(BASE_URL)
-//                        .client(client)
+                        .client(client)
                         .build();
 
                 service = retrofit.create(UserAPI.class);
