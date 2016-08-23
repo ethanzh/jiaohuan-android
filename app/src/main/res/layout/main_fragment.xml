@@ -34,6 +34,16 @@
         />
 
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/friend_no"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.14"
+        android:background="#FFFFFF"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -25,6 +25,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
     private Button mFriend;
     private Button mList;
+    private EditText mFriendNo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,37 +34,16 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mFriend = (Button) view.findViewById(R.id.friend);
         mTextView = (TextView) view.findViewById(R.id.welcome);
         mList = (Button) view.findViewById(R.id.list);
+        mFriendNo = (EditText) view.findViewById(R.id.friend_no);
 
-        mTextView.setText(CurrentUserObject.getCurrent().getUsername());
+        mTextView.setText("Welcome, " + CurrentUserObject.getCurrent().getUsername());
 
 
         mList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String token = CurrentToken.getCurrent();
 
-                UserAPI.Factory.getInstance().friendList(7).enqueue(new Callback<ArrayList<FriendsListJSON>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<FriendsListJSON>> call, Response<ArrayList<FriendsListJSON>> response) {
-
-//                        int numberOfUsers = response.body().size();
-//
-//                        String logger = "";
-//
-//                        for(int i = 0; i < numberOfUsers; i++){
-//                            logger += response.body().get(i).getFields().getUsername() + "\n";
-//                        }
-//
-                       // Log.wtf("LOGGER", logger);
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ArrayList<FriendsListJSON>> call, Throwable t) {
-                        Log.wtf("FAILED", t.getMessage());
-                    }
-                });
             }
         });
 
@@ -71,7 +51,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserAPI.Factory.getInstance().addFriend(7, 11).
+                UserAPI.Factory.getInstance().addFriend(14, 15).
                         enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
