@@ -150,6 +150,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onLoginSuccess() {
 
+
+
+
+
+
+
+
+
+
                 try {
                     Thread.sleep(1500);
                 } catch (InterruptedException e) {

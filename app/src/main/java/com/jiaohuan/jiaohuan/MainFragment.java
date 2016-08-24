@@ -51,7 +51,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserAPI.Factory.getInstance().addFriend(14, 15).
+
+                int their_pk = Integer.parseInt(mFriendNo.getText().toString());
+
+                Log.wtf("IDs", CurrentUserObject.getCurrent().getId() + ", " + their_pk);
+
+                UserAPI.Factory.getInstance().addFriend(CurrentUserObject.getCurrent().getId(), their_pk).
                         enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

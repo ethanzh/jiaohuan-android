@@ -41,7 +41,7 @@ public class RetrofitLogin {
 
                     CurrentUserObject.setCurrent(mUser);
 
-                    getFriendsList();
+                    //getFriendsList(mUser.getId());
 
                     callback.onLoginSuccess();
 
@@ -63,14 +63,16 @@ public class RetrofitLogin {
     }
 
 
-    public void getFriendsList(){
-        UserAPI.Factory.getInstance().friendList(7).enqueue(new Callback<ArrayList<FriendsListJSON>>() {
+    public void getFriendsList(Integer id){
+        UserAPI.Factory.getInstance().friendList(14).enqueue(new Callback<ArrayList<FriendsListJSON>>() {
             @Override
             public void onResponse(Call<ArrayList<FriendsListJSON>> call, Response<ArrayList<FriendsListJSON>> response) {
 
                 int numberOfUsers = response.body().size();
 
                 String logger = "";
+
+                Log.wtf("USERS", numberOfUsers + "");
 
                 ArrayList<User> listOfUsers = new ArrayList<>();
 
