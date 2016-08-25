@@ -43,6 +43,17 @@ public class MainFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
+                UserAPI.Factory.getInstance().testFunction().enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Log.wtf("WORK", "Test function works");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable throwable) {
+                        Log.wtf("FAIL", throwable.getStackTrace() + "");
+                    }
+                });
 
             }
         });

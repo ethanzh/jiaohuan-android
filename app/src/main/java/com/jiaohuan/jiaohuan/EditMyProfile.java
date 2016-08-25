@@ -125,6 +125,19 @@ public class EditMyProfile extends Activity {
         initialCompany = CurrentUserObject.getCurrent().getCompany();
         initialLocation = CurrentUserObject.getCurrent().getLocation();
 
+        if(initialEmail.equals("")){
+            mEmail.setHint("E-mail");
+        }
+        if(initialPhone.equals("")){
+            mPhone.setHint("Phone");
+        }
+        if(initialCompany.equals("")){
+            mCompany.setHint("Company");
+        }
+        if(initialLocation.equals("")){
+            mLocation.setHint("Location");
+        }
+
         mEmail.setHint(initialEmail);
         mPhone.setHint(initialPhone);
         mLocation.setHint(initialLocation);

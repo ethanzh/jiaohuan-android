@@ -32,16 +32,24 @@ public class RetrofitLogin {
             @Override
             public void onResponse(Call<GetTokenJSON> call, Response<GetTokenJSON> response) {
 
+                Log.wtf("logInTask", "Start");
+
                 try{
                     String token = response.body().getToken();
 
                     CurrentToken.setCurrent(token);
 
+                    Log.wtf("TOKEN", token);
+
                     User mUser = getUserFromServer();
 
                     CurrentUserObject.setCurrent(mUser);
 
-                    //getFriendsList(mUser.getId());
+                    getFriendsList(14);
+
+
+
+                    Log.wtf("logInTask", "Finish");
 
                     callback.onLoginSuccess();
 
@@ -63,16 +71,16 @@ public class RetrofitLogin {
     }
 
 
-    public void getFriendsList(Integer id){
-        UserAPI.Factory.getInstance().friendList(14).enqueue(new Callback<ArrayList<FriendsListJSON>>() {
+    public void getFriendsList(int id){
+        UserAPI.Factory.getInstance().friendList(id).enqueue(new Callback<ArrayList<FriendsListJSON>>() {
             @Override
             public void onResponse(Call<ArrayList<FriendsListJSON>> call, Response<ArrayList<FriendsListJSON>> response) {
+
+                Log.wtf("getFriendsList", "Start");
 
                 int numberOfUsers = response.body().size();
 
                 String logger = "";
-
-                Log.wtf("USERS", numberOfUsers + "");
 
                 ArrayList<User> listOfUsers = new ArrayList<>();
 
@@ -92,7 +100,7 @@ public class RetrofitLogin {
                     listOfUsers.add(friendCard);
                 }
                 UserList.setCurrent(listOfUsers);
-
+                Log.wtf("getFriendsList", "Finish");
             }
 
             @Override
@@ -113,6 +121,8 @@ public class RetrofitLogin {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
 
+                Log.wtf("getUserFromServer", "Start");
+
                 String username = response.body().getUsername();
                 String email = response.body().getEmail();
                 String first_name = response.body().getFirstName();
@@ -123,6 +133,9 @@ public class RetrofitLogin {
                 String location = response.body().getLocation();
                 String phone_number = response.body().getPhoneNumber();
                 String company = response.body().getCompany();
+
+                CurrentID.setCurrent(id);
+                Log.wtf("FIRST FUNCTION", "" + CurrentID.getCurrent() + "");
 
                 cu.setUsername(username);
                 cu.setEmail(email);
@@ -135,6 +148,9 @@ public class RetrofitLogin {
                 cu.setLocation(location);
                 cu.setPhoneNumber(phone_number);
 
+                getFriendsList(14);
+
+                Log.wtf("getUserFromServer", "Finish");
             }
 
             @Override

@@ -83,7 +83,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         mRecyclerView.addItemDecoration(new ListSpacingDecoration(getActivity(), 32));
 
         mTestAdapter = new RecycleAdapter(getActivity(), UserList.getCurrent());
-        Log.wtf("LIST", UserList.getCurrent().size() + "");
+        //Log.wtf("LIST", UserList.getCurrent().size() + "");
         mRecyclerView.setAdapter(mTestAdapter);
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.linlay);
