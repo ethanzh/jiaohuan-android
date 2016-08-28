@@ -54,12 +54,8 @@ public interface UserAPI {
     @GET("/auth/")
     Call<Void> getAuthOrNot(@Header("Authorization") String token);
 
-
-    @POST("/get_user_and_friends_list/")
-    Call<Void> testFunction();
-
-
-
+    @GET("/get_user_and_friends_list/")
+    Call<Void> testFunction(@Header("Authorization") String token);
 
     @FormUrlEncoded
     @POST("/update/")

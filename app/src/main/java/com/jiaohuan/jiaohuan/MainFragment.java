@@ -43,15 +43,17 @@ public class MainFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
-                UserAPI.Factory.getInstance().testFunction().enqueue(new Callback<Void>() {
+                String auth = "Token " + "26fc33b3765e65e4ececeb1ff7a45ae735004854";
+
+                UserAPI.Factory.getInstance().testFunction(auth).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        Log.wtf("WORK", "Test function works");
+                        Log.wtf("WORKED", "Worked");
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable throwable) {
-                        Log.wtf("FAIL", throwable.getStackTrace() + "");
+                        Log.wtf("FAILED", throwable.getStackTrace() + "");
                     }
                 });
 

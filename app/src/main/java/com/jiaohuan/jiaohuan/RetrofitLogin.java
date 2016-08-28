@@ -148,8 +148,6 @@ public class RetrofitLogin {
                 cu.setLocation(location);
                 cu.setPhoneNumber(phone_number);
 
-                getFriendsList(14);
-
                 Log.wtf("getUserFromServer", "Finish");
             }
 
