@@ -45,7 +45,7 @@ public class RetrofitLogin {
 
                     CurrentUserObject.setCurrent(mUser);
 
-                    getFriendsList(14);
+                    //getFriendsList(14);
 
 
 
@@ -99,7 +99,7 @@ public class RetrofitLogin {
 
                     listOfUsers.add(friendCard);
                 }
-                UserList.setCurrent(listOfUsers);
+                //UserList.setCurrent(listOfUsers);
                 Log.wtf("getFriendsList", "Finish");
             }
 
@@ -121,7 +121,25 @@ public class RetrofitLogin {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
 
-                Log.wtf("getUserFromServer", "Start");
+                UserAPI.Factory.getInstance().friendList(response.body().getId()).enqueue(new Callback<ArrayList<FriendsListJSON>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<FriendsListJSON>> call, Response<ArrayList<FriendsListJSON>> response) {
+
+                        UserList.setCurrent(response.body());
+
+                        ArrayList<FriendsListJSON> test = new ArrayList<>();
+                        test = response.body();
+
+                        Log.wtf("TEST", test.get(0).getFields().getUsername());
+
+                        Log.wtf("WORKED", "This worked");
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<FriendsListJSON>> call, Throwable throwable) {
+                        Log.wtf("FAIL",""+throwable.getMessage());
+                    }
+                });
 
                 String username = response.body().getUsername();
                 String email = response.body().getEmail();
@@ -147,6 +165,9 @@ public class RetrofitLogin {
                 cu.setId(id);
                 cu.setLocation(location);
                 cu.setPhoneNumber(phone_number);
+
+
+
 
                 Log.wtf("getUserFromServer", "Finish");
             }

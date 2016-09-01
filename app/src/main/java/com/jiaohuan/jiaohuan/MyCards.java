@@ -141,14 +141,14 @@ public class MyCards extends android.support.v4.app.Fragment {
     }
 
     public void setLabelValues(){
-        mPopName.setText(SelectedRow.getCurrent().getUsername());
-        mPopCompany.setText(SelectedRow.getCurrent().getCompany());
-        mWebsite.setText(SelectedRow.getCurrent().getWebsite());
-        mTitle.setText(SelectedRow.getCurrent().getTitle());
-        mPopEmail.setText(SelectedRow.getCurrent().getEmail());
-        mPopPhone.setText(SelectedRow.getCurrent().getPhoneNumber());
-        mPopAddress.setText(SelectedRow.getCurrent().getLocation());
-        mPopInfo.setText(SelectedRow.getCurrent().getInfo());
+        mPopName.setText(SelectedRow.getCurrent().getFields().getUsername());
+        mPopCompany.setText(SelectedRow.getCurrent().getFields().getCompany());
+        mWebsite.setText(SelectedRow.getCurrent().getFields().getWebsite());
+        mTitle.setText(SelectedRow.getCurrent().getFields().getTitle());
+        mPopEmail.setText(SelectedRow.getCurrent().getFields().getEmail());
+        mPopPhone.setText(SelectedRow.getCurrent().getFields().getPhoneNumber());
+        mPopAddress.setText(SelectedRow.getCurrent().getFields().getLocation());
+        mPopInfo.setText(SelectedRow.getCurrent().getFields().getInfo());
 
     }
 
@@ -523,9 +523,9 @@ public class MyCards extends android.support.v4.app.Fragment {
 
     public void setExpandValues(){
         // Gets text from the (fake) database and prints them to the activity
-        mPopName.setText(SelectedRow.getCurrent().getUsername());
-        mPopCompany.setText(SelectedRow.getCurrent().getCompany());
-        mPopEmail.setText(SelectedRow.getCurrent().getEmail());
+        mPopName.setText(SelectedRow.getCurrent().getFields().getUsername());
+        mPopCompany.setText(SelectedRow.getCurrent().getFields().getCompany());
+        mPopEmail.setText(SelectedRow.getCurrent().getFields().getEmail());
         //mPopAddress.setText(SelectedRow.getCurrent().ge());
         //mPopInfo.setText(SelectedRow.getCurrent().getInfo());
         //mWebsite.setText(website);
@@ -541,7 +541,7 @@ public class MyCards extends android.support.v4.app.Fragment {
         PopEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = SelectedRow.getCurrent().getEmail();
+                String email = SelectedRow.getCurrent().getFields().getEmail();
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/html");
 

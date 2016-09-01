@@ -1,15 +1,16 @@
 package com.jiaohuan.jiaohuan;
 
+import com.jiaohuan.jiaohuan.jsonData.FriendsListJSON;
 import com.jiaohuan.jiaohuan.jsonData.User;
 
 public class SelectedRow {
-    public static User current;
+    public static FriendsListJSON current;
 
-    public static User getCurrent(){
+    public static FriendsListJSON getCurrent(){
         return current;
     }
 
-    public static void setCurrent(User c){
+    public static void setCurrent(FriendsListJSON c){
         current = c;
     }
 }

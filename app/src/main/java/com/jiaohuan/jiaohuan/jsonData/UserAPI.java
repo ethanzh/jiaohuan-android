@@ -58,6 +58,10 @@ public interface UserAPI {
     Call<Void> testFunction(@Header("Authorization") String token);
 
     @FormUrlEncoded
+    @POST("/friend_list/")
+    Call<FriendsListJSON> getFriendsList(@Field("my_pk") Integer my_pk);
+
+    @FormUrlEncoded
     @POST("/update/")
     Call<Void> updateAll(@Field("email") String email,
                          @Field("company") String company,

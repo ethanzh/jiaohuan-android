@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jiaohuan.jiaohuan.jsonData.FriendsListJSON;
 import com.jiaohuan.jiaohuan.jsonData.User;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,14 +21,14 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     private static final int TYPE_CELL = 1;
     private LayoutInflater mLayoutInflater;
 
-    List<User> data = Collections.emptyList();
+    List<FriendsListJSON> data = Collections.emptyList();
 
-    public RecycleAdapter(Context context, List<User> data){
+    public RecycleAdapter(Context context, ArrayList<FriendsListJSON> data){
         mLayoutInflater = LayoutInflater.from(context);
         this.data = data;
     }
 
-    public User getRow(int position) {
+    public FriendsListJSON getRow(int position) {
         return this.data.get(position);
     }
 
@@ -43,11 +45,11 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     @Override
     public void onBindViewHolder(myViewHolder holder, int position) {
 
-        User current = data.get(position);
+        FriendsListJSON current = data.get(position);
 
-        holder.name.setText(current.getUsername());
+        holder.name.setText(current.getFields().getUsername());
 
-        holder.company.setText(current.getCompany());
+        holder.company.setText(current.getFields().getCompany());
 
         //holder.icon.setImageBitmap(current.getPic());
 
@@ -77,7 +79,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.myViewHo
     }
 
 
-    public void swap(List<User> datas){
+    public void swap(ArrayList<FriendsListJSON> datas){
         data.clear();
         data.addAll(datas);
         notifyDataSetChanged();
